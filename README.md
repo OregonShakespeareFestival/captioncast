@@ -24,6 +24,7 @@ Generate a certificat for TLS connection:
 ###Resources:
 ---
 
+- [Nokogiri Docs](http://www.nokogiri.org/tutorials/)  
 - [Chromecast Gem](https://rubygems.org/gems/chromecast)  
 - [Chromecast Gem Documentation](http://rubydoc.info/gems/chromecast/1.0/frames)  
 
