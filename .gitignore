@@ -1,2 +1,7 @@
 /.vagrant
-/log/development.log
+/log/*.log
+/tmp
+/.bundle
+/db/*.sqlite3
+/db/*.sqlite3-journal
+
