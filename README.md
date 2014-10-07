@@ -1,6 +1,6 @@
 ##Caption Cast Rails
 ---
-A rails implementation of captioncast
+A rails implementation of [captioncast](https://bitbucket.org/andrewkr/captioncast) authored by [Andrew Krug](https://bitbucket.org/andrewkr)
 
 ###Environment Preparation:
 ---
@@ -17,11 +17,18 @@ Add `gem: --no-document` to `~/.gemrc`
 ###Chromecast Prep:
 ---
 
+####Currently Broken  
 Generate a certificat for TLS connection:  
 `rake setup:certificate`
 
 ###Resources:
 ---
 
-[Chromecast Gem](https://rubygems.org/gems/chromecast)
-[Chromecast Gem Documentation](http://rubydoc.info/gems/chromecast/1.0/frames)
+- [Chromecast Gem](https://rubygems.org/gems/chromecast)  
+- [Chromecast Gem Documentation](http://rubydoc.info/gems/chromecast/1.0/frames)  
+
+###Contributors
+---
+
+- [Andrew Krug](https://bitbucket.org/andrewkr)  
+- [Joel Ferrier](https://bitbucket.org/joel-ferrier)  
