@@ -5,6 +5,6 @@ A rails implementation of captioncast
 Add `gem: --no-document` to `~/.gemrc`
 
 ###Tools:
-`sudo yum install -y ruby ruby-devel rubygems sqlite3-devel @development`  
+`sudo yum install -y ruby ruby-devel rubygems libxml2-devel libxslt-devel sqlite3-devel @development`  
 `gem install rails`  
 `bundle`  
