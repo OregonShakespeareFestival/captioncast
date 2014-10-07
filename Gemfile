@@ -38,6 +38,7 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+gem 'chromecast'
 gem 'nokogiri'
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
