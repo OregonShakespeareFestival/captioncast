@@ -2,7 +2,13 @@
 ---
 In support of making theatre accessible to a broader audience we seek to build the worlds best, free, open/closed caption system.  Theatres around the world are implementing open caption on proprietary expensive systems that don't give their audience the very best augmented experience.
 
-![currentboard](readme-static/01night-blogSpan.jpg)
+This projects goal is simple : Provide a free GPLv3 based open caption software suite that utilizes industry standards.  The project will use Ruby on Rails, Responsive Web Design, and Gems like the Chromecast gem to output to as many platforms as possible giving the consumer a choice of how they would like to view the captions.
+
+#Requirements
+---
+
+#Pivotal Tracker Project
+---
 
 
 
