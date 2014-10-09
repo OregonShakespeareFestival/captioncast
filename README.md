@@ -2,7 +2,7 @@
 ---
 In support of making theatre accessible to a broader audience we seek to build the worlds best, free, open/closed caption system.  Theatres around the world are implementing open caption on proprietary expensive systems that don't give their audience the very best augmented experience.
 
-!(readme-static/01night-blogSpan.jpg)[]
+![currentboard](readme-static/01night-blogSpan.jpg)
 
 
 
