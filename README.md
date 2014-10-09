@@ -4,13 +4,15 @@ In support of making theatre accessible to a broader audience we seek to build t
 
 This projects goal is simple : Provide a free GPLv3 based open caption software suite that utilizes industry standards.  The project will use Ruby on Rails, Responsive Web Design, and Gems like the Chromecast gem to output to as many platforms as possible giving the consumer a choice of how they would like to view the captions.
 
-#Requirements
+##Requirements
 ---
 
-#Pivotal Tracker Project
+TBD
+
+##Pivotal Tracker Project
 ---
 
-
+https://www.pivotaltracker.com/n/projects/1184042
 
 ##Caption Cast Rails
 ---
