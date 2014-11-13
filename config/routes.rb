@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'upload/new'
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   
   root 'cast#index'
