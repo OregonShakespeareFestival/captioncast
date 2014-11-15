@@ -27,13 +27,22 @@ end
 
 #/FinalDraft/Content/Paragraph//Text
 
+#Nondialogue Elements
+nondialouge = doc.xpath("/FinalDraft/Content/*[not(@Type='Dialogue' or @Type='Character')]//Text")
+  hnondialougue = Array.new
+
+nondialouge.each do |nondialouge|
+  hnondialougue.push(nondialouge.to_str)
+end
+
+
 #XPath any sub-item of node type paragraph that has attribute character containing text.
 characters = doc.xpath("/FinalDraft/Content/Paragraph[@Type='Character']//Text")
 
 #Create a character hash
 hcharacters = Array.new
 
-#Print the character list
+#Push each elem to array
 characters.each do |character|
   hcharacters.push(character.to_str)
 end
@@ -64,13 +73,18 @@ items.each do |item|
   s = item.to_str
 
   #Search the array to see if the line is actually a Character.
-  check = hcharacters.any? { |w| s =~ /^#{w}$/ }
+  charcheck = hcharacters.any? { |w| s =~ /^#{w}$/ }
 
-  if check == true
+  if charcheck == true
     linecharacter = s
     next
   else
-
+    #If it's not a character better check to see if it's non-dialogue.
+    nondial = hnondialougue.include?(s)
+    if nondial == true
+      #puts s
+      next
+    end
   end
 
   #If it's a new line let's go to the next item.
@@ -79,5 +93,7 @@ items.each do |item|
   else
     linenum = linenum + 1
     puts l + " " + linecharacter + ": " + s
+
+    #In final for all dialogue we should set visibility to true.
   end
 end
