@@ -70,7 +70,7 @@ class UploadController < ApplicationController
         #If it's not a character better check to see if it's non-dialogue.
         nondial = hnondialougue.include?(s)
         if nondial == true
-          txt = Text.new(position: linenum, content_text: s, visibility: false)
+          txt = Text.new(position: linenum, content_type: "Non-Dialogue", content_text: s, visibility: false)
           txt.save
           linenum = linenum + 1
           next
@@ -83,14 +83,10 @@ class UploadController < ApplicationController
       else
         linenum = linenum + 1
         text = l + " " + linecharacter + ": " + s
-        txt = Text.new(position: linenum, content_text: linecharacter + ": " + s, visibility: true)
+        txt = Text.new(position: linenum, content_type: "Dialogue", content_text: linecharacter + ": " + s, visibility: true)
         txt.save
         #In final for all dialogue we should set visibility to true.
       end
     end
   end
 end
-
-
-#txt = Text.new(content_text: child.to_str)
-#txt.save
