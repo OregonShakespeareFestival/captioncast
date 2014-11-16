@@ -1,0 +1,54 @@
+
+
+<button id="Prev"><<</button><button id="Next">>></button><br>
+
+
+<div id="captions">
+ <% counter = 0 %>
+ <% @atext.each do |q| %>
+  <span hidden = "hidden" id=<%= counter %>> <%= q.position.to_s %> <%= q.content_text.to_s %></br></span>
+  <% counter = counter + 1 %>
+ <% end %>
+</div>
+
+<script language="javascript" type="text/javascript">
+
+hashchar = "#"
+currline = 0
+
+strcurr = hashchar + currline
+strprev = hashchar
+
+$( "#Next" ).click(function() {
+  $( strcurr ).show( "slow", function() {
+  });
+
+  currline++
+
+  $( strprev ).hide( "slow", function() {
+  });
+
+  prevline = currline - 1
+
+  strcurr = hashchar + currline
+  strprev = hashchar + prevline
+
+
+});
+
+$( "#Prev" ).click(function() {
+  currline--
+
+  strcurr = hashchar + currline
+  strprev = hashchar + prevline
+  $( strcurr ).hide( "slow", function() {
+  });
+
+
+  $( strprev ).show( "slow", function() {
+  });
+
+  prevline = currline - 1
+});
+
+</script>
