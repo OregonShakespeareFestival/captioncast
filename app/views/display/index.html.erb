@@ -3,52 +3,54 @@
 <button id="Prev"><<</button><button id="Next">>></button><br>
 
 
-<div id="captions">
+<div class="container-fluid">
+
  <% counter = 0 %>
  <% @atext.each do |q| %>
-  <span hidden = "hidden" id=<%= counter %>> <%= q.position.to_s %> <%= q.content_text.to_s %></br></span>
+  <span hidden = "hidden" id=<%= counter %>> <%= q.content_text.to_s %></span>
   <% counter = counter + 1 %>
  <% end %>
 </div>
 
 <script language="javascript" type="text/javascript">
 
-hashchar = "#"
-currline = 0
+//Store the current position in HTML 5 localStorage
 
-strcurr = hashchar + currline
-strprev = hashchar
+if (localStorage["position"] > 0){
+
+    //localStorage.setItem("position", 0);
+
+  }
+else {
+
+    localStorage.setItem("position", 0);
+}
+
+var currline = localStorage["position"]
+
+$( "#" + localStorage["position"] ).show( "slow", function() {});
+
 
 $( "#Next" ).click(function() {
+  strcurr = "#" + currline
+  strprev = "#" + (currline - 1)
   $( strcurr ).show( "slow", function() {
   });
-
-  currline++
-
   $( strprev ).hide( "slow", function() {
   });
-
-  prevline = currline - 1
-
-  strcurr = hashchar + currline
-  strprev = hashchar + prevline
-
-
+  localStorage.setItem("position", currline);
+  currline++
 });
 
 $( "#Prev" ).click(function() {
-  currline--
-
-  strcurr = hashchar + currline
-  strprev = hashchar + prevline
+  strcurr = "#" + currline
+  strprev = "#" + (currline - 1)
   $( strcurr ).hide( "slow", function() {
   });
-
-
   $( strprev ).show( "slow", function() {
   });
-
-  prevline = currline - 1
+  currline--
+  localStorage.setItem("position", currline);
 });
 
 </script>
