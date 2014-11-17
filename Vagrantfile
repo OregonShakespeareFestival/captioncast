@@ -6,6 +6,7 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box      = "centos7"
+  config.vm.box_url     = "https://www.dropbox.com/s/qtw8hc4k7o9x8cp/centos7.box?dl=1"
   config.vm.network   "forwarded_port", guest: 3000, host: 3000
 
   config.vm.provider "virtualbox" do |vb|
@@ -17,5 +18,5 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.provision "shell",
-    inline: "sudo iptables -I INPUT -j ACCEPT; sudo service iptables save"
+    inline: 'sudo yum update -y; sudo yum install sqlite-devel openssl-devel ruby-devel rubygem-devel rubygem-bundler -y; sudo yum groupinstall "Development Tools" sudo iptables -I INPUT -j ACCEPT; sudo service iptables save'
 end
