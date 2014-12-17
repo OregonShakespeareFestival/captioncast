@@ -9,4 +9,9 @@ class DisplayController < ApplicationController
     s = Text.find(num)
     return s
   end
+
+  def poke
+    @poketext = "string"
+  end
+
 end
