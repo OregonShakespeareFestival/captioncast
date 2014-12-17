@@ -33,9 +33,6 @@ GEM
     bootstrap-sass (3.2.0.2)
       sass (~> 3.2)
     builder (3.2.2)
-    chromecast (1.0)
-      protobuf (~> 3.3)
-      ruby-tls (~> 1.0)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
@@ -45,10 +42,6 @@ GEM
     coffee-script-source (1.8.0)
     erubis (2.7.0)
     execjs (2.2.1)
-    ffi (1.9.5)
-    ffi-compiler (0.1.3)
-      ffi (>= 1.0.0)
-      rake
     font-awesome-rails (4.2.0.0)
       railties (>= 3.2, < 5.0)
     haml (4.0.5)
@@ -69,7 +62,6 @@ GEM
       activesupport (>= 3.0.0)
     mail (2.6.1)
       mime-types (>= 1.16, < 3)
-    middleware (0.1.0)
     mime-types (2.4.1)
     mini_portile (0.6.0)
     minitest (5.4.2)
@@ -77,11 +69,6 @@ GEM
     nested_form (0.3.2)
     nokogiri (1.6.3.1)
       mini_portile (= 0.6.0)
-    protobuf (3.3.5)
-      activesupport (>= 3.2)
-      middleware
-      thor
-      thread_safe
     rack (1.5.2)
     rack-pjax (0.8.0)
       nokogiri (~> 1.5)
@@ -121,9 +108,6 @@ GEM
     rdoc (4.1.2)
       json (~> 1.4)
     remotipart (1.2.1)
-    ruby-tls (1.0.3)
-      ffi-compiler (>= 0.0.2)
-      rake
     safe_yaml (1.0.4)
     sass (3.2.19)
     sass-rails (4.0.3)
@@ -162,7 +146,6 @@ PLATFORMS
 DEPENDENCIES
   autoprefixer-rails
   bootstrap-sass
-  chromecast
   coffee-rails (~> 4.0.0)
   jbuilder (~> 2.0)
   jquery-rails
