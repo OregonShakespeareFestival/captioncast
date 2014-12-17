@@ -38,7 +38,8 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-gem 'chromecast'
+#Removed for depends problem
+#gem 'chromecast'
 gem 'nokogiri'
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
