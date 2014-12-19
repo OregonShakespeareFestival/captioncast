@@ -1,6 +1,29 @@
+<!--
+  randolph todos - just a few
+  - set up action view partials
+    - render "header"
+      - roll in content as json with 
+        - controller: @jtext = Text.all.to_json
+        - view: raw @jtext
+      - include underscore with include helper
+      - include custom js module for timed ajax calls to retrieve golden index
+    - main top bar
+  - styling
+    - fluid container row
+    - active line in operator view
+    - before and after lines in operator view
+    - sass color palette variables for different color paletted
+  - controller 
+    - set controller to vend the golden index number as json
+    - set controller to SET the golden index number from param
+
+-->
+
 <!DOCTYPE html>
 <html>
   <head>
+
+
     <title>Caption Cast</title>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
