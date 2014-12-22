@@ -5,3 +5,9 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+#
+   Works.create([{ name: 'Equivocation', venue: 'Bowmer' }])
+  
+   Texts.create([{ work: '3', sequence: '1', element: '2', content_text: 'The quick brown fox jumped over the lazy dog', visibility: 'true'}])
+
+   Elements.create([{ type: 'spoken', text: 1, color: '#333333' }])
