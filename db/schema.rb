@@ -11,20 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141113221115) do
+ActiveRecord::Schema.define(version: 20141222230844) do
 
-  create_table "plays", force: true do |t|
-    t.string   "name"
+  create_table "elements", force: true do |t|
+    t.string   "type"
+    t.integer  "text"
+    t.string   "color"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "texts", force: true do |t|
-    t.integer  "position"
-    t.string   "content_type"
+    t.integer  "work"
+    t.integer  "sequence"
+    t.integer  "element"
     t.string   "content_text"
     t.string   "color"
     t.boolean  "visibility"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "works", force: true do |t|
+    t.string   "name"
+    t.string   "venue"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
