@@ -14,6 +14,7 @@
 ActiveRecord::Schema.define(version: 20141223021207) do
 
   create_table "elements", force: true do |t|
+    t.string   "element_name"
     t.string   "element_type"
     t.string   "color"
     t.datetime "created_at"
