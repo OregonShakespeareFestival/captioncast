@@ -1,15 +1,35 @@
-<h1>File Upload</h1>
-<%= form_tag({:action => 'uploadFile'},
-  :multipart => true) do %>
-<p><label for="upload_file">Select File</label>
-<%= file_field 'upload', 'datafile' %></p>
-<%= submit_tag "Upload" %>
-<% end %>
- <%= submit_tag "Upload" %>
-<% end %>
+<div class="container" id="main-upload">
+	<%= content_tag :div, :id=>"main-form-upload", :class=>"row" do %>
+		<%= content_tag :div, :id=>"attributes-upload", :class=>"col-xs-12 col-sm-6 col-md-4" do %>
+		
+			<h1>File Upload</h1>	
 
-<%=@venue %>
+			<%= form_tag({:action => "uploadFile"},
+			  :multipart => true, :class => "form-group") do %>
 
+				<%= content_tag :div, :class=>"form-group" do %>
+				   	<%= label_tag("Select a Script File") %>
+					</br>
+					<%= file_field "upload", "datafile" %>
+				<% end %>
 
+				<%= content_tag :div, :class=>"form-group" do %>
+				   	<%= label_tag("Select a Venue") %>
+					</br>
+					<%= select_tag "venue", options_from_collection_for_select(@venues, "id", "name"), :class=>"form-control" %>
+				<% end %>
+
+				<%= content_tag :div, :class=>"form-group" do %>
+				   	<%= label_tag("Select a Work") %>
+					</br>
+					<%= select_tag "work", options_from_collection_for_select(@works, "id", "name"), :class=>"form-control" %>
+				<% end %>
+				</br>
+				<%= button_tag "Upload", :type=>"submit", :class => "btn btn-default" %>
+			<% end %>
+
+		<% end %>
+	<% end %>
+</div>
 
 
