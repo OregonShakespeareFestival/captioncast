@@ -14,8 +14,8 @@
 ActiveRecord::Schema.define(version: 20141222230844) do
 
   create_table "elements", force: true do |t|
-    t.string   "type"
-    t.integer  "text"
+    t.string   "element_type"
+    t.integer  "content_text"
     t.string   "color"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20141222230844) do
     t.integer  "work"
     t.integer  "sequence"
     t.integer  "element"
+    t.string   "character"
     t.string   "content_text"
     t.string   "color"
     t.boolean  "visibility"
