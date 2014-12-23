@@ -1,4 +1,5 @@
 //fixture data
+/*
 var lines = [{
     "id": 1,
     "position": 0,
@@ -261,3 +262,4 @@ var lines = [{
     "created_at": "2014-12-23T05:48:54.879Z",
     "updated_at": "2014-12-23T05:48:54.879Z"
 }];
+*/
