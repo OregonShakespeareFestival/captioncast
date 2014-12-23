@@ -14,6 +14,9 @@ Rails.application.routes.draw do
   get 'cast/index'
   get 'cast/about'
 
+  get 'operator/index'
+  get 'editor/index'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
