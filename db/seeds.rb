@@ -5,3 +5,14 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+#
+bowmer = Venue.find_or_create_by!(name: 'Angus Bowmer Theatre')
+thomas = Venue.find_or_create_by!(name: 'Thomas Theatre')
+lizzy  = Venue.find_or_create_by!(name: 'Allen Elizabethan Theatre')
+
+equivocation = Work.find_or_create_by!(name: 'Equivocation') { |work| work.venue = bowmer }
+  
+dialog = Element.find_or_create_by!(element_type: 'Dialog') { |dialog| dialog.color = '#333333'; dialog.work = equivocation }
+
+text   = Text.find_or_create_by!( content_text: 'The quick brown fox jumped over the lazy dog') { |text| text.visibility = true; text.sequence = 1; text.work = equivocation; text.element = dialog }
+
