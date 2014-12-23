@@ -10,4 +10,4 @@
   
    Texts.create([{ work: '3', sequence: '1', element: '2', content_text: 'The quick brown fox jumped over the lazy dog', visibility: 'true'}])
 
-   Elements.create([{ type: 'spoken', text: 1, color: '#333333' }])
+   Elements.create([{ e_type: 'spoken', text: 1, color: '#333333' }])
