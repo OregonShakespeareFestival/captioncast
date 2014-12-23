@@ -1,80 +1,83 @@
+<div class="container-fluid" id="main-display">
 
-<!-- Lame buttons for now.  Bootstrap buttons in future. -->
-<button id="Prev"><<</button><button id="Next">>></button><br>
+  <!-- Lame buttons for now.  Bootstrap buttons in future. -->
+  <button id="Prev"><<</button><button id="Next">>></button><br>
 
-<!-- Using a fluid container for responsive text later. -->
-<div class="container-fluid">
+  <!-- Using a fluid container for responsive text later. -->
+  <div class="container-fluid">
 
-<%= @poketext %>
-
-
- <!-- Intialize a counter for the visible lines only. -->
- <% counter = 0 %>
-
- <!--For each item in the atext global process it into the template as a hidden span-->
- <% @atext.each do |q| %>
-
-  <!--Span uses the counter for visible lines in the ID-->
-  <span hidden = "hidden" id=<%= counter %>> <%= q.content_text.to_s %></span>
-
-  <!-- Increment the counter of course -->
-  <% counter = counter + 1 %>
- <% end %>
-</div>
+  <%= @poketext %>
 
 
-<!--Javascript at bottom of ERB template for more awesome. -->
-<script language="javascript" type="text/javascript">
+   <!-- Intialize a counter for the visible lines only. -->
+   <% counter = 0 %>
 
-//Store the current position in HTML 5 localStorage
-if (localStorage["position"] > 0){
-    //Need to figure out a way to store this with script title.  Problem for later.
-}
-else {
+   <!--For each item in the atext global process it into the template as a hidden span-->
+   <% @atext.each do |q| %>
 
-    //If there's nothing in there set it to zero.
-    localStorage.setItem("position", 0);
-}
+    <!--Span uses the counter for visible lines in the ID-->
+    <span hidden = "hidden" id=<%= counter %>> <%= q.content_text.to_s %></span>
 
-//Pull the current position in the text out of local storage.
-var currline = localStorage["position"]
+    <!-- Increment the counter of course -->
+    <% counter = counter + 1 %>
+   <% end %>
+  </div>
 
-//Display the element just pulled out of local position on refresh.
-$( "#" + localStorage["position"] ).show( "slow", function() {});
 
-//Click listener for the next button.
-$( "#Next" ).click(function() {
-  strcurr = "#" + currline
-  strprev = "#" + (currline - 1)
+  <!--Javascript at bottom of ERB template for more awesome. -->
+  <script language="javascript" type="text/javascript">
 
-  //Use jquery animations.
-  $( strcurr ).show( "slow", function() {
-  });
-  $( strprev ).hide( "slow", function() {
-  });
+  //Store the current position in HTML 5 localStorage
+  if (localStorage["position"] > 0){
+      //Need to figure out a way to store this with script title.  Problem for later.
+  }
+  else {
 
-  //Update localStorage on successful next-item.
-  localStorage.setItem("position", currline);
-  currline++
-});
+      //If there's nothing in there set it to zero.
+      localStorage.setItem("position", 0);
+  }
 
-//Click listener for previous button.
-$( "#Prev" ).click(function() {
-  strcurr = "#" + currline
-  strprev = "#" + (currline - 1)
+  //Pull the current position in the text out of local storage.
+  var currline = localStorage["position"]
 
-  //Use jquery animations.
-  $( strcurr ).hide( "slow", function() {
+  //Display the element just pulled out of local position on refresh.
+  $( "#" + localStorage["position"] ).show( "slow", function() {});
+
+  //Click listener for the next button.
+  $( "#Next" ).click(function() {
+    strcurr = "#" + currline
+    strprev = "#" + (currline - 1)
+
+    //Use jquery animations.
+    $( strcurr ).show( "slow", function() {
+    });
+    $( strprev ).hide( "slow", function() {
+    });
+
+    //Update localStorage on successful next-item.
+    localStorage.setItem("position", currline);
+    currline++
   });
 
-  $( strprev ).show( "slow", function() {
+  //Click listener for previous button.
+  $( "#Prev" ).click(function() {
+    strcurr = "#" + currline
+    strprev = "#" + (currline - 1)
+
+    //Use jquery animations.
+    $( strcurr ).hide( "slow", function() {
+    });
+
+    $( strprev ).show( "slow", function() {
+    });
+
+    //Decrement current line.
+    currline--
+
+    //Update localStorage on successful next-item.
+    localStorage.setItem("position", currline);
   });
-
-  //Decrement current line.
-  currline--
-
-  //Update localStorage on successful next-item.
-  localStorage.setItem("position", currline);
-});
 
 </script>
+
+</div>

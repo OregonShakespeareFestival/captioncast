@@ -1,3 +1,54 @@
 // Place all the styles related to the operator controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@mixin centered{
+	float:none;
+	margin-left:auto;
+	margin-right:auto;
+}
+@mixin vert-center{
+	float:none;
+	top:50%;
+	transform: translateY(-50%);
+}
+$targetcol: #ADA;
+
+
+#main-operator{
+	height:100%;
+	overflow:hidden;
+
+}
+#main-row-operator{
+
+	height:100%;
+}
+#line-holder-operator{
+	height:100%;
+	overflow:auto;
+}
+
+#commit-column-operator{
+
+	height:100%;
+}
+#commit-button-operator{
+	position:relative;
+	cursor:pointer;
+	font-size:12em;
+	text-align:center;
+	width:100%;
+	@include vert-center;
+}
+
+.line-operator{
+
+	font-size:2.5em;
+	padding-bottom: 10px;
+	padding-bottom: 10px;
+}
+.target-operator{
+	background-color:$targetcol;
+
+}

@@ -1,6 +1,7 @@
 class OperatorController < ApplicationController
 	def index
-		#add logic in here that pulls and converts the active record into a json
-		@jtext=Text.all.to_json;
+		#convert all lines to json and pass along in variable
+		#disabled at the moment so fixture data can be used		
+		#@jtext=Text.all.to_json;
 	end
 end
