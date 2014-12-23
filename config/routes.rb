@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
 
   get 'upload/new'
-
-
+  get 'upload/index'
+  post 'upload/index'
+  post 'upload/uploadFile'
   get 'display/index'
   get 'display/next'
   get 'display/previous'
