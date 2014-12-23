@@ -8,6 +8,6 @@
 #
    Works.create([{ name: 'Equivocation', venue: 'Bowmer' }])
   
-   Texts.create([{ work: '3', sequence: '1', element: '2', content_text: 'The quick brown fox jumped over the lazy dog', visibility: 'true'}])
+   Texts.create([{ content_text: 'The quick brown fox jumped over the lazy dog', visibility: 'true'}])
 
-   Elements.create([{ element_type: 'spoken', text: 1, color: '#333333' }])
+   Elements.create([{ element_type: 'spoken', color: '#333333' }])
