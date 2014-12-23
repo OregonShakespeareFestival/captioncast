@@ -11,33 +11,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141222230844) do
+ActiveRecord::Schema.define(version: 20141223021207) do
 
   create_table "elements", force: true do |t|
     t.string   "element_type"
-    t.integer  "content_text"
     t.string   "color"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "work_id"
   end
 
+  add_index "elements", ["work_id"], name: "index_elements_on_work_id"
+
   create_table "texts", force: true do |t|
-    t.integer  "work"
     t.integer  "sequence"
-    t.integer  "element"
-    t.string   "character"
-    t.string   "content_text"
-    t.string   "color"
+    t.text     "content_text"
+    t.string   "color_override"
     t.boolean  "visibility"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "work_id"
+    t.integer  "element_id"
+  end
+
+  add_index "texts", ["element_id"], name: "index_texts_on_element_id"
+  add_index "texts", ["work_id"], name: "index_texts_on_work_id"
+
+  create_table "venues", force: true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "works", force: true do |t|
     t.string   "name"
-    t.string   "venue"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "venue_id"
   end
+
+  add_index "works", ["venue_id"], name: "index_works_on_venue_id"
 
 end
