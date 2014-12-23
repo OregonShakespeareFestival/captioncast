@@ -8,6 +8,7 @@
       - include underscore with include helper
       - include custom js module for timed ajax calls to retrieve golden index
     - main top bar
+    - add in fixture data
   - styling
     - fluid container row
     - active line in operator view
@@ -28,45 +29,18 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
+    <!-- load fixtures here -->
   </head>
   <body>
-    <div class="container">
-      <div class="header">
-        <div class="navbar navbar-inverse">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/cast/index">Caption Cast</a>
-          </div>
-          <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-              <li class="active"><a href="/cast/index">Home</a></li>
-              <li><a href="/cast/about">About</a></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Resources <span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                  <li><a href="#">Load A Script</a></li>
-                  <li><a href="/admin">Admin</a></li>
-                </ul>
-              </li>
-            </ul>
-          </div><!--/.nav-collapse -->
-        </div>
-      </div>
-
       <div class="container">
         <%= yield %>
       </div>
 
-    </div>
+    <!--</div>-->
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <%= javascript_include_tag "application.js" %>
+    <!--<%= javascript_include_tag "application.js" %>-->
   </body>
 </html>
 
