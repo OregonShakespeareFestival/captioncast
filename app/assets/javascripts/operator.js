@@ -13,9 +13,9 @@ $(document).ready(function(){
 		//set the templates
 		var tLine = _.template($('#line-template-operator').html());
 		
-		//make sure the lines are sorted by position instead of index when read in
+		//make sure the lines are sorted by sequence instead of index when read in
 		lines = _.sortBy(lines,function(q){
-			return q.position;
+			return q.sequence;
 		});
 
 		//split each line into content and character. Assume 0 to first colon in line is character name
@@ -46,7 +46,7 @@ $(document).ready(function(){
 		});
 		//this happens when you click the commit button
 		$('#commit-button-operator').click(function(){
-			//post the position of the selected line via ajax
+			//post the sequence of the selected line via ajax
 			console.log('line committed');
 		});
 
