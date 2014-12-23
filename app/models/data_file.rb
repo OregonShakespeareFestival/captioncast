@@ -9,7 +9,6 @@ class DataFile < ActiveRecord::Base
     #write the file
     File.open(path, "wb") { |f| f.write(upload['datafile'].read) }
   end
-end
 
   def self.parse_fd(upload,work)
 
