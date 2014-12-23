@@ -1,8 +1,10 @@
 class UploadController < ApplicationController
   def new
-    play = Play.find_or_create_by(name: "The Counte Of Monte Cristo")
-    play.save()
+
+    #Where is the script file we're parsing.
     script = create_document("script.fdx")
+
+    #Tell it to go.
     parse_document(script)
   end
 
@@ -16,7 +18,6 @@ class UploadController < ApplicationController
   def parse_document(doc)
     #XML is like violence - if it doesn’t solve your problems, you are not using enough of it.
 
-
     #Build an xpath for what we want to search for
 
     #/FinalDraft/Content/Paragraph//Text
@@ -28,7 +29,6 @@ class UploadController < ApplicationController
     nondialouge.each do |nondialouge|
       hnondialougue.push(nondialouge.to_str)
     end
-
 
     #XPath any sub-item of node type paragraph that has attribute character containing text.
     characters = doc.xpath("/FinalDraft/Content/Paragraph[@Type='Character']//Text")
@@ -70,7 +70,7 @@ class UploadController < ApplicationController
         #If it's not a character better check to see if it's non-dialogue.
         nondial = hnondialougue.include?(s)
         if nondial == true
-          txt = Text.new(position: linenum, content_type: "Non-Dialogue", content_text: s, visibility: false)
+          txt = Texts.new(sequence: linenum, content_text: s, visibility: false)
           txt.save
           linenum = linenum + 1
           next
@@ -83,7 +83,7 @@ class UploadController < ApplicationController
       else
         linenum = linenum + 1
         text = l + " " + linecharacter + ": " + s
-        txt = Text.new(position: linenum, content_type: "Dialogue", content_text: linecharacter + ": " + s, visibility: true)
+        txt = Texts.new(sequence: linenum , content_text: linecharacter + ": " + s, visibility: true)
         txt.save
         #In final for all dialogue we should set visibility to true.
       end
