@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ElementsTest < ActiveSupport::TestCase
+class WorkTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
