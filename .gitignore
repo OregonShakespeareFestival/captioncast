@@ -6,3 +6,4 @@
 /db/*.sqlite3-journal
 /Gemfile.lock
 public\data\*
+public/data/*
