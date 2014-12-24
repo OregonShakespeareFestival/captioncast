@@ -1,5 +1,11 @@
-<script type="text/template" id='line-template-operator'>
-	<div class="line-operator" id="line-operator-{{= sequence }}">
-	{{= content_text }}
+<script type="text/template" id="line-template-operator">
+	<div class="line-operator" id="line-operator-{{= sequence }}" data-sequence="{{= sequence }}">
+		{{= content_text }}
+	</div>
+</script>
+
+<script type="text/template" id="line-template-display">
+	<div class="line-display" id="line-display-{{= sequence }}" data-sequence="{{= sequence}}">
+		{{= content_text }}
 	</div>
 </script>

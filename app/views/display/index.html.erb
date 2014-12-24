@@ -1,32 +1,16 @@
+<%= render "shared/json_injection" %>
+
 <div class="container-fluid" id="main-display">
 
-  <!-- Lame buttons for now.  Bootstrap buttons in future. -->
-  <button id="Prev"><<</button><button id="Next">>></button><br>
+  <div class="row" id="row-display">
+    <div class="col-lg-12 col-xs-12" id="line-holder-display">
 
-  <!-- Using a fluid container for responsive text later. -->
-  <div class="container-fluid">
-
-  <%= @poketext %>
-
-
-   <!-- Intialize a counter for the visible lines only. -->
-   <% counter = 0 %>
-
-   <!--For each item in the atext global process it into the template as a hidden span-->
-   <% @atext.each do |q| %>
-
-    <!--Span uses the counter for visible lines in the ID-->
-    <span hidden = "hidden" id=<%= counter %>> <%= q.content_text.to_s %></span>
-
-    <!-- Increment the counter of course -->
-    <% counter = counter + 1 %>
-   <% end %>
+    </div>
   </div>
-
+</div>
 
   <!--Javascript at bottom of ERB template for more awesome. -->
-  <script language="javascript" type="text/javascript">
-
+  <!--<script language="javascript" type="text/javascript">
   //Store the current position in HTML 5 localStorage
   if (localStorage["position"] > 0){
       //Need to figure out a way to store this with script title.  Problem for later.
@@ -79,5 +63,8 @@
   });
 
 </script>
+-->
 
+<!--
 </div>
+-->
