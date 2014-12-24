@@ -18,6 +18,8 @@ $(document).ready(function(){
 			return q.sequence;
 		});
 
+		//waiting to get data vended in for characters
+
 		//split each line into content and character. Assume 0 to first colon in line is character name
 		/*
 		_.each(lines, function(q, i){
@@ -49,13 +51,38 @@ $(document).ready(function(){
 			//post the sequence of the selected line via ajax
 			console.log('line committed');
 		});
-
 		$('#line-holder-operator').scroll(function(){
+			var updateInt = 300;
 			//logic that happens when scrolling goes here
+			//console.log($('#line-holder-operator div.line-operator'));
+			//check position of any line (4)
+			//$('#line-operator-' + 4).offset();
+			/*
 			console.log(
 				//scrolltop holds the key
 				$('#line-holder-operator').scrollTop()
 				);
+			*/
+			//self destroying counter that catches up the highlighting
+			if(!window.counting){
+				window.counting = setTimeout(function(){
+
+					$('#line-holder-operator div.line-operator').each(function(q){
+						$(this).removeClass('target-operator');
+					})
+					var mid = $(window).innerHeight()/2.2;
+					var l = _.sortBy($('#line-holder-operator div.line-operator'), function(q){
+						return Math.abs($(q).offset().top-mid);
+					})
+					$(l[0]).addClass('target-operator');
+					//console.log(l);
+					console.log('catch up');
+					//destroy the counter
+					window.counting=false;
+				}, updateInt);
+			}
+		
+			//console.log($('#line-holder-operator div.line-operator').position().top);
 		})
 	}
 

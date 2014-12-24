@@ -2,7 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-$targetcol: #ADA;
+$targetcol: #5493a8;
+$targettxt: #FEFEFE;
 $xs-break: 992px;
 
 @mixin centered{
@@ -46,6 +47,7 @@ $xs-break: 992px;
 
 		font-size:8em;
 	}
+	color:$targetcol;
 }
 
 .line-operator{
@@ -55,6 +57,7 @@ $xs-break: 992px;
 }
 .target-operator{
 	background-color:$targetcol;
+	color:$targettxt;
 
 }
 
