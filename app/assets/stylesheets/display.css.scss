@@ -2,16 +2,71 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#line-holder-display{
-	
+$displayBgCol: #222222;
+$displayTextCol: #f7e694;
+
+@mixin fullheight{
+
+	height:100%;
+}
+
+@mixin vert-center{
+	float:none;
+	top:50%;
+	transform: translateY(-50%);
+}
+
+
+
+.body-display{
+	background-color: $displayBgCol;
+	color:$displayTextCol;
 
 }
+
+//watch out for this... might have to alter this
+html{
+	@include fullheight;
+
+}
+
+
+#body-index-display{
+	@include fullheight;
+
+}
+
+
+
+#line-holder-display{
+	@include fullheight;
+}
+
+#main-display{
+
+	@include fullheight;
+
+}
+#row-display{
+
+	@include fullheight;
+
+}
+
 
 .line-display{
 	display:none;
 	font-size:8em;
+	text-align: center;
+	@include fullheight;
+
+	span{
+		@include vert-center;
+	}
+
 }
 
 .shown-display{
 	display:block;
 }
+
