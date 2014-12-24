@@ -4,6 +4,14 @@
 
 $displayBgCol: #222222;
 $displayTextCol: #f7e694;
+$xs-break: 992px;
+$lg-break: 1400px;
+$ipad-land-break: 1024px;
+$ipad-port-break: 768px;
+$iphone-land-break: 568px;
+$iphone-port-break: 340px;
+
+
 
 @mixin fullheight{
 
@@ -11,7 +19,9 @@ $displayTextCol: #f7e694;
 }
 
 @mixin vert-center{
-	float:none;
+	position:relative;
+	display:block;
+
 	top:50%;
 	transform: translateY(-50%);
 }
@@ -56,13 +66,29 @@ html{
 
 .line-display{
 	display:none;
-	font-size:8em;
+	font-size:5.5em;
 	text-align: center;
+	//padding for safe region of display-- just in case
+	padding:3%;
 	@include fullheight;
-
 	span{
 		@include vert-center;
 	}
+	@media screen and (max-width: $ipad-land-break){
+		font-size:4em;
+		padding:.5%;
+	}
+	@media screen and (max-width: $ipad-port-break){
+
+	}
+	@media screen and (max-width: $iphone-land-break){
+				font-size:2em;
+
+	}
+	@media screen and (max-width: $iphone-port-break){
+
+	}
+
 
 }
 
