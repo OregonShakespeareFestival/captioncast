@@ -8,8 +8,7 @@ class UploadController < ApplicationController
 
   def uploadFile
     post = DataFile.save(params[:upload])
-    render :text => "File has been uploaded successfully"
-    post = DataFile.parse_fd(params[:upload],"Equivocation")
+    post = DataFile.parse_fd(params[:upload], params[:work], params[:venue])
     render :text => "File has been uploaded successfully"
 
   end
