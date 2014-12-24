@@ -3,6 +3,8 @@ _.templateSettings = {
     interpolate: /\{\{\=(.+?)\}\}/g,
     evaluate: /\{\{(.+?)\}\}/g
 };
+var targeted = 1;
+var current = 1;
 $(document).ready(function(){
 
 	//if we're in the operator view
@@ -45,45 +47,46 @@ $(document).ready(function(){
 					tLine(q)
 				);
 			}
+			$('.line-operator').first().addClass('target-operator');
 		});
 		//this happens when you click the commit button
 		$('#commit-button-operator').click(function(){
 			//post the sequence of the selected line via ajax
-			console.log('line committed');
+			console.log($('.target-operator').attr('data-sequence'));
+			$('.current-operator').removeClass('current-operator');
+
+			$('.target-operator').addClass('current-operator');
 		});
+		//scrolling target feature
 		$('#line-holder-operator').scroll(function(){
-			var updateInt = 300;
-			//logic that happens when scrolling goes here
-			//console.log($('#line-holder-operator div.line-operator'));
-			//check position of any line (4)
-			//$('#line-operator-' + 4).offset();
-			/*
-			console.log(
-				//scrolltop holds the key
-				$('#line-holder-operator').scrollTop()
-				);
-			*/
+			var updateInt = 100;
 			//self destroying counter that catches up the highlighting
 			if(!window.counting){
 				window.counting = setTimeout(function(){
-
-					$('#line-holder-operator div.line-operator').each(function(q){
-						$(this).removeClass('target-operator');
-					})
+					//removed the targeted class
+					$('.target-operator').removeClass('target-operator');
 					var mid = $(window).innerHeight()/2.2;
 					var l = _.sortBy($('#line-holder-operator div.line-operator'), function(q){
 						return Math.abs($(q).offset().top-mid);
 					})
 					$(l[0]).addClass('target-operator');
-					//console.log(l);
-					console.log('catch up');
+					targeted = parseInt($(l[0]).attr('data-sequence'));
 					//destroy the counter
 					window.counting=false;
 				}, updateInt);
 			}
 		
-			//console.log($('#line-holder-operator div.line-operator').position().top);
-		})
+		});
+		//click the line I want feature
+		$('.line-operator').click(function(){
+			var scrollSpd = 500;
+			var diff = $('.target-operator').position().top - $(this).position().top;
+			$('#line-holder-operator').animate(
+				{scrollTop: 
+					$('#line-holder-operator').scrollTop() - diff
+				}, scrollSpd);
+			});
+
 	}
 
 });

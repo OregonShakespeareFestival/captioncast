@@ -1,3 +1,17 @@
 // Place all the styles related to the display controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#line-holder-display{
+	
+
+}
+
+.line-display{
+	display:none;
+	font-size:8em;
+}
+
+.shown-display{
+	display:block;
+}

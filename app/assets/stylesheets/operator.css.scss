@@ -2,9 +2,11 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-$targetcol: #5493a8;
+$targetcol: #9cbbe5;
 $targettxt: #FEFEFE;
+$currentcol: #DD6617;
 $xs-break: 992px;
+$lg-break: 1400px;
 
 @mixin centered{
 	float:none;
@@ -47,18 +49,32 @@ $xs-break: 992px;
 
 		font-size:8em;
 	}
+	@media only screen and (min-width:$lg-break){
+		font-size:18em;
+	}
+
 	color:$targetcol;
+}
+
+#commit-button-operator:active{
+	color:$currentcol;
+	font-weight:bold;
 }
 
 .line-operator{
 
 	font-size:2.5em;
 	padding:12px;
+	cursor:pointer;
 }
 .target-operator{
 	background-color:$targetcol;
 	color:$targettxt;
 
+}
+.current-operator{
+	color:$currentcol;
+	font-weight:bold;
 }
 
 #buffer-top-operator, #buffer-bottom-operator{
