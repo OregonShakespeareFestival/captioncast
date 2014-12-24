@@ -73,7 +73,7 @@ class DataFile < ActiveRecord::Base
         #If it's not a character better check to see if it's non-dialogue.
         nondial = hnondialougue.include?(s)
         if nondial == true
-          txt = Text.create(sequence: linenum, content_text: linecharacter + ": " + s, visibility: true){|txt| txt.element = 'Dialogue';  txt.work = 'Equivocation'}
+          txt = Text.create(sequence: linenum, content_text: linecharacter + ": " + s, visibility: false, element: Element.find_by(element_type: 'Dialogue'), work: Work.find_by_name('Equivocation'))
           txt.save
           linenum = linenum + 1
           next
@@ -86,7 +86,7 @@ class DataFile < ActiveRecord::Base
       else
         linenum = linenum + 1
         text = l + " " + linecharacter + ": " + s
-        txt = Text.new(sequence: linenum, content_text: linecharacter + ": " + s, visibility: true){ |txt| txt.element = Dialogue;  txt.work = Equivocation}
+        txt = Text.create(sequence: linenum, content_text: linecharacter + ": " + s, visibility: true, element: Element.find_by(element_type: 'Dialogue'), work: Work.find_by_name('Equivocation'))
         txt.save
         #In final for all dialogue we should set visibility to true.
       end
