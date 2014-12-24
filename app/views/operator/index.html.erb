@@ -5,24 +5,25 @@
 - fix styling so its white-on-black
 - set up responsive text sizing
 	-->
+<body id="body-ind-operator" class="body-operator">
+	<%= render "shared/json_injection" %>
+	<div class="container-fluid" id="main-operator">
 
-<%= render "shared/json_injection" %>
-<div class="container-fluid" id="main-operator">
-
-	<div class="row" id="main-row-operator">
-		<div class="col-md-3 col-xs-2" id="commit-column-operator">
-			<span class="glyphicon glyphicon-play-circle" id="commit-button-operator">
-			</span>
-		</div> 
-		<div class="col-md-9 col-xs-10" id="line-holder-operator">
-			<div id="buffer-top-operator"></div> 
-			<div id="line-holder-sub-operator">
-				<!-- lines go here -->
+		<div class="row" id="main-row-operator">
+			<div class="col-md-3 col-xs-2" id="commit-column-operator">
+				<span class="glyphicon glyphicon-play-circle" id="commit-button-operator">
+				</span>
+			</div> 
+			<div class="col-md-9 col-xs-10" id="line-holder-operator">
+				<div id="buffer-top-operator"></div> 
+				<div id="line-holder-sub-operator">
+					<!-- lines go here -->
+				</div>
+				<div id="buffer-bottom-operator"></div> 
 			</div>
-			<div id="buffer-bottom-operator"></div> 
 		</div>
+	<!--
+		<h1>welcome to operator view</h1>
+	-->
 	</div>
-<!--
-	<h1>welcome to operator view</h1>
--->
-</div>
+</body>
