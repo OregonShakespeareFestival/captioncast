@@ -9,12 +9,6 @@
       - include partial that holds underscore templates
       - include custom js module for timed ajax calls to retrieve golden index
     - main top bar
-    - add in fixture data
-  - styling
-    - fluid container row
-    - active line in operator view
-    - before and after lines in operator view
-    - sass color palette variables for different color paletted
   - controller 
     - set controller to vend the golden index number as json
     - set controller to SET the golden index number from param
@@ -35,14 +29,12 @@
     <%= render 'shared/front_templates' %>
     <meta name="viewport" content="initial-scale=1">
   </head>
-  <body>
-        <%= yield %>
+  <%= yield %>
 
     <!--</div>-->
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <!--<%= javascript_include_tag "application.js" %>-->
-  </body>
 </html>
 

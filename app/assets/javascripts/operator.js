@@ -80,7 +80,7 @@ $(document).ready(function(){
 		//click the line I want feature
 		$('.line-operator').click(function(){
 			var scrollSpd = 500;
-			var diff = $('.target-operator').position().top - $(this).position().top;
+			var diff = ($('.target-operator').position().top - $(this).position().top)*.9;
 			$('#line-holder-operator').animate(
 				{scrollTop: 
 					$('#line-holder-operator').scrollTop() - diff
