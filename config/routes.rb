@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'display/index'
   get 'display/next'
   get 'display/previous'
+  get 'display/current'
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
