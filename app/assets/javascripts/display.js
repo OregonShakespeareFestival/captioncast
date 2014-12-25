@@ -48,13 +48,19 @@ $(document).ready(function(){
 											setTimeout(function(){
 												adv();
 											}, refresh);
-
+											
 										});
 
 									
 								});
 								
+							}else{
+								setTimeout(function(){
+									adv();
+									}, refresh);
 							}
+
+
 						}),
 				});
 			}
