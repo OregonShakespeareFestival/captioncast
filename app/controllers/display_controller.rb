@@ -18,4 +18,10 @@ class DisplayController < ApplicationController
    # @poketext = "string"
   end
 
+  def current
+    #retrieve current position
+    @current = 1+rand(18)
+    render json: @current
+  end
+
 end
