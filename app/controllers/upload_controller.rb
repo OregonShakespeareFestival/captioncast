@@ -8,7 +8,7 @@ class UploadController < ApplicationController
 
   def uploadFile
     post = DataFile.save(params[:upload])
-    post = DataFile.parse_fd(params[:upload], params[:work], params[:venue])
+    post = DataFile.parse_fd(params[:upload], params[:work])
     render :text => "File has been uploaded successfully"
 
   end
