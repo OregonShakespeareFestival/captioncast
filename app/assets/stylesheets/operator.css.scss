@@ -85,3 +85,32 @@ $lg-break: 1400px;
 #line-holder-sub-operator{
 
 }
+#preview-operator{
+	z-index:100;
+	position:fixed;
+	/*top:5px;*/
+	top:-160px;
+	left:5px;
+	width:25%;
+	height:225px;
+	text-align:center;
+	background-color:#d5e1f2;
+	padding:5px;
+	cursor:pointer;
+	iframe{
+
+		width:100%;
+	}
+	@media only screen and (max-width:$xs-break){
+
+		width:16.6%
+	}
+
+}
+
+#previcon-operator{
+	color:$targetcol;
+	font-size:4em;
+	cursor:pointer;
+	padding-top:3px;
+}
