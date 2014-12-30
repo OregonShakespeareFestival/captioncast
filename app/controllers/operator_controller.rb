@@ -5,9 +5,9 @@ class OperatorController < ApplicationController
 		@jtext=Text.all.to_json;
 	end
 	def pushTextSeq
-		@currtext=params[:seq]
+		$currtext=params[:seq]
 		#testing returns line seq back as json
-		render :json => @currtext
+		render :json => $currtext
 		#when we're in production and don't need a reply
 		#render :nothing => true
 	end
