@@ -12,8 +12,23 @@ $(document).ready(function(){
 			return q.sequence;
 		});
 
-		//waiting to get data vended in for characters
 
+		//seed sequence #0 with a blank line
+		$('#line-holder-display').append(
+			tLine({
+			    "id": 0,
+			    "sequence": 0,
+			    "content_type": "Non-Dialogue",
+			    "content_text": " ",
+			    "color": null,
+			    "visibility": false,
+			    "created_at": " ",
+			    "updated_at": " "
+				})
+			);
+
+		//waiting to get data vended in for characters
+		
 		//templating per line
 		_.each(lines, function(q, i){
 			if(q.visibility){
@@ -27,7 +42,7 @@ $(document).ready(function(){
 		$('.line-display').first().fadeIn(dispFadeSpd, function(){
 			$(this).addClass('shown-display');
 			//set first interval
-			function adv(){
+			function heartbeat(){
 				//ajax goes here next timeout
 				$.ajax('/display/current', 
 					{
@@ -37,7 +52,6 @@ $(document).ready(function(){
 							if(current!=j){
 								//console.log(j);
 								current=j;
-								
 								$('.shown-display').fadeOut(dispFadeSpd, function(){
 									$(this).removeClass('shown-display');
 									//console.log('class-removed');
@@ -46,7 +60,7 @@ $(document).ready(function(){
 										})).fadeIn(dispFadeSpd, function(){
 											$(this).addClass('shown-display');
 											setTimeout(function(){
-												adv();
+												heartbeat();
 											}, refresh);
 											
 										});
@@ -56,7 +70,7 @@ $(document).ready(function(){
 								
 							}else{
 								setTimeout(function(){
-									adv();
+									heartbeat();
 									}, refresh);
 							}
 
@@ -64,7 +78,7 @@ $(document).ready(function(){
 						}),
 				});
 			}
-			adv();
+			heartbeat();
 		});
 
 
@@ -73,24 +87,3 @@ $(document).ready(function(){
 	}
 
 });
-/*
-//abstracted in crappy test function for now
-function advance(seq){
-	//current var is global in another section of script
-	console.log(current + 'and' + seq);
-	if(current!=seq){
-		current=seq;
-		$('.shown-display').fadeOut(dispFadeSpd, function(){
-			$(this).removeClass('shown-display');
-			//console.log('class-removed');
-			$(_.find($('.line-display'), function(q){
-				return parseInt($(q).attr('data-sequence'))==seq;
-				})).fadeIn(dispFadeSpd, function(){
-				$(this).addClass('shown-display');
-			})
-			
-		})
-	}
-
-}
-*/
