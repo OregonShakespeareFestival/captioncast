@@ -53,9 +53,17 @@ $(document).ready(function(){
 		//this happens when you click the commit button
 		$('#commit-button-operator').click(function(){
 			//post the sequence of the selected line via ajax
-
-
-			console.log($('.target-operator').attr('data-sequence'));
+			
+			$.ajax('/operator/pushTextSeq', {
+				type:'POST',
+				data: {
+					seq:$('.target-operator').attr('data-sequence')
+				},
+				success:(function(d){
+					console.log('line pushed ' + d);
+				}),
+			});
+			
 			$('.current-operator').removeClass('current-operator');
 
 			$('.target-operator').addClass('current-operator');
