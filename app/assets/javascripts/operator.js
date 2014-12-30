@@ -22,6 +22,7 @@ $(document).ready(function(){
 
 		//waiting to get data vended in for characters
 
+		//probably won't need this but hanging onto it for now
 		//split each line into content and character. Assume 0 to first colon in line is character name
 		/*
 		_.each(lines, function(q, i){
@@ -52,6 +53,8 @@ $(document).ready(function(){
 		//this happens when you click the commit button
 		$('#commit-button-operator').click(function(){
 			//post the sequence of the selected line via ajax
+
+
 			console.log($('.target-operator').attr('data-sequence'));
 			$('.current-operator').removeClass('current-operator');
 
