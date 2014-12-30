@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   get 'cast/about'
 
   get 'operator/index'
+  post 'operator/pushTextSeq'
+
   get 'editor/index'
 
 end
