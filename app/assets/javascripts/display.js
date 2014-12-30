@@ -1,5 +1,5 @@
 //javascript for the display view goes here
-var refresh = 5000;
+var refresh = 2000;
 var dispFadeSpd = 500;
 $(document).ready(function(){
 	if($('#main-display').length>0){
