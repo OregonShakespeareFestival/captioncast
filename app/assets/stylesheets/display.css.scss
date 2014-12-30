@@ -10,7 +10,7 @@ $ipad-land-break: 1024px;
 $ipad-port-break: 768px;
 $iphone-land-break: 568px;
 $iphone-port-break: 340px;
-
+$preview-break: 300px;
 
 
 @mixin fullheight{
@@ -82,12 +82,16 @@ html{
 
 	}
 	@media screen and (max-width: $iphone-land-break){
-				font-size:2em;
+		font-size:1.3em;
 
 	}
 	@media screen and (max-width: $iphone-port-break){
-
+		font-size:1em;
 	}
+	@media screen and (max-width: $preview-break){
+		font-size:1em;
+	}
+
 
 
 }

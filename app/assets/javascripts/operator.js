@@ -98,6 +98,30 @@ $(document).ready(function(){
 				}, scrollSpd);
 			});
 
+		//action that rolls down preview and poplates is
+		$('#preview-operator').click(function(){
+			//console.log('preview clicked');	
+			if($(this).attr('data-visible')=='false'){
+				$(this).animate({top:'5px'}, 1000, function(){
+					//console.log($(this).attr('data-visible'));
+
+					$(this).attr('data-visible', 'true');
+					if($('#preview-operator iframe').attr('src')==""){
+						$('#preview-operator iframe').attr('src', "/display/index");
+					}
+				});
+			}else{
+				$(this).animate({top:'-160px'}, 1000, function(){
+					//console.log($(this).attr('data-visible'));
+
+					$(this).attr('data-visible', 'false');
+				//$(this + ' iframe').attr(src, "/display/index");
+				});
+			}
+
+
+		});
+
 	}
 
 });
