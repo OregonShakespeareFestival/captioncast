@@ -5,8 +5,11 @@
 $targetcol: #9cbbe5;
 $targettxt: #FEFEFE;
 $currentcol: #DD6617;
+$lighttgcol: #d5e1f2;
 $xs-break: 992px;
 $lg-break: 1400px;
+$gen-btn-sz: 74px;
+$gen-btn-pad: 10px;
 
 @mixin centered{
 	float:none;
@@ -17,6 +20,20 @@ $lg-break: 1400px;
 	float:none;
 	top:50%;
 	transform: translateY(-50%);
+}
+@mixin gen-btn-style-operator{
+
+	text-align:center;
+	cursor:pointer;
+ 	background-color:$lighttgcol;
+ 	opacity:.9;
+
+
+}
+@mixin gen-btn-sizing-operator{
+	width:$gen-btn-sz;
+	height:$gen-btn-sz;
+	padding:$gen-btn-pad;
 }
 
 
@@ -93,10 +110,9 @@ $lg-break: 1400px;
 	left:5px;
 	width:25%;
 	height:225px;
-	text-align:center;
-	background-color:#d5e1f2;
 	padding:5px;
-	cursor:pointer;
+	@include gen-btn-style-operator;
+
 	iframe{
 
 		width:100%;
@@ -113,4 +129,21 @@ $lg-break: 1400px;
 	font-size:4em;
 	cursor:pointer;
 	padding-top:3px;
+
+}
+
+#blackout-operator{
+	z-index:150;
+	position:fixed;
+	top:0px;
+	@include gen-btn-sizing-operator;
+	@include gen-btn-style-operator;
+	right:20px;
+}
+#blackout-icon-operator{
+	color:$targetcol;
+	font-size:4em;
+	cursor:pointer;
+
+
 }

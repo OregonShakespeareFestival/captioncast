@@ -60,7 +60,7 @@ $(document).ready(function(){
 					seq:$('.target-operator').attr('data-sequence')
 				},
 				success:(function(d){
-					console.log('line pushed ' + d);
+					//console.log('line pushed ' + d);
 				}),
 			});
 			
@@ -100,11 +100,8 @@ $(document).ready(function(){
 
 		//action that rolls down preview and poplates is
 		$('#preview-operator').click(function(){
-			//console.log('preview clicked');	
 			if($(this).attr('data-visible')=='false'){
 				$(this).animate({top:'5px'}, 1000, function(){
-					//console.log($(this).attr('data-visible'));
-
 					$(this).attr('data-visible', 'true');
 					if($('#preview-operator iframe').attr('src')==""){
 						$('#preview-operator iframe').attr('src', "/display/index");
@@ -112,12 +109,24 @@ $(document).ready(function(){
 				});
 			}else{
 				$(this).animate({top:'-160px'}, 1000, function(){
-					//console.log($(this).attr('data-visible'));
-
 					$(this).attr('data-visible', 'false');
-				//$(this + ' iframe').attr(src, "/display/index");
 				});
 			}
+
+
+		});
+		//blackout the display
+		$('#blackout-operator').click(function(){
+			console.log('blackout');
+			$.ajax('/operator/pushTextSeq', {
+				type:'POST',
+				data: {
+					seq:0
+				},
+				success:(function(d){
+					console.log('display cleared');
+				}),
+			});
 
 
 		});
