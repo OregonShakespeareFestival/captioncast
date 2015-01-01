@@ -1,10 +1,4 @@
-<!-- randolph's todos -->
 
-<!--
-- hook up jquery 'heartbeat'
-- fix styling so its white-on-black
-- set up responsive text sizing
-	-->
 <body id="body-ind-operator" class="body-operator">
 	<%= render "shared/json_injection" %>
 	<div class="container-fluid" id="main-operator">
@@ -24,12 +18,13 @@
 				<div id="buffer-bottom-operator"></div> 
 			</div>
 		</div>
-	<!--
-		<h1>welcome to operator view</h1>
-	-->
+		<!-- fixed interface items -->
 	<div id="preview-operator" data-visible="false">
 		<iframe src="" frameBorder="0" scrolling="no"></iframe>
 		<span id="previcon-operator" class="glyphicon glyphicon-eye-open"></span>
+	</div>
+	<div id="blackout-operator">
+		<span id="blackout-icon-operator" class="glyphicon glyphicon-off"></span>
 	</div>
 
 	</div>
