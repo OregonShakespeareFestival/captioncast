@@ -1,0 +1,37 @@
+############################################################
+# OSF First DockerFile
+# A Docker Container Installation of CaptionCast
+############################################################
+
+#Declar CentOS the latest
+FROM centos
+
+Maintainer Andrew J Krug
+
+
+RUN yum update -y
+
+RUN yum install epel-release -y
+
+RUN yum install -y nginx curl nodejs
+RUN echo "daemon off;" >> /etc/nginx/nginx.conf
+
+RUN yum install sqlite-devel openssl-devel ruby-devel rubygem-devel rubygem-bundler -y
+
+ADD config/container/nginx-sites.conf /etc/nginx/confif.d/default
+ADD config/container/start-server.sh /usr/bin/start-server
+
+# Add rails project to project directory
+ADD ./ /rails
+
+# Add rails project to project directory
+ADD ./ /rails
+
+# bundle install
+RUN /bin/bash -l -c "bundle install"
+
+# Publish port 80
+EXPOSE 80
+
+# Startup commands
+ENTRYPOINT /usr/bin/start-server
