@@ -26,7 +26,7 @@ $gen-btn-pad: 10px;
 	text-align:center;
 	cursor:pointer;
  	background-color:$lighttgcol;
- 	opacity:.9;
+ 	opacity:.96;
 
 
 }
@@ -119,7 +119,7 @@ $gen-btn-pad: 10px;
 	}
 	@media only screen and (max-width:$xs-break){
 
-		width:16.6%
+		width:16.6%;
 	}
 
 }
@@ -145,5 +145,44 @@ $gen-btn-pad: 10px;
 	font-size:4em;
 	cursor:pointer;
 
+
+}
+#fforward-operator{
+	z-index:100;
+	position:fixed;
+	/*top:5px;*/
+	top:-160px;
+	left:27%;
+	width:25%;
+	height:225px;
+	padding:5px;
+	@include gen-btn-style-operator;
+
+	@media only screen and (max-width:$xs-break){
+
+		width:16.6%;
+		left:18%;
+	}
+	div{
+		height:150px;
+		width:100%;
+		margin-bottom: 0;
+		input{
+			font-size:3em;
+			width:85%;
+			padding:3px;
+			float:none;
+			top:50%;
+			transform: translateY(50%);
+		}
+	}
+
+}
+
+#fforward-icon-operator{
+	color:$targetcol;
+	font-size:4em;
+	cursor:pointer;
+	padding-top:3px;
 
 }

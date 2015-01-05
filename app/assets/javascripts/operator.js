@@ -115,6 +115,59 @@ $(document).ready(function(){
 
 
 		});
+		//roll down the fast forward feature
+		$('#fforward-operator').click(function(){
+			if($(this).attr('data-visible')=='false'){
+				$(this).animate({top:'5px'}, 1000, function(){
+					$(this).attr('data-visible', 'true');
+					$(this).find('input').first().focus();
+				});
+			}else{
+				$(this).animate({top:'-160px'}, 1000, function(){
+					$(this).attr('data-visible', 'false');
+					$(this).find('input').first().blur();
+
+				});
+			}
+
+
+		});
+
+		//submit a line number
+		$('#fforward-operator input').keypress(function(e){
+			if(e.which == 13){
+				console.log($(this).val());
+				var s = $(this).val();
+				var l = _.find($('.line-operator'), function(q){
+					return $(q).attr('data-sequence')==s;
+				});
+				console.log(l);
+				//this may be able to be abstracted to a single function
+				
+				var scrollSpd = 500;
+				if(l){
+				var diff = ($('.target-operator').position().top - $(l).position().top)*.9;
+				$('#line-holder-operator').animate(
+					{scrollTop: 
+						$('#line-holder-operator').scrollTop() - diff
+					}, scrollSpd);
+				}else{
+					alert('Line ' + s + ' not found');
+				}
+				
+				$('#fforward-operator').animate({top:'-160px'}, 1000, function(){
+					$(this).attr('data-visible', 'false');
+					var i = $(this).find('input').first();
+					i.blur();
+					i.val('');
+
+				});
+
+				return false;
+			}
+		});
+
+
 		//blackout the display
 		$('#blackout-operator').click(function(){
 			console.log('blackout');
