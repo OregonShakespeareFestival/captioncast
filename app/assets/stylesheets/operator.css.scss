@@ -84,6 +84,10 @@ $gen-btn-pad: 10px;
 	padding:12px;
 	cursor:pointer;
 }
+.char-hl-operator{
+	font-weight:bold;
+
+}
 .target-operator{
 	background-color:$targetcol;
 	color:$targettxt;
