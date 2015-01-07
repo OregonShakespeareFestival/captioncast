@@ -33,6 +33,16 @@ $(document).ready(function(){
 		*/
 		//templating per line
 		_.each(lines, function(q, i){
+			//this is a temporary scrub in of fixture characters
+			q.character = 'Character';
+
+			//append character name with colon
+			if(q.character.length>0){
+
+				q.character = q.character + ':';
+			}
+
+
 			//console.log(q.content_text);
 			//if the line is visible then show it?
 			//maybe we want it just a different color for operator view
