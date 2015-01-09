@@ -6,6 +6,12 @@ $targetcol: #9cbbe5;
 $targettxt: #FEFEFE;
 $currentcol: #DD6617;
 $lighttgcol: #d5e1f2;
+
+$bgcol1:#667D85;
+$bgcol2: #596D74;
+$bgcol3: #0E3544;
+$bgcol4: #082A36;
+
 $xs-break: 992px;
 $lg-break: 1400px;
 $gen-btn-sz: 74px;
@@ -47,20 +53,26 @@ $gen-btn-pad: 10px;
 	height:100%;
 }
 #line-holder-operator{
+	background-color:$bgcol4;
 	height:100%;
 	overflow:auto;
 }
 
 #commit-column-operator{
-
+	background-color:$bgcol2;
 	height:100%;
 }
 #commit-button-operator{
+	background-color:$bgcol1;
+	padding-top:10px;
+	padding-bottom:10px;
+	padding-left:20px;
 	position:relative;
 	cursor:pointer;
 	font-size:12em;
 	text-align:center;
 	width:100%;
+	left:-40px;
 	@include vert-center;
 	@media only screen and (max-width:$xs-break){
 
