@@ -2,13 +2,16 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-$targetcol: #9cbbe5;
+
+$basetextcol: #FFFBED;
+$targethl: #789036;
+$targetcol: #154553;
 $targettxt: #FEFEFE;
-$currentcol: #DD6617;
+$currentcol: #CCEC60;
 $lighttgcol: #d5e1f2;
 
-$bgcol1:#667D85;
-$bgcol2: #596D74;
+$bgcol1: #667D85;
+$bgcol2: #38545E;
 $bgcol3: #0E3544;
 $bgcol4: #082A36;
 
@@ -22,16 +25,18 @@ $gen-btn-pad: 10px;
 	margin-left:auto;
 	margin-right:auto;
 }
+/*
 @mixin vert-center{
 	float:none;
 	top:50%;
-	transform: translateY(-50%);
+	transform: translateY(50%);
 }
+*/
 @mixin gen-btn-style-operator{
 
 	text-align:center;
 	cursor:pointer;
- 	background-color:$lighttgcol;
+ 	background-color:$bgcol1;
  	opacity:.96;
 
 
@@ -42,11 +47,21 @@ $gen-btn-pad: 10px;
 	padding:$gen-btn-pad;
 }
 
+@mixin side-tab-operator{
+	.glyphicon{
+		float:left;
+	}
+}
+
+
 
 #main-operator{
 	height:100%;
 	overflow:hidden;
-
+	color: $basetextcol;
+	input{
+		color:#121212;
+	}
 }
 #main-row-operator{
 
@@ -71,21 +86,33 @@ $gen-btn-pad: 10px;
 	cursor:pointer;
 	font-size:12em;
 	text-align:center;
-	width:100%;
+	width:118%;
 	left:-40px;
-	@include vert-center;
-	@media only screen and (max-width:$xs-break){
+	height:220px;	
 
-		font-size:8em;
-	}
+	top:50%;
+	transform:translateY(-50%);
+
 	@media only screen and (min-width:$lg-break){
 		font-size:18em;
+		height:300px;
+
+	}
+
+
+	@media only screen and (max-width:$xs-break){
+		width:150%;
+		font-size:8em;
+		height:150px;
 	}
 
 	color:$targetcol;
 }
+#commit-icon-operator{
+	/*@include vert-center;*/
+}
 
-#commit-button-operator:active{
+#commit-button-operator:active, #fforward-operator:active, #preview-operator:active, #blackout-operator:active{
 	color:$currentcol;
 	font-weight:bold;
 }
@@ -98,11 +125,14 @@ $gen-btn-pad: 10px;
 }
 .char-hl-operator{
 	font-weight:bold;
+	text-transform: uppercase;
+
 
 }
 .target-operator{
 	background-color:$targetcol;
 	color:$targettxt;
+	border: 2px solid $targethl;
 
 }
 .current-operator{
@@ -120,23 +150,33 @@ $gen-btn-pad: 10px;
 }
 #preview-operator{
 	z-index:100;
-	position:fixed;
+
+	/*position:fixed;*/
 	/*top:5px;*/
-	top:-160px;
-	left:5px;
-	width:25%;
-	height:225px;
+	top:10px;
+	/*left:5px;*/
+	/* to roll into mixin? */
+	position:absolute;
+	/*width:25%;
+	width:110%;*/
+	width:118%;
+	left:-40px;
+
+	height:220px;
 	padding:5px;
 	@include gen-btn-style-operator;
 
 	iframe{
 
 		width:100%;
+		float:left;
 	}
+	/*
 	@media only screen and (max-width:$xs-break){
 
 		width:16.6%;
 	}
+	*/
 
 }
 
@@ -145,10 +185,13 @@ $gen-btn-pad: 10px;
 	font-size:4em;
 	cursor:pointer;
 	padding-top:3px;
+	float:left;
 
 }
 
 #blackout-operator{
+
+
 	z-index:150;
 	position:fixed;
 	top:0px;
@@ -164,6 +207,7 @@ $gen-btn-pad: 10px;
 
 }
 #fforward-operator{
+
 	z-index:100;
 	position:fixed;
 	/*top:5px;*/

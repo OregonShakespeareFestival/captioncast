@@ -38,8 +38,10 @@ $(document).ready(function(){
 
 			//append character name with colon
 			if(q.character.length>0){
-
+				//append the colon
 				q.character = q.character + ':';
+			}else{
+				q.character=' ';
 			}
 
 
@@ -110,6 +112,9 @@ $(document).ready(function(){
 
 		//action that rolls down preview and poplates is
 		$('#preview-operator').click(function(){
+
+			/* temporary disable
+
 			if($(this).attr('data-visible')=='false'){
 				$(this).animate({top:'5px'}, 1000, function(){
 					$(this).attr('data-visible', 'true');
@@ -122,7 +127,7 @@ $(document).ready(function(){
 					$(this).attr('data-visible', 'false');
 				});
 			}
-
+			/* temporary disable */
 
 		});
 		//roll down the fast forward feature
@@ -188,6 +193,7 @@ $(document).ready(function(){
 				},
 				success:(function(d){
 					console.log('display cleared');
+					$('.current-operator').removeClass('current-operator');
 				}),
 			});
 
