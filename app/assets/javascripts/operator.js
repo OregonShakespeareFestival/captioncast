@@ -5,6 +5,8 @@ _.templateSettings = {
 };
 var targeted = 1;
 var current = 1;
+var scrollSpd = 500;
+
 $(document).ready(function(){
 
 	//if we're in the operator view
@@ -102,8 +104,7 @@ $(document).ready(function(){
 		});
 		//click the line I want feature
 		$('.line-operator').click(function(){
-			var scrollSpd = 500;
-			var diff = ($('.target-operator').position().top - $(this).position().top)*.9;
+			var diff = ($('.target-operator').position().top - $(this).position().top)*1.0;
 			$('#line-holder-operator').animate(
 				{scrollTop: 
 					$('#line-holder-operator').scrollTop() - diff
@@ -149,17 +150,16 @@ $(document).ready(function(){
 		//submit a line number
 		$('#fforward-operator input').keypress(function(e){
 			if(e.which == 13){
-				console.log($(this).val());
+				//console.log($(this).val());
 				var s = $(this).val();
 				var l = _.find($('.line-operator'), function(q){
 					return $(q).attr('data-sequence')==s;
 				});
-				console.log(l);
+				//console.log(l);
 				//this may be able to be abstracted to a single function
 				
-				var scrollSpd = 500;
 				if(l){
-				var diff = ($('.target-operator').position().top - $(l).position().top)*.9;
+				var diff = ($('.target-operator').position().top - $(l).position().top)*1.0;
 				$('#line-holder-operator').animate(
 					{scrollTop: 
 						$('#line-holder-operator').scrollTop() - diff
@@ -194,7 +194,7 @@ $(document).ready(function(){
 
 		//blackout the display
 		$('#blackout-operator').click(function(){
-			console.log('blackout');
+			//console.log('blackout');
 			$.ajax('/operator/pushTextSeq', {
 				type:'POST',
 				data: {
@@ -208,6 +208,45 @@ $(document).ready(function(){
 
 
 		});
+
+		//single up and down buttons
+		$('#up-button-operator').click(function(){
+
+			var prevNum = parseInt($('.target-operator').first().attr('data-sequence'))-1;
+			if(prevNum>0){
+				var prevTar = $.grep($('.line-operator'), function(n){
+					return $(n).attr('data-sequence') == prevNum;
+				})[0];
+				//console.log(prevTar);
+				var diff = ($('.target-operator').position().top - $(prevTar).position().top)*1.0;
+				$('#line-holder-operator').animate(
+					{scrollTop: 
+						$('#line-holder-operator').scrollTop() - diff
+					}, scrollSpd);
+				//console.log('up');
+			}
+		});
+		$('#down-button-operator').click(function(){
+			var nextNum = parseInt($('.target-operator').first().attr('data-sequence'))+1;
+			//console.log(nextNum);
+			if(nextNum <= $('.line-operator').length){
+				var nextTar = $.grep($('.line-operator'), function(n){
+					return $(n).attr('data-sequence') == nextNum;
+				})[0];
+				//console.log(nextTar);
+				var diff = ($('.target-operator').position().top - $(nextTar).position().top)*1.0;
+				$('#line-holder-operator').animate(
+					{scrollTop: 
+						$('#line-holder-operator').scrollTop() - diff
+					}, scrollSpd);
+				//console.log('up');
+			}
+
+			//console.log('down');
+		});
+
+
+		
 
 	}
 
