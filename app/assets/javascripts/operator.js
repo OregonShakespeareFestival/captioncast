@@ -113,32 +113,30 @@ $(document).ready(function(){
 		//action that rolls down preview and poplates is
 		$('#preview-operator').click(function(){
 
-			/* temporary disable
 
 			if($(this).attr('data-visible')=='false'){
-				$(this).animate({top:'5px'}, 1000, function(){
+				$(this).animate({left:'0px'}, 1000, function(){
 					$(this).attr('data-visible', 'true');
 					if($('#preview-operator iframe').attr('src')==""){
 						$('#preview-operator iframe').attr('src', "/display/index");
 					}
 				});
 			}else{
-				$(this).animate({top:'-160px'}, 1000, function(){
+				$(this).animate({left:'-100%'}, 1000, function(){
 					$(this).attr('data-visible', 'false');
 				});
 			}
-			/* temporary disable */
 
 		});
 		//roll down the fast forward feature
 		$('#fforward-operator').click(function(){
 			if($(this).attr('data-visible')=='false'){
-				$(this).animate({top:'5px'}, 1000, function(){
+				$(this).animate({left:'0px'}, 1000, function(){
 					$(this).attr('data-visible', 'true');
 					$(this).find('input').first().focus();
 				});
 			}else{
-				$(this).animate({top:'-160px'}, 1000, function(){
+				$(this).animate({left:'-100%'}, 1000, function(){
 					$(this).attr('data-visible', 'false');
 					$(this).find('input').first().blur();
 
@@ -170,7 +168,7 @@ $(document).ready(function(){
 					alert('Line ' + s + ' not found');
 				}
 				
-				$('#fforward-operator').animate({top:'-160px'}, 1000, function(){
+				$('#fforward-operator').animate({left:'-100%'}, 1000, function(){
 					$(this).attr('data-visible', 'false');
 					var i = $(this).find('input').first();
 					i.blur();
@@ -181,7 +179,18 @@ $(document).ready(function(){
 				return false;
 			}
 		});
+		/*
+		//need to debug this block
+		$('#fforward-operator input').blur(function(){
+				$('#fforward-operator').animate({left:'-100%'}, 500, function(){
+					$(this).attr('data-visible', 'false');
+					var i = $(this).find('input').first();
+					i.blur();
+					i.val('');
 
+				});
+			});
+		*/
 
 		//blackout the display
 		$('#blackout-operator').click(function(){
