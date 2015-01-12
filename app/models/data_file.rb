@@ -11,7 +11,7 @@ class DataFile < ActiveRecord::Base
   end
 
 
-  #add element to the database
+  #add element to the element table
   def self.add_element(name, type, color, work)
       #Text.create(sequence: linenum, content_text: linecharacter + ": " + s, visibility: true, element: Element.find_by(element_type: 'Dialogue'), work: Work.find_by_name('Equivocation'))
       e = Element.find_or_create_by!(element_name: name, element_type: type, color: color, work: Work.find_by_name(work))
@@ -19,19 +19,20 @@ class DataFile < ActiveRecord::Base
   end 
   
 
-  #add the data to the Text table in the database
-  #def self.add_text(character, lineCount, charLine, visibility)
-  #  txt = Text.find_or_create_by!(element: Work.find_by_name('CHARACTER'), work: Work.find_by_name('Equivocation'), content_text: charLine, visibility: true)
-  #  txt.save
- # end
+  #add the characters line to the Text table in the database
+  def self.add_char_line(character, lineCount, charLine, visibility)
+    txt = Text.create(sequence: lineCount, element: Element.find_by(element_name: character, element_type: 'CHARACTER'), work: Work.first, content_text: charLine, visibility: visibility)
+    txt.save
+  end
 
 
-
-  # get the characters in the play
-
-  # get the name/title of the play
-
-  # get the color of each character 
+  #add the stage direction etc to the Text table in the database
+  def self.add_direction(e_type, lineCount, direction, visibility)
+    txt = Text.create(sequence: lineCount, element: Element.find_by(element_type: e_type), work: Work.first, content_text: direction, visibility: visibility)
+    txt.save
+    #puts "direction = " + e_type + " & " + direction 
+    #puts lineCount
+  end
 
 
 
@@ -54,12 +55,14 @@ class DataFile < ActiveRecord::Base
     #Nondialogue Elements
     nondialouge = doc.xpath("/FinalDraft/Content/*[not(@Type='Dialogue')]")
 
-    #gets any non dialougge element
+    #gets any non dialouge element
     nondialouge.each do |nondialouge|
       type = nondialouge.attributes["Type"].value
       #add element to the database if not already there
-      self.add_element("", type.to_str.upcase, "#666666", "Equivocation")
+      self.add_element("-", type.to_str.upcase, "#666666", "Equivocation")
     end
+
+
 
     #XPath any sub-item of node type paragraph that has attribute character containing text.
     characters = doc.xpath("/FinalDraft/Content/Paragraph[@Type='Character']//Text")
@@ -70,15 +73,19 @@ class DataFile < ActiveRecord::Base
       self.add_element( name, "CHARACTER", "#111111", "Equivocation")
     end
 
+
+
     #xpath through the whole document for generaing entire script
     lines = doc.xpath("/FinalDraft/Content/Paragraph")
     lineCount = 0
     charName = ""
 
+
+
     #loops through the script and adds necessary lines into the database
     lines.each do |line|
       par_type = line.attributes["Type"].value
-      #if its a character, get who and set character
+      #if its a character, get who and set character name
       if par_type.upcase == "CHARACTER"
         charName = line.children.children.text
 
@@ -86,20 +93,26 @@ class DataFile < ActiveRecord::Base
       elsif par_type.upcase == "DIALOGUE"
         charLine = line.children.children.text
         #here we send all the data to the database if its a dialogue
-        #self.add_text(charName, lineCount, charLine, true)
-        puts charName + " is saying " + charLine
+        self.add_char_line(charName.upcase, lineCount, charLine, true)
+        #puts charName + " is saying " + charLine 
+        lineCount += 1
 
+      #gets visible parenthetical description 
+      elsif par_type.upcase == "PARENTHETICAL"
+        direction = line.children.children.text
+        self.add_direction(par_type.upcase, lineCount, direction, true)
+        #puts "WTF " + par_type.upcase + " " + direction
+        lineCount += 1
 
-      #catches non visible 
+      #catches non visible lines
       else
-        #self.add_text(charName, lineCount, charLine, true)
-        puts "WTF"
-
-      #next line number 
-      lineCount += 1
+        direction = line.children.children.text
+        self.add_direction(par_type.upcase, lineCount, direction, false)
+        #puts "WTF " + par_type.upcase + " " + direction
+        lineCount += 1
+      
       end
     
     end
-
   end
 end
