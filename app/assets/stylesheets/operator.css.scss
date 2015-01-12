@@ -2,7 +2,6 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-
 $basetextcol: #FFFBED;
 $targethl: #789036;
 $targetcol: #154553;
@@ -150,26 +149,39 @@ $gen-btn-pad: 10px;
 }
 #preview-operator{
 	z-index:100;
-
-	/*position:fixed;*/
-	/*top:5px;*/
 	top:10px;
-	/*left:5px;*/
-	/* to roll into mixin? */
 	position:absolute;
-	/*width:25%;
-	width:110%;*/
-	width:118%;
-	left:-40px;
-
-	height:220px;
+	width:120%;
+	left:-100%;
+	height:29%;
 	padding:5px;
 	@include gen-btn-style-operator;
 
 	iframe{
-
-		width:100%;
+		position:relative;
+		z-index:120;
+		width:80%;
+		height:95%;
 		float:left;
+		transform:translateY(2%);
+	}
+	#prev-spinner-operator{
+		position:relative;
+		z-index:101;
+		width:80%;
+		height:95%;
+		top:-56%;
+		float:left;
+		transform:translateY(2%);
+		font-size:2em;
+		font-weight: bold;
+		text-transform: uppercase;
+		color:$targetcol;
+		@media only screen and (max-width:$xs-break){
+			font-size:1em;
+		}
+
+
 	}
 	/*
 	@media only screen and (max-width:$xs-break){
@@ -177,17 +189,28 @@ $gen-btn-pad: 10px;
 		width:16.6%;
 	}
 	*/
-
-}
-
-#previcon-operator{
+	@media only screen and (max-width:$xs-break){
+		width:130%;
+	}
+	#previcon-operator{
 	color:$targetcol;
-	font-size:4em;
+	font-size:3em;
 	cursor:pointer;
 	padding-top:3px;
-	float:left;
+	padding-right:.7%;
+	float:right;
+	top:50%;
+	transform: translateY(-50%);
+	@media only screen and (max-width:$xs-break){
+		font-size:2em;
+		padding-right:.2%;
+		}
+
+
+	}
 
 }
+
 
 #blackout-operator{
 
@@ -207,42 +230,48 @@ $gen-btn-pad: 10px;
 
 }
 #fforward-operator{
-
 	z-index:100;
-	position:fixed;
-	/*top:5px;*/
-	top:-160px;
-	left:27%;
-	width:25%;
-	height:225px;
+	top:75%;
+	position:absolute;
+	width:120%;
+	left:-100%;
+	height:80px;
 	padding:5px;
+	transform:translateY(-50%);
 	@include gen-btn-style-operator;
 
 	@media only screen and (max-width:$xs-break){
 
-		width:16.6%;
-		left:18%;
+		width:130%;
+		left:0;
 	}
 	div{
 		height:150px;
-		width:100%;
+		width:65%;
 		margin-bottom: 0;
+		float:left;
 		input{
-			font-size:3em;
-			width:85%;
+			font-size:2.3em;
+			width:90%;
 			padding:3px;
-			float:none;
-			top:50%;
-			transform: translateY(50%);
+			float:left;
+			position:relative;
+			top:5%;
+			left:7%;
+		}
+	}
+	#fforward-icon-operator{
+	color:$targetcol;
+	font-size:3em;
+	cursor:pointer;
+	padding-right:.5%;
+	float:right;
+	top:50%;
+	transform:translateY(-50%);
+		@media only screen and (max-width:$xs-break){
+		font-size:2em;
 		}
 	}
 
 }
 
-#fforward-icon-operator{
-	color:$targetcol;
-	font-size:4em;
-	cursor:pointer;
-	padding-top:3px;
-
-}
