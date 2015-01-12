@@ -6,7 +6,7 @@ class Element < ActiveRecord::Base
   validates_presence_of :color
 
   def element_type_enum
-    ['Act Break','Scene Heading','Character','Dialogue', 'Action', 'Parenthetical', 'Operator Note', 'Non-Dialogue']
+    ['ACT BREAK','SCENE HEADING','CHARACTER','DIALOGUE', 'ACTION', 'PARENTHETICAL', 'OPERATOR NOTE', 'NON-DIALOGUE']
   end
 
   def name
