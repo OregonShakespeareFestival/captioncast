@@ -1,0 +1,312 @@
+// Place all the styles related to the operator controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+$basetextcol: #FFFBED;
+$targethl: #789036;
+$targetcol: #154553;
+$targettxt: #FEFEFE;
+$currentcol: #CCEC60;
+$lighttgcol: #d5e1f2;
+
+$bgcol1: #667D85;
+$bgcol2: #38545E;
+$bgcol3: #0E3544;
+$bgcol4: #082A36;
+
+$xs-break: 992px;
+$lg-break: 1400px;
+$gen-btn-sz: 74px;
+$gen-btn-pad: 10px;
+
+@mixin centered{
+	float:none;
+	margin-left:auto;
+	margin-right:auto;
+}
+/*
+@mixin vert-center{
+	float:none;
+	top:50%;
+	transform: translateY(50%);
+}
+*/
+@mixin gen-btn-style-operator{
+
+	text-align:center;
+	cursor:pointer;
+ 	background-color:$bgcol1;
+ 	opacity:.96;
+	color:$targetcol;
+
+
+
+}
+@mixin gen-btn-sizing-operator{
+	width:$gen-btn-sz;
+	height:$gen-btn-sz;
+	padding:$gen-btn-pad;
+
+}
+
+@mixin side-tab-operator{
+	.glyphicon{
+		float:left;
+	}
+}
+
+
+
+#main-operator{
+	height:100%;
+	overflow:hidden;
+	color: $basetextcol;
+	input{
+		color:#121212;
+	}
+}
+#main-row-operator{
+
+	height:100%;
+}
+#line-holder-operator{
+	background-color:$bgcol4;
+	height:100%;
+	overflow:auto;
+}
+
+#commit-column-operator{
+	background-color:$bgcol2;
+	height:100%;
+}
+#commit-button-operator{
+	background-color:$bgcol1;
+	padding-top:10px;
+	padding-bottom:10px;
+	padding-left:20px;
+	position:relative;
+	cursor:pointer;
+	font-size:12em;
+	text-align:center;
+	width:118%;
+	left:-40px;
+	height:220px;	
+	color:$targetcol;
+	top:50%;
+	transform:translateY(-50%);
+
+	@media only screen and (min-width:$lg-break){
+		font-size:18em;
+		height:300px;
+
+	}
+
+
+	@media only screen and (max-width:$xs-break){
+		width:150%;
+		font-size:8em;
+		height:150px;
+	}
+
+}
+#commit-icon-operator{
+	/*@include vert-center;*/
+}
+
+#commit-button-operator:active, #fforward-operator:active, #preview-operator:active, #blackout-operator:active{
+	color:$currentcol;
+	font-weight:bold;
+}
+
+.line-operator{
+
+	font-size:2.5em;
+	padding:12px;
+	cursor:pointer;
+}
+.char-hl-operator{
+	font-weight:bold;
+	text-transform: uppercase;
+
+
+}
+.target-operator{
+	background-color:$targetcol;
+	color:$targettxt;
+	border: 2px solid $targethl;
+
+}
+.current-operator{
+	color:$currentcol;
+	font-weight:bold;
+}
+
+#buffer-top-operator{
+	height:45%;
+} 
+#buffer-bottom-operator{
+	height:40%;
+}
+
+#line-holder-sub-operator{
+
+}
+#preview-operator{
+	z-index:100;
+	top:10px;
+	position:absolute;
+	width:120%;
+	left:-100%;
+	height:29%;
+	padding:5px;
+	@include gen-btn-style-operator;
+
+	iframe{
+		position:relative;
+		z-index:120;
+		width:80%;
+		height:95%;
+		float:left;
+		transform:translateY(2%);
+	}
+	#prev-spinner-operator{
+		position:relative;
+		z-index:101;
+		width:80%;
+		height:95%;
+		top:-56%;
+		float:left;
+		transform:translateY(2%);
+		font-size:2em;
+		font-weight: bold;
+		text-transform: uppercase;
+		color:$targetcol;
+		@media only screen and (max-width:$xs-break){
+			font-size:1em;
+		}
+
+
+	}
+	/*
+	@media only screen and (max-width:$xs-break){
+
+		width:16.6%;
+	}
+	*/
+	@media only screen and (max-width:$xs-break){
+		width:130%;
+	}
+	#previcon-operator{
+	font-size:3em;
+	cursor:pointer;
+	padding-top:3px;
+	padding-right:.7%;
+	float:right;
+	top:50%;
+	transform: translateY(-50%);
+	@media only screen and (max-width:$xs-break){
+		font-size:2em;
+		padding-right:.2%;
+		}
+
+
+	}
+
+}
+
+
+#blackout-operator{
+
+
+	z-index:150;
+	position:fixed;
+	top:0px;
+	@include gen-btn-sizing-operator;
+	@include gen-btn-style-operator;
+	right:20px;
+}
+#blackout-icon-operator{
+	font-size:4em;
+	cursor:pointer;
+
+
+}
+#fforward-operator{
+	z-index:100;
+	top:75%;
+	position:absolute;
+	width:120%;
+	left:-100%;
+	height:80px;
+	padding:5px;
+	transform:translateY(-50%);
+	@include gen-btn-style-operator;
+
+	@media only screen and (max-width:$xs-break){
+
+		width:130%;
+	}
+	div{
+		height:150px;
+		width:65%;
+		margin-bottom: 0;
+		float:left;
+		input{
+			font-size:2.3em;
+			width:90%;
+			padding:3px;
+			float:left;
+			position:relative;
+			top:5%;
+			left:7%;
+		}
+	}
+	#fforward-icon-operator{
+	font-size:3em;
+	cursor:pointer;
+	padding-right:.5%;
+	float:right;
+	top:50%;
+	transform:translateY(-50%);
+	@media only screen and (max-width:$xs-break){
+		font-size:2em;
+		}
+	}
+
+}
+
+.wide-button-operator{
+	background-color:#0E3544;
+	cursor:pointer;
+	width:72%;
+	position:fixed;
+	text-align:center;
+	font-size:3em;
+	color:$bgcol1;
+	height:75px;
+	left:25%;
+	@media only screen and (max-width:$xs-break){
+		width:80%;
+		left:17%;
+
+	}
+	&:active{
+		color:$currentcol;
+		font-weight:bold;
+	}
+	span{
+		height:100%;
+		vertical-align: sub;
+	}
+}
+
+
+#up-button-operator{
+	top:0%;
+
+}
+#down-button-operator{
+	bottom:0;
+
+}
+

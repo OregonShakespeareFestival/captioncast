@@ -1,0 +1,47 @@
+
+<body id="body-ind-operator" class="body-operator">
+	<%= render "shared/json_injection" %>
+	<div class="container-fluid" id="main-operator">
+		<div class="row" id="main-row-operator">
+			<div class="col-md-3 col-xs-2" id="commit-column-operator">
+				<div id="commit-button-operator">
+					<span class="glyphicon glyphicon-play-circle" id="commit-icon-operator">
+					</span>
+				</div>
+				<div id="preview-operator" data-visible="false">
+
+					<iframe src="" frameBorder="0" scrolling="no"></iframe>
+					<span id="previcon-operator" class="glyphicon glyphicon-eye-open"></span>
+					<div id="prev-spinner-operator">Loading...</div>
+
+				</div>
+				<div id="fforward-operator"data-visible="false">
+					<div class="form-group" >
+						<input type="text" placeholder="Skip to #"/>
+					</div>
+					<span id="fforward-icon-operator" class="glyphicon glyphicon-fast-forward"></span>
+				</div>
+
+			</div> 
+			<div class="col-md-9 col-xs-10" id="line-holder-operator">
+				<div id="up-button-operator" class="wide-button-operator">
+					<span class="glyphicon glyphicon-chevron-up"></span>
+				</div>
+				<div id="down-button-operator" class="wide-button-operator">
+					<span class="glyphicon glyphicon-chevron-down"></span>
+				</div>
+
+				<div id="buffer-top-operator"></div> 
+				<div id="line-holder-sub-operator">
+					<!-- lines go here -->
+				</div>
+				<div id="buffer-bottom-operator"></div> 
+			</div>
+		</div>
+		<!-- fixed interface items -->
+		
+	<div id="blackout-operator">
+		<span id="blackout-icon-operator" class="glyphicon glyphicon-off"></span>
+	</div>
+	</div>
+</body>
