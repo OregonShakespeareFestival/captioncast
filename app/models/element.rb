@@ -10,6 +10,10 @@ class Element < ActiveRecord::Base
   end
 
   def name
-    element_type
+    if element_name
+      element_name
+    else
+      element_type
+    end
   end
 end
