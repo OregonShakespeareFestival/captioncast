@@ -1,6 +1,6 @@
 //javascript for the display view goes here
 var refresh = 2000;
-var dispFadeSpd = 500;
+var dispFadeSpd = 400;
 $(document).ready(function(){
 	if($('#main-display').length>0){
 		//console.log('this is the display view');
@@ -16,6 +16,7 @@ $(document).ready(function(){
 		//seed sequence #0 with a blank line
 		$('#line-holder-display').append(
 			tLine({
+				"character":'',
 			    "id": 0,
 			    "sequence": 0,
 			    "content_type": "Non-Dialogue",
@@ -31,6 +32,14 @@ $(document).ready(function(){
 		
 		//templating per line
 		_.each(lines, function(q, i){
+			//this is a temporary scrub in of fixture characters
+			q.character = 'Character';
+			//console.log(q.character);
+			//append character name with color
+			if(q.character.length>0){
+				q.character = q.character + ':';
+			}
+
 			if(q.visibility){
 				$('#line-holder-display').append(
 					tLine(q)

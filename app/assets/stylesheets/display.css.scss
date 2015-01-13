@@ -71,8 +71,14 @@ html{
 	//padding for safe region of display-- just in case
 	padding:3%;
 	@include fullheight;
-	span{
+	span.line-full-display{
 		@include vert-center;
+		span.line-content-display{
+
+		}
+		span.line-char-display{
+			font-weight:bold;
+		}
 	}
 	@media screen and (max-width: $ipad-land-break){
 		font-size:4em;
