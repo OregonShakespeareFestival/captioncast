@@ -6,6 +6,10 @@ class DisplayController < ApplicationController
     #vend all lines out to the display view
     @jtext=Text.all.to_json;
 
+    #pick between multi-line view and single line with a parameter
+    if params[:multi] == "1"
+      render "multi"
+    end
   end
 
   #Function to pull back a particular noko-obj using the ID in the database to return the element.
