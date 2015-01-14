@@ -1,0 +1,73 @@
+<body id="body-index-display" class="body-display">
+  <div id="multi-flag-display" style="display:none"></div>
+
+  <%= render "shared/json_injection" %>
+
+  <div class="container-fluid" id="main-display">
+
+    <div class="row" id="row-display">
+      <div class="col-lg-12 col-xs-12" id="line-holder-display">
+        This view will display multiple lines when it's built out
+      </div>
+    </div>
+  </div>
+</body>
+  <!--Javascript at bottom of ERB template for more awesome. -->
+  <!--<script language="javascript" type="text/javascript">
+  //Store the current position in HTML 5 localStorage
+  if (localStorage["position"] > 0){
+      //Need to figure out a way to store this with script title.  Problem for later.
+  }
+  else {
+
+      //If there's nothing in there set it to zero.
+      localStorage.setItem("position", 0);
+  }
+
+  //Pull the current position in the text out of local storage.
+  var currline = localStorage["position"]
+
+  //Display the element just pulled out of local position on refresh.
+  $( "#" + localStorage["position"] ).show( "slow", function() {});
+
+  //Click listener for the next button.
+  $( "#Next" ).click(function() {
+    strcurr = "#" + currline
+    strprev = "#" + (currline - 1)
+
+    //Use jquery animations.
+    $( strcurr ).show( "slow", function() {
+    });
+    $( strprev ).hide( "slow", function() {
+    });
+
+    //Update localStorage on successful next-item.
+    localStorage.setItem("position", currline);
+    currline++
+  });
+
+  //Click listener for previous button.
+  $( "#Prev" ).click(function() {
+    strcurr = "#" + currline
+    strprev = "#" + (currline - 1)
+
+    //Use jquery animations.
+    $( strcurr ).hide( "slow", function() {
+    });
+
+    $( strprev ).show( "slow", function() {
+    });
+
+    //Decrement current line.
+    currline--
+
+    //Update localStorage on successful next-item.
+    localStorage.setItem("position", currline);
+  });
+
+</script>
+-->
+
+<!--
+</div>
+-->
