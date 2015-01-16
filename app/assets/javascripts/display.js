@@ -1,8 +1,11 @@
 //javascript for the display view goes here
 var refresh = 2000;
 var dispFadeSpd = 400;
+var scrollSpd = 400;
 $(document).ready(function(){
-	if($('#main-display').length>0){
+	if($('#multi-flag-display').length<=0){
+
+	//if($('#main-display').length>0){
 		//console.log('this is the display view');
 		//template views
 		var tLine = _.template($('#line-template-display').html());
@@ -91,16 +94,14 @@ $(document).ready(function(){
 		});
 
 
-
-
-	}
-
-	//this is specific JS for the multi-line view
-	if($('#multi-flag-display').length>0){
+	//end of original block
+	//}
+	}else{
+		//this is specific JS for the multi-line view
 		console.log('welcome to multi-line mode');
 		//console.log('this is the display view');
 		//template views
-		var tLine = _.template($('#line-template-display').html());
+		var tLine = _.template($('#line-template-display-multi').html());
 		
 		//make sure the lines are sorted by sequence instead of index when read in
 		lines = _.sortBy(lines,function(q){
@@ -109,7 +110,7 @@ $(document).ready(function(){
 
 
 		//seed sequence #0 with a blank line
-		$('#line-holder-display').append(
+		$('#line-holder-display-multi').append(
 			tLine({
 				"character":'',
 			    "id": 0,
@@ -136,54 +137,68 @@ $(document).ready(function(){
 			}
 
 			if(q.visibility){
-				$('#line-holder-display').append(
+				$('#line-holder-display-multi').append(
 					tLine(q)
 				);
 			}
 		});
+		//$('.line-display-multi').addClass('shown-display');
+		//$('.line-display-multi').addClass('blur-multi');
 		//when the first line fade in it sets off the preiodic ajax scrape
 		//for now we're just grabbing a random number but soon it will be the number supplied by the operator
-		$('.line-display').first().fadeIn(dispFadeSpd, function(){
-			$(this).addClass('shown-display');
-			//set first interval
-			function heartbeat(){
-				//ajax goes here next timeout
-				$.ajax('/display/current', 
-					{
-						success:(function(j){
-							console.log('sequence scraped ' + j);
 
-							if(current!=j){
-								//console.log(j);
-								current=j;
-								$('.shown-display').fadeOut(dispFadeSpd, function(){
-									$(this).removeClass('shown-display');
-									//console.log('class-removed');
-									$(_.find($('.line-display'), function(q){
+		//set first interval
+		function heartbeat(){
+			//ajax goes here next timeout
+			$.ajax('/display/current', 
+				{
+					success:(function(j){
+						console.log('sequence scraped ' + j);
+
+						if(current!=j){
+							//console.log(j);
+							current=j;
+
+							if(current!==0){
+							
+								var newElem = _.find($('.line-display-multi'), function(q){
 										return parseInt($(q).attr('data-sequence'))==j;
-										})).fadeIn(dispFadeSpd, function(){
-											$(this).addClass('shown-display');
-											setTimeout(function(){
-												heartbeat();
-											}, refresh);
-											
-										});
-
-									
 								});
-								
-							}else{
+							/*
+								//animate the scroll
+								var diff = ($('#line-display-0').position().top - $(newElem).position().top)*1.0;
+								$('#line-holder-display-multi').animate(
+									{scrollTop: 
+										$('#line-holder-display-multi').scrollTop() - diff
+								}, scrollSpd);
+							*/
+								//$('.shown-display').fadeOut(dispFadeSpd, function(){
+								//remove the focus class
+								$('.focus-multi').removeClass('focus-multi');
+								//console.log('class-removed');
+
+								$(newElem).addClass('focus-multi');
+										//$(this).addClass('shown-display');
 								setTimeout(function(){
 									heartbeat();
-									}, refresh);
+								}, refresh);
 							}
 
+									
+								//});
+								
+						}else{
+							setTimeout(function(){
+								heartbeat();
+								}, refresh);
+						}
+						
 
-						}),
-				});
-			}
-			heartbeat();
-		});
+					}),
+			});
+		}
+		heartbeat();
+		
 
 
 

@@ -4,6 +4,7 @@
 
 $displayBgCol: #222222;
 $displayTextCol: #f7e694;
+$displayTextColBlur: #726A44;
 $xs-break: 992px;
 $lg-break: 1400px;
 $ipad-land-break: 1024px;
@@ -26,45 +27,7 @@ $preview-break: 300px;
 	transform: translateY(-50%);
 }
 
-
-
-.body-display{
-	background-color: $displayBgCol;
-	color:$displayTextCol;
-
-}
-
-//watch out for this... might have to alter this
-html{
-	@include fullheight;
-
-}
-
-
-#body-index-display{
-	@include fullheight;
-
-}
-
-
-
-#line-holder-display{
-	@include fullheight;
-}
-
-#main-display{
-
-	@include fullheight;
-
-}
-#row-display{
-
-	@include fullheight;
-
-}
-
-
-.line-display{
+@mixin line-display{
 	display:none;
 	font-size:5.5em;
 	text-align: center;
@@ -98,11 +61,85 @@ html{
 		font-size:1em;
 	}
 
+}
 
+
+.body-display{
+	background-color: $displayBgCol;
+	color:$displayTextCol;
 
 }
+
+/*watch out for this... might have to alter this*/
+html{
+	@include fullheight;
+
+}
+
+
+#body-index-display{
+	@include fullheight;
+
+}
+
+
+
+#line-holder-display{
+	@include fullheight;
+}
+#line-holder-display-multi{
+	@include fullheight;
+	/*overflow:scroll;*/
+	/*overflow-y:auto;*/
+
+}
+
+#main-display{
+
+	@include fullheight;
+	height:100%;
+	/*added for multiline. needs testing*/
+	/*overflow:hidden;*/
+
+}
+#row-display{
+
+	@include fullheight;
+
+}
+
+
+.line-display{
+	@include line-display;
+}
+
+.line-display-multi{
+	@include line-display;
+	/*height:100%;*/
+	display:block;
+	color: $displayTextColBlur;
+
+}
+
 
 .shown-display{
 	display:block;
 }
 
+.focus-multi{
+	color:$displayTextCol;
+}
+
+/*
+#shade-multi{
+	position:fixed;
+	background:$displayBgCol;
+	width:100%;
+	height:100%;
+	display:block;
+}
+*/
+
+#row-display-multi{
+
+}
