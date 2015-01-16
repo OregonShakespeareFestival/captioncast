@@ -1,7 +1,7 @@
 //javascript for the display view goes here
 var refresh = 2000;
 var dispFadeSpd = 400;
-var scrollSpd = 400;
+var scrollSpd = 800;
 $(document).ready(function(){
 	if($('#multi-flag-display').length<=0){
 
@@ -97,6 +97,8 @@ $(document).ready(function(){
 	//end of original block
 	//}
 	}else{
+		$('#shade-multi').css('display', 'none');
+
 		//this is specific JS for the multi-line view
 		console.log('welcome to multi-line mode');
 		//console.log('this is the display view');
@@ -125,7 +127,8 @@ $(document).ready(function(){
 			);
 
 		//waiting to get data vended in for characters
-		
+		//$('#line-holder-display-multi').append('<div id="buffer-top-display-multi"></div>');
+
 		//templating per line
 		_.each(lines, function(q, i){
 			//this is a temporary scrub in of fixture characters
@@ -142,6 +145,8 @@ $(document).ready(function(){
 				);
 			}
 		});
+		//$('#line-holder-display-multi').append('<div id="buffer-bottom-display-multi"></div>');
+
 		//$('.line-display-multi').addClass('shown-display');
 		//$('.line-display-multi').addClass('blur-multi');
 		//when the first line fade in it sets off the preiodic ajax scrape
@@ -160,7 +165,7 @@ $(document).ready(function(){
 							current=j;
 
 							if(current!==0){
-							
+								$('#shade-multi').fadeOut(dispFadeSpd);
 								var newElem = _.find($('.line-display-multi'), function(q){
 										return parseInt($(q).attr('data-sequence'))==j;
 								});
@@ -172,6 +177,8 @@ $(document).ready(function(){
 										$('#line-holder-display-multi').scrollTop() - diff
 								}, scrollSpd);
 							*/
+								//$('#body-index-display').animate({scrollTop:$(newElem).position().top-$(window).height()/2-$(newElem).height()/2});
+								$('#body-index-display').animate({scrollTop:$(newElem).position().top+$(newElem).height()/2});
 								//$('.shown-display').fadeOut(dispFadeSpd, function(){
 								//remove the focus class
 								$('.focus-multi').removeClass('focus-multi');
@@ -182,6 +189,11 @@ $(document).ready(function(){
 								setTimeout(function(){
 									heartbeat();
 								}, refresh);
+							}else{
+								$('#shade-multi').fadeIn(dispFadeSpd);
+								setTimeout(function(){
+									heartbeat();
+									}, refresh);
 							}
 
 									
