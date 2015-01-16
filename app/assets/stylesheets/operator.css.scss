@@ -55,6 +55,10 @@ $gen-btn-pad: 10px;
 	}
 }
 
+#body-ind-operator{
+	background-color:$bgcol4;
+	color: $lighttgcol;
+}
 
 
 #main-operator{
@@ -69,6 +73,8 @@ $gen-btn-pad: 10px;
 
 	height:100%;
 }
+
+
 #line-holder-operator{
 	background-color:$bgcol4;
 	height:100%;
