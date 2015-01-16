@@ -27,22 +27,13 @@ $preview-break: 300px;
 	transform: translateY(-50%);
 }
 
-@mixin line-display{
+@mixin line-disp{
 	display:none;
 	font-size:5.5em;
 	text-align: center;
-	//padding for safe region of display-- just in case
+	/*padding for safe region of display-- just in case*/
 	padding:3%;
 	@include fullheight;
-	span.line-full-display{
-		@include vert-center;
-		span.line-content-display{
-
-		}
-		span.line-char-display{
-			font-weight:bold;
-		}
-	}
 	@media screen and (max-width: $ipad-land-break){
 		font-size:4em;
 		padding:.5%;
@@ -87,17 +78,15 @@ html{
 #line-holder-display{
 	@include fullheight;
 }
+
 #line-holder-display-multi{
 	@include fullheight;
-	/*overflow:scroll;*/
-	/*overflow-y:auto;*/
-
+	/*overflow:auto;*/
 }
 
 #main-display{
 
 	@include fullheight;
-	height:100%;
 	/*added for multiline. needs testing*/
 	/*overflow:hidden;*/
 
@@ -110,15 +99,40 @@ html{
 
 
 .line-display{
-	@include line-display;
+	@include line-disp;
+	span.line-full-display{
+		@include vert-center;
+		span.line-content-display{
+
+		}
+		span.line-char-display{
+			font-weight:bold;
+		}
+	}
+
 }
 
 .line-display-multi{
-	@include line-display;
-	/*height:100%;*/
+	@include line-disp;
 	display:block;
 	color: $displayTextColBlur;
+	span.line-full-display{
+		/*@include vert-center;*/
+		span.line-content-display{
 
+		}
+		span.line-char-display{
+			font-weight:bold;
+		}
+	}
+
+}
+
+#buffer-top-display-multi{
+	height:45%;
+} 
+#buffer-bottom-display-multi{
+	height:40%;
 }
 
 
