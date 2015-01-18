@@ -7,6 +7,10 @@ class DataFile < ActiveRecord::Base
     #create the file path
     path = File.join(directory, name)
     #write the file
+
+
+    #here we will check for .txt or .fdx
+
     File.open(path, "wb") { |f| f.write(upload['datafile'].read) }
   end
 
@@ -38,17 +42,94 @@ class DataFile < ActiveRecord::Base
 
   def self.parse_fd(upload,work)
 
+    #create the file path abd open the file
     name =  upload['datafile'].original_filename
     directory = "public/data"
-    #create the file path
-
-    path = File.join(directory, name)
-
+    path = File.join(directory, name)    
     f = File.open(path)
-    doc =  Nokogiri::XML(f)
-    f.close
+
+    if(File.extname(path) == ".txt")
+      self.parse_text_file(f)
+      return
+
+    elsif(File.extname(path) == ".fdx")
+      doc =  Nokogiri::XML(f)
+      f.close
+      self.parse_fdx(doc)
+      return
+    end   
+  end
 
 
+
+
+  #used to parse a .txt file script (typically other languages)
+  def self.parse_text_file(f)
+
+    #reads the file line by line into array
+    arr = IO.readlines(f)
+
+
+    #checks for character name in line and adds it to the elements table if it does not already exist
+    arr.each do |line|
+      name = line.force_encoding("ISO-8859-1").encode("utf-8", replace: nil).match(/^[A-Z1-9\s]+(?=:)/)
+      if (name != nil)
+        #add the character "element" to the table if it does not exist
+        self.add_element(name[0].upcase, "CHARACTER", "#666666", "LBJ")
+      end
+    end
+
+
+    cur_line = ""
+    haveline = false
+    lineCount = 1
+    name = ""
+
+
+    #now we add the lines in the script to the database depending on the character
+    arr.each do |line|
+
+      #look for a character name indicating the beginning of a dialogue
+      a = line.force_encoding("ISO-8859-1").encode("utf-8", replace: nil).match(/^[A-Z1-9\s]+(?=:)/)
+      
+      #we have a completed monologue and need to submit it to the db
+      if(a != nil and haveline == true)
+        #here we send all the data to the database if its a dialogue
+        self.add_char_line(name, lineCount, cur_line, true)
+        puts name.upcase
+        puts cur_line
+        lineCount += 1
+        haveline = false
+        cur_line = ""
+        name = ""
+      end
+
+      #we need to strip the name from the monologue 
+      if (a != nil)
+        #get the character speaking
+        name = a[0].upcase
+        #returns just the line said by the character
+        cur_line = line.force_encoding("ISO-8859-1").encode("utf-8", replace: nil).sub(/^[A-Z1-9\s]+:\s?/,"")
+        haveline = true
+
+      #we just append this line to our current characters script
+      elsif (a == nil)
+        cur_line += " " + line.force_encoding("ISO-8859-1").encode("utf-8", replace: nil).sub(/^[A-Z1-9\s]+:\s?/,"")
+
+        #add the character "element" to the table if it does not exist
+        #self.add_element(name[0].upcase, "CHARACTER", "#666666", "LBJ")
+      end
+    end
+
+
+  end
+
+
+
+
+
+  #used for parsing script in XML format
+  def self.parse_fdx(doc)
     #XML is like violence - if it doesn’t solve your problems, you are not using enough of it.
     #Build an xpath for what we want to search for
     #/FinalDraft/Content/Paragraph//Text
@@ -59,7 +140,7 @@ class DataFile < ActiveRecord::Base
     nondialouge.each do |nondialouge|
       type = nondialouge.attributes["Type"].value
       #add element to the database if not already there
-      self.add_element("-", type.to_str.upcase, "#666666", "Equivocation")
+      self.add_element("", type.to_str.upcase, "#666666", "Equivocation")
     end
 
 
@@ -110,9 +191,7 @@ class DataFile < ActiveRecord::Base
         self.add_direction(par_type.upcase, lineCount, direction, false)
         #puts "WTF " + par_type.upcase + " " + direction
         lineCount += 1
-      
       end
-    
     end
   end
 end
