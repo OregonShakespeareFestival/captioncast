@@ -1,6 +1,10 @@
 require 'nokogiri'
 
 class DataFile < ActiveRecord::Base
+  
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#uploads and saves the file
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   def self.save(upload)
     name =  upload['datafile'].original_filename
     directory = "public/data"
@@ -24,6 +28,7 @@ class DataFile < ActiveRecord::Base
   
 
   #add the characters line to the Text table in the database
+  #TODO: determin how to pass in the correct "work" elemnt
   def self.add_char_line(character, lineCount, charLine, visibility)
     txt = Text.create(sequence: lineCount, element: Element.find_by(element_name: character, element_type: 'CHARACTER'), work: Work.first, content_text: charLine, visibility: visibility)
     txt.save
@@ -38,8 +43,12 @@ class DataFile < ActiveRecord::Base
     #puts lineCount
   end
 
-
-
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  #this is called in the controlers file when a file is uploaded
+  # ** ONLY ACCEPTS .TXT OR .FDX FILES
+  # .TXT file should be in the format
+  # "CHARACTER NAME:" (all caps) "text goes here"
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   def self.parse_fd(upload,work)
 
     #create the file path abd open the file
@@ -62,8 +71,9 @@ class DataFile < ActiveRecord::Base
 
 
 
-
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   #used to parse a .txt file script (typically other languages)
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   def self.parse_text_file(f)
 
     #reads the file line by line into array
@@ -126,9 +136,9 @@ class DataFile < ActiveRecord::Base
 
 
 
-
-
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   #used for parsing script in XML format
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   def self.parse_fdx(doc)
     #XML is like violence - if it doesn’t solve your problems, you are not using enough of it.
     #Build an xpath for what we want to search for
