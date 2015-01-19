@@ -36,12 +36,12 @@ $(document).ready(function(){
 		//templating per line
 		_.each(lines, function(q, i){
 			//this is a temporary scrub in of fixture characters
-			q.character = 'Character';
+			//q.character = 'Character';
 
 			//append character name with colon
-			if(q.character.length>0){
+			if(q.element.element_name.length>0){
 				//append the colon
-				q.character = q.character + ':';
+				q.character = q.element.element_name + ':';
 			}else{
 				q.character=' ';
 			}
@@ -213,6 +213,7 @@ $(document).ready(function(){
 		$('#up-button-operator').click(function(){
 
 			var prevNum = parseInt($('.target-operator').first().attr('data-sequence'))-1;
+			console.log(prevNum);
 			if(prevNum>0){
 				var prevTar = $.grep($('.line-operator'), function(n){
 					return $(n).attr('data-sequence') == prevNum;
