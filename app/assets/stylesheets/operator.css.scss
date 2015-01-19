@@ -9,6 +9,8 @@ $targettxt: #FEFEFE;
 $currentcol: #CCEC60;
 $lighttgcol: #d5e1f2;
 
+$nonviscol: #bbbbbb;
+
 $bgcol1: #667D85;
 $bgcol2: #38545E;
 $bgcol3: #0E3544;
@@ -129,6 +131,10 @@ $gen-btn-pad: 10px;
 	font-size:2.5em;
 	padding:12px;
 	cursor:pointer;
+}
+.line-non-visible-operator{
+	font-style:italic;
+	color: $nonviscol;
 }
 .char-hl-operator{
 	font-weight:bold;
