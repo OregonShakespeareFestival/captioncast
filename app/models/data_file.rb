@@ -3,6 +3,7 @@ require 'nokogiri'
 class DataFile < ActiveRecord::Base
 
   @default_text_color = "#F7E694"
+  @work
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #uploads and saves the file
@@ -24,7 +25,7 @@ class DataFile < ActiveRecord::Base
   #add element to the element table
   def self.add_element(name, type, color, work_id)
       #Text.create(sequence: linenum, content_text: linecharacter + ": " + s, visibility: true, element: Element.find_by(element_type: 'Dialogue'), work: Work.find_by_name('Equivocation'))
-      e = Element.find_or_create_by!(element_name: name, element_type: type, color: color, work: Work.find_by_id(work_id))
+      e = Element.find_or_create_by!(element_name: name, element_type: type, color: color, work: @work)
       e.save
   end
 
@@ -32,14 +33,14 @@ class DataFile < ActiveRecord::Base
   #add the characters line to the Text table in the database
   #TODO: determin how to pass in the correct "work" elemnt
   def self.add_char_line(character, lineCount, charLine, visibility, work_id)
-    txt = Text.create(sequence: lineCount, element: Element.find_by(element_name: character, element_type: 'CHARACTER'), work: Work.find_by(work_id), content_text: charLine, visibility: visibility)
+    txt = Text.create(sequence: lineCount, element: Element.find_by(element_name: character, element_type: 'CHARACTER'), work: @work, content_text: charLine, visibility: visibility)
     txt.save
   end
 
 
   #add the stage direction etc to the Text table in the database
   def self.add_direction(e_type, lineCount, direction, visibility, work_id)
-    txt = Text.create(sequence: lineCount, element: Element.find_by(element_type: e_type), work: Work.find_by(work_id), content_text: direction, visibility: visibility)
+    txt = Text.create(sequence: lineCount, element: Element.find_by(element_type: e_type), work: @work, content_text: direction, visibility: visibility)
     txt.save
     #puts "direction = " + e_type + " & " + direction
     #puts lineCount
@@ -58,6 +59,8 @@ class DataFile < ActiveRecord::Base
     directory = "public/data"
     path = File.join(directory, name)
     f = File.open(path)
+
+    @work = Work.find_by_id(work)
 
     if(File.extname(path) == ".txt")
       self.parse_text_file(f, work)
