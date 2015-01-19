@@ -10,6 +10,32 @@ class DataFile < ActiveRecord::Base
     File.open(path, "wb") { |f| f.write(upload['datafile'].read) }
   end
 
+
+  #add element to the element table
+  def self.add_element(name, type, color, work)
+      #Text.create(sequence: linenum, content_text: linecharacter + ": " + s, visibility: true, element: Element.find_by(element_type: 'Dialogue'), work: Work.find_by_name('Equivocation'))
+      e = Element.find_or_create_by!(element_name: name, element_type: type, color: color, work: Work.find_by_name(work))
+      e.save
+  end 
+  
+
+  #add the characters line to the Text table in the database
+  def self.add_char_line(character, lineCount, charLine, visibility)
+    txt = Text.create(sequence: lineCount, element: Element.find_by(element_name: character, element_type: 'CHARACTER'), work: Work.first, content_text: charLine, visibility: visibility)
+    txt.save
+  end
+
+
+  #add the stage direction etc to the Text table in the database
+  def self.add_direction(e_type, lineCount, direction, visibility)
+    txt = Text.create(sequence: lineCount, element: Element.find_by(element_type: e_type), work: Work.first, content_text: direction, visibility: visibility)
+    txt.save
+    #puts "direction = " + e_type + " & " + direction 
+    #puts lineCount
+  end
+
+
+
   def self.parse_fd(upload,work)
 
     name =  upload['datafile'].original_filename
@@ -22,75 +48,71 @@ class DataFile < ActiveRecord::Base
     doc =  Nokogiri::XML(f)
     f.close
 
+
     #XML is like violence - if it doesn’t solve your problems, you are not using enough of it.
     #Build an xpath for what we want to search for
     #/FinalDraft/Content/Paragraph//Text
     #Nondialogue Elements
-    nondialouge = doc.xpath("/FinalDraft/Content/*[not(@Type='Dialogue' or @Type='Character')]//Text")
-      hnondialougue = Array.new
+    nondialouge = doc.xpath("/FinalDraft/Content/*[not(@Type='Dialogue')]")
 
+    #gets any non dialouge element
     nondialouge.each do |nondialouge|
-      hnondialougue.push(nondialouge.to_str)
+      type = nondialouge.attributes["Type"].value
+      #add element to the database if not already there
+      self.add_element("-", type.to_str.upcase, "#666666", "Equivocation")
     end
+
+
 
     #XPath any sub-item of node type paragraph that has attribute character containing text.
     characters = doc.xpath("/FinalDraft/Content/Paragraph[@Type='Character']//Text")
 
-    #Create a character hash
-    hcharacters = Array.new
-
-    #Push each elem to array
+    #Adds each character element to the database if it's new to the database
     characters.each do |character|
-      hcharacters.push(character.to_str)
+      name = character.text.to_str.upcase
+      self.add_element( name, "CHARACTER", "#111111", "Equivocation")
     end
 
-    #Make sure only unique characters are in the array.
-    hcharacters = hcharacters.uniq
 
-    #XPath any sub-item of node type paragraph containing text.
-    items = doc.xpath("/FinalDraft/Content/Paragraph//Text")
 
-    #Counter int for the lines
-    linenum = 0
+    #xpath through the whole document for generaing entire script
+    lines = doc.xpath("/FinalDraft/Content/Paragraph")
+    lineCount = 0
+    charName = ""
 
-    #Create a scope var to hold characters temporarily.
 
-    linecharacter = ""
 
-    #For each item let's bulding a string object with the line number and line.
-    items.each do |item|
-      #Cast our other itmes as strings.
-      l = linenum.to_s
-      s = item.to_str
+    #loops through the script and adds necessary lines into the database
+    lines.each do |line|
+      par_type = line.attributes["Type"].value
+      #if its a character, get who and set character name
+      if par_type.upcase == "CHARACTER"
+        charName = line.children.children.text
 
-      #Search the array to see if the line is actually a Character.
-      charcheck = hcharacters.any? { |w| s =~ /^#{w}$/ }
+      #gets the dialogue then we set the, character should alredy be set 
+      elsif par_type.upcase == "DIALOGUE"
+        charLine = line.children.children.text
+        #here we send all the data to the database if its a dialogue
+        self.add_char_line(charName.upcase, lineCount, charLine, true)
+        #puts charName + " is saying " + charLine 
+        lineCount += 1
 
-      if charcheck == true
-        linecharacter = s
-        next
+      #gets visible parenthetical description 
+      elsif par_type.upcase == "PARENTHETICAL"
+        direction = line.children.children.text
+        self.add_direction(par_type.upcase, lineCount, direction, true)
+        #puts "WTF " + par_type.upcase + " " + direction
+        lineCount += 1
+
+      #catches non visible lines
       else
-        #If it's not a character better check to see if it's non-dialogue.
-        nondial = hnondialougue.include?(s)
-        if nondial == true
-          txt = Text.create(sequence: linenum, content_text: linecharacter + ": " + s, visibility: false, element: Element.find_by(element_type: 'Dialogue'), work: Work.find_by_name('Equivocation'))
-          txt.save
-          linenum = linenum + 1
-          next
-        end
+        direction = line.children.children.text
+        self.add_direction(par_type.upcase, lineCount, direction, false)
+        #puts "WTF " + par_type.upcase + " " + direction
+        lineCount += 1
+      
       end
-
-      #If it's a new line let's go to the next item.
-      if s == ("")
-        next
-      else
-        linenum = linenum + 1
-        text = l + " " + linecharacter + ": " + s
-        txt = Text.create(sequence: linenum, content_text: linecharacter + ": " + s, visibility: true, element: Element.find_by(element_type: 'Dialogue'), work: Work.find_by_name('Equivocation'))
-        txt.save
-        #In final for all dialogue we should set visibility to true.
-      end
+    
     end
   end
 end
-
