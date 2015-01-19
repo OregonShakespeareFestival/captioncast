@@ -1,3 +1,81 @@
 // Place all the styles related to the cast controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+$basetextcol: #FFFBED;
+$targethl: #789036;
+$targetcol: #154553;
+$targettxt: #FEFEFE;
+$currentcol: #CCEC60;
+$lighttgcol: #d5e1f2;
+
+$bgcol1: #667D85;
+$bgcol2: #38545E;
+$bgcol3: #0E3544;
+$bgcol4: #082A36;
+
+$xs-break: 992px;
+$lg-break: 1400px;
+$gen-btn-sz: 74px;
+$gen-btn-pad: 10px;
+
+
+.body-cast{
+	background-color:$bgcol4;
+	color:$basetextcol;
+}
+#title-cast{
+	width:100%;
+	text-align:center;
+	font-size:3em;
+	display:inline-block;
+	padding:30px;
+}
+
+.button-cast{
+	height:250px;
+
+	div{
+		width:95%;
+		height:95%;
+		cursor:pointer;
+		background-color:$bgcol2;
+		font-size:6em;
+		color:$bgcol3;
+	}
+	.glyphicon{
+		transform:translateY(50%);
+
+	}
+	span{
+		padding:8px;
+		width:100%;
+		text-align:center;
+
+	}
+	.button-title-cast{
+		font-size:.5em;
+		display:block;
+		padding-top:40px;
+	}
+	&:active{
+		span{
+			text-decoration: none;
+			color:$currentcol;
+			font-weight:bold;
+		}
+	}
+	a:hover, a:visited, a:focus{
+		text-decoration:none;
+	}
+
+
+}
+#display-button-cast{
+}
+#operator-button-cast{
+}
+#editor-button-cast{
+}
+#upload-button-cast{
+}
