@@ -3,11 +3,42 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
+$basetextcol: #FFFBED;
+$targethl: #789036;
+$targetcol: #154553;
+$targettxt: #FEFEFE;
+$currentcol: #CCEC60;
+$lighttgcol: #d5e1f2;
+
+$bgcol1: #667D85;
+$bgcol2: #38545E;
+$bgcol3: #0E3544;
+$bgcol4: #082A36;
+
+$xs-break: 992px;
+$lg-break: 1400px;
+$gen-btn-sz: 74px;
+$gen-btn-pad: 10px;
+
+.body-upload {
+	background-color:$bgcol4;
+	color:$basetextcol;
+}
+
+#title-upload {
+	width:100%;
+	text-align:center;
+	font-size:3em;
+	display:inline-block;
+	padding:30px;
+}
+
+
 #main-form-upload{
-	
+
 }
 
 #attributes-upload{
-	
+
 
 }
