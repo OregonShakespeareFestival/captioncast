@@ -61,26 +61,37 @@ $(document).ready(function(){
 				$('#line-holder-sub-operator').append(
 					tLine(q)
 				);
+			}else{
+				//need handling for non-visible items
+				//show them with different styling
+				// 
 			}
 			$('.line-operator').first().addClass('target-operator');
+			$('.line-operator').each(function(){
+				if($(this).attr('data-visibility')=="false"){
+					$(this).addClass('line-non-visible-operator');
+				}
+			});
 		});
 		//this happens when you click the commit button
 		$('#commit-button-operator').click(function(){
 			//post the sequence of the selected line via ajax
-			
-			$.ajax('/operator/pushTextSeq', {
-				type:'POST',
-				data: {
-					seq:$('.target-operator').attr('data-sequence')
-				},
-				success:(function(d){
-					//console.log('line pushed ' + d);
-				}),
-			});
-			
-			$('.current-operator').removeClass('current-operator');
+			console.log($('.target-operator').attr('data-visibility'));
+			if($('.target-operator').attr('data-visibility')=="true"){
+				$.ajax('/operator/pushTextSeq', {
+					type:'POST',
+					data: {
+						seq:$('.target-operator').attr('data-sequence')
+					},
+					success:(function(d){
+						//console.log('line pushed ' + d);
+					}),
+				});
+				
+				$('.current-operator').removeClass('current-operator');
 
-			$('.target-operator').addClass('current-operator');
+				$('.target-operator').addClass('current-operator');
+			}
 		});
 		//scrolling target feature
 		$('#line-holder-operator').scroll(function(){
