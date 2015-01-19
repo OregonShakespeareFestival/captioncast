@@ -41,7 +41,7 @@ gem 'capistrano-rails', group: :development
 # gem 'debugger', group: [:development, :test]
 
 gem 'nokogiri'
-gem 'bootstrap-sass'
+gem 'bootstrap-sass', '~> 3.3.1.0'
 gem 'autoprefixer-rails'
 gem 'rails_admin'
 gem 'underscore-rails'
