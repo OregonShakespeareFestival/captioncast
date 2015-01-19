@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 20141223190338) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "language"
     t.integer  "venue_id"
   end
 
