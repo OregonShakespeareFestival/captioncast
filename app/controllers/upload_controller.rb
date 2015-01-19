@@ -7,6 +7,9 @@ class UploadController < ApplicationController
   end
 
   def uploadFile
+
+    Text.all.where(work: params[:work]).delete_all
+
     post = DataFile.save(params[:upload])
     post = DataFile.parse_fd(params[:upload], params[:work])
     render :text => "File has been uploaded successfully"
