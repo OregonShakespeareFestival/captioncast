@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<FinalDraft DocumentType="Script" Template="No" Version="1">
+
+  <Content>
+    <Paragraph Type="Act Break">
+      <Text AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Courier Final Draft" RevisionID="0" Size="12" Style="Underline">ACT ONE</Text>
+    </Paragraph>
+    <Paragraph Type="Scene Heading">
+      <SceneProperties Length="4 6/8" Page="1" Title=""/>
+      <Text>Scene 1 - an office - mid-meeting - tense silence.</Text>
+    </Paragraph>
+    <Paragraph Type="Action">
+      <Text>Two men. A desk between them. SHAG - 40’s - stands on the power-deficit side of the desk.  </Text>
+    </Paragraph>
+    <Paragraph Type="Character">
+      <Text>Shag</Text>
+    </Paragraph>
+    <Paragraph Type="Dialogue">
+      <Text>Why me?</Text>
+    </Paragraph>
+    <Paragraph Type="Action">
+      <Text>CECIL - 40’s - in spite of a permanently bent body and short stature, sits on the power surplus side of the desk. </Text>
+    </Paragraph>
+    <Paragraph Type="Character">
+      <Text>CECIL</Text>
+    </Paragraph>
+    <Paragraph Type="Dialogue">
+      <Text>It wasn’t that others weren’t considered. </Text>
+    </Paragraph>
+    <Paragraph Type="Action">
+      <Text>On the table - a manuscript. Cecil moves the manuscript towards Shag. Shag does not take it. </Text>
+    </Paragraph>
+    <Paragraph Type="Character">
+      <Text>Shag</Text>
+    </Paragraph>
+    <Paragraph Type="Dialogue">
+      <Text>I can’t make the decision.</Text>
+    </Paragraph>
+    <Paragraph Type="Character">
+      <Text>CECIL</Text>
+    </Paragraph>
+      <Paragraph Type="Parenthetical">
+      <Text>(then)</Text>
+    </Paragraph>
+    <Paragraph Type="Dialogue">
+      <Text>I never knew I had a story of my own - until he told it.</Text>
+    </Paragraph>
+    <Paragraph Type="Action">
+      <Text>She kisses him. </Text>
+    </Paragraph>
+    <Paragraph Type="Action">
+      <Text>She holds the final four plays to her.</Text>
+    </Paragraph>
+    <Paragraph Type="Action">
+      <Text AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Courier Final Draft" RevisionID="0" Size="12" Style="Underline"></Text>
+    </Paragraph>
+    <Paragraph Type="Action">
+      <Text AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Courier Final Draft" RevisionID="0" Size="12" Style="Underline">END OF PLAY</Text>
+    </Paragraph>
+  </Content>
+
+    <Cast>
+    <Narrator Actor="Man 1">
+      <Element Type="Character"/>
+      <Element Type="Dialogue"/>
+    </Narrator>
+    <Member Actor="Man 1" Character="Shag"/>
+    <Member Actor="Man 1" Character="Tom"/>
+    <Member Actor="Man 1" Character="SHARPE"/>
+    <Member Actor="Man 1" Character="NaTE"/>
+    <Member Actor="Man 1" Character="Cecil"/>
+    <Member Actor="Man 1" Character="END OF ACT 1"/>
+    <Member Actor="Man 1" Character="Nate/conspirator"/>
+    <Member Actor="Man 1" Character="Coke"/>
+    <Member Actor="Man 1" Character="Garnet"/>
+    <Member Actor="Man 1" Character="JUDITH"/>
+    <Member Actor="Man 1" Character="Armin"/>
+    <Member Actor="Man 1" Character="Richard"/>
+    <Member Actor="Man 1" Character="James"/>
+    <Member Actor="Man 1" Character="Macbeth"/>
+    <Member Actor="Man 1" Character="WITCH/armin"/>
+    <Member Actor="Man 1" Character="Witch 1"/>
+    <Member Actor="Man 1" Character="Witch 2"/>
+    <Member Actor="Man 1" Character="WITCH 3"/>
+    <Member Actor="Man 1" Character="RICHARD/CONSPIRATOR"/>
+    <Member Actor="Man 1" Character="MEN"/>
+    <Member Actor="Man 1" Character="AR"/>
+    <Member Actor="Man 1" Character="JUNIOR/ARMIN"/>
+    <Member Actor="Man 1" Character="ALL WITCHES"/>
+    <Member Actor="Man 1" Character="ALL"/>
+    <Member Actor="Man 1" Character="JAME"/>
+    <Member Actor="Man 1" Character="WITCH 1/armin"/>
+    <Member Actor="Man 1" Character="NAT"/>
+    <Member Actor="Man 1" Character="GAR"/>
+    <Member Actor="Man 1" Character="PERCY"/>
+    <Member Actor="Man 1" Character="Richard/fawkes"/>
+    <Member Actor="Man 1" Character="All conspirators"/>
+    <Member Actor="Man 1" Character="Armin/priest"/>
+    <Member Actor="Man 1" Character="Sharpe/conspriator"/>
+    <Member Actor="Man 1" Character="CATESBY"/>
+    <Member Actor="Man 1" Character="SHARPE/CONSPIRATOR"/>
+  </Cast>
+
+  <SceneNumberOptions LeftLocation="0.75" RightLocation="7.38" ShowNumbersOnLeft="Yes" ShowNumbersOnRight="Yes">
+    <FontSpec AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Courier Final Draft" RevisionID="0" Size="12" Style=""/>
+  </SceneNumberOptions>
+
+</FinalDraft>
