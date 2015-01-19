@@ -4,7 +4,7 @@ class DisplayController < ApplicationController
     #@atext = Text.where(visibility: true)
 
     #vend all lines out to the display view
-    @jtext=Text.all.to_json;
+    @jtext=Text.all.to_json(:include => :element);
 
     #pick between multi-line view and single line with a parameter
     if params[:multi] == "1"
