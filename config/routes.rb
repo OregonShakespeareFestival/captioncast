@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   post 'upload/index'
   post 'upload/uploadFile'
   get 'display/index'
+  get 'display/current'
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
