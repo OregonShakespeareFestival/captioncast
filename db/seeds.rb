@@ -11,31 +11,31 @@ thomas = Venue.find_or_create_by!(name: 'Thomas Theatre')
 lizzy  = Venue.find_or_create_by!(name: 'Allen Elizabethan Theatre')
 
 
-Work.create!(name: "Much Ado about Nothing") { |work| work.venue = bowmer; work.language = "en" }
-Work.create!(name: "Guys and Dolls") { |work| work.venue = bowmer; work.language = "en" }
-Work.create!(name: "Fingersmith") { |work| work.venue = bowmer; work.language = "en" }
-Work.create!(name: "Secret Love in Peach Blossom Land") { |work| work.venue = bowmer; work.language = "en" }
-Work.create!(name: "Sweat") { |work| work.venue = bowmer; work.language = "en" }
+Work.create!(work_name: "Much Ado about Nothing") { |work| work.venue = bowmer; work.language = "en" }
+Work.create!(work_name: "Guys and Dolls") { |work| work.venue = bowmer; work.language = "en" }
+Work.create!(work_name: "Fingersmith") { |work| work.venue = bowmer; work.language = "en" }
+Work.create!(work_name: "Secret Love in Peach Blossom Land") { |work| work.venue = bowmer; work.language = "en" }
+Work.create!(work_name: "Sweat") { |work| work.venue = bowmer; work.language = "en" }
 
-Work.create!(name: "Pericles") { |work| work.venue = thomas; work.language = "en" }
-Work.create!(name: "Long Day's Journey into Night") { |work| work.venue = thomas; work.language = "en" }
-Work.create!(name: "The Happiest Song Plays Last") { |work| work.venue = thomas; work.language = "en" }
+Work.create!(work_name: "Pericles") { |work| work.venue = thomas; work.language = "en" }
+Work.create!(work_name: "Long Day's Journey into Night") { |work| work.venue = thomas; work.language = "en" }
+Work.create!(work_name: "The Happiest Song Plays Last") { |work| work.venue = thomas; work.language = "en" }
 
-Work.create!(name: "Antony and Cleopatra") { |work| work.venue = lizzy; work.language = "en" }
-Work.create!(name: "Head Over Heels") { |work| work.venue = lizzy; work.language = "en" }
-Work.create!(name: "The Count of Monte Cristo") { |work| work.venue = lizzy; work.language = "en" }
+Work.create!(work_name: "Antony and Cleopatra") { |work| work.venue = lizzy; work.language = "en" }
+Work.create!(work_name: "Head Over Heels") { |work| work.venue = lizzy; work.language = "en" }
+Work.create!(work_name: "The Count of Monte Cristo") { |work| work.venue = lizzy; work.language = "en" }
 
 
-Work.create!(name: "Much Ado about Nothing") { |work| work.venue = bowmer; work.language = "es" }
-Work.create!(name: "Guys and Dolls") { |work| work.venue = bowmer; work.language = "es" }
-Work.create!(name: "Fingersmith") { |work| work.venue = bowmer; work.language = "es" }
-Work.create!(name: "Secret Love in Peach Blossom Land") { |work| work.venue = bowmer; work.language = "es" }
-Work.create!(name: "Sweat") { |work| work.venue = bowmer; work.language = "es" }
+Work.create!(work_name: "Much Ado about Nothing") { |work| work.venue = bowmer; work.language = "es" }
+Work.create!(work_name: "Guys and Dolls") { |work| work.venue = bowmer; work.language = "es" }
+Work.create!(work_name: "Fingersmith") { |work| work.venue = bowmer; work.language = "es" }
+Work.create!(work_name: "Secret Love in Peach Blossom Land") { |work| work.venue = bowmer; work.language = "es" }
+Work.create!(work_name: "Sweat") { |work| work.venue = bowmer; work.language = "es" }
 
-Work.create!(name: "Pericles") { |work| work.venue = thomas; work.language = "es" }
-Work.create!(name: "Long Day's Journey into Night") { |work| work.venue = thomas; work.language = "es" }
-Work.create!(name: "The Happiest Song Plays Last") { |work| work.venue = thomas; work.language = "es" }
+Work.create!(work_name: "Pericles") { |work| work.venue = thomas; work.language = "es" }
+Work.create!(work_name: "Long Day's Journey into Night") { |work| work.venue = thomas; work.language = "es" }
+Work.create!(work_name: "The Happiest Song Plays Last") { |work| work.venue = thomas; work.language = "es" }
 
-Work.create!(name: "Antony and Cleopatra") { |work| work.venue = lizzy; work.language = "es" }
-Work.create!(name: "Head Over Heels") { |work| work.venue = lizzy; work.language = "es" }
-Work.create!(name: "The Count of Monte Cristo") { |work| work.venue = lizzy; work.language = "es" }
+Work.create!(work_name: "Antony and Cleopatra") { |work| work.venue = lizzy; work.language = "es" }
+Work.create!(work_name: "Head Over Heels") { |work| work.venue = lizzy; work.language = "es" }
+Work.create!(work_name: "The Count of Monte Cristo") { |work| work.venue = lizzy; work.language = "es" }

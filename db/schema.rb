@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 20141223190338) do
   end
 
   create_table "works", force: true do |t|
-    t.string   "name"
+    t.string   "work_name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "language"
