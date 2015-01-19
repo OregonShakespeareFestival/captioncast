@@ -1,7 +1,7 @@
 class CreateWorks < ActiveRecord::Migration
   def change
     create_table :works do |t|
-      t.string :name
+      t.string :work_name
       t.timestamps
       t.string :language
     end
