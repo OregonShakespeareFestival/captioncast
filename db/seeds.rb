@@ -11,4 +11,4 @@ thomas = Venue.find_or_create_by!(name: 'Thomas Theatre')
 lizzy  = Venue.find_or_create_by!(name: 'Allen Elizabethan Theatre')
 
 equivocation = Work.find_or_create_by!(name: 'Equivocation') { |work| work.venue = bowmer }
-  
+LBJ = Work.find_or_create_by!(name: 'LBJ') { |work| work.venue = bowmer }  
