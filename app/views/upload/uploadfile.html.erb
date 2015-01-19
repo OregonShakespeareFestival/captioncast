@@ -1,8 +1,8 @@
 <div class="container" id="main-upload">
 	<%= content_tag :div, :id=>"main-form-upload", :class=>"row" do %>
 		<%= content_tag :div, :id=>"attributes-upload", :class=>"col-xs-12 col-sm-6 col-md-4" do %>
-		
-			<h1>File Upload</h1>	
+
+			<h1>File Upload</h1>
 
 			<%= form_tag({:action => "uploadFile"},
 			  :multipart => true, :class => "form-group") do %>
@@ -22,7 +22,7 @@
 				<%= content_tag :div, :class=>"form-group" do %>
 				   	<%= label_tag("Select a Work") %>
 					</br>
-					<%= select_tag "work", options_from_collection_for_select(@works, "id", "name"), :class=>"form-control" %>
+					<%= select_tag "work", options_from_collection_for_select(Work.order(:work_name), "id", "name" ), :class=>"form-control" %>
 				<% end %>
 				</br>
 				<%= button_tag "Upload", :type=>"submit", :class => "btn btn-default" %>
@@ -31,5 +31,3 @@
 		<% end %>
 	<% end %>
 </div>
-
-
