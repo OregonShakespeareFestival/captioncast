@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141223190338) do
+ActiveRecord::Schema.define(version: 20150122172125) do
 
   create_table "data_files", force: true do |t|
     t.datetime "created_at"
@@ -28,6 +28,16 @@ ActiveRecord::Schema.define(version: 20141223190338) do
   end
 
   add_index "elements", ["work_id"], name: "index_elements_on_work_id"
+
+  create_table "operators", force: true do |t|
+    t.text     "name"
+    t.text     "view_attributes"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "work_id"
+  end
+
+  add_index "operators", ["work_id"], name: "index_operators_on_work_id"
 
   create_table "texts", force: true do |t|
     t.integer  "sequence"
