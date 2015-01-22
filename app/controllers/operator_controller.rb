@@ -5,6 +5,8 @@ class OperatorController < ApplicationController
 
 		#set the operator variable
 		@operator = params[:operator]
+		@view_mode = params[:view_mode]
+		@work = params[:work]
 		# slurp up the required text
 		@jtext = Text.all.where(work: params[:work]).to_json(:include => :element)
 		# add the default position of 0 for an operator
