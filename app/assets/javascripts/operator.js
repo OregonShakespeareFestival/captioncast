@@ -132,7 +132,7 @@ $(document).ready(function(){
 				$(this).animate({left:'0px'}, 1000, function(){
 					$(this).attr('data-visible', 'true');
 					if($('#preview-operator iframe').attr('src')==""){
-						$('#preview-operator iframe').attr('src', "/display/index");
+						$('#preview-operator iframe').attr('src', "/display/index?operator="+operator+"&view="+view_mode+"&work="+work);
 					}
 				});
 			}else{
