@@ -211,7 +211,8 @@ $(document).ready(function(){
 			$.ajax('/operator/pushTextSeq', {
 				type:'POST',
 				data: {
-					seq:0
+					seq:0,
+          operator: operator
 				},
 				success:(function(d){
 					console.log('display cleared');
