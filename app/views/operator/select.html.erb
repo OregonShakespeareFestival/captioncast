@@ -1,27 +1,37 @@
 <body id="body-index-upload" class="body-upload">
 
-<%= javascript_include_tag "jquery.fileupload-ui" %>
+	<%= javascript_include_tag "jquery.fileupload-ui" %>
 
-<div class="container" id="main-upload">
-	<%= content_tag :div, :id=>"main-form-upload", :class=>"row" do %>
-		<%= content_tag :div, :id=>"attributes-upload", :class=>"col-xs-12 col-sm-6 col-md-4" do %>
+	<div class="container" id="main-upload">
+		<%= content_tag :div, :id=>"main-form-upload", :class=>"row" do %>
+			<%= content_tag :div, :id=>"attributes-upload", :class=>"col-xs-12 col-sm-6 col-md-4" do %>
 
-			<h1 class="title-upload">Select The Work</h1>
+				<h1 class="title-upload">Preferences</h1>
 
-			<%= form_tag({:action => "select"},
-			  :multipart => true, :class => "form-group") do %>
+				<%= form_tag({:action => "select"},
+			  	:multipart => true, :class => "form-group") do %>
 
-				<%= content_tag :div, :class=>"form-group" do %>
-				   	<%= label_tag("Select a Work") %>
+					<%= content_tag :div, :class=>"form-group" do %>
+				  	<%= label_tag("Select a Work") %>
+						</br>
+						<%= select_tag "work", options_from_collection_for_select(Work.order(:work_name), "id", "name" ), :class=>"form-control" %>
+					<% end %>
 					</br>
-					<%= select_tag "work", options_from_collection_for_select(Work.order(:work_name), "id", "name" ), :class=>"form-control" %>
+					<%= content_tag :div, :class=>"form-group" do %>
+						<%= label_tag("Select a view style") %>
+				  	</br>
+						<%= select_tag "view", "<option>single</option><option>multi</option>".html_safe, :class=>"form-control" %>
+					<% end %>
+					</br>
+					<%= content_tag :div, :class=>"form-group" do %>
+						<%= label_tag("Enter Your Name") %>
+						</br>
+						<%= text_field(:operator, :name, size: 20, :class=>"form-control") %>
+					<% end %>
+			  	</br>
+					<%= button_tag "Continue", :type=>"submit", :class => "btn btn-primary" %>
 				<% end %>
-				</br>
-				<%= button_tag "Continue", :type=>"submit", :class => "btn btn-primary" %>
 			<% end %>
-
 		<% end %>
-	<% end %>
-</div>
-
+	</div>
 </body>
