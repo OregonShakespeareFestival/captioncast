@@ -1,10 +1,14 @@
 Rails.application.routes.draw do
 
+  get 'display/select'
+  post 'display/select'
+
   get 'upload/index'
   post 'upload/index'
   post 'upload/uploadFile'
   get 'display/index'
   get 'display/current'
+  post 'display/current'
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
