@@ -58,12 +58,10 @@ $(document).ready(function(){
 			//set first interval
 			function heartbeat(){
 				//ajax goes here next timeout
-				$.ajax(
-					{
-						type: "POST",
-						url: "/display/current",
+				$.ajax('/display/current',
+			  	{
 						data: {operator: operator},
-					 	dataType: 'json',
+				  	dataType: 'json',
 						success:(function(j){
 							console.log('sequence scraped ' + j);
 
@@ -163,10 +161,8 @@ $(document).ready(function(){
 		//set first interval
 		function heartbeat(){
 			//ajax goes here next timeout
-			$.ajax(
+			$.ajax('/display/current',
 			  {
-				  type: "POST",
-				  url: "/display/current",
 					data: {operator: operator},
 				  dataType: 'json',
 					success:(function(j){

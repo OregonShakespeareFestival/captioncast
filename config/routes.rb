@@ -8,7 +8,6 @@ Rails.application.routes.draw do
   post 'upload/uploadFile'
   get 'display/index'
   get 'display/current'
-  post 'display/current'
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
