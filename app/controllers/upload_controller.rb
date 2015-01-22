@@ -12,8 +12,8 @@ class UploadController < ApplicationController
 
     post = DataFile.save(params[:upload])
     post = DataFile.parse_fd(params[:upload], params[:work])
-    render :text => "File has been uploaded successfully"
-
+    #render :text => "File has been uploaded successfully"
+    redirect_to :controller => 'cast', :action => 'index'
   end
 
 
