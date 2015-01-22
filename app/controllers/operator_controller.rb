@@ -11,15 +11,13 @@ class OperatorController < ApplicationController
 		Rails.application.config.operator_positions.merge!({params[:operator] => "0"})
 	end
 	def pushTextSeq
-		#$currtext=params[:seq]
-		#testing returns line seq back as json
 		Rails.application.config.operator_positions.merge!({params[:operator] => params[:seq]})
 
-		#is this still necessary??
-		render :json => $currtext
+		render :json => params[:seq]
 		#when we're in production and don't need a reply
 		#render :nothing => true
 	end
+	
 	def select
 
 		if request.get?

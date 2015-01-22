@@ -25,14 +25,9 @@ class DisplayController < ApplicationController
   end
 
   def current
-    #if !defined? $currtext
-    #  $currtext = 0
-    #end
     position = Rails.application.config.operator_positions[params[:operator]]
-    puts "#{position} :: pow"
     #retrieve current position
     #@current = 1+rand(18)
-    #render json: @current
     render json: position
   end
 
