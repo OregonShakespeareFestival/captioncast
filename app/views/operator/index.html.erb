@@ -1,3 +1,6 @@
+<%= javascript_tag do %>
+var operator= '<%=@operator%>'
+<%end%>
 
 <body id="body-ind-operator" class="body-operator">
 	<%= render "shared/json_injection" %>
@@ -22,7 +25,7 @@
 					<span id="fforward-icon-operator" class="glyphicon glyphicon-fast-forward"></span>
 				</div>
 
-			</div> 
+			</div>
 			<div class="col-md-9 col-xs-10" id="line-holder-operator">
 				<div id="up-button-operator" class="wide-button-operator">
 					<span class="glyphicon glyphicon-chevron-up"></span>
@@ -31,15 +34,15 @@
 					<span class="glyphicon glyphicon-chevron-down"></span>
 				</div>
 
-				<div id="buffer-top-operator"></div> 
+				<div id="buffer-top-operator"></div>
 				<div id="line-holder-sub-operator">
 					<!-- lines go here -->
 				</div>
-				<div id="buffer-bottom-operator"></div> 
+				<div id="buffer-bottom-operator"></div>
 			</div>
 		</div>
 		<!-- fixed interface items -->
-		
+
 	<div id="blackout-operator">
 		<span id="blackout-icon-operator" class="glyphicon glyphicon-off"></span>
 	</div>

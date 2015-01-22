@@ -17,7 +17,7 @@ $(document).ready(function(){
 		//console.log('this is the operator view');
 		//set the templates
 		var tLine = _.template($('#line-template-operator').html());
-		
+
 		//make sure the lines are sorted by sequence instead of index when read in
 		lines = _.sortBy(lines,function(q){
 			return q.sequence;
@@ -65,7 +65,7 @@ $(document).ready(function(){
 			}else{
 				//need handling for non-visible items
 				//show them with different styling
-				// 
+				//
 			}
 			$('.line-operator').first().addClass('target-operator');
 			$('.line-operator').each(function(){
@@ -82,13 +82,14 @@ $(document).ready(function(){
 				$.ajax('/operator/pushTextSeq', {
 					type:'POST',
 					data: {
-						seq:$('.target-operator').attr('data-sequence')
+						seq:$('.target-operator').attr('data-sequence'),
+            operator: operator
 					},
 					success:(function(d){
 						//console.log('line pushed ' + d);
 					}),
 				});
-				
+
 				$('.current-operator').removeClass('current-operator');
 
 				$('.target-operator').addClass('current-operator');
@@ -112,13 +113,13 @@ $(document).ready(function(){
 					window.counting=false;
 				}, updateInt);
 			}
-		
+
 		});
 		//click the line I want feature
 		$('.line-operator').click(function(){
 			var diff = ($('.target-operator').position().top - $(this).position().top)*1.0;
 			$('#line-holder-operator').animate(
-				{scrollTop: 
+				{scrollTop:
 					$('#line-holder-operator').scrollTop() - diff
 				}, scrollSpd);
 			});
@@ -169,17 +170,17 @@ $(document).ready(function(){
 				});
 				//console.log(l);
 				//this may be able to be abstracted to a single function
-				
+
 				if(l){
 				var diff = ($('.target-operator').position().top - $(l).position().top)*1.0;
 				$('#line-holder-operator').animate(
-					{scrollTop: 
+					{scrollTop:
 						$('#line-holder-operator').scrollTop() - diff
 					}, scrollSpd);
 				}else{
 					alert('Line ' + s + ' not found');
 				}
-				
+
 				$('#fforward-operator').animate({left:'-100%'}, 1000, function(){
 					$(this).attr('data-visible', 'false');
 					var i = $(this).find('input').first();
@@ -239,7 +240,7 @@ $(document).ready(function(){
 				//console.log(prevNum);
 				var diff = ($('.target-operator').position().top - $(prevTar).position().top)*1.0;
 				$('#line-holder-operator').animate(
-					{scrollTop: 
+					{scrollTop:
 						$('#line-holder-operator').scrollTop() - diff
 					}, scrollSpd);
 				//console.log('up');
@@ -260,7 +261,7 @@ $(document).ready(function(){
 				//console.log(nextTar);
 				var diff = ($('.target-operator').position().top - $(nextTar).position().top)*1.0;
 				$('#line-holder-operator').animate(
-					{scrollTop: 
+					{scrollTop:
 						$('#line-holder-operator').scrollTop() - diff
 					}, scrollSpd);
 				//console.log('up');
@@ -270,7 +271,7 @@ $(document).ready(function(){
 		});
 
 
-		
+
 
 	}
 
