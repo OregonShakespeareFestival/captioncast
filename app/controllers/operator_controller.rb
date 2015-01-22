@@ -21,12 +21,13 @@ class OperatorController < ApplicationController
 		if request.post?
 			# Create Operator record
 			operator_name = params[:operator]
-			Operator.create!(name: operator_name[:name],
+			operator = Operator.create!(name: operator_name[:name],
 				view_attributes: params[:view], work_id: params[:work])
 
 			# redirect to index
 			redirect_to :controller => 'operator', :action => 'index',
-				:work => params[:work], :view_mode => params[:view]
+				:work => params[:work], :view_mode => params[:view],
+				:operator => operator.id
 		end
 	end
 end

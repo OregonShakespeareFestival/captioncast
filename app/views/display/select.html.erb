@@ -1,0 +1,26 @@
+<body id="body-index-upload" class="body-upload">
+
+  <%= javascript_include_tag "jquery.fileupload-ui" %>
+
+  <div class="container" id="main-upload">
+    <%= content_tag :div, :id=>"main-form-upload", :class=>"row" do %>
+      <%= content_tag :div, :id=>"attributes-upload", :class=>"col-xs-12 col-sm-6 col-md-4" do %>
+
+        <h1 class="title-upload">Select An Operator</h1>
+
+        <%= form_tag({:action => "select"},
+    :multipart => true, :class => "form-group") do %>
+
+          <% @operators.each do |operator| %>
+            <% work = Work.find_by(id: operator.work_id) %>
+            <% venue = work.venue %>
+            <%= radio_button_tag(:selected_operator, operator.id) %>
+            <%= label_tag("#{operator.name} | #{work.name}") %>
+            </br>
+          <% end %>
+          <%= button_tag "Continue", :type=>"submit", :class => "btn btn-primary" %>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+</body>

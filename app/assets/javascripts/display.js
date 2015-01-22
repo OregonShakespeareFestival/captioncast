@@ -9,7 +9,7 @@ $(document).ready(function(){
 		//console.log('this is the display view');
 		//template views
 		var tLine = _.template($('#line-template-display').html());
-		
+
 		//make sure the lines are sorted by sequence instead of index when read in
 		lines = _.sortBy(lines,function(q){
 			return q.sequence;
@@ -32,7 +32,7 @@ $(document).ready(function(){
 			);
 
 		//waiting to get data vended in for characters
-		
+
 		//templating per line
 		_.each(lines, function(q, i){
 			//this is a temporary scrub in of fixture characters
@@ -58,8 +58,12 @@ $(document).ready(function(){
 			//set first interval
 			function heartbeat(){
 				//ajax goes here next timeout
-				$.ajax('/display/current', 
+				$.ajax(
 					{
+						type: "POST",
+						url: "/display/current",
+						data: {operator: operator},
+					 	dataType: 'json',
 						success:(function(j){
 							console.log('sequence scraped ' + j);
 
@@ -76,12 +80,12 @@ $(document).ready(function(){
 											setTimeout(function(){
 												heartbeat();
 											}, refresh);
-											
+
 										});
 
-									
+
 								});
-								
+
 							}else{
 								setTimeout(function(){
 									heartbeat();
@@ -106,7 +110,7 @@ $(document).ready(function(){
 		//console.log('this is the display view');
 		//template views
 		var tLine = _.template($('#line-template-display-multi').html());
-		
+
 		//make sure the lines are sorted by sequence instead of index when read in
 		lines = _.sortBy(lines,function(q){
 			return q.sequence;
@@ -159,8 +163,12 @@ $(document).ready(function(){
 		//set first interval
 		function heartbeat(){
 			//ajax goes here next timeout
-			$.ajax('/display/current', 
-				{
+			$.ajax(
+			  {
+				  type: "POST",
+				  url: "/display/current",
+					data: {operator: operator},
+				  dataType: 'json',
 					success:(function(j){
 						console.log('sequence scraped ' + j);
 
@@ -177,7 +185,7 @@ $(document).ready(function(){
 								//animate the scroll
 								var diff = ($('#line-display-0').position().top - $(newElem).position().top)*1.0;
 								$('#line-holder-display-multi').animate(
-									{scrollTop: 
+									{scrollTop:
 										$('#line-holder-display-multi').scrollTop() - diff
 								}, scrollSpd);
 							*/
@@ -200,21 +208,21 @@ $(document).ready(function(){
 									}, refresh);
 							}
 
-									
+
 								//});
-								
+
 						}else{
 							setTimeout(function(){
 								heartbeat();
 								}, refresh);
 						}
-						
+
 
 					}),
 			});
 		}
 		heartbeat();
-		
+
 
 
 
