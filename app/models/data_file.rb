@@ -82,7 +82,7 @@ class DataFile < ActiveRecord::Base
   def self.parse_text_file(f, work)
 
     #reads the file line by line into array
-    arr = IO.readlines(f, work)
+    arr = IO.readlines(f)
 
 
     #checks for character name in line and adds it to the elements table if it does not already exist
