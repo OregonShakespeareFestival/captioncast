@@ -3,11 +3,19 @@ class OperatorController < ApplicationController
 		#convert all lines to json and pass along in variable
 		#disabled at the moment so fixture data can be used
 
-		@jtext = Text.all.where(work: params[:work]).to_json(:include => :element);
+		#set the operator variable
+		@operator = params[:operator]
+		# slurp up the required text
+		@jtext = Text.all.where(work: params[:work]).to_json(:include => :element)
+		# add the default position of 0 for an operator
+		Rails.application.config.operator_positions.merge!({params[:operator] => "0"})
 	end
 	def pushTextSeq
-		$currtext=params[:seq]
+		#$currtext=params[:seq]
 		#testing returns line seq back as json
+		Rails.application.config.operator_positions.merge!({params[:operator] => params[:seq]})
+
+		#is this still necessary??
 		render :json => $currtext
 		#when we're in production and don't need a reply
 		#render :nothing => true
