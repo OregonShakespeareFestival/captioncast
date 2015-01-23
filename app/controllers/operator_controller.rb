@@ -12,8 +12,12 @@ class OperatorController < ApplicationController
 		# add the default position of 0 for an operator
 	end
 	def pushTextSeq
+		operator = Operator.find_by(id: params[:operator])
 		Rails.application.config.operator_positions.merge!({params[:operator] => params[:seq]})
+		operator.position = params[:seq]
+		operator.save
 
+		# for debug purposes
 		render :json => params[:seq]
 		#when we're in production and don't need a reply
 		#render :nothing => true
@@ -49,11 +53,12 @@ class OperatorController < ApplicationController
 				#TODO: check to see if we will be creating a duplicate
 
 				operator = Operator.create!(name: operator_name[:name],
-					view_attributes: params[:view], work_id: params[:work])
+					view_attributes: params[:view], work_id: params[:work], position: 0)
 			end
 
-			# set position to 0
-			Rails.application.config.operator_positions.merge!({operator.id => "0"})
+			# set position to the value stored in the operator record
+			Rails.application.config.operator_positions.merge!(
+				{operator.id => operator.position})
 			# redirect to index
 			redirect_to :controller => 'operator', :action => 'index',
 				:work => work, :view_mode => view_mode,
