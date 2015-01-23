@@ -20,9 +20,16 @@ An open source multilingual open caption project.  Inspired by [captioncast](htt
 ###Development Tools:
 ---------
 
-`sudo yum install -y ruby ruby-devel rubygems libxml2-devel libxslt-devel sqlite3-devel openssl-devel @development`  
+`sudo yum install -y ruby ruby-devel rubygems redis libxml2-devel libxslt-devel sqlite3-devel openssl-devel @development`  
 `gem install rails`  
 `bundle`  
+`rake db:migrate`
+`rake db:seed`
+`systemctl enable redis`
+`systemctl start redis`
+`rails s`
+
+In another terminal run: `rake resque:work QUEUE='*'`
 
 A vagrant file is also provided in the project for use.  
 
