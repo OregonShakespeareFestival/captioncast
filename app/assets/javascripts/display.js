@@ -160,6 +160,7 @@ $(document).ready(function(){
 
 		//set first interval
 		function heartbeat(){
+			var bottomPad = 30;
 			//ajax goes here next timeout
 			$.ajax('/display/current',
 			  {
@@ -186,7 +187,8 @@ $(document).ready(function(){
 								}, scrollSpd);
 							*/
 								//$('#body-index-display').animate({scrollTop:$(newElem).position().top-$(window).height()/2-$(newElem).height()/2});
-								$('#body-index-display').animate({scrollTop:$(newElem).position().top+$(newElem).height()/2});
+								//$('#body-index-display').animate({scrollTop:$(newElem).position().top-$(newElem).height()/2});
+								$('#body-index-display').animate({scrollTop:$(newElem).position().top-$(window).height()/2+$(newElem).height()+bottomPad});
 								//$('.shown-display').fadeOut(dispFadeSpd, function(){
 								//remove the focus class
 								$('.focus-multi').removeClass('focus-multi');
