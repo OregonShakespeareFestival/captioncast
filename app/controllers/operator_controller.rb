@@ -11,6 +11,7 @@ class OperatorController < ApplicationController
 		@jtext = Text.all.where(work: params[:work]).to_json(:include => :element)
 		# add the default position of 0 for an operator
 	end
+
 	def pushTextSeq
 		operator = Operator.find_by(id: params[:operator])
 		Rails.application.config.operator_positions.merge!({params[:operator] => params[:seq]})
@@ -24,6 +25,7 @@ class OperatorController < ApplicationController
 	end
 
 	def select
+		#TODO: refactor, break out into several methods
 		@operators = Operator.all
 		if request.get?
 			now = DateTime.now

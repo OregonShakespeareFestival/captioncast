@@ -1,5 +1,5 @@
 //javascript for the display view goes here
-var refresh = 2000;
+var refresh = 500;
 var dispFadeSpd = 400;
 var scrollSpd = 800;
 $(document).ready(function(){
