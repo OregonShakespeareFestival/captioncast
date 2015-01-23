@@ -29,8 +29,9 @@ $preview-break: 300px;
 
 @mixin line-disp{
 	display:none;
-	font-size:5.5em;
-	text-align: center;
+	font-size:300%;
+	text-align: left;
+	word-break: keep-all;
 	/*padding for safe region of display-- just in case*/
 	padding:3%;
 	line-height:1.2em;
@@ -159,7 +160,7 @@ html{
 
 #buffer-top-display-multi{
 	height:45%;
-} 
+}
 #buffer-bottom-display-multi{
 	height:40%;
 }
