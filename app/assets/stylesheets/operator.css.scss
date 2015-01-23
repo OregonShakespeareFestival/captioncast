@@ -282,8 +282,24 @@ $ipad-land-break: 1024px;
 
 
 }
+#autocommit-operator{
 
-.blackout-off-operator{
+
+	z-index:200;
+	position:fixed;
+	top:0px;
+	@include gen-btn-sizing-operator;
+	@include gen-btn-style-operator;
+	right:100px;
+}
+#autocommit-icon-operator{
+	font-size:4em;
+	cursor:pointer;
+
+
+}
+
+.blackout-off-operator, .autocommit-on-operator{
 	color:$currentcol;
 	font-weight:bold;
 
