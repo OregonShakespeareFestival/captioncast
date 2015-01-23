@@ -1,3 +1,5 @@
+require 'resque/server'
+
 Rails.application.routes.draw do
 
   get 'display/select'
@@ -22,5 +24,7 @@ Rails.application.routes.draw do
   post 'operator/pushTextSeq'
 
   get 'editor/index'
+
+  mount Resque::Server.new, at: "/resque"
 
 end
