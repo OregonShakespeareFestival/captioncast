@@ -8,43 +8,46 @@ class DataFile < ActiveRecord::Base
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #uploads and saves the file
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
   def self.save(upload)
     name =  upload['datafile'].original_filename
     directory = "public/data"
     #create the file path
     path = File.join(directory, name)
-    #write the file
-
-
-    #here we will check for .txt or .fdx
-
     File.open(path, "wb") { |f| f.write(upload['datafile'].read) }
   end
 
 
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   #add element to the element table
-  def self.add_element(name, type, color, work_id)
-      #Text.create(sequence: linenum, content_text: linecharacter + ": " + s, visibility: true, element: Element.find_by(element_type: 'Dialogue'), work: Work.find_by_name('Equivocation'))
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+
+  def self.add_element(name, type, color, work_id)      
       e = Element.find_or_create_by!(element_name: name, element_type: type, color: color, work: @work)
       e.save
   end
 
 
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   #add the characters line to the Text table in the database
-  #TODO: determin how to pass in the correct "work" elemnt
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
   def self.add_char_line(character, lineCount, charLine, visibility, work_id)
     txt = Text.create(sequence: lineCount, element: Element.find_by(element_name: character, element_type: 'CHARACTER'), work: @work, content_text: charLine, visibility: visibility)
     txt.save
   end
 
 
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   #add the stage direction etc to the Text table in the database
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
   def self.add_direction(e_type, lineCount, direction, visibility, work_id)
     txt = Text.create(sequence: lineCount, element: Element.find_by(element_type: e_type), work: @work, content_text: direction, visibility: visibility)
     txt.save
-    #puts "direction = " + e_type + " & " + direction
-    #puts lineCount
   end
+
+
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   #this is called in the controlers file when a file is uploaded
@@ -52,6 +55,7 @@ class DataFile < ActiveRecord::Base
   # .TXT file should be in the format
   # "CHARACTER NAME:" (all caps) "text goes here"
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
   def self.parse_fd(upload, work)
 
     #create the file path abd open the file
@@ -79,29 +83,117 @@ class DataFile < ActiveRecord::Base
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   #used to parse a .txt file script (typically other languages)
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
   def self.parse_text_file(f, work)
 
     #reads the file line by line into array
     arr = IO.readlines(f)
 
+    #adds all elements/character in the script to the database
+    self.add_character_elements(arr, work)
 
-    #checks for character name in line and adds it to the elements table if it does not already exist
+    #add the lines in the script to the database depending on the character
+    self.add_text_lines_to_db(arr, work)
+  end
+
+
+
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  #used for parsing script in .fdx format
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+  def self.parse_fdx(doc, work)
+   
+    #XPath for any Nondialogue Elements
+    nondialouge = doc.xpath("/FinalDraft/Content/*[not(@Type='Dialogue')]")
+    #add any nondialouge elemnts to the database
+    self.add_fdx_nondialouge(nondialouge, work)
+
+
+    #XPath for any characters.
+    characters = doc.xpath("/FinalDraft/Content/Paragraph[@Type='Character']//Text")
+    #add any nondialouge elemnts to the database
+    self.add_fdx_character(characters, work)
+
+    #add the lines to the database
+    self.add_fdx_lines_to_db(doc, work)
+
+  end
+
+
+
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#checks for character name in text file and adds it to the elements table if it does not already exist
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+def self.add_character_elements(arr, work)
+    
     arr.each do |line|
       name = line.force_encoding("ISO-8859-1").encode("utf-8", replace: nil).match(/^[A-Z1-9\s]+(?=:)/)
       if (name != nil)
         #add the character "element" to the table if it does not exist
-        self.add_element(name[0].upcase, "CHARACTER", @default_text_color, work)
+        character_name = name[0].upcase.lstrip.rstrip
+        self.add_element(character_name, "CHARACTER", @default_text_color, work)
       end
     end
+end
 
+
+
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  #adds visible and non visible lines to database for FDX script
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+  def self.add_fdx_lines_to_db(doc, work)
+
+    #xpath through the whole document for generaing entire script
+    lines = doc.xpath("/FinalDraft/Content/Paragraph")
+    lineCount = 0
+    charName = ""
+
+    #loops through the script and adds necessary lines into the database
+    lines.each do |line|
+      par_type = line.attributes["Type"].value.lstrip.rstrip
+      #if its a character, get who and set character name
+      if par_type.upcase == "CHARACTER"
+        charName = line.children.children.text
+        charName = charName.lstrip.rstrip #strip leading and trailing whitespace from name
+
+      #gets the dialogue, character should alredy be set
+      elsif par_type.upcase == "DIALOGUE"
+        charLine = line.children.children.text
+        #here we send all the data to the database if its a dialogue
+        self.add_char_line(charName.upcase, lineCount, charLine, true, work)
+        lineCount += 1
+
+      #gets parenthetical description (currently non-visible)
+      elsif par_type.upcase == "PARENTHETICAL"
+        direction = line.children.children.text
+        self.add_direction(par_type.upcase, lineCount, direction, false, work)
+        lineCount += 1
+
+      #catches all other non visible lines
+      else
+        direction = line.children.children.text
+        self.add_direction(par_type.upcase, lineCount, direction, false, work)
+        lineCount += 1
+      end
+    end
+  end
+
+
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  #adds character's lines the the database
+  # - Takes an array which each index is a string/line from the script
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+  def self.add_text_lines_to_db(arr, work)
 
     cur_line = ""
     haveline = false
     lineCount = 1
     name = ""
 
-
-    #now we add the lines in the script to the database depending on the character
     arr.each do |line|
 
       #look for a character name indicating the beginning of a dialogue
@@ -111,8 +203,6 @@ class DataFile < ActiveRecord::Base
       if(a != nil and haveline == true)
         #here we send all the data to the database if its a dialogue
         self.add_char_line(name, lineCount, cur_line, true, work)
-        puts name.upcase
-        puts cur_line
         lineCount += 1
         haveline = false
         cur_line = ""
@@ -122,91 +212,42 @@ class DataFile < ActiveRecord::Base
       #we need to strip the name from the monologue
       if (a != nil)
         #get the character speaking
-        name = a[0].upcase
-        #returns just the line said by the character
-        cur_line = line.force_encoding("ISO-8859-1").encode("utf-8", replace: nil).sub(/^[A-Z1-9\s]+:\s?/,"")
+        name = a[0].upcase.lstrip.rstrip
+        #returns just the line said by the character (removing excess whitespace)
+        cur_line = line.force_encoding("ISO-8859-1").encode("utf-8", replace: nil).sub(/^[A-Z1-9\s]+:\s?/,"").squish
         haveline = true
 
       #we just append this line to our current characters script
       elsif (a == nil)
-        cur_line += " " + line.force_encoding("ISO-8859-1").encode("utf-8", replace: nil).sub(/^[A-Z1-9\s]+:\s?/,"")
-
-        #add the character "element" to the table if it does not exist
-        #self.add_element(name[0].upcase, "CHARACTER", "#666666", "LBJ")
+        cur_line += " " + line.force_encoding("ISO-8859-1").encode("utf-8", replace: nil).sub(/^[A-Z1-9\s]+:\s?/,"").squish
       end
     end
+  end
 
 
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#takes any nondialouge element from .fdx after xpath() and adds it to the db
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+  def self.add_fdx_nondialouge(nondialouge, work)
+      nondialouge.each do |nondialouge|
+        type = nondialouge.attributes["Type"].value
+        self.add_element("", type.to_str.upcase, @default_text_color, work)
+    end
   end
 
 
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-  #used for parsing script in XML format
+#takes any character element from .fdx after xpath() and adds it to the db
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-  def self.parse_fdx(doc, work)
-    #XML is like violence - if it doesn’t solve your problems, you are not using enough of it.
-    #Build an xpath for what we want to search for
-    #/FinalDraft/Content/Paragraph//Text
-    #Nondialogue Elements
-    nondialouge = doc.xpath("/FinalDraft/Content/*[not(@Type='Dialogue')]")
 
-    #gets any non dialouge element
-    nondialouge.each do |nondialouge|
-      type = nondialouge.attributes["Type"].value
-      #add element to the database if not already there
-      self.add_element("", type.to_str.upcase, @default_text_color, work)
-    end
-
-
-
-    #XPath any sub-item of node type paragraph that has attribute character containing text.
-    characters = doc.xpath("/FinalDraft/Content/Paragraph[@Type='Character']//Text")
-
-    #Adds each character element to the database if it's new to the database
-    characters.each do |character|
-      name = character.text.to_str.upcase
-      self.add_element( name, "CHARACTER", @default_text_color, work)
-    end
-
-
-
-    #xpath through the whole document for generaing entire script
-    lines = doc.xpath("/FinalDraft/Content/Paragraph")
-    lineCount = 0
-    charName = ""
-
-
-
-    #loops through the script and adds necessary lines into the database
-    lines.each do |line|
-      par_type = line.attributes["Type"].value
-      #if its a character, get who and set character name
-      if par_type.upcase == "CHARACTER"
-        charName = line.children.children.text
-
-      #gets the dialogue then we set the, character should alredy be set
-      elsif par_type.upcase == "DIALOGUE"
-        charLine = line.children.children.text
-        #here we send all the data to the database if its a dialogue
-        self.add_char_line(charName.upcase, lineCount, charLine, true, work)
-        #puts charName + " is saying " + charLine
-        lineCount += 1
-
-      #gets visible parenthetical description
-      elsif par_type.upcase == "PARENTHETICAL"
-        direction = line.children.children.text
-        self.add_direction(par_type.upcase, lineCount, direction, true, work)
-        #puts "WTF " + par_type.upcase + " " + direction
-        lineCount += 1
-
-      #catches non visible lines
-      else
-        direction = line.children.children.text
-        self.add_direction(par_type.upcase, lineCount, direction, false, work)
-        #puts "WTF " + par_type.upcase + " " + direction
-        lineCount += 1
-      end
+  def self.add_fdx_character(characters, work)
+      characters.each do |character|
+        name = character.text.to_str.upcase.lstrip.rstrip
+        self.add_element( name, "CHARACTER", @default_text_color, work)
     end
   end
-end
+
+
+end #end class
