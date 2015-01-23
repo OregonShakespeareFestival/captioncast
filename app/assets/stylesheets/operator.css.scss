@@ -20,6 +20,8 @@ $xs-break: 992px;
 $lg-break: 1400px;
 $gen-btn-sz: 74px;
 $gen-btn-pad: 10px;
+$ipad-land-break: 1024px;
+
 
 @mixin centered{
 	float:none;
@@ -101,11 +103,12 @@ $gen-btn-pad: 10px;
 	height:220px;	
 	color:$targetcol;
 	top:50%;
+	max-width:400px;
 	transform:translateY(-50%);
 
 	@media only screen and (min-width:$lg-break){
-		font-size:18em;
-		height:300px;
+		font-size:16em;
+		height:270px;
 
 	}
 
@@ -172,27 +175,63 @@ $gen-btn-pad: 10px;
 	height:29%;
 	padding:5px;
 	@include gen-btn-style-operator;
-
-	iframe{
+	#prev-holder-operator{
 		position:relative;
-		z-index:120;
+		height:0;
 		width:80%;
-		height:95%;
 		float:left;
-		transform:translateY(2%);
+		padding-top:44.25%;
+		transform: translate(-50%, -96%);
+		/* a special surprise for later
+		div{
+			z-index:120;
+			background-color:black;
+			color:yellow;
+			width:100%;
+			position:absolute;
+		}
+		*/
+		
+		iframe{
+			position:absolute;
+			z-index:120;
+			width:100%;
+			height:100%;
+			max-width: 320px;
+			max-height: 180px;
+			/*a hack for now */
+			transform:translateY(2%);
+			@media screen and (max-width:$ipad-land-break){
+				transform:translateY(25%);
+			}
+			/*
+			float:left;
+			transform:translateY(2%);
+			*/
+			
+		}
+		
+
 	}
 	#prev-spinner-operator{
 		position:relative;
 		z-index:101;
 		width:80%;
 		height:95%;
-		top:-56%;
+		/*top:-56%;
 		float:left;
 		transform:translateY(2%);
+		*/
 		font-size:2em;
 		font-weight: bold;
 		text-transform: uppercase;
 		color:$targetcol;
+		left:56%;
+		top:10px;
+		@media screen and (max-width:$ipad-land-break){
+			top:45px;		
+		}
+
 		@media only screen and (max-width:$xs-break){
 			font-size:1em;
 		}
