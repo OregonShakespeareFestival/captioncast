@@ -30,6 +30,8 @@ An open source multilingual open caption project.  Inspired by [captioncast](htt
 `rails s`
 
 In another terminal run: `rake resque:work QUEUE='*'`
+Load the resque schedule `rake resque:setup_schdule`
+Finally run the resque task scheduler `rake resque:scheduler`
 
 A vagrant file is also provided in the project for use.  
 
@@ -55,5 +57,3 @@ Docker image is published here for consumption:
 -	[Randolph Jones](https://github.com/randolphjones)
 -	[Tony Hess](https://github.com/toeknee919)
 -	[Amanda Denbeck](https://github.com/denbecka)
-
-
