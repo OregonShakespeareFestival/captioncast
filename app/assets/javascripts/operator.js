@@ -243,6 +243,19 @@ $(document).ready(function(){
 
 
 		});
+		$('#autocommit-operator').click(function(){
+			if(autoCommit){
+				autoCommit = false;
+				console.log('autocommit off');
+
+			}else{
+				autoCommit = true;
+				console.log('autocommit on');
+
+			}
+			console.log(this);
+			$('#autocommit-icon-operator').toggleClass('autocommit-on-operator')
+		});
 
 		//single up and down buttons
 		$('#up-button-operator').click(function(){
