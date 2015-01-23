@@ -124,7 +124,7 @@ $ipad-land-break: 1024px;
 	/*@include vert-center;*/
 }
 
-#commit-button-operator:active, #fforward-operator:active, #preview-operator:active, #blackout-operator:active{
+#commit-button-operator:active, #fforward-operator:active, #preview-operator:active{
 	color:$currentcol;
 	font-weight:bold;
 }
@@ -282,6 +282,13 @@ $ipad-land-break: 1024px;
 
 
 }
+
+.blackout-off-operator{
+	color:$currentcol;
+	font-weight:bold;
+
+}
+
 #fforward-operator{
 	z-index:100;
 	top:75%;

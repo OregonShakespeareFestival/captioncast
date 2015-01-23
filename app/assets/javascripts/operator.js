@@ -6,6 +6,9 @@ _.templateSettings = {
 var targeted = 1;
 var current = 1;
 var scrollSpd = 500;
+var blackout=false;
+//line in reserve when it's blackout mode. Defaults to 1.
+//var reserveLine = 1;
 //var lineMapping;
 
 $(document).ready(function(){
@@ -93,6 +96,11 @@ $(document).ready(function(){
 				$('.current-operator').removeClass('current-operator');
 
 				$('.target-operator').addClass('current-operator');
+				if(blackout){
+					$('#blackout-icon-operator').addClass('blackout-off-operator');
+					blackout=false;
+				}
+				current=$('.target-operator').attr('data-sequence');
 			}
 		});
 		//scrolling target feature
@@ -210,17 +218,39 @@ $(document).ready(function(){
 		//blackout the display
 		$('#blackout-operator').click(function(){
 			//console.log('blackout');
-			$.ajax('/operator/pushTextSeq', {
-				type:'POST',
-				data: {
-					seq:0,
-          operator: operator
-				},
-				success:(function(d){
-					console.log('display cleared');
-					$('.current-operator').removeClass('current-operator');
-				}),
-			});
+			if(!blackout){
+				$.ajax('/operator/pushTextSeq', {
+					type:'POST',
+					data: {
+						seq:0,
+	          operator: operator
+					},
+					success:(function(d){
+						console.log('display cleared');
+						$('.current-operator').removeClass('current-operator');
+						$('#blackout-icon-operator').toggleClass('blackout-off-operator');
+						blackout=true;
+					}),
+				});
+			}else{
+				$.ajax('/operator/pushTextSeq', {
+					type:'POST',
+					data: {
+						seq:current,
+	          operator: operator
+					},
+					success:(function(d){
+						console.log('display is back');
+						var last = $.grep($('.line-operator'), function(n){
+							return $(n).attr('data-sequence') == current;
+						})[0];
+						$(last).addClass('current-operator');
+						//$('.current-operator').removeClass('current-operator');
+						$('#blackout-icon-operator').toggleClass('blackout-off-operator');
+						blackout=false;
+					}),
+				});
+			}
 
 
 		});
