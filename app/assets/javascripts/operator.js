@@ -131,9 +131,11 @@ $(document).ready(function(){
 			if($(this).attr('data-visible')=='false'){
 				$(this).animate({left:'0px'}, 1000, function(){
 					$(this).attr('data-visible', 'true');
+					
 					if($('#preview-operator iframe').attr('src')==""){
 						$('#preview-operator iframe').attr('src', "/display/index?operator="+operator+"&view="+viewMode+"&work="+work);
 					}
+					
 				});
 			}else{
 				$(this).animate({left:'-100%'}, 1000, function(){
