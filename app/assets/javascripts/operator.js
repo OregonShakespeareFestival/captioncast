@@ -6,7 +6,9 @@ _.templateSettings = {
 var targeted = 1;
 var current = 1;
 var scrollSpd = 500;
-var blackout=false;
+var blackout = false;
+var autoCommit = true;
+var scrolling = false;
 //line in reserve when it's blackout mode. Defaults to 1.
 //var reserveLine = 1;
 //var lineMapping;
@@ -257,50 +259,55 @@ $(document).ready(function(){
 
 		//single up and down buttons
 		$('#up-button-operator').click(function(){
-			var prevNum = parseInt($('.target-operator').first().attr('data-sequence'))-1;
-			var firstNum = parseInt($('.line-operator').first().attr('data-sequence'));
-			var finalNum = parseInt($('.line-operator').last().attr('data-sequence'));
-			console.log(prevNum);
-			if(prevNum >= firstNum && prevNum < finalNum){
-				var prevTar;
-				while(typeof prevTar==='undefined' && prevNum >= firstNum){
-					prevTar = $.grep($('.line-operator'), function(n){
-						return $(n).attr('data-sequence') == prevNum;
-					})[0];
-					prevNum--;
-					console.log(prevTar);
+			if(!scrolling){
+				scrolling=true;
+				var prevNum = parseInt($('.target-operator').first().attr('data-sequence'))-1;
+				var firstNum = parseInt($('.line-operator').first().attr('data-sequence'));
+				var finalNum = parseInt($('.line-operator').last().attr('data-sequence'));
+				console.log(prevNum);
+				if(prevNum >= firstNum && prevNum < finalNum){
+					var prevTar;
+					while(typeof prevTar==='undefined' && prevNum >= firstNum){
+						prevTar = $.grep($('.line-operator'), function(n){
+							return $(n).attr('data-sequence') == prevNum;
+						})[0];
+						prevNum--;
+						console.log(prevTar);
+					}
+					var diff = ($('.target-operator').position().top - $(prevTar).position().top)*1.0;
+					$('#line-holder-operator').animate(
+						{scrollTop:
+							$('#line-holder-operator').scrollTop() - diff
+						}, scrollSpd, function(){
+							scrolling=false;
+						});
 				}
-				//console.log(prevNum);
-				var diff = ($('.target-operator').position().top - $(prevTar).position().top)*1.0;
-				$('#line-holder-operator').animate(
-					{scrollTop:
-						$('#line-holder-operator').scrollTop() - diff
-					}, scrollSpd);
-				//console.log('up');
-			}
+			}	
 		});
 		$('#down-button-operator').click(function(){
-			var nextNum = parseInt($('.target-operator').first().attr('data-sequence'))+1;
-			var firstNum = parseInt($('.line-operator').first().attr('data-sequence'));
-			var finalNum = parseInt($('.line-operator').last().attr('data-sequence'));
-			if(nextNum <= finalNum && nextNum >= firstNum){
-				var nextTar;
-				while(typeof nextTar==='undefined' && nextNum < finalNum){
-					nextTar = $.grep($('.line-operator'), function(n){
-						return $(n).attr('data-sequence') == nextNum;
-					})[0];
-					nextNum++;
+			if(!scrolling){
+				scrolling=true;
+				var nextNum = parseInt($('.target-operator').first().attr('data-sequence'))+1;
+				var firstNum = parseInt($('.line-operator').first().attr('data-sequence'));
+				var finalNum = parseInt($('.line-operator').last().attr('data-sequence'));
+				if(nextNum <= finalNum && nextNum >= firstNum){
+					var nextTar;
+					while(typeof nextTar==='undefined' && nextNum < finalNum){
+						nextTar = $.grep($('.line-operator'), function(n){
+							return $(n).attr('data-sequence') == nextNum;
+						})[0];
+						nextNum++;
+					}
+					//console.log(nextTar);
+					var diff = ($('.target-operator').position().top - $(nextTar).position().top)*1.0;
+					$('#line-holder-operator').animate(
+						{scrollTop:
+							$('#line-holder-operator').scrollTop() - diff
+						}, scrollSpd, function(){
+							scrolling=false
+						});
 				}
-				//console.log(nextTar);
-				var diff = ($('.target-operator').position().top - $(nextTar).position().top)*1.0;
-				$('#line-holder-operator').animate(
-					{scrollTop:
-						$('#line-holder-operator').scrollTop() - diff
-					}, scrollSpd);
-				//console.log('up');
 			}
-
-			//console.log('down');
 		});
 
 
