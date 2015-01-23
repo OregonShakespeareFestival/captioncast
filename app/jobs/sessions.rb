@@ -1,4 +1,4 @@
-class Sessions
+class Sessions < Resque::Job
   @queue = :session_managment
 
   def self.perform

@@ -1,0 +1,5 @@
+cull_sessions:
+  every:
+    - "15m"
+  class: 'Sessions'
+  queue: session_managment
