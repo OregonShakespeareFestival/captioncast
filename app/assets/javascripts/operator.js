@@ -6,15 +6,47 @@ _.templateSettings = {
 var targeted = 1;
 var current = 1;
 var scrollSpd = 500;
-var blackout=false;
+var blackout = false;
+var autoCommit = true;
+var scrolling = false;
 //line in reserve when it's blackout mode. Defaults to 1.
 //var reserveLine = 1;
 //var lineMapping;
 
-$(document).ready(function(){
 
+$(document).ready(function(){
 	//if we're in the operator view
 	if($('#main-operator').length>0){
+		//this function will universally commit the targeted line
+		function commit(){
+				//post the current sequence identifier through AJAX
+				if($('.target-operator').attr('data-visibility')=="true"){
+					$.ajax('/operator/pushTextSeq', {
+						type:'POST',
+						data: {
+							seq:$('.target-operator').attr('data-sequence'),
+	            operator: operator
+						},
+						success:(function(d){
+							//display logic if successful
+							$('.current-operator').removeClass('current-operator');
+							$('.target-operator').addClass('current-operator');
+							if(blackout){
+								$('#blackout-icon-operator').addClass('blackout-off-operator');
+								blackout=false;
+							}
+							current=$('.target-operator').attr('data-sequence');
+						}),
+						error:(function(){
+							//put in better error handling here
+							alert('Commit failed! Please check your connection.');
+						}),
+					});
+
+				}
+
+		}
+
 		$('#main-operator').height($(window).innerHeight()+'px');
 
 		//console.log('this is the operator view');
@@ -26,17 +58,6 @@ $(document).ready(function(){
 			return q.sequence;
 		});
 
-		//waiting to get data vended in for characters
-
-		//probably won't need this but hanging onto it for now
-		//split each line into content and character. Assume 0 to first colon in line is character name
-		/*
-		_.each(lines, function(q, i){
-			lines[i].character = q.content_text.substring(0, q.content_text.indexOf(':'));
-			lines[i].line = q.content_text.substring(0, q.content_text.indexOf(':'));
-
-		});
-		*/
 		//templating per line
 		_.each(lines, function(q, i){
 			//this is a temporary scrub in of fixture characters
@@ -49,18 +70,10 @@ $(document).ready(function(){
 			}else{
 				q.character=' ';
 			}
-
-
-			//console.log(q.content_text);
-			//if the line is visible then show it?
-			//maybe we want it just a different color for operator view
-			//evens and odds?
-			if(i%2==0){
-				q.even=true;
-
-			}else{
-				q.even=false;
-			}
+			$('#line-holder-sub-operator').append(
+				tLine(q)
+			);
+			/*
 			if(q.visibility){
 				$('#line-holder-sub-operator').append(
 					tLine(q)
@@ -69,7 +82,7 @@ $(document).ready(function(){
 				//need handling for non-visible items
 				//show them with different styling
 				//
-			}
+			}*/
 			$('.line-operator').first().addClass('target-operator');
 			$('.line-operator').each(function(){
 				if($(this).attr('data-visibility')=="false"){
@@ -78,31 +91,7 @@ $(document).ready(function(){
 			});
 		});
 		//this happens when you click the commit button
-		$('#commit-button-operator').click(function(){
-			//post the sequence of the selected line via ajax
-			console.log($('.target-operator').attr('data-visibility'));
-			if($('.target-operator').attr('data-visibility')=="true"){
-				$.ajax('/operator/pushTextSeq', {
-					type:'POST',
-					data: {
-						seq:$('.target-operator').attr('data-sequence'),
-            operator: operator
-					},
-					success:(function(d){
-						//console.log('line pushed ' + d);
-					}),
-				});
-
-				$('.current-operator').removeClass('current-operator');
-
-				$('.target-operator').addClass('current-operator');
-				if(blackout){
-					$('#blackout-icon-operator').addClass('blackout-off-operator');
-					blackout=false;
-				}
-				current=$('.target-operator').attr('data-sequence');
-			}
-		});
+		$('#commit-button-operator').click(commit);
 		//scrolling target feature
 		$('#line-holder-operator').scroll(function(){
 			var updateInt = 100;
@@ -254,53 +243,79 @@ $(document).ready(function(){
 
 
 		});
+		$('#autocommit-operator').click(function(){
+			if(autoCommit){
+				autoCommit = false;
+				console.log('autocommit off');
+
+			}else{
+				autoCommit = true;
+				console.log('autocommit on');
+
+			}
+			console.log(this);
+			$('#autocommit-icon-operator').toggleClass('autocommit-on-operator')
+		});
 
 		//single up and down buttons
 		$('#up-button-operator').click(function(){
-			var prevNum = parseInt($('.target-operator').first().attr('data-sequence'))-1;
-			var firstNum = parseInt($('.line-operator').first().attr('data-sequence'));
-			var finalNum = parseInt($('.line-operator').last().attr('data-sequence'));
-			console.log(prevNum);
-			if(prevNum >= firstNum && prevNum < finalNum){
-				var prevTar;
-				while(typeof prevTar==='undefined' && prevNum >= firstNum){
-					prevTar = $.grep($('.line-operator'), function(n){
-						return $(n).attr('data-sequence') == prevNum;
-					})[0];
-					prevNum--;
-					console.log(prevTar);
+			if(!scrolling){
+				scrolling=true;
+				var prevNum = parseInt($('.target-operator').first().attr('data-sequence'))-1;
+				var firstNum = parseInt($('.line-operator').first().attr('data-sequence'));
+				var finalNum = parseInt($('.line-operator').last().attr('data-sequence'));
+				console.log(prevNum);
+				if(prevNum >= firstNum && prevNum < finalNum){
+					var prevTar;
+					while(typeof prevTar==='undefined' && prevNum >= firstNum){
+						prevTar = $.grep($('.line-operator'), function(n){
+							return $(n).attr('data-sequence') == prevNum;
+						})[0];
+						prevNum--;
+						console.log(prevTar);
+					}
+					var diff = ($('.target-operator').position().top - $(prevTar).position().top)*1.0;
+					$('#line-holder-operator').animate(
+						{scrollTop:
+							$('#line-holder-operator').scrollTop() - diff
+						}, scrollSpd, function(){
+							if(autoCommit){
+								commit();
+							}
+
+							scrolling=false;
+						});
 				}
-				//console.log(prevNum);
-				var diff = ($('.target-operator').position().top - $(prevTar).position().top)*1.0;
-				$('#line-holder-operator').animate(
-					{scrollTop:
-						$('#line-holder-operator').scrollTop() - diff
-					}, scrollSpd);
-				//console.log('up');
-			}
+			}	
 		});
 		$('#down-button-operator').click(function(){
-			var nextNum = parseInt($('.target-operator').first().attr('data-sequence'))+1;
-			var firstNum = parseInt($('.line-operator').first().attr('data-sequence'));
-			var finalNum = parseInt($('.line-operator').last().attr('data-sequence'));
-			if(nextNum <= finalNum && nextNum >= firstNum){
-				var nextTar;
-				while(typeof nextTar==='undefined' && nextNum < finalNum){
-					nextTar = $.grep($('.line-operator'), function(n){
-						return $(n).attr('data-sequence') == nextNum;
-					})[0];
-					nextNum++;
-				}
-				//console.log(nextTar);
-				var diff = ($('.target-operator').position().top - $(nextTar).position().top)*1.0;
-				$('#line-holder-operator').animate(
-					{scrollTop:
-						$('#line-holder-operator').scrollTop() - diff
-					}, scrollSpd);
-				//console.log('up');
-			}
+			if(!scrolling){
+				scrolling=true;
+				var nextNum = parseInt($('.target-operator').first().attr('data-sequence'))+1;
+				var firstNum = parseInt($('.line-operator').first().attr('data-sequence'));
+				var finalNum = parseInt($('.line-operator').last().attr('data-sequence'));
+				if(nextNum <= finalNum && nextNum >= firstNum){
+					var nextTar;
+					while(typeof nextTar==='undefined' && nextNum < finalNum){
+						nextTar = $.grep($('.line-operator'), function(n){
+							return $(n).attr('data-sequence') == nextNum;
+						})[0];
+						nextNum++;
+					}
+					//console.log(nextTar);
+					var diff = ($('.target-operator').position().top - $(nextTar).position().top)*1.0;
+					$('#line-holder-operator').animate(
+						{scrollTop:
+							$('#line-holder-operator').scrollTop() - diff
+						}, scrollSpd, function(){
+							if(autoCommit){
+								commit();
+							}
 
-			//console.log('down');
+							scrolling=false
+						});
+				}
+			}
 		});
 
 
