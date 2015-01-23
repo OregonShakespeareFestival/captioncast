@@ -1,11 +1,10 @@
-<%= javascript_tag do %>
-var operator= '<%=@operator%>';
-var view_mode= '<%=@view_mode%>';
-var work= '<%=@work%>';
-<%end%>
+<script>
+	var viewMode= '<%= @view_mode %>';
+	var work= '<%= @work %>';
+</script>
 
 <body id="body-ind-operator" class="body-operator">
-	<%= render "shared/json_injection" %>
+	<%= render "shared/js_global_injection" %>
 	<div class="container-fluid" id="main-operator">
 		<div class="row" id="main-row-operator">
 			<div class="col-md-3 col-xs-2" id="commit-column-operator">
