@@ -8,11 +8,11 @@
 	<div class="container-fluid" id="main-operator">
 		<div class="row" id="main-row-operator">
 			<div class="col-md-3 col-xs-2" id="commit-column-operator">
-				<div id="commit-button-operator">
+				<div id="commit-button-operator" title="Show the selected line on the house display.">
 					<span class="glyphicon glyphicon-play-circle" id="commit-icon-operator">
 					</span>
 				</div>
-				<div id="preview-operator" data-visible="false">
+				<div id="preview-operator" data-visible="false" title="Preview what's on the house display.">
 					<div id="prev-holder-operator">
 						<div id="prev-spinner-operator">Loading...</div>
 						<iframe src="" frameBorder="0" scrolling="no"></iframe>
@@ -26,7 +26,7 @@
 					<span id="previcon-operator" class="glyphicon glyphicon-eye-open"></span>
 
 				</div>
-				<div id="fforward-operator"data-visible="false">
+				<div id="fforward-operator"data-visible="false" title="Skip forward to a specific line">
 					<div class="form-group" >
 						<input type="text" placeholder="Skip to #"/>
 					</div>
@@ -35,10 +35,10 @@
 
 			</div>
 			<div class="col-md-9 col-xs-10" id="line-holder-operator">
-				<div id="up-button-operator" class="wide-button-operator">
+				<div id="up-button-operator" class="wide-button-operator" title="Go back one line.">
 					<span class="glyphicon glyphicon-chevron-up"></span>
 				</div>
-				<div id="down-button-operator" class="wide-button-operator">
+				<div id="down-button-operator" class="wide-button-operator" title="Go forward one line.">
 					<span class="glyphicon glyphicon-chevron-down"></span>
 				</div>
 
@@ -51,10 +51,10 @@
 		</div>
 		<!-- fixed interface items -->
 
-	<div id="blackout-operator">
+	<div id="blackout-operator" title="Toggle this to black out the house display.">
 		<span id="blackout-icon-operator" class="glyphicon glyphicon-off blackout-off-operator"></span>
 	</div>
-	<div id="autocommit-operator">
+	<div id="autocommit-operator" title="Toggle this to display and scroll at the same time with the up and down arrows.">
 		<span id="autocommit-icon-operator" class="glyphicon glyphicon-lock autocommit-on-operator"></span>
 	</div>
 	</div>
