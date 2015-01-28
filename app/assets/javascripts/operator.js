@@ -112,8 +112,8 @@ $(document).ready(function(){
 		var mid = $(window).innerHeight()/2.2;
 		function sortHeight(a, b){
 			//there's a problem i how offset works
-			var an = Math.abs(a.offset().top-mid);
-			var bn = Math.abs(b.offset().top-mid);
+			var an = Math.abs(a.offsetTop-mid);
+			var bn = Math.abs(b.offsetTop-mid);
 			if(an>bn){
 				return 1;
 			}
@@ -135,8 +135,8 @@ $(document).ready(function(){
 						return Math.abs($(q).offset().top-mid);
 					});*/
 					$lines.sort(sortHeight);
-					$lines[0].addClass('target-operator');
-					targeted = parseInt($lines[0].attr('data-sequence'));
+					$lines.first().addClass('target-operator');
+					targeted = parseInt($lines.first().attr('data-sequence'));
 					//destroy the counter
 					window.counting=false;
 				}, updateInt);
