@@ -9,13 +9,11 @@ var scrollSpd = 500;
 var blackout = false;
 var autoCommit = true;
 var scrolling = false;
-//line in reserve when it's blackout mode. Defaults to 1.
-//var reserveLine = 1;
-//var lineMapping;
 
+//line jquery object to hold dom
+var $lines;
 
 $(document).ready(function(){
-	//if we're in the operator view
 	if($('#main-operator').length>0){
 		//this function will universally commit the targeted line
 		function commit(){
@@ -48,24 +46,30 @@ $(document).ready(function(){
 		}
 
 		$('#main-operator').height($(window).innerHeight()+'px');
-
-		//console.log('this is the operator view');
 		//set the templates
 		var tLine = _.template($('#line-template-operator').html());
 
 		//make sure the lines are sorted by sequence instead of index when read in
-		lines = _.sortBy(lines,function(q){
+
+		//!! refact this as well with custyom sort function
+		/*lines = _.sortBy(lines,function(q){
 			return q.sequence;
-		});
+		});*/
+		//this is a singleton so it's cool if it's anonymous
+		lines.sort(function(a, b){
+			if(a.sequence < b.sequence){
+				return -1;
+			}
+			if(a.sequence > b.sequence){
+				return 1;
+			}
+			return 0;
+		}
+);
 
 		//templating per line
-		_.each(lines, function(q, i){
-			//this is a temporary scrub in of fixture characters
-			//q.character = 'Character';
-
-			//append character name with colon
+		/*_.each(lines, function(q, i){
 			if(q.element.element_name.length>0){
-				//append the colon
 				q.character = q.element.element_name + ':';
 			}else{
 				q.character=' ';
@@ -73,16 +77,21 @@ $(document).ready(function(){
 			$('#line-holder-sub-operator').append(
 				tLine(q)
 			);
-			/*
-			if(q.visibility){
-				$('#line-holder-sub-operator').append(
-					tLine(q)
-				);
+			$('.line-operator').first().addClass('target-operator');
+			$('.line-operator').each(function(){
+				if($(this).attr('data-visibility')=="false"){
+					$(this).addClass('line-non-visible-operator');
+				}
+			});
+		});*/
+		//	refac with native for loop
+		lines.forEach(function(q){
+			if(q.element.element_name.length>0){
+				q.character = q.element.element_name + ':';
 			}else{
-				//need handling for non-visible items
-				//show them with different styling
-				//
-			}*/
+				q.character=' ';
+			}
+			document.getElementById('line-holder-sub-operator').innerHTML+=tLine(q);
 			$('.line-operator').first().addClass('target-operator');
 			$('.line-operator').each(function(){
 				if($(this).attr('data-visibility')=="false"){
@@ -90,9 +99,29 @@ $(document).ready(function(){
 				}
 			});
 		});
+		$lines = $('.line-operator');
 		//this happens when you click the commit button
 		$('#commit-button-operator').click(commit);
+
 		//scrolling target feature
+		//!!!this is the heaviest and needs refac big time
+		//use named function for sorting
+		//eventually shift all of this to the top to minimize hoisting
+		//make this a singleton at the risk of being non-responsive
+
+		var mid = $(window).innerHeight()/2.2;
+		function sortHeight(a, b){
+			//there's a problem i how offset works
+			var an = Math.abs(a.offset().top-mid);
+			var bn = Math.abs(b.offset().top-mid);
+			if(an>bn){
+				return 1;
+			}
+			if(an<bn){
+				return -1;
+			}
+			return 0;
+		}
 		$('#line-holder-operator').scroll(function(){
 			var updateInt = 100;
 			//self destroying counter that catches up the highlighting
@@ -100,12 +129,14 @@ $(document).ready(function(){
 				window.counting = setTimeout(function(){
 					//removed the targeted class
 					$('.target-operator').removeClass('target-operator');
-					var mid = $(window).innerHeight()/2.2;
-					var l = _.sortBy($('#line-holder-operator div.line-operator'), function(q){
+					//var mid = $(window).innerHeight()/2.2;
+					//!! heaviest call shows in profiling
+					/*var l = _.sortBy($('#line-holder-operator div.line-operator'), function(q){
 						return Math.abs($(q).offset().top-mid);
-					})
-					$(l[0]).addClass('target-operator');
-					targeted = parseInt($(l[0]).attr('data-sequence'));
+					});*/
+					$lines.sort(sortHeight);
+					$lines[0].addClass('target-operator');
+					targeted = parseInt($lines[0].attr('data-sequence'));
 					//destroy the counter
 					window.counting=false;
 				}, updateInt);
