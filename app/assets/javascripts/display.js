@@ -160,7 +160,7 @@ $(document).ready(function(){
 
 		//set first interval
 		function heartbeat(){
-			var bottomPad = 30;
+			var bottomPad = 65;
 			//ajax goes here next timeout
 			$.ajax('/display/current',
 			  {
