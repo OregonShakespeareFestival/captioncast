@@ -4,6 +4,7 @@ _.templateSettings = {
     evaluate: /\{\{(.+?)\}\}/g
 };
 var targeted = 1;
+var $targeted;
 var current = 1;
 var scrollSpd = 500;
 var blackout = false;
@@ -50,7 +51,7 @@ $(document).ready(function(){
 
 		//set the middlepoint
 		//maybe tweak the 2.2?
-		var mid = parseInt($(window).innerHeight()/2);
+		var mid = Math.round($(window).innerHeight()/2);
 
 		//set the templates
 		var tLine = _.template($('#line-template-operator').html());
@@ -67,60 +68,38 @@ $(document).ready(function(){
 		});
 
 		//set up a universal named function that will return the number closest to the center using math.abs
-
-		//templating per line
-		/*_.each(lines, function(q, i){
-			if(q.element.element_name.length>0){
-				q.character = q.element.element_name + ':';
-			}else{
-				q.character=' ';
-			}
-			$('#line-holder-sub-operator').append(
-				tLine(q)
-			);
-			$('.line-operator').first().addClass('target-operator');
-			$('.line-operator').each(function(){
-				if($(this).attr('data-visibility')=="false"){
-					$(this).addClass('line-non-visible-operator');
-				}
-			});
-		});*/
-
-		
+	
 		//refac further with custom named foreach with named eval function
 
 		//	refac with native for loop
 		// singleton is fine since this is a one-time execution
-		lines.forEach(function(q){
-			if(q.element.element_name.length>0){
-				q.character = q.element.element_name + ':';
+		var lineCont = document.getElementById('line-holder-sub-operator');
+		var il = lines.length-1;
+		while(il>-1){
+			var cl = lines[il];
+			if(cl['element']['element_name'].length>0){
+				cl['character'] = cl['element']['element_name'] + ':';
 			}else{
-				q.character=' ';
+				cl['character']=' ';
 			}
 			//this does the templating
-			document.getElementById('line-holder-sub-operator').innerHTML+=tLine(q);
-		});
-		//store the lines inside of a jquery object
+			lineCont.innerHTML=tLine(cl)+lineCont.innerHTML;
+			//console.log(hString);
+			il--;
+		}
+
+		//clear the lines object now that it's been used
+		lines=undefined;
+
+		//store the new DOM lines inside of a jquery object
 		$lines = $('.line-operator');
-		$lines.first().addClass('target-operator');
+		$targeted = $lines.first();
+		$targeted.addClass('target-operator');
 		$lines.each(function(){
 			if($(this).attr('data-visibility')=="false"){
 				$(this).addClass('line-non-visible-operator');
 			}
 		});
-		//loop again and calculate the scroll top value and store in new data-height attr
-
-		//actually can we just have a simple alias/pairing
-		//use an indexed array
-		//pair sequences with vertical locations
-		/*
-		var lAlias=[];
-		$lines.each(function(){
-			//this.attr('data-height', this.position().top);
-
-			lAlias[$(this).attr('data-sequence')] = this.offsetTop;
-		});
-		*/
 		//store an alias list
 		function buildAlias(){
 			//store each elevation and height in an object
@@ -128,7 +107,6 @@ $(document).ready(function(){
 			//$lines.each(function(){
 			for(var i = $lines.length-1; i>=0; i--){
 				var line = $lines[i];
-				//var s = $(this).attr('data-sequence');
 				var s = line['dataset']['sequence'];
 				la[s] = {e:line['offsetTop'], h:line['offsetHeight']};
 			};
@@ -140,60 +118,19 @@ $(document).ready(function(){
 		//this happens when you click the commit button
 		$('#commit-button-operator').click(commit);
 
-		//scrolling target feature
-		//!!!this is the heaviest and needs refac big time
-		//use named function for sorting
-		//eventually shift all of this to the top to minimize hoisting
-		//make this a singleton at the risk of being non-responsive
-
-		//ARGH! scrap this! write an even leaner function, please
-		/*
-		function sortHeight(a, b){
-			//there's a problem i how offset works
-			//a.getAttribute('data-height');
-			var an = Math.abs(a.offsetTop-mid);
-			var bn = Math.abs(b.offsetTop-mid);
-			if(an>bn){
-				return 1;
-			}
-			if(an<bn){
-				return -1;
-			}
-			return 0;
-		}*/
-
-		//really... get on that. leaner function, now, please
-		/*function findCenter($a, st){
-			//scrolltop is st
-			//set first closest number by subtracting scrolltop
-			var c = $a[1];
-			//set array length
-			var l = $a.length;
-			//loop through array
-			for(var i=1; i<l; i++){
-				//if entry i even exists to begin with
-				//if math abs of current is less than math abs of t then replace t
-
-				//check to see if this perfs better
-				//if math abs of next is more than the last then break?
-
-			}
-			//return the top
-			return t;
-		}*/
+		//this sorts the stack for the line closest to middle
 		function findMid(a, st){
 			//define midpoint relative to holder
-			//var t = st+mid;
-			var t = st;
+			var t = st+mid;
 			var i = a.length-1;
 			//set initial vals
 			var cs = i;
-			var ce = a[i]['e'];
+			var ce = a[i]['e']+Math.round(a[i]['h']);
 			var cd = Math.abs(ce-t);
 			var ld = cd;
 			while(i>0){
 				//find the currently evaluated sequence's elevation minus midpoint
-				var e=a[i]['e'];
+				var e=a[i]['e']+Math.round(a[i]['h']);
 				//set a distance to beat based on absolute value
 				var d = Math.abs(e-t);
 				//if this distance is less than the one to beat
@@ -212,39 +149,22 @@ $(document).ready(function(){
 			//return t;
 			return cs;
 		}
-		/*
-		function forEach(a, c){
-			var l = a.length;
-			for(var i=0; i<l; i++){
-				c(a[i], i);
-			}
-		};
-		*/
-		$('#line-holder-operator').scroll(function(){
+		var $lh = $('#line-holder-operator');
+		$lh.scroll(function(){
 			var updateInt = 300;
 			//self destroying counter that updates the highlighting
 			function advanceTarget(){
 					//removed the targeted class
 					$('.target-operator').removeClass('target-operator');
-					//var mid = $(window).innerHeight()/2.2;
-					//!! heaviest call shows in profiling
-					/*var l = _.sortBy($('#line-holder-operator div.line-operator'), function(q){
-						return Math.abs($(q).offset().top-mid);
-					});*/
-
-
-
-					//this needs to be leaner still!
-					//$lines.sort(sortHeight);
 					//get scrolltop
-					var st = $('#line-holder-operator')[0]['scrollTop'];
-					console.log('scrolltop is '+st);
+					var st = document.getElementById('line-holder-operator')['scrollTop'];
+					//console.log('scrolltop is '+st);
 					targeted = findMid(lAlias, st);
-					console.log(targeted);
+					//console.log(targeted);
 					//now apply the target class to the correctly selected one
 					$($lines[targeted]).addClass('target-operator');
 					//$lines.first().addClass('target-operator');
-					//targeted = parseInt($lines.first().attr('data-sequence'));
+					//targeted = Math.round($lines.first().attr('data-sequence'));
 					//destroy the counter
 					window.counting=false;
 			};
@@ -254,17 +174,14 @@ $(document).ready(function(){
 			}
 
 		});
-		//click the line I want feature
+		//this auto-scrolls to a desired element
+		function aniScroll(el){
+			$lh.animate({scrollTop: el['offsetTop'] +  Math.round(el['offsetHeight']/2) - mid}, scrollSpd);
+		}
+		//scroll to a line when it's clicked
 		$('.line-operator').click(function(){
-
-			//this can be made much much leaner as well.
-			var diff = ($('.target-operator').position().top - $(this).position().top)*1.0;
-			$('#line-holder-operator').animate(
-				{scrollTop:
-					$('#line-holder-operator').scrollTop() - diff
-				}, scrollSpd);
-			});
-
+			aniScroll(this);
+		});
 		//action that rolls down preview and poplates is
 		$('#preview-operator').click(function(){
 
@@ -405,9 +322,11 @@ $(document).ready(function(){
 		$('#up-button-operator').click(function(){
 			if(!scrolling){
 				scrolling=true;
-				var prevNum = parseInt($('.target-operator').first().attr('data-sequence'))-1;
-				var firstNum = parseInt($('.line-operator').first().attr('data-sequence'));
-				var finalNum = parseInt($('.line-operator').last().attr('data-sequence'));
+				//yeah, could def simplify this...
+				/*
+				var prevNum = Math.round($('.target-operator').first().attr('data-sequence'))-1;
+				var firstNum = Math.round($('.line-operator').first().attr('data-sequence'));
+				var finalNum = Math.round($('.line-operator').last().attr('data-sequence'));
 				console.log(prevNum);
 				if(prevNum >= firstNum && prevNum < finalNum){
 					var prevTar;
@@ -430,14 +349,19 @@ $(document).ready(function(){
 							scrolling=false;
 						});
 				}
+				*/
+				scrolling=false;
 			}	
 		});
 		$('#down-button-operator').click(function(){
 			if(!scrolling){
 				scrolling=true;
-				var nextNum = parseInt($('.target-operator').first().attr('data-sequence'))+1;
-				var firstNum = parseInt($('.line-operator').first().attr('data-sequence'));
-				var finalNum = parseInt($('.line-operator').last().attr('data-sequence'));
+
+				//could def slim this up
+				/*
+				var nextNum = Math.round($('.target-operator').first().attr('data-sequence'))+1;
+				var firstNum = Math.round($('.line-operator').first().attr('data-sequence'));
+				var finalNum = Math.round($('.line-operator').last().attr('data-sequence'));
 				if(nextNum <= finalNum && nextNum >= firstNum){
 					var nextTar;
 					while(typeof nextTar==='undefined' && nextNum < finalNum){
@@ -459,6 +383,8 @@ $(document).ready(function(){
 							scrolling=false
 						});
 				}
+				*/
+				scrolling=false;
 			}
 		});
 
