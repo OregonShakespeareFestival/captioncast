@@ -95,6 +95,7 @@ $(document).ready(function(){
 
 		//store the new DOM lines inside of a jquery object
 		$lines = $('.line-operator');
+		//actually, would be good if lines were read into the array with sequence numbers for index vals?
 		$targeted = $lines.first();
 		$targeted.addClass('target-operator');
 		var minSeq = Math.round($targeted.attr('data-sequence')); 
