@@ -73,7 +73,8 @@ $(document).ready(function(){
 
 		//	refac with native for loop
 		// singleton is fine since this is a one-time execution
-		var lineCont = document.getElementById('line-holder-sub-operator');
+		//var lineCont = document.getElementById('line-holder-sub-operator');
+		$lineCont = $('#line-holder-sub-operator');
 		var il = lines.length-1;
 		while(il>-1){
 			var cl = lines[il];
@@ -83,8 +84,9 @@ $(document).ready(function(){
 				cl['character']=' ';
 			}
 			//this does the templating
-			lineCont.innerHTML=tLine(cl)+lineCont.innerHTML;
+			//lineCont.innerHTML=tLine(cl)+lineCont.innerHTML;
 			//console.log(hString);
+			$lineCont.prepend(tLine(cl));
 			il--;
 		}
 
