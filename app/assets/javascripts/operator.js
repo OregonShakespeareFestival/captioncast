@@ -96,6 +96,7 @@ $(document).ready(function(){
 		//store the new DOM lines inside of a jquery object
 		$lines = $('.line-operator');
 		//actually, would be good if lines were read into the array with sequence numbers for index vals?
+
 		$targeted = $lines.first();
 		$targeted.addClass('target-operator');
 		var minSeq = Math.round($targeted.attr('data-sequence')); 
@@ -167,8 +168,14 @@ $(document).ready(function(){
 					targeted = findMid(lAlias, st);
 					//console.log(targeted);
 					//now apply the target class to the correctly selected one
+
+					//!!!this is where the sequence number and index don't match up
+					//options
+					//check sequence here... but it could get heavy
+					// assume that sequence is index+1.. 99% right
+
 					$($lines[targeted]).addClass('target-operator');
-					//$lines.first().addClass('target-operator');
+
 					//targeted = Math.round($lines.first().attr('data-sequence'));
 					//destroy the counter
 					window.counting=false;
