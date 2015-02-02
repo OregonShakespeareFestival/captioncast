@@ -97,6 +97,8 @@ $(document).ready(function(){
 		$lines = $('.line-operator');
 		$targeted = $lines.first();
 		$targeted.addClass('target-operator');
+		var minSeq = Math.round($targeted.attr('data-sequence')); 
+		var maxSeq = Math.round($targeted.last().attr('data-sequence'));
 		$lines.each(function(){
 			if($(this).attr('data-visibility')=="false"){
 				$(this).addClass('line-non-visible-operator');
@@ -177,8 +179,8 @@ $(document).ready(function(){
 
 		});
 		//this auto-scrolls to a desired element
-		function aniScroll(el){
-			$lh.animate({scrollTop: el['offsetTop'] +  Math.round(el['offsetHeight']/2) - mid}, scrollSpd);
+		function aniScroll(el, c){
+			$lh.animate({scrollTop: el['offsetTop'] +  Math.round(el['offsetHeight']/2) - mid}, scrollSpd, c);
 		}
 		//scroll to a line when it's clicked
 		$('.line-operator').click(function(){
@@ -324,6 +326,15 @@ $(document).ready(function(){
 		$('#up-button-operator').click(function(){
 			if(!scrolling){
 				scrolling=true;
+				if(targeted!=minSeq){
+					aniScroll($lines[targeted--], function(){
+					if(autoCommit){ 
+						commit(); 
+					}
+						//targeted--; 
+						scrolling=false;
+						});
+				}
 				//yeah, could def simplify this...
 				/*
 				var prevNum = Math.round($('.target-operator').first().attr('data-sequence'))-1;
@@ -348,11 +359,11 @@ $(document).ready(function(){
 								commit();
 							}
 
-							scrolling=false;
+							scrolling=false;`
 						});
 				}
 				*/
-				scrolling=false;
+				//scrolling=false;
 			}	
 		});
 		$('#down-button-operator').click(function(){
