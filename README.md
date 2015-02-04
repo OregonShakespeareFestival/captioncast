@@ -20,18 +20,34 @@ An open source multilingual open caption project.  Inspired by [captioncast](htt
 ###Development Tools:
 ---------
 
-`sudo yum install -y ruby ruby-devel rubygems redis libxml2-devel libxslt-devel sqlite3-devel openssl-devel @development`  
+####First time setup:  
+
+Run `vagrant up` to create a development virtual machine and connect to it with `vagrant ssh`.  
+
+Install required packages.  
+
+```
+sudo yum install -y ruby ruby-devel rubygems redis libxml2-devel libxslt-devel sqlite3-devel openssl-devel @development
+systemctl enable redis  
+systemctl start redis  
+```
+
+Development files are mounted to the vm at /vagrant `cd /vagrant`  
+
+Install rails and run setup tasks.  
+
 `gem install rails`  
 `bundle`  
-`rake db:migrate`
-`rake db:seed`
-`systemctl enable redis`
-`systemctl start redis`
-`rails s`
+`rake db:migrate`  
+`rake db:seed`  
 
-In another terminal run: `rake resque:work QUEUE='*'`
-Load the resque schedule `rake resque:setup_schdule`
-Finally run the resque task scheduler `rake resque:scheduler`
+####Running in development mode:  
+
+Start the rails server `rails s`  
+
+In another terminal run: `rake resque:work QUEUE='*'`  
+Load the resque schedule: `rake resque:setup_schedule`  
+Finally run the resque task scheduler: `rake resque:scheduler`  
 
 A vagrant file is also provided in the project for use.  
 
