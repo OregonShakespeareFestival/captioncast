@@ -17,26 +17,27 @@ var $lines;
 $(document).ready(function(){
 	if($('#main-operator').length>0){
 		//this function will universally commit the targeted line
+		function seqPushed(d){
+			//display logic if successful
+			$('.current-operator').removeClass('current-operator');
+			$targeted.addClass('current-operator');
+			if(blackout){
+				$('#blackout-icon-operator').addClass('blackout-off-operator');
+				blackout=false;
+			}
+			current=$targeted.attr('data-sequence');
+		}
 		function commit(){
-				var $t = $('.target-operator');
+				//var $t = $('.target-operator');
 				//post the current sequence identifier through AJAX
-				if($t.attr('data-visibility')=="true"){
+				if($targeted.attr('data-visibility')=="true"){
 					$.ajax('/operator/pushTextSeq', {
 						type:'POST',
 						data: {
-							seq:$t.attr('data-sequence'),
+							seq:$targeted.attr('data-sequence'),
 				            operator: operator
 						},
-						success:(function(d){
-							//display logic if successful
-							$('.current-operator').removeClass('current-operator');
-							$t.addClass('current-operator');
-							if(blackout){
-								$('#blackout-icon-operator').addClass('blackout-off-operator');
-								blackout=false;
-							}
-							current=$t.attr('data-sequence');
-						}),
+						success:seqPushed,
 						error:(function(){
 							//put in better error handling here
 							alert('Commit failed! Please check your connection.');
@@ -161,7 +162,7 @@ $(document).ready(function(){
 			//self destroying counter that updates the highlighting
 			function advanceTarget(){
 					//removed the targeted class
-					$('.target-operator').removeClass('target-operator');
+					$targeted.removeClass('target-operator');
 					//get scrolltop
 					var st = document.getElementById('line-holder-operator')['scrollTop'];
 					//console.log('scrolltop is '+st);
@@ -183,8 +184,9 @@ $(document).ready(function(){
 						ind--;
 					}
 					$targeted.addClass('targeted-operator');*/
-
-					$($lines[targeted-1]).addClass('target-operator');
+					$targeted = $($lines[targeted-1]);
+					console.log($targeted);
+					$targeted.addClass('target-operator');
 
 					//targeted = Math.round($lines.first().attr('data-sequence'));
 					//destroy the counter
@@ -286,7 +288,22 @@ $(document).ready(function(){
 				});
 			});
 		*/
-
+		function dispOff(d){
+			console.log('display cleared');
+			$('.current-operator').removeClass('current-operator');
+			$('#blackout-icon-operator').toggleClass('blackout-off-operator');
+			blackout=true;
+		}
+		function dispOn(d){
+			console.log('display is back');
+			var last = $.grep($('.line-operator'), function(n){
+				return $(n).attr('data-sequence') == current;
+			})[0];
+			$(last).addClass('current-operator');
+			//$('.current-operator').removeClass('current-operator');
+			$('#blackout-icon-operator').toggleClass('blackout-off-operator');
+			blackout=false;
+		}
 		//blackout the display
 		$('#blackout-operator').click(function(){
 			//console.log('blackout');
@@ -297,12 +314,7 @@ $(document).ready(function(){
 						seq:0,
 	          operator: operator
 					},
-					success:(function(d){
-						console.log('display cleared');
-						$('.current-operator').removeClass('current-operator');
-						$('#blackout-icon-operator').toggleClass('blackout-off-operator');
-						blackout=true;
-					}),
+					success:dispOff,
 				});
 			}else{
 				$.ajax('/operator/pushTextSeq', {
@@ -311,16 +323,7 @@ $(document).ready(function(){
 						seq:current,
 	          operator: operator
 					},
-					success:(function(d){
-						console.log('display is back');
-						var last = $.grep($('.line-operator'), function(n){
-							return $(n).attr('data-sequence') == current;
-						})[0];
-						$(last).addClass('current-operator');
-						//$('.current-operator').removeClass('current-operator');
-						$('#blackout-icon-operator').toggleClass('blackout-off-operator');
-						blackout=false;
-					}),
+					success:dispOn,
 				});
 			}
 
