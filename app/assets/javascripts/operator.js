@@ -131,12 +131,12 @@ $(document).ready(function(){
 			var i = a.length-1;
 			//set initial vals
 			var cs = i;
-			var ce = a[i]['e']+Math.round(a[i]['h']);
+			var ce = a[i]['e']+Math.round(a[i]['h']/2);
 			var cd = Math.abs(ce-t);
 			var ld = cd;
 			while(i>0){
 				//find the currently evaluated sequence's elevation minus midpoint
-				var e=a[i]['e']+Math.round(a[i]['h']);
+				var e=a[i]['e']+Math.round(a[i]['h']/2);
 				//set a distance to beat based on absolute value
 				var d = Math.abs(e-t);
 				//if this distance is less than the one to beat
@@ -173,8 +173,18 @@ $(document).ready(function(){
 					//options
 					//check sequence here... but it could get heavy
 					// assume that sequence is index+1.. 99% right
+					/*
+					var ind = $lines.length-1;
+					while(ind>0){
+						if(parseInt($lines[ind]['dataset']['sequence'])==targeted-1){
+							$targeted = $lines[ind];
+							break;
+						}
+						ind--;
+					}
+					$targeted.addClass('targeted-operator');*/
 
-					$($lines[targeted]).addClass('target-operator');
+					$($lines[targeted-1]).addClass('target-operator');
 
 					//targeted = Math.round($lines.first().attr('data-sequence'));
 					//destroy the counter
@@ -333,79 +343,44 @@ $(document).ready(function(){
 		//single up and down buttons
 		$('#up-button-operator').click(function(){
 			if(!scrolling){
-				scrolling=true;
 				if(targeted!=minSeq){
-					aniScroll($lines[targeted--], function(){
-					if(autoCommit){ 
-						commit(); 
-					}
-						//targeted--; 
-						scrolling=false;
-						});
-				}
-				//yeah, could def simplify this...
-				/*
-				var prevNum = Math.round($('.target-operator').first().attr('data-sequence'))-1;
-				var firstNum = Math.round($('.line-operator').first().attr('data-sequence'));
-				var finalNum = Math.round($('.line-operator').last().attr('data-sequence'));
-				console.log(prevNum);
-				if(prevNum >= firstNum && prevNum < finalNum){
-					var prevTar;
-					while(typeof prevTar==='undefined' && prevNum >= firstNum){
-						prevTar = $.grep($('.line-operator'), function(n){
-							return $(n).attr('data-sequence') == prevNum;
-						})[0];
-						prevNum--;
-						console.log(prevTar);
-					}
-					var diff = ($('.target-operator').position().top - $(prevTar).position().top)*1.0;
-					$('#line-holder-operator').animate(
-						{scrollTop:
-							$('#line-holder-operator').scrollTop() - diff
-						}, scrollSpd, function(){
-							if(autoCommit){
-								commit();
-							}
+					scrolling=true;
 
-							scrolling=false;`
-						});
+					//console.log('scrolled');
+					//this practice is not 100% sound
+					//it relies on no gaps, no duplicates in sequence numbers
+					aniScroll($lines[targeted-2], function(){
+						if(autoCommit){ 
+							commit(); 
+						}
+						targeted--; 
+						console.log(targeted);
+						scrolling=false;
+						//targeted++;
+					});
 				}
-				*/
-				//scrolling=false;
 			}	
 		});
 		$('#down-button-operator').click(function(){
 			if(!scrolling){
-				scrolling=true;
+				//doesn't scroll down on first line. need fix
+				if(targeted!=maxSeq){
+					scrolling=true;
 
-				//could def slim this up
-				/*
-				var nextNum = Math.round($('.target-operator').first().attr('data-sequence'))+1;
-				var firstNum = Math.round($('.line-operator').first().attr('data-sequence'));
-				var finalNum = Math.round($('.line-operator').last().attr('data-sequence'));
-				if(nextNum <= finalNum && nextNum >= firstNum){
-					var nextTar;
-					while(typeof nextTar==='undefined' && nextNum < finalNum){
-						nextTar = $.grep($('.line-operator'), function(n){
-							return $(n).attr('data-sequence') == nextNum;
-						})[0];
-						nextNum++;
-					}
-					//console.log(nextTar);
-					var diff = ($('.target-operator').position().top - $(nextTar).position().top)*1.0;
-					$('#line-holder-operator').animate(
-						{scrollTop:
-							$('#line-holder-operator').scrollTop() - diff
-						}, scrollSpd, function(){
-							if(autoCommit){
-								commit();
-							}
+					//console.log('scrolled');
+					//this practice is not 100% sound
+					//it relies on no gaps, no duplicates in sequence numbers
 
-							scrolling=false
-						});
+					aniScroll($lines[targeted], function(){
+						if(autoCommit){ 
+							commit(); 
+						}
+						targeted++; 
+						console.log(targeted);
+						scrolling=false;
+						//targeted++;
+					});
 				}
-				*/
-				scrolling=false;
 			}
 		});
 
