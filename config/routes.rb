@@ -1,6 +1,8 @@
 require 'resque/server'
 
 Rails.application.routes.draw do
+  resources :works, only: [:index]
+  # GET /works -> WorksController index
 
   get 'display/select'
   post 'display/select'
@@ -26,5 +28,4 @@ Rails.application.routes.draw do
   get 'editor/index'
 
   mount Resque::Server.new, at: "/resque"
-
 end
