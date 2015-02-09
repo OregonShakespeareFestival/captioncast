@@ -1,9 +1,9 @@
-<h1>Works</h1>
+<h1>Select the script to edit</h1>
+<!--creates the form for selecting the play to edit.
+this currently posts the id of the script selected (currently just posts to itself-->
+<%= form_tag do %>
 
-<ul>
-  <% @works.each do |work| %>
-    <li>
-      <%= work.work_name %>
-    </li>
-  <% end %>
-</ul>
+ <%= select_tag(options_from_collection_for_select(Work.all, :id, :name)) %>
+  <%= submit_tag("Edit Script") %>
+<% end %>
+

@@ -5,7 +5,7 @@ class Work < ActiveRecord::Base
   validates_presence_of :language
 
   def name
-    work_name + ' - ' + language
+    "#{work_name}. #{language}"
   end
 
 end
