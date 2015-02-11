@@ -27,8 +27,16 @@ Rails.application.routes.draw do
   #for the editor view 
   get 'works/index'
   post 'works/index'
-
-  resources :works, only: [:index]
+  get 'works/show'
+  post 'works/show'
+  post 'works/edit'
+  get 'works/edit'
+  post 'works/editorview'
+  get 'works/editorview'
+  patch '/works/:id', to: 'works#editorview', as: 'work'
+  resources :works
+  resources :texts
+  #resources :works, only: [:index]
   # GET /works -> WorksController index
 
 

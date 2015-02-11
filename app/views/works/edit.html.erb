@@ -1,0 +1,25 @@
+
+
+<!--shows the contact information of the @contact person (one person set up in controller-->
+<!--create loop for an array holding elements containing lines-->
+
+
+
+
+<h1>Edit lines</h1>
+
+<!--this is the view for showing all the contacts in the database-->
+<% if @lines.blank? %>
+ <p>No contacts to display.</p>
+<% else %>
+  <ul id="works">
+    <% @lines.each do |c| %>
+      <li>
+      	<!--to contact_controller method 'show' with the parameter c.id (routes must be set for this)-->
+        <%= link_to ': '+c.content_text, works_editorview_path(:id => c.id) %> 
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+<!--to contact VIEW 'new' which then uses the create method-->
+<p><%= link_to "New Contact", {:action => 'new' } %></p>
