@@ -19,7 +19,7 @@ class TextsController < ApplicationController
 
        private
        #********************************************************************
-       #used for bringing in params sent to the create function
+       #used for bringing in params sent to the update function
        #******************************************************************
 	   def message_params
 	      params.require(:text).permit(:content_text)
