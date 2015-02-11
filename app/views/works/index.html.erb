@@ -1,9 +1,16 @@
 <h1>Select the script to edit</h1>
 <!--creates the form for selecting the play to edit.
 this currently posts the id of the script selected (currently just posts to itself-->
-<%= form_tag do %>
-
- <%= select_tag(options_from_collection_for_select(Work.all, :id, :name)) %>
-  <%= submit_tag("Edit Script") %>
+<% if @works.blank? %>
+ <p>No works to display.</p>
+<% else %>
+  <ul id="works">
+    <% @works.each do |c| %>
+      <li>
+      	<!--to contact_controller method 'show' with the parameter c.id (routes must be set for this)-->
+        <%= link_to c.work_name+': '+c.language, works_edit_path(:id => c.id) %> 
+      </li>
+    <% end %>
+  </ul>
 <% end %>
 

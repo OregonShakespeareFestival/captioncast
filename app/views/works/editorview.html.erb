@@ -1,0 +1,14 @@
+<h1>View/Edit Contact</h1>
+<p id="notice"><%= notice %></p>
+<!--shows the contact information of the @contact person (one person set up in controller-->
+<% provide(:title, "Edit contact") %>
+
+<%= form_for(@text) do |f| %>
+
+	<%= f.label :content_text %> <!--label as 'name'-->
+	<%= f.text_field :content_text, class: 'form-control' %>
+
+ <%= f.submit "Update" %>
+<% end %>
+
+<%= link_to 'Back', {:action => 'edit'} %>
