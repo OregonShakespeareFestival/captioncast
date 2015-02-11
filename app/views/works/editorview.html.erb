@@ -1,12 +1,20 @@
-<h1>View/Edit Contact</h1>
+<h1>View/Edit Script element</h1>
 <p id="notice"><%= notice %></p>
-<!--shows the contact information of the @contact person (one person set up in controller-->
+
+<!--**************************************************
+	shows the selected line of the script and its details 
+	which are made available for editing
+*******************************************************-->
 <% provide(:title, "Edit contact") %>
 
+<!--form for editing the content/settings of the line-->
 <%= form_for(@text) do |f| %>
 
 	<%= f.label :content_text %> <!--label as 'name'-->
 	<%= f.text_field :content_text, class: 'form-control' %>
+	<%= f.label :visible %>
+	<%= f.check_box_tag(:visibility) %>
+
 
  <%= f.submit "Update" %>
 <% end %>

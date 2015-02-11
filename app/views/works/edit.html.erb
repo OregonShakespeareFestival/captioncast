@@ -1,25 +1,63 @@
 
 
+
+
+<style>
+span.glyphicon.glyphicon-eye-open{
+	size: 75px;
+}
+	tr:nth-child(even){
+	  background-color: #dcdcdc;
+	}
+	tr:nth-child(odd){
+	  background-color: #aaaaaa;
+	}
+</style>
+
+
 <!--shows the contact information of the @contact person (one person set up in controller-->
 <!--create loop for an array holding elements containing lines-->
 
-
-
-
-<h1>Edit lines</h1>
+<h1>Lines available for editing</h1>
 
 <!--this is the view for showing all the contacts in the database-->
 <% if @lines.blank? %>
  <p>No contacts to display.</p>
 <% else %>
-  <ul id="works">
+
+<!--table showing all lines for the current script-->
+  <table id="works" class='table'>
+  	<tr>
+  	<th>Sequence</th>
+  	<th>Character</th>
+  	<th>Type</th>
+  	<th>Text</th>
+  	<th>Visibility</th>
+  	<th>Edit</th>
+  	</tr>
+ 
     <% @lines.each do |c| %>
-      <li>
-      	<!--to contact_controller method 'show' with the parameter c.id (routes must be set for this)-->
-        <%= link_to ': '+c.content_text, works_editorview_path(:id => c.id) %> 
-      </li>
+    <% el = Element.find(c.element_id) %>
+
+    <tr>
+      <td> <%=c.sequence %> </td>
+      <td> <%=el.element_name %> </td>
+      <td> <%=el.element_type %> </td>
+      <td> <%=c.content_text %> </td>
+
+<!--show an eye in the visibility column if visible-->
+    <% if c.visibility == true %>
+		<td><span class='glyphicon glyphicon-eye-open'></span></td>
+		<% else %>
+		<td></td>
+		<% end %>
+
+<!--link to edit this line-->
+      <td> <%= link_to 'EDIT', works_editorview_path(:id => c.id) %> </td>
+    
+    </tr>
     <% end %>
-  </ul>
+  </table>
+
+
 <% end %>
-<!--to contact VIEW 'new' which then uses the create method-->
-<p><%= link_to "New Contact", {:action => 'new' } %></p>
