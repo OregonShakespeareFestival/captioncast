@@ -1,19 +1,5 @@
 
-
-
-
-<style>
-span.glyphicon.glyphicon-eye-open{
-	size: 75px;
-}
-	tr:nth-child(even){
-	  background-color: #dcdcdc;
-	}
-	tr:nth-child(odd){
-	  background-color: #aaaaaa;
-	}
-</style>
-
+<%= javascript_include_tag "works" %>
 
 <!--shows the contact information of the @contact person (one person set up in controller-->
 <!--create loop for an array holding elements containing lines-->
@@ -45,16 +31,16 @@ span.glyphicon.glyphicon-eye-open{
       <td> <%=el.element_type %> </td>
       <td> <%=c.content_text %> </td>
 
-<!--show an eye in the visibility column if visible-->
+<!--show an eye in the visibility column if this line is visible-->
     <% if c.visibility == true %>
-		<td><span class='glyphicon glyphicon-eye-open'></span></td>
+			<td><span class='glyphicon glyphicon-eye-open visi visiTr' data-id="<%= c.id %>"></span></td>
 		<% else %>
-		<td></td>
+			<td><span class='glyphicon glyphicon-eye-open visi ' data-id="<%= c.id %>"></span></td>
 		<% end %>
 
-<!--link to edit this line-->
+<!--link to edit specific this line-->
       <td> <%= link_to 'EDIT', works_editorview_path(:id => c.id) %> </td>
-    
+      
     </tr>
     <% end %>
   </table>

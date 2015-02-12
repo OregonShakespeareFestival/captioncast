@@ -21,12 +21,9 @@ end
 
 
 def edit
-	#show_id =  Work.find(params[:id])
-	#puts "show ID == " + show_id.name
-	puts "in edit============================================================="
-	@lines = Text.where(:work_id => 3)
+	@lines = Text.where(:work_id => params[:id]).order(:sequence)
 
-	
+#, :order => 'sequence'
 end	
 
 
@@ -34,13 +31,13 @@ def new
 	@text = Text.new
 end
 
+
 def editorview
-	puts "in editorview============" +params[:id] +" ================================================="
 	@text = Text.find(params[:id])
 end
 
+
 def update
-	puts "in update============================================================="
       @text = Text.where(:id => params[:id])
       if @text.update_attributes(message_params)
       # Handle a successful update.

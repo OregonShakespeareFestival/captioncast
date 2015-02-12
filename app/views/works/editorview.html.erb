@@ -1,3 +1,6 @@
+<%= javascript_include_tag "works" %>
+
+
 <h1>View/Edit Script element</h1>
 <p id="notice"><%= notice %></p>
 
@@ -10,13 +13,23 @@
 <!--form for editing the content/settings of the line-->
 <%= form_for(@text) do |f| %>
 
+<% @el = Element.find(@text.element_id) %>
+
+<p><%="Character: " + @el.element_name%></p>
+<p><%="Element: " + @el.element_type%></p>
+
 	<%= f.label :content_text %> <!--label as 'name'-->
-	<%= f.text_field :content_text, class: 'form-control' %>
-	<%= f.label :visible %>
-	<%= f.check_box_tag(:visibility) %>
+	<%= f.text_area :content_text, class: 'form-control', cols: 50, rows: 5 %>
+
+	<!--insert visibility toggle-->
 
 
  <%= f.submit "Update" %>
 <% end %>
 
-<%= link_to 'Back', {:action => 'edit'} %>
+<span id="supBlank"> Insert a Blank </span><br>
+<%= link_to 'Add Blank Space After', texts_addBlank_path(:id => @text.id) %><br>
+<%= link_to 'Delete This Line', texts_removeLine_path(:id => @text.id) %><br>
+<%= link_to 'Split this Line', texts_removeLine_path(:id => @text.id) %><br>
+<a href="http://127.0.0.1:3000/works/edit?id=<%= @el.work_id %>" >Back!</a>
+<!--<%= link_to 'Back', {:action => 'edit'} %>-->
