@@ -33,6 +33,11 @@ Rails.application.routes.draw do
   get 'works/edit'
   post 'works/editorview'
   get 'works/editorview'
+  get 'texts/addBlank'
+  post 'texts/addBlank'
+  post 'texts/toggleVis'
+  get 'texts/removeLine'
+  post 'texts/removeLine'
   patch '/works/:id', to: 'works#editorview', as: 'work'
   resources :works
   resources :texts
