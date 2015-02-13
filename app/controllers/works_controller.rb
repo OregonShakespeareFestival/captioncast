@@ -1,22 +1,20 @@
 class WorksController < ApplicationController
-  
+
 
   def index
-    @works = Work.all
+    @works = Work.order(:work_name, :language)
   end
-
 
   def select
 
   end
-
 
 #********************************************************************
 #called by our views/works/index.html.erb to show all the scripts lines
 #********************************************************************
 def show
 	@text = Text.find(params[:id])
-end  
+end
 
 
 
@@ -24,7 +22,7 @@ def edit
 	@lines = Text.where(:work_id => params[:id]).order(:sequence)
 
 #, :order => 'sequence'
-end	
+end
 
 
 def new
@@ -44,7 +42,7 @@ def update
       redirect_to:action => "index"
       else
       render 'edit'
-      end 
+      end
 end
 
 
