@@ -6,6 +6,11 @@
 	color:blue;
 	cursor:pointer;
 }
+#splitIt{
+
+	color:blue;
+	cursor:pointer;
+}
 span.glyphicon.glyphicon-eye-open{
 	size: 75px;
 }
@@ -17,12 +22,19 @@ tr:nth-child(odd){
 }
 
 .visi{
-	
 	color:#797979;
 	cursor:pointer;
-
 }
+
 .visiTr{
 	
 	color:#000;
+}
+.edi{
+	
+	color:blue;
+	cursor:pointer;
+}
+#notice{
+	color:red;
 }

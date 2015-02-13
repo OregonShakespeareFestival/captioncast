@@ -1,6 +1,10 @@
 class TextsController < ApplicationController
        
 
+
+        def show
+        end
+
         #********************************************************************
         # inserts a line into the database. Used for splitting up a monologue
         # we get the work id, then find the 
@@ -21,24 +25,17 @@ class TextsController < ApplicationController
 
 
           #insert our new blankline element with (seqid + 1)
-          txt = Text.create(sequence: (seqid + 1), element_id: Element.find_by(element_type: 'BLANKLINE').id, work_id: wid, content_text: "<br /> <br />", visibility: true)
+          txt = Text.create(sequence: (seqid + 1), element_id: lne.element_id, work_id: lne.work_id, content_text: lne.content_text, visibility: lne.visibility)
           txt.save
           if(txt.new_record?)
-            flash[:notice] = "Edit NOT successfully made"
+            flash[:notice] = "SPLIT successfully made"
             redirect_to:back
           else
-            flash[:notice] = "Edit successfully made"
+            flash[:notice] = "SPLIT NOT successfully made!!"
             redirect_to:back
           
           end
         end
-
-
-
-
-
-
-
 
 
 
@@ -65,10 +62,10 @@ class TextsController < ApplicationController
           txt = Text.create(sequence: (seqid + 1), element_id: Element.find_by(element_type: 'BLANKLINE').id, work_id: wid, content_text: "<br /> <br />", visibility: true)
           txt.save
           if(txt.new_record?)
-            flash[:notice] = "Edit NOT successfully made"
+            flash[:notice] = "BLANK SPACE successfully added"
             redirect_to:back
           else
-          flash[:notice] = "Edit successfully made"
+          flash[:notice] = "BLANK SPACE NOT added"
           redirect_to:back
           
           end
@@ -82,26 +79,25 @@ class TextsController < ApplicationController
        # each line after will be decremented to fil in the gap
        #******************************************************************
        def removeLine
-          puts "paramsID ==== " + params[:id]
+
           lne = Text.find(params[:id]) #gives us the line
           wid = lne.work_id #gives us the work id to use for selecting the right whitespace element
-          seqid = lne.sequence
+
 
 
           #remove the current line from the database
           lne.destroy
 
-
           #get all lines beyond seqid (sequence starts at seqid +1 and ID will be +2)
-          qry = "work_id = " + wid.to_s + " AND sequence > " + seqid.to_s
           e_beyond = Text.where(qry)
+          
           e_beyond.each do |a|
 
           #increment each line beyond the current one
           a.decrement!(:sequence, by = 1)
-
           end
-          redirect_to :controller => 'works', :action => 'edit', :id => 9
+
+          redirect_to :controller => 'works', :action => 'edit', :id => wid
         end
 
 

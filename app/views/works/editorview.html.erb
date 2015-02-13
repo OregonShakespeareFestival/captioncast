@@ -21,8 +21,6 @@
 	<%= f.label :content_text %> <!--label as 'name'-->
 	<%= f.text_area :content_text, class: 'form-control', cols: 50, rows: 5 %>
 
-	<!--insert visibility toggle-->
-
 
  <%= f.submit "Update" %>
 <% end %>
@@ -30,6 +28,6 @@
 <span id="supBlank"> Insert a Blank </span><br>
 <%= link_to 'Add Blank Space After', texts_addBlank_path(:id => @text.id) %><br>
 <%= link_to 'Delete This Line', texts_removeLine_path(:id => @text.id) %><br>
-<%= link_to 'Split this Line', texts_removeLine_path(:id => @text.id) %><br>
+<%= link_to 'Split This Line', texts_splitLine_path(:id => @text.id) %><br>
+<!--<span id="splitIt" data-id="<%= @text.id %>"> Split This Text </span><br>-->
 <a href="http://127.0.0.1:3000/works/edit?id=<%= @el.work_id %>" >Back!</a>
-<!--<%= link_to 'Back', {:action => 'edit'} %>-->

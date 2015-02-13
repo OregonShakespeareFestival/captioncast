@@ -38,6 +38,8 @@ Rails.application.routes.draw do
   post 'texts/toggleVis'
   get 'texts/removeLine'
   post 'texts/removeLine'
+  get 'texts/splitLine'
+  post 'texts/splitLine'
   patch '/works/:id', to: 'works#editorview', as: 'work'
   resources :works
   resources :texts
