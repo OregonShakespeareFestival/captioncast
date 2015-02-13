@@ -38,36 +38,36 @@ $(document).ready(function(){
 	});
 
 
-//used for splitting lines
-	$('#splitIt').click(function(){
-		$edt = $(this);
-		console.log(this);
-		console.log('split it changed');
-		console.log($edt.attr('data-id')) //data-id = the id of the textline in the database (not sequence)
-		//$(this).toggleClass('visiTr');
-		// $.ajax('/texts/toggleVis',
-		// 	{
-		// 		data:{
-		// 			id: $vis.attr('data-id')
-		// 			},
-		// 		method: 'POST',
-		// 		success:(function(d){
-		// 			//console.log('success');
-		// 			//console.log(d);
-		// 			$vis.toggleClass('visiTr');
+	//used for bolding entire lines
+	$('#boldIt').click(function(){
+		var text = $('textarea#text_content_text').val();
 
-		// 		}),
-		// 		error:(function(e){
-		// 			//console.log(e);
-		// 			//console.log('error');
-		// 			//console.log('i got nothing');
-		// 		})
-		// 	}
-		// );
+		console.log(text);
+		text = text.toUpperCase();
+		$('textarea#text_content_text').val(text);
+
+				//TODO: highlight only selected text
+				// function ShowSelection()
+				// {
+				//   var textComponent = document.getElementById('Editor');
+				//   var selectedText;
+				//   // IE version
+				//   if (document.selection != undefined)
+				//   {
+				//     textComponent.focus();
+				//     var sel = document.selection.createRange();
+				//     selectedText = sel.text;
+				//   }
+				//   // Mozilla version
+				//   else if (textComponent.selectionStart != undefined)
+				//   {
+				//     var startPos = textComponent.selectionStart;
+				//     var endPos = textComponent.selectionEnd;
+				//     selectedText = textComponent.value.substring(startPos, endPos)
+				//   }
+				//   alert("You selected: " + selectedText);
+				// }
 
 	});
-
-
-
 
 })
