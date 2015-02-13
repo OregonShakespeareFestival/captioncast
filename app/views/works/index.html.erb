@@ -1,0 +1,20 @@
+<h1>Select the script to edit</h1>
+<!--**********************************************
+creates the form for selecting the play to edit.
+*****************************************************-->
+<% if @works.blank? %>
+ <p>No works to display.</p>
+<% else %>
+  <ul id="works">
+    <% @works.each do |work| %>
+      <li>
+        <% if work.texts.present? %>
+          <%= link_to work_details(work), work_texts_path(work_id: work.id) %>
+        <% else %>
+          <%= work_details(work) %>
+        <% end %>
+      	<!--to contact_controller method 'show' with the parameter work.id (routes must be set for this)-->
+      </li>
+    <% end %>
+  </ul>
+<% end %>
