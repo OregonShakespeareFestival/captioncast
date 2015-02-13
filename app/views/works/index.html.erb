@@ -6,12 +6,15 @@ creates the form for selecting the play to edit.
  <p>No works to display.</p>
 <% else %>
   <ul id="works">
-    <% @works.each do |c| %>
+    <% @works.each do |work| %>
       <li>
-      	<!--to contact_controller method 'show' with the parameter c.id (routes must be set for this)-->
-        <%= link_to c.work_name+': '+c.language, works_edit_path(:id => c.id) %> 
+        <% if work.texts.present? %>
+          <%= link_to work_details(work), works_edit_path(:id => work.id) %>
+        <% else %>
+          <%= work_details(work) %>
+        <% end %>
+      	<!--to contact_controller method 'show' with the parameter work.id (routes must be set for this)-->
       </li>
     <% end %>
   </ul>
 <% end %>
-
