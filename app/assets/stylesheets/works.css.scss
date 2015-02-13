@@ -1,15 +1,20 @@
 .form-control{
 	width:75%;
+	display:inline-block;
+	margin:0;
 }
-#supBlank{
-
-	color:blue;
+#supBlank, #boldIt{
+	color:#337AB7;
 	cursor:pointer;
 }
 #splitIt{
-
 	color:blue;
 	cursor:pointer;
+}
+.edit_text{
+	border:2px solid;
+	width:604px;
+	height:300px;
 }
 span.glyphicon.glyphicon-eye-open{
 	size: 75px;
@@ -37,4 +42,18 @@ tr:nth-child(odd){
 }
 #notice{
 	color:red;
+}
+#element_attr{
+	background-color: #92C0E7;
+	width: 200px;
+	height:296px;
+	display:inline-block;
+	float:left;
+
+}
+textarea#text_content_text{
+	display:inline-block;
+	float:left;
+	width:400px;
+	height:296px;
 }

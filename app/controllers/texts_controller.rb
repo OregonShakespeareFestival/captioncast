@@ -6,6 +6,7 @@ class TextsController < ApplicationController
         def show
         end
 
+
         #********************************************************************
         # inserts a line into the database. Used for splitting up a monologue
         # we get the work id, then find the
