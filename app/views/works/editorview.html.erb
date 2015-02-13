@@ -5,7 +5,7 @@
 <p id="notice"><%= notice %></p>
 
 <!--**************************************************
-	shows the selected line of the script and its details 
+	shows the selected line of the script and its details
 	which are made available for editing
 *******************************************************-->
 <% provide(:title, "Edit contact") %>
@@ -30,4 +30,4 @@
 <%= link_to 'Delete This Line', texts_removeLine_path(:id => @text.id) %><br>
 <%= link_to 'Split This Line', texts_splitLine_path(:id => @text.id) %><br>
 <!--<span id="splitIt" data-id="<%= @text.id %>"> Split This Text </span><br>-->
-<a href="http://127.0.0.1:3000/works/edit?id=<%= @el.work_id %>" >Back!</a>
+<%= link_to 'All lines', work_texts_path(work_id: @text.work), data: { no_turbolink: true } %>
