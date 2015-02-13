@@ -9,7 +9,7 @@ creates the form for selecting the play to edit.
     <% @works.each do |work| %>
       <li>
         <% if work.texts.present? %>
-          <%= link_to work_details(work), works_edit_path(:id => work.id) %>
+          <%= link_to work_details(work), work_texts_path(work_id: work.id) %>
         <% else %>
           <%= work_details(work) %>
         <% end %>

@@ -1,7 +1,7 @@
 require 'resque/server'
 
 Rails.application.routes.draw do
-  
+
 
   get 'display/select'
   post 'display/select'
@@ -24,13 +24,7 @@ Rails.application.routes.draw do
   post 'operator/select'
   post 'operator/pushTextSeq'
 
-  #for the editor view 
-  get 'works/index'
-  post 'works/index'
-  get 'works/show'
-  post 'works/show'
-  post 'works/edit'
-  get 'works/edit'
+  #for the editor view
   post 'works/editorview'
   get 'works/editorview'
   get 'texts/addBlank'
@@ -41,12 +35,12 @@ Rails.application.routes.draw do
   get 'texts/splitLine'
   post 'texts/splitLine'
   patch '/works/:id', to: 'works#editorview', as: 'work'
-  resources :works
+  resources :works, only: [:index, :show, :edit] do
+    resources :texts, only: [:index]
+  end
   resources :texts
   #resources :works, only: [:index]
   # GET /works -> WorksController index
-
-
 
   mount Resque::Server.new, at: "/resque"
 end

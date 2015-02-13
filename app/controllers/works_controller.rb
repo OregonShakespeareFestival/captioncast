@@ -1,6 +1,4 @@
 class WorksController < ApplicationController
-
-
   def index
     @works = Work.order(:work_name, :language)
   end
