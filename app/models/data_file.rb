@@ -136,6 +136,8 @@ def self.add_character_elements(arr, work)
         self.add_element(character_name, "CHARACTER", @default_text_color, work)
       end
     end
+    #adds a blank line character for the editor to use for this work
+    self.add_element("", "BLANKLINE", @default_text_color, work )
 end
 
 
@@ -247,6 +249,8 @@ end
         name = character.text.to_str.upcase.lstrip.rstrip
         self.add_element( name, "CHARACTER", @default_text_color, work)
     end
+  #adds a blank line character for editor to use for this work
+  self.add_element("", "BLANKLINE", @default_text_color, work )
   end
 
 
