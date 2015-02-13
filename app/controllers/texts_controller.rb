@@ -1,13 +1,14 @@
 class TextsController < ApplicationController
-       
-
+  def index
+    @work = Work.find(params[:work_id])
+  end
 
         def show
         end
 
         #********************************************************************
         # inserts a line into the database. Used for splitting up a monologue
-        # we get the work id, then find the 
+        # we get the work id, then find the
         #******************************************************************
        def splitLine
           lne = Text.find(params[:id]) #gives us the line
@@ -33,7 +34,7 @@ class TextsController < ApplicationController
           else
             flash[:notice] = "SPLIT NOT successfully made!!"
             redirect_to:back
-          
+
           end
         end
 
@@ -41,7 +42,7 @@ class TextsController < ApplicationController
 
       #********************************************************************
        #inserts a blank line into the database after seqid of the line selected
-       # we get the work id, then find the 
+       # we get the work id, then find the
        #******************************************************************
        def addBlank
           lne = Text.find(params[:id]) #gives us the line
@@ -67,7 +68,7 @@ class TextsController < ApplicationController
           else
           flash[:notice] = "BLANK SPACE NOT added"
           redirect_to:back
-          
+
           end
         end
 
@@ -90,7 +91,7 @@ class TextsController < ApplicationController
 
           #get all lines beyond seqid (sequence starts at seqid +1 and ID will be +2)
           e_beyond = Text.where(qry)
-          
+
           e_beyond.each do |a|
 
           #increment each line beyond the current one
@@ -107,7 +108,7 @@ class TextsController < ApplicationController
        #updates the visibility of a line when the visibility is toggled in editorview
        #******************************************************************
        def toggleVis
-          
+
 
           @text2 = Text.find(params[:id])
 
@@ -124,11 +125,11 @@ class TextsController < ApplicationController
           else
               if @text2.update_attributes(:visibility => false)
                 render :json => 'true'
-              else 
-                render :json => 'Failed to update record to false' 
+              else
+                render :json => 'Failed to update record to false'
               end
 
-          end            
+          end
        end
 
 
@@ -145,11 +146,11 @@ class TextsController < ApplicationController
           if @text2.update_attributes(message_params)
 	          # Handle a successful update.
 	          flash[:notice] = "Edit successfully made"
-	          redirect_to:back 
+	          redirect_to:back
           else
           	flash[:notice] = "NOTICE: ERROR DURING UPDATE"
 	          redirect_to:back
-          end 
+          end
        end
 
 
