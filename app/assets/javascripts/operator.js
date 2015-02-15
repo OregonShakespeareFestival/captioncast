@@ -320,6 +320,7 @@ $(document).ready(function(){
 
 
 
+		$('#shade-loading-operator').fadeOut(1000, function(){});
 
 	}
 

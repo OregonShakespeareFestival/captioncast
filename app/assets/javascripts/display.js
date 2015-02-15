@@ -227,6 +227,9 @@ $(document).ready(function(){
 
 
 		}
+		$('#shade-loading-display').fadeOut(1000, function(){});
+
 	}
+
 
 });
