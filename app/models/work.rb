@@ -3,9 +3,10 @@ class Work < ActiveRecord::Base
   validates_presence_of :work_name
   validates_presence_of :venue_id
   validates_presence_of :language
+  has_many :texts, -> { order "sequence" }
 
+  #places the name/language in the dropdown for selecting the script to edit
   def name
-    work_name + ' - ' + language
+    "#{work_name}. #{language}"
   end
-
 end

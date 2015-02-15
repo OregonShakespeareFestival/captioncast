@@ -1,0 +1,32 @@
+<body id="body-editorview-works" class="body-works">
+
+	<h1>View/Edit Script element</h1>
+	<p id="notice"><%= notice %></p>
+
+	<!--**************************************************
+		shows the selected line of the script and its details
+		which are made available for editing
+	*******************************************************-->
+	<% provide(:title, "Edit contact") %>
+
+	<!--form for editing the content/settings of the line-->
+	<%= form_for(@text) do |f| %>
+
+	<% @el = Element.find(@text.element_id) %>
+
+	<p><%="Character: " + @el.element_name%></p>
+	<p><%="Element: " + @el.element_type%></p>
+
+		<%= f.label :content_text %> <!--label as 'name'-->
+		<%= f.text_area :content_text, class: 'form-control', cols: 50, rows: 5 %>
+
+
+	 <%= f.submit "Update" %>
+	<% end %>
+
+	<span id="supBlank"> Insert a Blank </span><br>
+	<%= link_to 'Add Blank Space After', texts_addBlank_path(:id => @text.id) %><br>
+	<%= link_to 'Delete This Line', texts_removeLine_path(:id => @text.id) %><br>
+	<%= link_to 'Split This Line', texts_splitLine_path(:id => @text.id) %><br>
+	<!--<span id="splitIt" data-id="<%= @text.id %>"> Split This Text </span><br>-->
+	<%= link_to 'All lines', work_texts_path(work_id: @text.work), data: { no_turbolink: true } %>
