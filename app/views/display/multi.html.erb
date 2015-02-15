@@ -1,15 +1,13 @@
-
-<%= javascript_include_tag "display" %>
-<%= javascript_include_tag "operator" %>
-
+<<<<<<< Updated upstream
+=======
 <%= javascript_tag do %>
   var operator= '<%=@operator%>'
 <%end%>
+>>>>>>> Stashed changes
 
 <body id="body-index-display" class="body-display">
   <div id="multi-flag-display" style="display:none"></div>
 
-  <%= render "shared/js_global_injection" %>
 
   <div class="container-fluid" id="main-display">
     <div class="row" id="row-display-multi">
@@ -23,14 +21,18 @@
 
   </div>
     <div id="shade-multi"></div>
+    <div id="shade-loading-display">The script is now loading...</div>
 
    <div id="gradient-top-display-multi" class="grad-shades-display-multi">
    </div>
    <!--
    <div id="gradient-bottom-display-multi" class="grad-shades-display-multi">
    </div-->
+  <%= javascript_tag do %>
+    var operator= '<%=@operator%>'
+  <%end%>
+  <%= render "shared/js_global_injection" %>
 
-</body>
   <!--Javascript at bottom of ERB template for more awesome. -->
   <!--<script language="javascript" type="text/javascript">
   //Store the current position in HTML 5 localStorage

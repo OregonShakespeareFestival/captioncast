@@ -45,3 +45,7 @@ gem 'rails_admin'
 gem 'underscore-rails'
 gem 'resque'
 gem 'resque-scheduler'
+
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0'
+end
