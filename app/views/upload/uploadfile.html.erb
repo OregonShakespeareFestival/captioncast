@@ -1,37 +1,36 @@
 <body id="body-index-upload" class="body-upload">
 
-<div class="container" id="main-upload">
-	<%= content_tag :div, :id=>"main-form-upload", :class=>"row" do %>
-		<%= content_tag :div, :id=>"attributes-upload", :class=>"col-xs-12 col-sm-6 col-md-4" do %>
+	<div class="container" id="main-upload">
+		<%= content_tag :div, :id=>"main-form-upload", :class=>"row" do %>
+			<%= content_tag :div, :id=>"attributes-upload", :class=>"col-xs-12 col-sm-6 col-md-4" do %>
 
-			<h1 class="title-upload">File Upload</h1>
+				<h1 class="title-upload">File Upload</h1>
 
-			<%= form_tag({:action => "uploadFile"},
-			  :multipart => true, :class => "form-group") do %>
+				<%= form_tag({:action => "uploadFile"},
+				  :multipart => true, :class => "form-group") do %>
 
-				<%= content_tag :div, :class=>"form-group" do %>
-				   	<%= label_tag("Select a Script File") %>
+					<%= content_tag :div, :class=>"form-group" do %>
+					   	<%= label_tag("Select a Script File") %>
+						</br>
+						<%= file_field "upload", "datafile", :class => "btn btn-small btn-primary btn-inverse" %>
+					<% end %>
+
+					<%= content_tag :div, :class=>"form-group" do %>
+					   	<%= label_tag("Select a Venue") %>
+						</br>
+						<%= select_tag "venue", options_from_collection_for_select(@venues, "id", "name"), :class=>"form-control" %>
+					<% end %>
+
+					<%= content_tag :div, :class=>"form-group" do %>
+					   	<%= label_tag("Select a Work") %>
+						</br>
+						<%= select_tag "work", options_from_collection_for_select(Work.order(:work_name), "id", "name" ), :class=>"form-control" %>
+					<% end %>
 					</br>
-					<%= file_field "upload", "datafile", :class => "btn btn-small btn-primary btn-inverse" %>
+					<%= button_tag "Upload", :type=>"submit", :class => "btn btn-primary" %>
 				<% end %>
 
-				<%= content_tag :div, :class=>"form-group" do %>
-				   	<%= label_tag("Select a Venue") %>
-					</br>
-					<%= select_tag "venue", options_from_collection_for_select(@venues, "id", "name"), :class=>"form-control" %>
-				<% end %>
-
-				<%= content_tag :div, :class=>"form-group" do %>
-				   	<%= label_tag("Select a Work") %>
-					</br>
-					<%= select_tag "work", options_from_collection_for_select(Work.order(:work_name), "id", "name" ), :class=>"form-control" %>
-				<% end %>
-				</br>
-				<%= button_tag "Upload", :type=>"submit", :class => "btn btn-primary" %>
 			<% end %>
-
 		<% end %>
-	<% end %>
-</div>
+	</div>
 
-</body>
