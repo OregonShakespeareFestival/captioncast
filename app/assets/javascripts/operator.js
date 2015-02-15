@@ -13,6 +13,7 @@ var scrolling = false;
 
 //jquery object to hold line elements
 var $lines;
+var lAlias;
 
 $(document).ready(function(){
 	if($('#main-operator').length>0){
@@ -101,7 +102,7 @@ $(document).ready(function(){
 		$targeted = $lines.first();
 		$targeted.addClass('target-operator');
 		var minSeq = Math.round($targeted.attr('data-sequence')); 
-		var maxSeq = Math.round($targeted.last().attr('data-sequence'));
+		var maxSeq = Math.round($lines.last().attr('data-sequence'));
 		$lines.each(function(){
 			if($(this).attr('data-visibility')=="false"){
 				$(this).addClass('line-non-visible-operator');
@@ -115,12 +116,13 @@ $(document).ready(function(){
 			for(var i = $lines.length-1; i>=0; i--){
 				var line = $lines[i];
 				var s = line['dataset']['sequence'];
-				la[s] = {e:line['offsetTop'], h:line['offsetHeight']};
+				la[s] = {e:line['offsetTop'], h:line['offsetHeight'], 2:i, 3:line['dataset']['visibility']};
 			};
 			return la;
 		}
 		//build lAlias again on resize
-		var lAlias = buildAlias();
+		lAlias = buildAlias();
+		//console.log(lAlias);
 
 		//this happens when you click the commit button
 		$('#commit-button-operator').click(commit);
@@ -154,7 +156,8 @@ $(document).ready(function(){
 				i--;
 			}
 			//return t;
-			return cs;
+			//return cs;
+			return a[cs][2];
 		}
 		var $lh = $('#line-holder-operator');
 		$lh.scroll(function(){
@@ -167,7 +170,7 @@ $(document).ready(function(){
 					var st = document.getElementById('line-holder-operator')['scrollTop'];
 					//console.log('scrolltop is '+st);
 					targeted = findMid(lAlias, st);
-					//console.log(targeted);
+					console.log(targeted);
 					//now apply the target class to the correctly selected one
 
 					//!!!this is where the sequence number and index don't match up
@@ -184,8 +187,8 @@ $(document).ready(function(){
 						ind--;
 					}
 					$targeted.addClass('targeted-operator');*/
-					$targeted = $($lines[targeted-1]);
-					console.log($targeted);
+					$targeted = $($lines[targeted]);
+					//console.log($targeted);
 					$targeted.addClass('target-operator');
 
 					//targeted = Math.round($lines.first().attr('data-sequence'));
@@ -352,14 +355,15 @@ $(document).ready(function(){
 					//console.log('scrolled');
 					//this practice is not 100% sound
 					//it relies on no gaps, no duplicates in sequence numbers
-					aniScroll($lines[targeted-2], function(){
+					targeted--; 				
+					aniScroll($lines[targeted], function(){
+						//console.log(targeted);
+						scrolling=false;
+						//targeted++;
 						if(autoCommit){ 
 							commit(); 
 						}
-						targeted--; 
-						console.log(targeted);
-						scrolling=false;
-						//targeted++;
+
 					});
 				}
 			}	
@@ -374,14 +378,16 @@ $(document).ready(function(){
 					//this practice is not 100% sound
 					//it relies on no gaps, no duplicates in sequence numbers
 
+					//if alias exists and has visibility marked
+					targeted++; 				
 					aniScroll($lines[targeted], function(){
+						//console.log(targeted);
+						scrolling=false;
+						//targeted++;
 						if(autoCommit){ 
 							commit(); 
 						}
-						targeted++; 
-						console.log(targeted);
-						scrolling=false;
-						//targeted++;
+
 					});
 				}
 			}
