@@ -1,12 +1,4 @@
 
-<%= javascript_include_tag "display" %>
-<%= javascript_include_tag "operator" %>
-
-<script>
-	var viewMode= '<%= @view_mode %>';
-	var work= '<%= @work %>';
-</script>
-
 <body id="body-ind-operator" class="body-operator">
 	<%= render "shared/js_global_injection" %>
 	<div class="container-fluid" id="main-operator">
@@ -62,4 +54,9 @@
 		<span id="autocommit-icon-operator" class="glyphicon glyphicon-lock autocommit-on-operator"></span>
 	</div>
 	</div>
+	<script>
+		var viewMode= '<%= @view_mode %>';
+		var work= '<%= @work %>';
+	</script>
+
 </body>
