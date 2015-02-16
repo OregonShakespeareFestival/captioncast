@@ -4,6 +4,8 @@ var dispFadeSpd = 400;
 var scrollSpd = 800;
 $(document).ready(function(){
 	if($('#body-index-display').length>0){
+		var current=0;
+
 		if($('#multi-flag-display').length<=0){
 
 		//if($('#main-display').length>0){
@@ -169,7 +171,6 @@ $(document).ready(function(){
 					  dataType: 'json',
 						success:(function(j){
 							console.log('sequence scraped ' + j);
-
 							if(current!=j){
 								//console.log(j);
 								current=j;
