@@ -4,9 +4,8 @@ _.templateSettings = {
     evaluate: /\{\{(.+?)\}\}/g
 };
 var targeted = 1;
-var $targeted;
-var current = 1;
-var scrollSpd = 500;
+var $targeted, $current;
+var scrollSpd = 400;
 var blackout = false;
 var autoCommit = true;
 var scrolling = false;
@@ -17,19 +16,33 @@ var lAlias;
 
 $(document).ready(function(){
 	if($('#main-operator').length>0){
+		var currentOp = 0;
+		//whenever the operator is restarted black out the screen -- can abstract this
+		$.ajax('/operator/pushTextSeq', {
+				type:'POST',
+				data: {
+					seq:0,
+			        operator: operator
+				},
+			success:dispOff,
+		});
+
 		//this function will universally commit the targeted line
 		function seqPushed(d){
 			//display logic if successful
-			$('.current-operator').removeClass('current-operator');
+			if($current){
+				$current.removeClass('current-operator');
+			}
 			$targeted.addClass('current-operator');
+			$current=$targeted;
 			if(blackout){
 				$('#blackout-icon-operator').addClass('blackout-off-operator');
 				blackout=false;
 			}
-			current=$targeted.attr('data-sequence');
+			currentOp=targeted;
+			console.log(d + ' pushed ' + 'for index ' + currentOp );
 		}
 		function commit(){
-				//var $t = $('.target-operator');
 				//post the current sequence identifier through AJAX
 				if($targeted.attr('data-visibility')=="true"){
 					$.ajax('/operator/pushTextSeq', {
@@ -52,7 +65,6 @@ $(document).ready(function(){
 		$('#main-operator').height($(window).innerHeight()+'px');
 
 		//set the middlepoint
-		//maybe tweak the 2.2?
 		var mid = Math.round($(window).innerHeight()/2);
 
 		//set the templates
@@ -69,13 +81,7 @@ $(document).ready(function(){
 			return 0;
 		});
 
-		//set up a universal named function that will return the number closest to the center using math.abs
 	
-		//refac further with custom named foreach with named eval function
-
-		//	refac with native for loop
-		// singleton is fine since this is a one-time execution
-		//var lineCont = document.getElementById('line-holder-sub-operator');
 		$lineCont = $('#line-holder-sub-operator');
 		var il = lines.length-1;
 		while(il>-1){
@@ -85,9 +91,6 @@ $(document).ready(function(){
 			}else{
 				cl['character']=' ';
 			}
-			//this does the templating
-			//lineCont.innerHTML=tLine(cl)+lineCont.innerHTML;
-			//console.log(hString);
 			$lineCont.prepend(tLine(cl));
 			il--;
 		}
@@ -101,65 +104,71 @@ $(document).ready(function(){
 
 		$targeted = $lines.first();
 		$targeted.addClass('target-operator');
-		var minSeq = Math.round($targeted.attr('data-sequence')); 
-		var maxSeq = Math.round($lines.last().attr('data-sequence'));
+		var minInd = 0; 
+		var maxInd = $lines.length-1;
+		//ID for non-visual lines
 		$lines.each(function(){
 			if($(this).attr('data-visibility')=="false"){
 				$(this).addClass('line-non-visible-operator');
 			}
 		});
-		//store an alias list
+		function boolSet(str){
+			if(str=='true'){
+				return true;
+			}else{
+				return false;
+			}
+		}
+		//this is a very lean way to store frequently evaluated values for each line
 		function buildAlias(){
-			//store each elevation and height in an object
 			var la=[];
-			//$lines.each(function(){
 			for(var i = $lines.length-1; i>=0; i--){
 				var line = $lines[i];
-				var s = line['dataset']['sequence'];
-				la[s] = {e:line['offsetTop'], h:line['offsetHeight'], 2:i, 3:line['dataset']['visibility']};
+				//var s = line['dataset']['sequence'];
+				la[i] = [line['offsetTop'], line['offsetHeight'], boolSet(line['dataset']['visibility'])];
 			};
 			return la;
 		}
 		//build lAlias again on resize
 		lAlias = buildAlias();
-		//console.log(lAlias);
 
 		//this happens when you click the commit button
 		$('#commit-button-operator').click(commit);
 
-		//this sorts the stack for the line closest to middle
+		//this is a lean function that sorts the stack for the line closest to middle
 		function findMid(a, st){
 			//define midpoint relative to holder
 			var t = st+mid;
 			var i = a.length-1;
 			//set initial vals
-			var cs = i;
-			var ce = a[i]['e']+Math.round(a[i]['h']/2);
+			var ci = i;
+			var ce = a[i][0]+Math.round(a[i][1]/2);
 			var cd = Math.abs(ce-t);
 			var ld = cd;
-			while(i>0){
+			while(i>-1){
 				//find the currently evaluated sequence's elevation minus midpoint
-				var e=a[i]['e']+Math.round(a[i]['h']/2);
+				var e=a[i][0]+Math.round(a[i][1]/2);
 				//set a distance to beat based on absolute value
 				var d = Math.abs(e-t);
-				//if this distance is less than the one to beat
-				if(d<cd){
+				//set the visibility
+				var v = a[i][2];
+				//if this distance is less than the one to beat and visible
+				if(d<cd&&v){
 					//then swap new vals
 					cd = d;
-					cs = i;
+					ci = i;
 				}
-				//if this distance is greater than the last then break
-				if(d>ld){
+				//if this distance is greater than the last and visible then break
+				if(d>ld&&v){
 					break;
 				}
 				ld=d;
 				i--;
 			}
-			//return t;
-			//return cs;
-			return a[cs][2];
+			return ci;
 		}
 		var $lh = $('#line-holder-operator');
+		//everytime the operator is scrolled, target a new line
 		$lh.scroll(function(){
 			var updateInt = 300;
 			//self destroying counter that updates the highlighting
@@ -168,32 +177,16 @@ $(document).ready(function(){
 					$targeted.removeClass('target-operator');
 					//get scrolltop
 					var st = document.getElementById('line-holder-operator')['scrollTop'];
-					//console.log('scrolltop is '+st);
 					targeted = findMid(lAlias, st);
-					console.log(targeted);
-					//now apply the target class to the correctly selected one
-
-					//!!!this is where the sequence number and index don't match up
-					//options
-					//check sequence here... but it could get heavy
-					// assume that sequence is index+1.. 99% right
-					/*
-					var ind = $lines.length-1;
-					while(ind>0){
-						if(parseInt($lines[ind]['dataset']['sequence'])==targeted-1){
-							$targeted = $lines[ind];
-							break;
-						}
-						ind--;
-					}
-					$targeted.addClass('targeted-operator');*/
 					$targeted = $($lines[targeted]);
-					//console.log($targeted);
 					$targeted.addClass('target-operator');
 
-					//targeted = Math.round($lines.first().attr('data-sequence'));
 					//destroy the counter
 					window.counting=false;
+					if(autoCommit){
+						commit();
+					}
+
 			};
 			if(!window.counting){
 				window.counting = setTimeout(
@@ -255,7 +248,6 @@ $(document).ready(function(){
 				var l = _.find($('.line-operator'), function(q){
 					return $(q).attr('data-sequence')==s;
 				});
-				//console.log(l);
 				//this may be able to be abstracted to a single function
 
 				if(l){
@@ -300,16 +292,14 @@ $(document).ready(function(){
 		function dispOn(d){
 			console.log('display is back');
 			var last = $.grep($('.line-operator'), function(n){
-				return $(n).attr('data-sequence') == current;
+				return $(n).attr('data-sequence') == currentOp;
 			})[0];
 			$(last).addClass('current-operator');
-			//$('.current-operator').removeClass('current-operator');
 			$('#blackout-icon-operator').toggleClass('blackout-off-operator');
 			blackout=false;
 		}
 		//blackout the display
 		$('#blackout-operator').click(function(){
-			//console.log('blackout');
 			if(!blackout){
 				$.ajax('/operator/pushTextSeq', {
 					type:'POST',
@@ -323,7 +313,7 @@ $(document).ready(function(){
 				$.ajax('/operator/pushTextSeq', {
 					type:'POST',
 					data: {
-						seq:current,
+						seq:currentOp,
 	          operator: operator
 					},
 					success:dispOn,
@@ -349,45 +339,29 @@ $(document).ready(function(){
 		//single up and down buttons
 		$('#up-button-operator').click(function(){
 			if(!scrolling){
-				if(targeted!=minSeq){
-					scrolling=true;
-
-					//console.log('scrolled');
-					//this practice is not 100% sound
-					//it relies on no gaps, no duplicates in sequence numbers
-					targeted--; 				
+				if(targeted!=minInd){
+					targeted--;
+					while(!lAlias[targeted][2]&&targeted>minInd){
+						targeted--;
+					}
+ 				
 					aniScroll($lines[targeted], function(){
 						//console.log(targeted);
 						scrolling=false;
-						//targeted++;
-						if(autoCommit){ 
-							commit(); 
-						}
-
 					});
 				}
 			}	
 		});
 		$('#down-button-operator').click(function(){
 			if(!scrolling){
-				//doesn't scroll down on first line. need fix
-				if(targeted!=maxSeq){
+				if(targeted!=maxInd){
 					scrolling=true;
-
-					//console.log('scrolled');
-					//this practice is not 100% sound
-					//it relies on no gaps, no duplicates in sequence numbers
-
-					//if alias exists and has visibility marked
-					targeted++; 				
+					targeted++;
+					while(!lAlias[targeted][2]&&targeted<maxInd){
+						targeted++;
+					}
 					aniScroll($lines[targeted], function(){
-						//console.log(targeted);
 						scrolling=false;
-						//targeted++;
-						if(autoCommit){ 
-							commit(); 
-						}
-
 					});
 				}
 			}
