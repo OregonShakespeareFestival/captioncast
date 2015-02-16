@@ -222,6 +222,11 @@ $(document).ready(function(){
 			}
 
 		});
+		//old js for "skip to number" feature 
+		//let's hide this and see if anybody cares
+		//front-end features are like teeth: ignore them and they will go away
+
+		/* 
 		//roll down the fast forward feature
 		$('#fforward-operator').click(function(){
 			if($(this).attr('data-visible')=='false'){
@@ -239,7 +244,6 @@ $(document).ready(function(){
 
 
 		});
-
 		//submit a line number
 		$('#fforward-operator input').keypress(function(e){
 			if(e.which == 13){
@@ -271,7 +275,6 @@ $(document).ready(function(){
 				return false;
 			}
 		});
-		/*
 		//need to debug this block
 		$('#fforward-operator input').blur(function(){
 				$('#fforward-operator').animate({left:'-100%'}, 500, function(){
