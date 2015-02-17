@@ -18,8 +18,6 @@ end
 
 def edit
 	@lines = Text.where(:work_id => params[:id]).order(:sequence)
-
-#, :order => 'sequence'
 end
 
 
