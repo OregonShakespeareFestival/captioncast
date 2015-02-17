@@ -44,7 +44,7 @@ tr:nth-child(odd){
 	color:red;
 }
 #element_attr{
-	background-color: #92C0E7;
+	background-color: #BBBBBB;
 	width: 200px;
 	height:296px;
 	display:inline-block;
@@ -56,4 +56,8 @@ textarea#text_content_text{
 	float:left;
 	width:400px;
 	height:296px;
+}
+input[type=submit]{
+	clear:both;
+	margin:3px;
 }

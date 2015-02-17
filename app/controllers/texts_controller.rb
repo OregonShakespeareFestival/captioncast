@@ -145,7 +145,7 @@ class TextsController < ApplicationController
 
           if @text2.update_attributes(message_params)
 	          # Handle a successful update.
-	          flash[:notice] = "Edit successfully made"
+	          flash[:notice] = "Text successfully updated"
 	          redirect_to:back
           else
           	flash[:notice] = "NOTICE: ERROR DURING UPDATE"

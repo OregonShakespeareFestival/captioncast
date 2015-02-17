@@ -2,6 +2,7 @@
 <!--create loop for an array holding elements containing lines-->
 <body id="body-edit-editor" class="body-editor">
   <h1>Lines available for editing</h1>
+  <%= link_to 'EDIT', works_editorview_path(:id => 3) %>
 
   <!--this is the view for showing all the contacts in the database-->
   <% if @lines.blank? %>
