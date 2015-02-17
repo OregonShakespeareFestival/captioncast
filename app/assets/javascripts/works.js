@@ -1,15 +1,18 @@
 $(document).ready(function(){
 	console.log('hello there');
+	
+//***********************************************
+//inserts a non visible newline on the screen
+//***********************************************
 	var $contentBox = $('#text_content_text');
-	$('#supBlank').click(function(){
-
-		console.log('how\'m I doing so far?');
+	$('#supBlank').click(function(){	
 		$contentBox.val($contentBox.val() + '<br />');
+		});
 
 
-	});
-
+//***********************************************
 //changes the database visible value for element
+//***********************************************
 	$('.visi').click(function(){
 		$vis = $(this);
 		console.log(this);
@@ -34,11 +37,11 @@ $(document).ready(function(){
 				})
 			}
 		);
-
 	});
 
-
+	//***********************************************
 	//used for bolding selected lines in the editorview
+	//***********************************************
 	$('#boldIt').click(function(){
 
 		   var textComponent = document.getElementById('text_content_text');
@@ -64,5 +67,35 @@ $(document).ready(function(){
 
 		});
 
-	});
+
+		//***********************************************
+		//going to split a line base on the cursers location in the textarea
+		//***********************************************
+		//$('.visi').click(function(){
+/*			$vis = $(this);
+			console.log(this);
+			console.log('visi changed');
+			//$(this).toggleClass('visiTr');
+			$.ajax('/texts/toggleVis',
+				{
+					data:{
+						id: $vis.attr('data-id')
+						},
+					method: 'POST',
+					success:(function(d){
+						//console.log('success');
+						//console.log(d);
+						$vis.toggleClass('visiTr');
+
+					}),
+					error:(function(e){
+						//console.log(e);
+						//console.log('error');
+						//console.log('i got nothing');
+					})
+				}
+			);
+		});*/
+
+	});	// onload
 
