@@ -114,9 +114,9 @@ $(document).ready(function(){
 		});
 		function boolSet(str){
 			if(str=='true'){
-				return true;
+				return 1;
 			}else{
-				return false;
+				return 0;
 			}
 		}
 		//this is a very lean way to store frequently evaluated values for each line
@@ -153,13 +153,13 @@ $(document).ready(function(){
 				//set the visibility
 				var v = a[i][2];
 				//if this distance is less than the one to beat and visible
-				if(d<cd&&v){
+				if(d<cd&&v==1){
 					//then swap new vals
 					cd = d;
 					ci = i;
 				}
 				//if this distance is greater than the last and visible then break
-				if(d>ld&&v){
+				if(d>ld&&v==1){
 					break;
 				}
 				ld=d;
