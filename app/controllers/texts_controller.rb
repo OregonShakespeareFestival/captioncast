@@ -32,7 +32,7 @@ class TextsController < ApplicationController
             flash[:notice] = "SPLIT successfully made"
             redirect_to:back
           else
-            flash[:notice] = "SPLIT NOT successfully made!!"
+            #flash[:notice] = "SPLIT NOT successfully made!!"           #need to fix this
             redirect_to:back
 
           end
@@ -66,8 +66,8 @@ class TextsController < ApplicationController
             flash[:notice] = "BLANK SPACE successfully added"
             redirect_to:back
           else
-          flash[:notice] = "BLANK SPACE NOT added"
-          redirect_to:back
+            #flash[:notice] = "BLANK SPACE NOT added"         need to fix this
+            redirect_to:back
 
           end
         end
@@ -81,15 +81,16 @@ class TextsController < ApplicationController
        #******************************************************************
        def removeLine
 
-          lne = Text.find(params[:id]) #gives us the line
+          lne = Text.find_by_id(params[:id]) #gives us the line
           wid = lne.work_id #gives us the work id to use for selecting the right whitespace element
-
+          seqid = lne.sequence
 
 
           #remove the current line from the database
           lne.destroy
 
           #get all lines beyond seqid (sequence starts at seqid +1 and ID will be +2)
+          qry = "work_id = " + wid.to_s + " AND sequence > " + seqid.to_s
           e_beyond = Text.where(qry)
 
           e_beyond.each do |a|

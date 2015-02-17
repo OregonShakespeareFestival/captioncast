@@ -11,7 +11,7 @@ class WorksController < ApplicationController
 #called by our views/works/index.html.erb to show all the scripts lines
 #********************************************************************
 def show
-	@text = Text.find(params[:id])
+	@text = Text.find_by_id(params[:id])
 end
 
 
@@ -29,7 +29,7 @@ end
 
 
 def editorview
-	@text = Text.find(params[:id])
+	@text = Text.find_by_id(params[:id])
 end
 
 
