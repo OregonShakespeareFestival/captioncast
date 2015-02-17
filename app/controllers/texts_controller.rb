@@ -98,7 +98,7 @@ class TextsController < ApplicationController
           a.decrement!(:sequence, by = 1)
           end
 
-          redirect_to :controller => 'works', :action => 'edit', :id => wid
+          redirect_to :controller => 'texts', :action => 'index', :work_id => wid
         end
 
 
