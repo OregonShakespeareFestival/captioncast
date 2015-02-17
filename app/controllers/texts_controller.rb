@@ -6,6 +6,7 @@ class TextsController < ApplicationController
         def show
         end
 
+
         #********************************************************************
         # inserts a line into the database. Used for splitting up a monologue
         # we get the work id, then find the
@@ -27,8 +28,7 @@ class TextsController < ApplicationController
 
           #insert our new blankline element with (seqid + 1)
           txt = Text.create(sequence: (seqid + 1), element_id: lne.element_id, work_id: lne.work_id, content_text: lne.content_text, visibility: lne.visibility)
-          txt.save
-          if(txt.new_record?)
+          if txt.save
             flash[:notice] = "SPLIT successfully made"
             redirect_to:back
           else
@@ -61,12 +61,11 @@ class TextsController < ApplicationController
 
           #insert our new blankline element with (seqid + 1)
           txt = Text.create(sequence: (seqid + 1), element_id: Element.find_by(element_type: 'BLANKLINE').id, work_id: wid, content_text: "<br /> <br />", visibility: true)
-          txt.save
-          if(txt.new_record?)
+          if txt.save
             flash[:notice] = "BLANK SPACE successfully added"
             redirect_to:back
           else
-            #flash[:notice] = "BLANK SPACE NOT added"         need to fix this
+            flash[:notice] = "BLANK SPACE NOT added"        # need to fix this
             redirect_to:back
 
           end
