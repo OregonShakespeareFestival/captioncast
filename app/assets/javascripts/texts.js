@@ -1,4 +1,4 @@
-$(document).ready(function(){
+/*$(document).ready(function(){
 	//console.log('here are texts to edit');
 
 	if($('#body-index-texts').length>0){
@@ -67,4 +67,4 @@ $(document).ready(function(){
 
 	
 
-});
+});*/
