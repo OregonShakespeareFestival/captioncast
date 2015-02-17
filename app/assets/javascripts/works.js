@@ -38,35 +38,29 @@ $(document).ready(function(){
 	});
 
 
-	//used for bolding entire lines
+	//used for bolding selected lines in the editorview
 	$('#boldIt').click(function(){
-		var text = $('textarea#text_content_text').val();
 
-		console.log(text);
-		text = text.toUpperCase();
-		$('textarea#text_content_text').val(text);
-
-				//TODO: highlight only selected text
-				// function ShowSelection()
-				// {
-				//   var textComponent = document.getElementById('Editor');
-				//   var selectedText;
-				//   // IE version
-				//   if (document.selection != undefined)
-				//   {
-				//     textComponent.focus();
-				//     var sel = document.selection.createRange();
-				//     selectedText = sel.text;
-				//   }
-				//   // Mozilla version
-				//   else if (textComponent.selectionStart != undefined)
-				//   {
-				//     var startPos = textComponent.selectionStart;
-				//     var endPos = textComponent.selectionEnd;
-				//     selectedText = textComponent.value.substring(startPos, endPos)
-				//   }
-				//   alert("You selected: " + selectedText);
-				// }
+		   var textComponent = document.getElementById('text_content_text');
+		   
+		   var selectedText;
+		//   // IE version
+		   	if (document.selection != undefined){
+		     	textComponent.focus();
+		     	var sel = document.selection.createRange();
+		     	selectedText = sel.text;
+				}
+			  // Mozilla version
+			else if (textComponent.selectionStart != undefined){
+		    	var startPos = textComponent.selectionStart;
+		    	var endPos = textComponent.selectionEnd;
+		    	selectedText = textComponent.value.substring(startPos, endPos)
+		  		}
+  		//bolds the text that is highlighted in the textarea		
+		$('textarea#text_content_text').val(
+			$('textarea#text_content_text').val().substring(0, textComponent.selectionStart) 
+			+ selectedText.toUpperCase()
+			+ $('textarea#text_content_text').val().substring(textComponent.selectionEnd));
 
 		});
 
