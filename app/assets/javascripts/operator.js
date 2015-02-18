@@ -3,7 +3,7 @@ _.templateSettings = {
     interpolate: /\{\{\=(.+?)\}\}/g,
     evaluate: /\{\{(.+?)\}\}/g
 };
-var targeted = 1;
+var targeted = 0;
 var $targeted, $current;
 var blackout = false;
 var autoCommit = true;
@@ -90,7 +90,9 @@ $(document).ready(function(){
 			}else{
 				cl['character']=' ';
 			}
-			$lineCont.prepend(tLine(cl));
+			if(lines[il]['visibility']){
+				$lineCont.prepend(tLine(cl));
+			}
 			il--;
 		}
 
