@@ -82,6 +82,10 @@ class DataFile < ActiveRecord::Base
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   #used to parse a .txt file script (typically other languages)
+  #        This requires that text files be encoded with 
+  #
+  #   Western (Windows 1252)  or    Western (ISO 8859-1) or   Western European (ISO) (Word)  
+  #                               in .txt format 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
   def self.parse_text_file(f, work)
