@@ -1,7 +1,7 @@
 //javascript for the display view goes here
 var refresh = 500;
 var dispFadeSpd = 400;
-var scrollSpd = 800;
+var displayScrollSpd = 1200;
 $(document).ready(function(){
 	if($('#body-index-display').length>0){
 		var current=0;
@@ -186,11 +186,11 @@ $(document).ready(function(){
 									$('#line-holder-display-multi').animate(
 										{scrollTop:
 											$('#line-holder-display-multi').scrollTop() - diff
-									}, scrollSpd);
+									}, displayScrollSpd);
 								*/
 									//$('#body-index-display').animate({scrollTop:$(newElem).position().top-$(window).height()/2-$(newElem).height()/2});
 									//$('#body-index-display').animate({scrollTop:$(newElem).position().top-$(newElem).height()/2});
-									$('#body-index-display').animate({scrollTop:$(newElem).position().top-$(window).height()/2+$(newElem).height()+bottomPad});
+									$('#body-index-display').animate({scrollTop:$(newElem).position().top-$(window).height()/2+$(newElem).height()+bottomPad}, displayScrollSpd);
 									//$('.shown-display').fadeOut(dispFadeSpd, function(){
 									//remove the focus class
 									$('.focus-multi').removeClass('focus-multi');

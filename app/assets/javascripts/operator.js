@@ -5,15 +5,14 @@ _.templateSettings = {
 };
 var targeted = 1;
 var $targeted, $current;
-var scrollSpd = 400;
 var blackout = false;
 var autoCommit = true;
 var scrolling = false;
+var opScrollSpd= 400;
 
 //jquery object to hold line elements
 var $lines;
 var lAlias;
-
 $(document).ready(function(){
 	if($('#main-operator').length>0){
 		var currentOp = 0;
@@ -196,7 +195,7 @@ $(document).ready(function(){
 		});
 		//this auto-scrolls to a desired element
 		function aniScroll(el, c){
-			$lh.animate({scrollTop: el['offsetTop'] +  Math.round(el['offsetHeight']/2) - mid}, scrollSpd, c);
+			$lh.animate({scrollTop: el['offsetTop'] +  Math.round(el['offsetHeight']/2) - mid}, opScrollSpd, c);
 		}
 		//scroll to a line when it's clicked
 		$('.line-operator').click(function(){
@@ -259,7 +258,7 @@ $(document).ready(function(){
 				$('#line-holder-operator').animate(
 					{scrollTop:
 						$('#line-holder-operator').scrollTop() - diff
-					}, scrollSpd);
+					}, opScrollSpd);
 				}else{
 					alert('Line ' + s + ' not found');
 				}
