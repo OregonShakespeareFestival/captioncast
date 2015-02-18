@@ -82,18 +82,23 @@ $(document).ready(function(){
 
 	
 		$lineCont = $('#line-holder-sub-operator');
-		var il = lines.length-1;
-		while(il>-1){
-			var cl = lines[il];
-			if(cl['element']['element_name'].length>0){
-				cl['character'] = cl['element']['element_name'] + ':';
-			}else{
-				cl['character']=' ';
-			}
+		// var il = lines.length-1;
+		var il = 0;
+		var ll = lines.length; 
+		var lc, cc;
+		while(il<ll){
 			if(lines[il]['visibility']){
-				$lineCont.prepend(tLine(cl));
+				var cl = lines[il];
+				cc = cl['element']['element_name'];
+				if(cc.length>0&&cc!=lc){
+					cl['character'] = cl['element']['element_name'] + ':';
+					lc = cc;
+				}else{
+					cl['character']=' ';
+				}
+				$lineCont.append(tLine(cl));
 			}
-			il--;
+			il++;
 		}
 
 		//clear the lines object now that it's been used
