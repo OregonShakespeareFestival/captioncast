@@ -198,8 +198,8 @@ end
 
     arr.each do |line|
 
-      #look for a character name indicating the beginning of a dialogue
-      a = line.force_encoding("ISO-8859-1").encode("utf-8", replace: nil).match(/^[A-Z1-9\s]+(?=:)/)
+      #look for a character name indicating the beginning of a dialogue                           <- remove ".?" for future use (for error in spanish scripts) 
+      a = line.force_encoding("ISO-8859-1").encode("utf-8", replace: nil).match(/^[A-Z1-9\s]+(?=.?:)/)
 
       #we have a completed monologue and need to submit it to the db
       if(a != nil and haveline == true)
@@ -215,13 +215,13 @@ end
       if (a != nil)
         #get the character speaking
         name = a[0].upcase.lstrip.rstrip
-        #returns just the line said by the character (removing excess whitespace)
-        cur_line = line.force_encoding("ISO-8859-1").encode("utf-8", replace: nil).sub(/^[A-Z1-9\s]+:\s?/,"").squish
+        #returns just the line said by the character (removing excess whitespace)                     <- remove ".?" for future use (for error in spanish scripts)
+        cur_line = line.force_encoding("ISO-8859-1").encode("utf-8", replace: nil).sub(/^[A-Z1-9\s]+.?:\s?/,"").squish
         haveline = true
 
       #we just append this line to our current characters script
-      elsif (a == nil)
-        cur_line += " " + line.force_encoding("ISO-8859-1").encode("utf-8", replace: nil).sub(/^[A-Z1-9\s]+:\s?/,"").squish
+      elsif (a == nil)                                                                                      #  <- remove ".?" for future use (for error in spanish scripts)
+        cur_line += " " + line.force_encoding("ISO-8859-1").encode("utf-8", replace: nil).sub(/^[A-Z1-9\s]+.?:\s?/,"").squish
       end
     end
   end

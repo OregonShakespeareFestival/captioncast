@@ -19,8 +19,8 @@
 		Visibility: <p class='glyphicon glyphicon-eye-open visi <%= "visiTr" if @text.visibility %>' data-id="<%= @text.id %>"></p><br>
 
 
-		<span id="boldIt">Bold It</span><br>
-		<span id="supBlank"> Insert a Blank Space</span><br>
+		<span id="boldIt">Uppercase Selection</span><br>
+		<span id="supBlank">Insert Blank Space</span><br>
 		<%= link_to 'Add Blank Line After', texts_addBlank_path(:id => @text.id) %> **<br>
 		<%= link_to 'Delete This Line', texts_removeLine_path(:id => @text.id) %> **<br>
 		<%= link_to 'Split This Line', texts_splitLine_path(:id => @text.id) %> **<br>
