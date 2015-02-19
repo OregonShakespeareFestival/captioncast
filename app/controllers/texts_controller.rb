@@ -161,8 +161,6 @@ class TextsController < ApplicationController
        def addLine
         char_text = params['new_line']
 
-         
-
           lne = Text.find_by_id(params[:id]) #gives us the line we will insert after
           wid = lne.work_id #gives us the work id to use for selecting the right whitespace element
           seqid = lne.sequence
@@ -175,7 +173,6 @@ class TextsController < ApplicationController
           #increment each line beyond the current one
           a.increment!(:sequence, by = 1)
           end
-
 
           #insert our new line for character with text and (seqid + 1)
           txt = Text.create(sequence: (seqid + 1), element_id: Element.find_by_id(params['character_name_dropdown']).id, work_id: wid, content_text: char_text['content_text'], visibility: true)
