@@ -132,8 +132,8 @@ class DataFile < ActiveRecord::Base
 
 def self.add_character_elements(arr, work)
     
-    arr.each do |line|
-      name = line.force_encoding("ISO-8859-1").encode("utf-8", replace: nil).match(/^[A-Z1-9\s]+(?=:)/)
+    arr.each do |line|                                                                              #<- remove ".?" for future use (for error in spanish scripts)
+      name = line.force_encoding("ISO-8859-1").encode("utf-8", replace: nil).match(/^[A-Z1-9\s]+(?=.?:)/)
       if (name != nil)
         #add the character "element" to the table if it does not exist
         character_name = name[0].upcase.lstrip.rstrip
