@@ -36,6 +36,8 @@ Rails.application.routes.draw do
   post 'texts/splitLine'
   get 'texts/boldLine'
   post 'texts/boldLine'
+  get 'texts/addLine'
+  post 'texts/addLine'
   patch '/works/:id', to: 'works#editorview', as: 'work'
   resources :works, only: [:index, :show, :edit] do
     resources :texts, only: [:index]

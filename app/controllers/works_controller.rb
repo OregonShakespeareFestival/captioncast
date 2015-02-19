@@ -18,6 +18,7 @@ end
 
 def edit
 	@lines = Text.where(:work_id => params[:id]).order(:sequence)
+
 end
 
 
@@ -28,6 +29,7 @@ end
 
 def editorview
 	@text = Text.find_by_id(params[:id])
+  @element = Element.where(:work_id => @text.work_id)
 end
 
 
