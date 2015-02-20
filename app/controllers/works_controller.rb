@@ -39,6 +39,7 @@ def editorview
 end
 
 
+
 def update
   @text = Text.where(:id => params[:id])
   if @text.update_attributes(message_params)
@@ -48,7 +49,6 @@ def update
     render 'edit'
   end
 end
-
 
    private
    #********************************************************************
