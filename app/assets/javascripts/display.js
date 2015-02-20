@@ -21,7 +21,7 @@ var $linesDisp, $b, inc, curLin, $blackOutCov;
 //this function moves to any given line at any given increment
 //accepts the name of the element to be scrolled, line height increment, and the current line
 $(document).ready(function(){
-	if($('#body-index-display').length>0){
+	if($('#body-display-index, #body-display-multi').length>0){
 		//set the element to be scrolled
 		$b = $('#body-index-display');
 		//set the blackout cover
@@ -36,7 +36,7 @@ $(document).ready(function(){
 		//this function modified our lines and turns them into DOM objects
 		function buildLinesDisp($container){
 			var il = 0;
-			var ll = lines.length; 
+			var ll = lines.length;
 			var lc, cc;
 			//figure out if we're going to include character name based on who said last line
 			//--!!!-- this needs to account properly for blanklines
