@@ -2,6 +2,7 @@ class Work < ActiveRecord::Base
   # associations
   belongs_to :venue
   has_many :texts, -> { order "sequence" }
+  has_many :elements
 
   # validations
   validates_presence_of :work_name

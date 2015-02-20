@@ -44,7 +44,7 @@ Rails.application.routes.draw do
   post 'works/deleteScript'
   patch '/works/:id', to: 'works#editorview', as: 'work'
   resources :works, only: [:index, :show, :edit] do
-    resources :texts, only: [:index]
+    resources :texts, only: [:index, :edit]
   end
   resources :texts
   #resources :works, only: [:index]

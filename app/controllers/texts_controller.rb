@@ -7,6 +7,12 @@ class TextsController < ApplicationController
   def show
   end
 
+  def edit
+    @work = Work.find(params[:work_id])
+    @text = @work.texts.find(params[:id])
+    @elements = @work.elements.sort_by(&:name)
+  end
+
 
   #********************************************************************
   # inserts a line into the database. Used for splitting up a monologue
