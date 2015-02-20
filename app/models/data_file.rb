@@ -172,11 +172,12 @@ end
         self.add_char_line(charName.upcase, lineCount, charLine, true, work)
         lineCount += 1
 
-      #gets parenthetical description (currently non-visible)
-      elsif par_type.upcase == "PARENTHETICAL"
-        direction = line.children.children.text
-        self.add_direction(par_type.upcase, lineCount, direction, false, work)
-        lineCount += 1
+      #gets parenthetical or action description (currently being ignored per request or Alayha)
+      elsif par_type.upcase == "PARENTHETICAL" or par_type.upcase == "ACTION"
+        #direction = line.children.children.text
+        #self.add_direction(par_type.upcase, lineCount, direction, false, work)
+        #lineCount += 1
+        #puts "ignoring paren. or action"
 
       #catches all other non visible lines
       else

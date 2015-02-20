@@ -29,7 +29,7 @@ end
 
 def editorview
 	@text = Text.find_by_id(params[:id])
-  @element = Element.where(:work_id => @text.work_id)
+  @element = Element.where(:work_id => @text.work_id).order(:element_name)
 end
 
 
