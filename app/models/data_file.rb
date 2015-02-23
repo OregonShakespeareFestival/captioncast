@@ -133,7 +133,7 @@ class DataFile < ActiveRecord::Base
 def self.add_character_elements(arr, work)
     
     arr.each do |line|                                                                              #<- remove ".?" for future use (for error in spanish scripts)
-      name = line.force_encoding("ISO-8859-1").encode("utf-8", replace: nil).match(/^[A-Z1-9\s]+(?=.?:)/)
+      name = line.force_encoding("ISO-8859-1").encode("utf-8", replace: nil).match(/^[A-Z1-9\s\.]+(?=.?:)/)
       if (name != nil)
         #add the character "element" to the table if it does not exist
         character_name = name[0].upcase.lstrip.rstrip
@@ -168,16 +168,17 @@ end
       #gets the dialogue, character should alredy be set
       elsif par_type.upcase == "DIALOGUE"
         charLine = line.children.children.text
-        #here we send all the data to the database if its a dialogue
-        self.add_char_line(charName.upcase, lineCount, charLine, true, work)
-        lineCount += 1
+        #send the dialogue to be split into centenses and sent to database
+        lineCount = self.split_into_sentences(charName.upcase, lineCount, charLine, work)
+        #self.add_char_line(charName.upcase, lineCount, charLine, true, work)
+        #lineCount += 1
 
       #gets parenthetical or action description (currently being ignored per request or Alayha)
       elsif par_type.upcase == "PARENTHETICAL" or par_type.upcase == "ACTION"
         #direction = line.children.children.text
         #self.add_direction(par_type.upcase, lineCount, direction, false, work)
         #lineCount += 1
-        #puts "ignoring paren. or action"
+
 
       #catches all other non visible lines
       else
@@ -209,8 +210,8 @@ end
       #we have a completed monologue and need to submit it to the db
       if(a != nil and haveline == true)
         #here we send all the data to the database if its a dialogue
-        self.add_char_line(name, lineCount, cur_line, true, work)
-        lineCount += 1
+        lineCount = self.split_into_sentences(name, lineCount, cur_line, work)
+        #self.add_char_line(name, lineCount, cur_line, true, work)
         haveline = false
         cur_line = ""
         name = ""
@@ -252,11 +253,74 @@ end
   def self.add_fdx_character(characters, work)
       characters.each do |character|
         name = character.text.to_str.upcase.lstrip.rstrip
-        self.add_element( name, "CHARACTER", @default_text_color, work)
+        self.add_element(name, "CHARACTER", @default_text_color, work)
     end
   #adds a blank line character for editor to use for this work
   self.add_element("", "BLANKLINE", @default_text_color, work )
   end
 
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#takes any .txt line from the script, splits into centenses, and adds 
+# each centense into a line and adds that line to the database
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+def self.split_into_sentences(name, lineCount, cur_line, work)
+  
+  #split the current line into its centences
+  sentences = self.split_by_sentence(cur_line)
+
+  #add each sentence for this character into the database
+  sentences.each do |sentence|
+    self.add_char_line(name, lineCount, sentence, true, work)
+    lineCount += 1 
+  end
+  lineCount
+end
+
+
+
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# takes a line from the script, splits into sentences and return an array 
+# containing the sentences found
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+def self.split_by_sentence(line)
+   ary = line.gsub(/\n/," ").split(/([^\.\?\!]+[\.\?\!])/)
+     ary.delete("")
+     sentences = Array.new
+     str = ""
+     for i in 0..ary.size-1
+       next if ary[i].size == 0 || ary[i] =~ /^\s*$/
+       str << ary[i]
+
+       #acceptions for abrev. with a period
+       while str =~ /(Mr|Sr|Mrs|Ms|Dr|Mt|St|Lt|Ave|Rd|Blvd)\.$/
+          if ary[i+1] == nil
+            break
+          else
+            str << ary[i+1]       
+          end
+          i += 1
+          ary[i] = ""
+        end
+
+
+       if (i < ary.size-1)
+         next if ary[i] =~ /[A-Z]\.$/
+         next if ary[i+1] =~ /^\s*[a-z]/
+       end
+       if ary[i+1] =~ /^\"/
+         str << '"'
+         ary[i+1].sub!(/^\"/,"")
+       elsif ary[i+1] =~ /^\)/
+         str << ')'
+         ary[i+1].sub!(/^\)/,"")
+       elsif ary[i+1] =~ /^\.{2,}/
+         str << ''
+         ary[i+1].sub!(/^\.{2,}/,"")
+       end
+       sentences << str.sub(/^\s+/,"")
+       str = ""
+     end
+     sentences
+end
 
 end #end class
