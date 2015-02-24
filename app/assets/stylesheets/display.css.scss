@@ -29,7 +29,7 @@ $preview-break: 339px;
 
 @mixin line-disp{
 	display:none;
-	font-size:300%;
+	font-size:900%;
 	text-align: left;
 	word-break: keep-all;
 	/*padding for safe region of display-- just in case*/
@@ -130,7 +130,10 @@ html{
 			font-weight:bold;
 		}
 	}
-	padding:5% 0% 5% 0%;/*
+	padding:0% 0% 0% 0%;
+	
+	/*
+
 	@media screen and (max-width: $ipad-land-break){
 		font-size:3.3em;
 		padding:5%;
