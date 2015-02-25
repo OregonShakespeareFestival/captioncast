@@ -95,7 +95,16 @@ $(document).ready(function(){
 		//set the element to be scrolled
 		$oplh = $('#line-holder-operator');
 
-		$('#up-button-operator').click(function(){
+		function linePushed(j){
+			$oplh.animate({scrollTop:curLinOp*opInc}, opScrollSpd);
+			console.log('line '+ j + ' pushed');
+		}
+
+		//originally attached, inline, to a click listener on the up and down
+		//button operators. These two functions have been abstracted so that
+		//we can provide the same functionality for the up and down keys
+		//on the keyboard, without needing the code in two seperate areas.
+		function textUp() {
 			if(curLinOp>1){
 
 				curLinOp--;
@@ -115,11 +124,9 @@ $(document).ready(function(){
 
 			}
 			console.log(curLinOp);
+		}
 
-
-		})
-
-		$('#down-button-operator').click(function(){
+		function textDown() {
 			curLinOp++;		
 
 			$.ajax('/operator/pushTextSeq', {
@@ -135,15 +142,33 @@ $(document).ready(function(){
 					alert('Commit failed! Please check your connection.');
 				}),
 			});
-
-
-		})
-		function linePushed(j){
-			$oplh.animate({scrollTop:curLinOp*opInc}, opScrollSpd);
-			console.log('line '+ j + ' pushed');
 		}
 
+		//single up and down buttons
+		$('#up-button-operator').click(function(){
+			textUp();
+		});
+		$('#down-button-operator').click(function(){
+			textDown();
+		});
 
+		//prevent scrolling on keydown when the operator view is focused
+		$(document).keydown(function(e) {
+			e.preventDefault();
+			return false;
+		});
+		//up and down keys
+		$(document).keyup(function(e) {
+			e.preventDefault();
+			switch(e.which) {
+				case 38: //up
+					textUp();
+					break;
+				case 40: //down
+					textDown();
+					break;
+			}
+		});
 
 		//this function will universally commit the targeted line
 		/*
