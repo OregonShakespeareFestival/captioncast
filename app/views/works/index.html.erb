@@ -12,7 +12,7 @@
         <li>
           <% if work.texts.present? %>
             <%= link_to work_details(work), work_texts_path(work_id: work.id) %> 
-            <%= link_to 'DELETE SCRIPT', works_deleteScript_path(id: work.id), data: {confirm:'Are you sure you want to delete this script completly?'}%>
+            <%= link_to 'DELETE SCRIPT', works_deleteScript_path(work_id: work.id)%>
           <% else %>
             <%= work_details(work) %>
           <% end %>

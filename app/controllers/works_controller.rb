@@ -28,8 +28,8 @@ end
 
 #deletes all texts and elements related to a script
 def deleteScript
-  Text.delete_all(:work_id => params[:id])
-  Element.delete_all(:work_id => params[:id])
+  Text.delete_all(:work_id => params[:work_id])
+  Element.delete_all(:work_id => params[:work_id])
   redirect_to:action => "index"
 end
 

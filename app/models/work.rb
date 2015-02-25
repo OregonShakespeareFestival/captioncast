@@ -9,4 +9,11 @@ class Work < ActiveRecord::Base
   def name
     "#{work_name}. #{language}"
   end
+
+  def deleteScript
+  	Text.delete_all(:work_id => params[:work_id])
+  	Element.delete_all(:work_id => params[:work_id])
+  	redirect_to:action => "index"
+  end
+
 end

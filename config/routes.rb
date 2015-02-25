@@ -38,6 +38,7 @@ Rails.application.routes.draw do
   post 'texts/boldLine'
   get 'texts/addLine'
   post 'texts/addLine'
+  get 'works/deleteScript'
   post 'works/deleteScript'
   patch '/works/:id', to: 'works#editorview', as: 'work'
   resources :works, only: [:index, :show, :edit] do
