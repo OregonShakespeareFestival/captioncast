@@ -96,7 +96,6 @@ html{
 		}
 	}
 	@media screen and (max-width: $ipad-land-break){
-		/*font-size:4em;*/
 		padding:.5%;
 	}
 	@media screen and (max-width: $ipad-port-break){
@@ -120,7 +119,8 @@ html{
 .line-display-multi{
 	@include line-disp;
 	display:block;
-	color: $displayTextColBlur;
+	/*color: $displayTextColBlur;*/
+	color: $displayTextCol;
 	span.line-full-display{
 		/*@include vert-center;*/
 		span.line-content-display{
@@ -132,15 +132,13 @@ html{
 	}
 	padding:0% 0% 0% 0%;
 	
-	/*
+	/* --- let's not worry about responsive for the moment
 
 	@media screen and (max-width: $ipad-land-break){
 		font-size:3.3em;
 		padding:5%;
 	}
-*/
 	@media screen and (max-width: $ipad-land-break){
-		/*font-size:4em;*/
 		padding:5% 0% 5% 0%;
 	}
 	@media screen and (max-width: $ipad-port-break){
@@ -157,12 +155,13 @@ html{
 	@media screen and (max-width: $preview-break){
 		font-size:1em;
 	}
+*/
 
 
 }
 
 #buffer-top-display-multi{
-	height:45%;
+	height:100%;
 }
 #buffer-bottom-display-multi{
 	height:40%;

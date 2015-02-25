@@ -25,10 +25,21 @@ class DisplayController < ApplicationController
   end
 
   def current
-    position = Rails.application.config.operator_positions[params[:operator]]
+    #position = Rails.application.config.operator_positions[params[:operator]]
     #retrieve current position
+
+    #test code --will run display in 'zombie' mode
     #@current = 1+rand(18)
-    render json: position
+    #render json: @current
+    
+    #more testing --incremented 'zombie' mode
+    #use this to test long term scrolling in an automated fashion
+    if(defined? $current)
+      $current+=1
+    else
+      $current=1
+    end
+    render json: $current
   end
 
   def select

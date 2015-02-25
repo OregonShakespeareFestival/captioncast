@@ -1,58 +1,34 @@
-//javascript for the display view goes here
+//global variable for overall scale of lines
+//this represents the percentage sizing of the display font
+//may or may not end up using this.
+var scale = 900;
 
-//need a remapping function to predict character limites from scaling
-function remap(v, min, max, nMin, nMax){
-	return nMin + (nMax - nMin) * (v - min) / (max - min);
-}
+
+//javascript for the display view goes here
 
 var refresh = 20;
 var dispFadeSpd = 40;
 var displayScrollSpd = 500;
-var $linesDisp;
 
-//set a general scale number to go by
-//900 represents 900% font size and will use this to parse and divide text elements globally
-var scale = 900;
-//30 characters fill the appropriate width of a 1080P screen at 900%
-//50 characters fill the appropriate width of a 1080P screen at 600%
-//will want to find the next space inside of 30 characters and split lines there
-//var charLim = Math.round(remap(scale, 600, 900, 50, 30));
-var $b, inc, cur;
-//make the page move at any given increment
-//increment with a negative to move down
-function move($el, incr){
-	cur+=incr;
-	$el.animate({scrollTop:cur}, displayScrollSpd);
-}
+
+var $linesDisp, $b, inc, curLin, $blackOutCov;
+
+//this function moves to any given line at any given increment
+//accepts the name of the element to be scrolled, line height increment, and the current line
 $(document).ready(function(){
-
 	if($('#body-index-display').length>0){
+		//set the element to be scrolled
 		$b = $('#body-index-display');
-		cur = $('#body-index-display').scrollTop();
-
-		var current=0;
+		//set the blackout cover
+		$blackOutCov = $('#shade-multi');
 
 		//make sure the lines are sorted by sequence instead of index when read in
+		//this can likely be done more efficiently in Rails ActiveRecord + ActionView
 		lines = _.sortBy(lines,function(q){
 			return q.sequence;
 		});
-/*
-		//split lines by char limit here?
-		var i = lines.length-1;
-		while(i>=0){
-			console.log(lines[i]['content_text']);
-			var c = lines[i]['content_text'];
-			var arr = [];
-			while(c.length>0){
-				arr.push(c.substr(0,charLim));
 
-			}
-			lines[i]['content_arr']=arr;
-
-			i--;
-		}
-		*/
-
+		//this function modified our lines and turns them into DOM objects
 		function buildLinesDisp($container){
 
 
@@ -61,6 +37,7 @@ $(document).ready(function(){
 			var ll = lines.length; 
 			var lc, cc;
 			//figure out if we're going to include character name based on who said last line
+			//--!!!-- this needs to account properly for blanklines
 			while(il<ll){
 				if(lines[il]['visibility']){
 					var cl = lines[il];
@@ -76,9 +53,13 @@ $(document).ready(function(){
 				il++;
 			}
 		}
+
+		//let's just disable single line view for now
+		//clearly there's little demand for it at the moment
+
 		//if we're in single line view...
 		if($('#multi-flag-display').length<=0){
-			$lineCont = $('#line-holder-display');
+		/*	$lineCont = $('#line-holder-display');
 			// template views
 			var tLine = _.template($('#line-template-display').html());
 			//seed sequence #0 with a blank line
@@ -146,24 +127,22 @@ $(document).ready(function(){
 
 		//end of original block
 		//}
+		*/
+
 
 		//if we're using multi-line view
 		}else{
-
+			//hide the initial cover the display view
 			$('#shade-multi').css('display', 'none');
-			//this is specific JS for the multi-line view
-			//console.log('welcome to multi-line mode');
 
-			//redivide lines
-
-
-			// //template views
+			//set the templating function
 			var tLine = _.template($('#line-template-display-multi').html());
 
+			//set the line container
 			$lineCont = $('#line-holder-display-multi');
 
-
-			//seed sequence #0 with a blank line
+			//seed with a blank line first
+			// !!! not sure if we need this anymore
 			$lineCont.append(
 				tLine({
 					"character":'',
@@ -182,59 +161,63 @@ $(document).ready(function(){
 			buildLinesDisp($lineCont);
 
 			//set increment for line up/down
+			//the increment is based on the line height in the CSS, parsed to a float
+			//!!! - this number is not precise enough to facilitate scrolling through an extended script
+			//!!! - We may need a feature later on that "corrects" the inaccuracy
 			inc = parseFloat($('.line-display-multi').css('line-height'));
+			//store the container name in a var
 			$linesDisp = $('.line-display-multi');
 
 
-			//set first interval
+			//heartbeat is a recursive function linked to the success of an ajax poll
 			function heartbeat(){
-				var bottomPad = 65;
 				//ajax goes here next timeout
 				$.ajax('/display/current',
 				  {
-						data: {operator: operator},
-					  dataType: 'json',
-						success:(function(j){
-							console.log('sequence scraped ' + j);
-							if(current!=j){
-								//console.log(j);
-								current=j;
-
-								if(current!==0){
-									$('#shade-multi').fadeOut(dispFadeSpd);
-									var newElem = _.find($linesDisp, function(q){
-											return parseInt($(q).attr('data-sequence'))==j;
-									});
-									$('#body-index-display').animate({scrollTop:$(newElem).position().top-$(window).height()/2+$(newElem).height()+bottomPad}, displayScrollSpd);
-									//remove the focus class
-									$('.focus-multi').removeClass('focus-multi');
-									//console.log('class-removed');
-
-									$(newElem).addClass('focus-multi');
-											//$(this).addClass('shown-display');
-									setTimeout(function(){
-										heartbeat();
-									}, refresh);
-								}else{
-									$('#shade-multi').fadeIn(dispFadeSpd);
-									setTimeout(function(){
-										heartbeat();
-										}, refresh);
-								}
-
-
-									//});
-
-							}else{
-								setTimeout(function(){
-									heartbeat();
-									}, refresh);
-							}
-
-
-						}),
+					data: {operator: operator},
+					dataType: 'json',
+					success:linePulled,
+					error:(function(e){
+						console.log('error: polling failed');
+					}),
 				});
 			}
+			function linePulled(j){
+				console.log('line scraped ' + j);
+				//if(current!=j){
+
+				//if the line has changed
+				if(curLin!=j){
+					curLin=j;
+					//if the line ID is not 0 then proceed
+					if(curLin!==0){
+						$blackOutCov.fadeOut(dispFadeSpd);
+
+						//most importantly
+						//move view to the next line
+						$b.animate({scrollTop:inc*curLin}, displayScrollSpd);
+
+						//set the next heartbeat
+						setTimeout(function(){
+							heartbeat();
+						}, refresh);
+					}else{
+						//if the line id is 0 then black out the screen
+						$blackOutCov.fadeIn(dispFadeSpd);
+						setTimeout(function(){
+							heartbeat();
+							}, refresh);
+					}
+
+				}else{
+					setTimeout(function(){
+						heartbeat();
+						}, refresh);
+				}
+
+
+			}
+			//start the heartbeat for the first time
 			heartbeat();
 
 
@@ -242,6 +225,10 @@ $(document).ready(function(){
 
 
 		}
+
+		//when everything is done processing, we fade off the loading message
+		//everything above this is sync so this goes at the very bottom of our code
+		//!!! would be great if this had an animated throbber
 		$('#shade-loading-display').fadeOut(1000, function(){});
 
 	}
