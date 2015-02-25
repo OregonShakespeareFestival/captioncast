@@ -26,6 +26,12 @@ def new
 	@text = Text.new
 end
 
+#deletes all texts and elements related to a script
+def deleteScript
+  Text.delete_all(:work_id => params[:id])
+  Element.delete_all(:work_id => params[:id])
+  redirect_to:action => "index"
+end
 
 def editorview
 	@text = Text.find_by_id(params[:id])
