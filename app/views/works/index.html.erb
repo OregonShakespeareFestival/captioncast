@@ -11,7 +11,8 @@
       <% @works.each do |work| %>
         <li>
           <% if work.texts.present? %>
-            <%= link_to work_details(work), work_texts_path(work_id: work.id) %>
+            <%= link_to work_details(work), work_texts_path(work_id: work.id) %> 
+            <%= link_to 'DELETE SCRIPT', works_deleteScript_path(id: work.id), data: {confirm:'Are you sure you want to delete this script completly?'}%>
           <% else %>
             <%= work_details(work) %>
           <% end %>
