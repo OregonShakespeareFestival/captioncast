@@ -2,6 +2,7 @@
 	<%= render "shared/js_global_injection" %>
 	<div class="container-fluid" id="main-operator">
 		<div class="row" id="main-row-operator">
+		<!-- remove these controls until we need them again
 			<div class="col-md-3 col-xs-2" id="commit-column-operator">
 				<div id="commit-button-operator" title="Show the selected line on the house display.">
 					<span class="glyphicon glyphicon-play-circle" id="commit-icon-operator">
@@ -12,25 +13,14 @@
 						<div id="prev-spinner-operator">Loading...</div>
 						<iframe src="" frameBorder="0" scrolling="no"></iframe>
 
-						<!--
-						<div id="prev-operator">
-							This is a line
-						</div
-						-->
 					</div>
 					<span id="previcon-operator" class="glyphicon glyphicon-eye-open"></span>
 
 				</div>
-				<!-- "skip to line by num" featue that nobody seemed to notice. Let's hide it and see if anybody says anything
-				<div id="fforward-operator"data-visible="false" title="Skip forward to a specific line">
-					<div class="form-group" >
-						<input type="text" placeholder="Skip to #"/>
-					</div>
-					<span id="fforward-icon-operator" class="glyphicon glyphicon-fast-forward"></span>
-				</div>
-				-->
 			</div>
-			<div class="col-md-9 col-xs-10" id="line-holder-operator">
+		-->
+			<!--<div class="col-md-9 col-xs-10" id="line-holder-operator">-->
+			<div class="col-xs-12" id="line-holder-operator">
 				<div id="up-button-operator" class="wide-button-operator" title="Go back one line.">
 					<span class="glyphicon glyphicon-chevron-up"></span>
 				</div>
@@ -50,9 +40,14 @@
 		<div id="blackout-operator" title="Toggle this to black out the house display.">
 			<span id="blackout-icon-operator" class="glyphicon glyphicon-off blackout-off-operator"></span>
 		</div>
+		<div id="target-overlay-operator">
+
+		</div>
+		<!--
 		<div id="autocommit-operator" title="Toggle this to display and scroll at the same time with the up and down arrows.">
 			<span id="autocommit-icon-operator" class="glyphicon glyphicon-lock autocommit-on-operator"></span>
 		</div>
+		-->
 	</div>
 	<div id="shade-loading-operator">
 		The script is now loading...

@@ -6,8 +6,13 @@ var scale = 900;
 
 //javascript for the display view goes here
 
-var refresh = 20;
-var dispFadeSpd = 40;
+//make the refresh rate as high as can be tolerated 
+var refresh = 50;
+
+//this is how fast the screen blacks out
+var dispFadeSpd = 400;
+
+//this is how quickly the next line scrolls
 var displayScrollSpd = 500;
 
 

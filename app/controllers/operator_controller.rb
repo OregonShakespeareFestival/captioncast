@@ -13,19 +13,26 @@ class OperatorController < ApplicationController
 	end
 
 	def pushTextSeq
-		#pulling operators from the db slows us down a lot
-		operator = Operator.find_by(id: params[:operator])
-		Rails.application.config.operator_positions.merge!({params[:operator] => params[:seq]})
-		operator.position = params[:seq]
-		operator.save
+		#pulling operators from the db likely slows us down a lot
+		# operator = Operator.find_by(id: params[:operator])
+		# Rails.application.config.operator_positions.merge!({params[:operator] => params[:seq]})
+		# operator.position = params[:seq]
+		# operator.save
 
 		#!!! we should try and store the position number in a global array or hash table
 
 
 		# for debug purposes
-		render :json => params[:seq]
+		# render :json => params[:seq]
 		#when we're in production and don't need a reply
 		#render :nothing => true
+
+		#let's get back to basics
+		#this doesn't work with concurrent operators - yet
+		#we can extend to multi-operators by using an array or hash though
+		#just vend out the current line for now
+		$current = params[:seq]
+		render :json => $current
 	end
 
 	def select

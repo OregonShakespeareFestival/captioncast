@@ -131,8 +131,9 @@ $ipad-land-break: 1024px;
 
 .line-operator{
 
+	/*font-size:2.5em;*/
+	/*padding:12px;*/
 	font-size:2.5em;
-	padding:12px;
 	cursor:pointer;
 }
 .line-non-visible-operator{
@@ -151,13 +152,26 @@ $ipad-land-break: 1024px;
 	border: 2px solid $targethl;
 
 }
+
+#target-overlay-operator{
+	opacity:.5;
+	background-color:$targethl;
+	border: 2px solid $targethl;
+	position:fixed;
+	top:50%;
+	width:100%;
+	height:50px;
+	/*transform:translateY(-50%);*/
+}
 .current-operator{
 	color:$currentcol;
 	/*font-weight:bold;*/
 }
 
+
+/*needs to be adjusted with the font size*/
 #buffer-top-operator{
-	height:45%;
+	height:57%;
 } 
 #buffer-bottom-operator{
 	height:40%;
@@ -352,13 +366,18 @@ $ipad-land-break: 1024px;
 .wide-button-operator{
 	background-color:#0E3544;
 	cursor:pointer;
-	width:72%;
+	width:100%;
+	/*width:72%;*/
 	position:fixed;
 	text-align:center;
 	font-size:3em;
 	color:$bgcol1;
 	height:75px;
-	left:25%;
+	user-select:none;
+
+	/*left:25%;*/
+
+	/* -- let's worry about responsive later
 	@media only screen and (max-width:$xs-break){
 		width:80%;
 		left:17%;
@@ -372,6 +391,7 @@ $ipad-land-break: 1024px;
 		height:100%;
 		vertical-align: sub;
 	}
+	*/
 }
 
 
