@@ -96,6 +96,7 @@ $(document).ready(function(){
 		$oplh = $('#line-holder-operator');
 
 		function linePushed(j){
+			$oplh.stop();
 			$oplh.animate({scrollTop:curLinOp*opInc}, opScrollSpd);
 			console.log('line '+ j + ' pushed');
 		}
@@ -166,6 +167,9 @@ $(document).ready(function(){
 					break;
 				case 40: //down
 					textDown();
+					break;
+				case 32: //spacebar
+					toggleBlackout();
 					break;
 			}
 		});
@@ -413,8 +417,8 @@ $(document).ready(function(){
 			$('#blackout-icon-operator').toggleClass('blackout-off-operator');
 			blackout=false;
 		}
-		//blackout the display
-		$('#blackout-operator').click(function(){
+
+		function toggleBlackout() {
 			if(!blackout){
 				$.ajax('/operator/pushTextSeq', {
 					type:'POST',
@@ -434,8 +438,11 @@ $(document).ready(function(){
 					success:dispOn,
 				});
 			}
+		}
 
-
+		//blackout the display
+		$('#blackout-operator').click(function(){
+			toggleBlackout();
 		});
 		/*
 		$('#autocommit-operator').click(function(){

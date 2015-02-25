@@ -200,6 +200,7 @@ $(document).ready(function(){
 
 						//most importantly
 						//move view to the next line
+						$b.stop();
 						$b.animate({scrollTop:inc*curLin}, displayScrollSpd);
 
 						//set the next heartbeat
