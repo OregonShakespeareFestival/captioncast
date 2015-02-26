@@ -85,7 +85,7 @@ $(document).ready(function(){
 		
 		//populating this val artificially
 		//should eventually be dynamically calculated though
-		$($lines).css('width', '530px');
+		$($lines).css('width', '640px'); 
 
 
 

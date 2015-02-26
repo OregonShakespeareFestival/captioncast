@@ -34,9 +34,7 @@ $preview-break: 339px;
 	word-break: keep-all;
 	/*padding for safe region of display-- just in case*/
 	padding:3%;
-	line-height:1.2em;
-
-
+	line-height:2em;
 }
 
 
@@ -229,4 +227,8 @@ html{
 	background-color:$displayBgCol;
 	text-align:center;
 	font-size:4em;
+}
+
+.line-display-multi{
+	width:1910px;
 }

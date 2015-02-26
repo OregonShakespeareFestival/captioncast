@@ -35,9 +35,6 @@ $(document).ready(function(){
 
 		//this function modified our lines and turns them into DOM objects
 		function buildLinesDisp($container){
-
-
-
 			var il = 0;
 			var ll = lines.length; 
 			var lc, cc;
