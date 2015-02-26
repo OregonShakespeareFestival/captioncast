@@ -35,9 +35,6 @@ $(document).ready(function(){
 
 		//this function modified our lines and turns them into DOM objects
 		function buildLinesDisp($container){
-
-
-
 			var il = 0;
 			var ll = lines.length; 
 			var lc, cc;
@@ -200,6 +197,7 @@ $(document).ready(function(){
 
 						//most importantly
 						//move view to the next line
+						$b.stop();
 						$b.animate({scrollTop:inc*curLin}, displayScrollSpd);
 
 						//set the next heartbeat
