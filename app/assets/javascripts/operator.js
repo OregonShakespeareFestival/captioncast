@@ -411,7 +411,7 @@ $(document).ready(function(){
 		function dispOn(d){
 			console.log('display is back');
 			var last = $.grep($('.line-operator'), function(n){
-				return $(n).attr('data-sequence') == currentOp;
+				return $(n).attr('data-sequence') == curLinOp;
 			})[0];
 			$(last).addClass('current-operator');
 			$('#blackout-icon-operator').toggleClass('blackout-off-operator');
@@ -432,7 +432,7 @@ $(document).ready(function(){
 				$.ajax('/operator/pushTextSeq', {
 					type:'POST',
 					data: {
-						seq:currentOp,
+						seq:curLinOp,
 	          operator: operator
 					},
 					success:dispOn,
