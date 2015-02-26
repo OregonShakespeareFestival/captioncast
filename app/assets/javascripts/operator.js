@@ -7,6 +7,7 @@ _.templateSettings = {
 var targeted = 0;
 var $targeted, $current;
 */
+var line_count = 0;
 var blackout = false;
 var autoCommit = true;
 var scrolling = false;
@@ -56,7 +57,8 @@ $(document).ready(function(){
 		$lineCont = $('#line-holder-sub-operator');
 		// var il = lines.length-1;
 		var il = 0;
-		var ll = lines.length; 
+		var ll = lines.length;
+		line_count = lines.length; 
 		var lc, cc;
 		while(il<ll){
 			if(lines[il]['visibility']){
@@ -73,8 +75,7 @@ $(document).ready(function(){
 			il++;
 		}
 
-		//clear the lines object now that it's been used
-		lines=undefined;
+		
 
 		//store the new DOM lines inside of a jquery object
 		$lines = $('.line-operator');
@@ -128,22 +129,28 @@ $(document).ready(function(){
 		}
 
 		function textDown() {
-			curLinOp++;		
+			if(curLinOp < line_count){
+				curLinOp++;		
+				
+				$.ajax('/operator/pushTextSeq', {
+					type:'POST',
+					data: {
+						seq:curLinOp,
+			            operator: operator
+					},
+					success:linePushed,
+					error:(function(){
+						curLinOp--;
+						//put in better error handling here
+						alert('Commit failed! Please check your connection.');
+					}),
+				});
 
-			$.ajax('/operator/pushTextSeq', {
-				type:'POST',
-				data: {
-					seq:curLinOp,
-		            operator: operator
-				},
-				success:linePushed,
-				error:(function(){
-					curLinOp--;
-					//put in better error handling here
-					alert('Commit failed! Please check your connection.');
-				}),
-			});
+			}
 		}
+
+		//clear the lines object now that it's been used
+		lines=undefined;
 
 		//single up and down buttons
 		$('#up-button-operator').click(function(){
