@@ -8,3 +8,4 @@
 public\data\*
 public/data/*
 /scripts
+.DS_Store

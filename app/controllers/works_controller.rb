@@ -11,19 +11,19 @@ class WorksController < ApplicationController
 #called by our views/works/index.html.erb to show all the scripts lines
 #********************************************************************
 def show
-	@text = Text.find_by_id(params[:id])
+  @text = Text.find_by_id(params[:id])
 end
 
 
 
 def edit
-	@lines = Text.where(:work_id => params[:id]).order(:sequence)
+  @lines = Text.where(:work_id => params[:id]).order(:sequence)
 
 end
 
 
 def new
-	@text = Text.new
+  @text = Text.new
 end
 
 #deletes all texts and elements related to a script
@@ -34,19 +34,19 @@ def deleteScript
 end
 
 def editorview
-	@text = Text.find_by_id(params[:id])
+  @text = Text.find_by_id(params[:id])
   @element = Element.where(:work_id => @text.work_id).order(:element_name)
 end
 
 
 def update
-      @text = Text.where(:id => params[:id])
-      if @text.update_attributes(message_params)
-      # Handle a successful update.
-      redirect_to:action => "index"
-      else
-      render 'edit'
-      end
+  @text = Text.where(:id => params[:id])
+  if @text.update_attributes(message_params)
+    # Handle a successful update.
+    redirect_to:action => "index"
+  else
+    render 'edit'
+  end
 end
 
 
