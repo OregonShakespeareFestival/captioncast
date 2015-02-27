@@ -177,29 +177,22 @@ $(document).ready(function(){
 				$.ajax('/display/current', {
 					data: {operator: operator},
 					dataType: 'json',
-					success:linePulled,
+					success:(function(data) {
+						linePulled(data);
+						blackedOut(data);
+					}),
 					error:(function(e){
 						console.log('error: polling failed');
 					})
 				});
-
-				//ajax for checkout for blackout
-				$.ajax('/display/blackout', {
-					data: { operator: operator },
-					dataType: 'json',
-					success: blackedOut,
-					error:(function(e) {
-						console.log('error: polling for blackout failed');
-					})
-				});
 			}
 			function linePulled(j){
-				console.log('line scraped ' + j);
+				console.log('line scraped ' + j.seq);
 				//if(current!=j){
 
 				//if the line has changed
-				if(curLin!=j) {
-					curLin=j;
+				if(curLin!=j.seq) {
+					curLin=j.seq;
 
 					//most importantly
 					//move view to the next line
@@ -214,7 +207,7 @@ $(document).ready(function(){
 			}
 			function blackedOut(b) {
 				console.log('blackout toggled: ' + b);
-				if(b == 1)
+				if(b.blackout == 1)
 					$blackOutCov.fadeIn(dispFadeSpd);
 				else
 					$blackOutCov.fadeOut(dispFadeSpd);
