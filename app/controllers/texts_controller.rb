@@ -1,6 +1,13 @@
 class TextsController < ApplicationController
   def index
+    work = Work.find(params[:work_id])
+    @texts = work.texts
+  end
+
+  def edit
     @work = Work.find(params[:work_id])
+    @text = @work.texts.find(params[:id])
+    @elements = @work.elements.sort_by(&:name)
   end
 
   def show
