@@ -1,34 +1,30 @@
-<body id="body-index-texts" class="body-texts">
+<!--create loop for an array holding elements containing lines-->
 
-
-
-  <!--create loop for an array holding elements containing lines-->
-
-  <h1>Lines available for editing</h1>
-  <%= button_to 'Back to Main', cast_index_path, method: :get %>
-  <!--this is the view for showing all the contacts in the database-->
-  <% if @work.texts.blank? %>
-   <p>No lines to display.</p>
-  <% else %>
-    <!--table showing all lines for the current script-->
-    <table id="works" class='table'>
-    	<tr>
-        <% %w{Sequence Character Type Text Visibility Edit}.each do |header_name| %>
-          <th><%= header_name %></th>
-        <% end %>
-    	</tr>
-
-      <% @work.texts.each do |line| %>
-        <tr>
-          <td><%= line.sequence %></td>
-          <td><%= line.element_name %></td>
-          <td><%= line.element_type %></td>
-          <td><%= line.content_text %></td>
-      		<td><span class='glyphicon glyphicon-eye-open visi <%= "visiTr" if line.visibility %>' data-id="<%= line.id %>"></span></td>
-
-          <!--link to edit specific this line-->
-          <td><%= link_to 'EDIT', works_editorview_path(:id => line.id) %></td>
-        </tr>
+<h1>Lines available for editing</h1>
+<%= button_to 'Back to Main', cast_index_path, method: :get %>
+<!--this is the view for showing all the contacts in the database-->
+<% if @texts.blank? %>
+ <p>No lines to display.</p>
+<% else %>
+  <!--table showing all lines for the current script-->
+  <table id="works" class='table'>
+  	<tr>
+      <% %w{Sequence Character Type Text Visibility Edit}.each do |header_name| %>
+        <th><%= header_name %></th>
       <% end %>
-    </table>
-  <% end %>
+  	</tr>
+
+    <% @texts.each do |line| %>
+      <tr>
+        <td><%= line.sequence %></td>
+        <td><%= line.element_name %></td>
+        <td><%= line.element_type %></td>
+        <td><%= line.content_text %></td>
+    		<td><span class='glyphicon glyphicon-eye-open visi <%= "visiTr" if line.visibility %>' data-id="<%= line.id %>"></span></td>
+
+        <!--link to edit specific this line-->
+        <td><%= link_to 'EDIT', edit_work_text_path(@work, line) %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>

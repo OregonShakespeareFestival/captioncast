@@ -6,7 +6,7 @@ var scale = 900;
 
 //javascript for the display view goes here
 
-//make the refresh rate as high as can be tolerated 
+//make the refresh rate as high as can be tolerated
 var refresh = 50;
 
 //this is how fast the screen blacks out
@@ -21,9 +21,9 @@ var $linesDisp, $b, inc, curLin, $blackOutCov;
 //this function moves to any given line at any given increment
 //accepts the name of the element to be scrolled, line height increment, and the current line
 $(document).ready(function(){
-	if($('#body-index-display').length>0){
+	if($('#body-display-index').length>0){
 		//set the element to be scrolled
-		$b = $('#body-index-display');
+		$b = $('#body-display-index');
 		//set the blackout cover
 		$blackOutCov = $('#shade-multi');
 
@@ -36,7 +36,7 @@ $(document).ready(function(){
 		//this function modified our lines and turns them into DOM objects
 		function buildLinesDisp($container){
 			var il = 0;
-			var ll = lines.length; 
+			var ll = lines.length;
 			var lc, cc;
 			//figure out if we're going to include character name based on who said last line
 			//--!!!-- this needs to account properly for blanklines
@@ -200,13 +200,13 @@ $(document).ready(function(){
 				//if the line has changed
 				if(curLin!=j) {
 					curLin=j;
-			
+
 					//most importantly
 					//move view to the next line
 					$b.stop();
 					$b.animate({scrollTop:inc*curLin}, displayScrollSpd);
 				}
-				
+
 				//set the next heartbeat
 				setTimeout(function(){
 					heartbeat();

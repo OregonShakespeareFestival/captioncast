@@ -1,45 +1,44 @@
 <!--shows the contact information of the @contact person (one person set up in controller-->
 <!--create loop for an array holding elements containing lines-->
-<body id="body-edit-editor" class="body-editor">
-  <h1>Lines available for editing</h1>
+<h1>Lines available for editing</h1>
 
-  <!--this is the view for showing all the contacts in the database-->
-  <% if @lines.blank? %>
-   <p>No contacts to display.</p>
-  <% else %>
+<!--this is the view for showing all the contacts in the database-->
+<% if @lines.blank? %>
+ <p>No contacts to display.</p>
+<% else %>
 
-  <!--table showing all lines for the current script-->
-    <table id="works" class='table'>
-    	<tr>
-    	<th>Sequence</th>
-    	<th>Character</th>
-    	<th>Type</th>
-    	<th>Text</th>
-    	<th>Visibility</th>
-    	<th>Edit</th>
-    	</tr>
-   
-      <% @lines.each do |c| %>
-      <% el = Element.find(c.element_id) %>
+<!--table showing all lines for the current script-->
+  <table id="works" class='table'>
+  	<tr>
+  	<th>Sequence</th>
+  	<th>Character</th>
+  	<th>Type</th>
+  	<th>Text</th>
+  	<th>Visibility</th>
+  	<th>Edit</th>
+  	</tr>
 
-      <tr>
-        <td> <%=c.sequence %> </td>
-        <td> <%=el.element_name %> </td>
-        <td> <%=el.element_type %> </td>
-        <td> <%=c.content_text %> </td>
+    <% @lines.each do |c| %>
+    <% el = Element.find(c.element_id) %>
 
-  <!--show an eye in the visibility column if this line is visible-->
-      <% if c.visibility == true %>
-  			<td><span class='glyphicon glyphicon-eye-open visi visiTr' data-id="<%= c.id %>"></span></td>
-  		<% else %>
-  			<td><span class='glyphicon glyphicon-eye-open visi ' data-id="<%= c.id %>"></span></td>
-  		<% end %>
+    <tr>
+      <td> <%=c.sequence %> </td>
+      <td> <%=el.element_name %> </td>
+      <td> <%=el.element_type %> </td>
+      <td> <%=c.content_text %> </td>
 
-  <!--link to edit specific this line-->
-        <td> <%= link_to 'EDIT', works_editorview_path(:id => c.id) %></td>
-        
-      </tr>
-      <% end %>
-    </table>
-    
-  <% end %>
+<!--show an eye in the visibility column if this line is visible-->
+    <% if c.visibility == true %>
+			<td><span class='glyphicon glyphicon-eye-open visi visiTr' data-id="<%= c.id %>"></span></td>
+		<% else %>
+			<td><span class='glyphicon glyphicon-eye-open visi ' data-id="<%= c.id %>"></span></td>
+		<% end %>
+
+<!--link to edit specific this line-->
+      <td> <%= link_to 'EDIT', works_editorview_path(:id => c.id) %></td>
+
+    </tr>
+    <% end %>
+  </table>
+
+<% end %>

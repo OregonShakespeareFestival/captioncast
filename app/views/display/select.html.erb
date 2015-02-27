@@ -1,18 +1,20 @@
-<body id="body-select-display" class="body-display">
+<div class="container" id="main-upload">
+  <%= content_tag :div, :id=>"main-form-upload", :class=>"row" do %>
+    <%= content_tag :div, :id=>"attributes-upload", :class=>"col-xs-12 col-sm-6 col-md-4" do %>
+      <h1 class="title-upload">Select An Operator</h1>
 
-  <div class="container" id="main-upload">
-    <%= content_tag :div, :id=>"main-form-upload", :class=>"row" do %>
+      <%= form_tag({:action => "select"},
+  :multipart => true, :class => "form-group") do %>
 
-
-        <h1 class="title-upload">Select An Operator</h1>
-        <div id="select_display_op">
-            <% @operators.each do |operator| %>
-            <% work = Work.find_by(id: operator.work_id) %>
-            <% venue = work.venue %>
-            <%= link_to "#{operator.name} | #{work.name}", display_select_path(:selected_operator =>operator.id), method: :post%>
-            </br>
-          <% end %>
-        </div>
-
+        <% @operators.each do |operator| %>
+          <% work = Work.find_by(id: operator.work_id) %>
+          <% venue = work.venue %>
+          <%= radio_button_tag(:selected_operator, operator.id) %>
+          <%= label_tag("#{operator.name} | #{work.name}") %>
+          </br>
+        <% end %>
+        <%= button_tag "Continue", :type=>"submit", :class => "btn btn-primary" %>
+      <% end %>
     <% end %>
-  </div>
+  <% end %>
+</div>
