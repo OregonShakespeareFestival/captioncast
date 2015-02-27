@@ -1,7 +1,7 @@
 /*$(document).ready(function(){
 	//console.log('here are texts to edit');
 
-	if($('#body-index-texts').length>0){
+	if($('#body-texts-index').length>0){
 			//console.log('here are texts to edit x2');
 
 		//changes the database visible value for element
@@ -65,6 +65,6 @@
 	}
 
 
-	
+
 
 });*/
