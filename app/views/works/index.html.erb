@@ -10,11 +10,9 @@
         <li>
           <% if work.texts.present? %>
             <%= link_to work_details(work), work_texts_path(work_id: work.id) %>
-            <%= link_to 'DELETE SCRIPT', works_deleteScript_path(work_id: work.id)%>
           <% else %>
             <%= work_details(work) %>
           <% end %>
-          <!--to contact_controller method 'show' with the parameter work.id (routes must be set for this)-->
         </li>
       <% end %>
     </ul>
