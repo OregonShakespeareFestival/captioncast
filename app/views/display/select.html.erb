@@ -6,18 +6,12 @@
 
         <h1 class="title-upload">Select An Operator</h1>
 
-        <%= form_tag({:action => "select"},
-    :multipart => true, :class => "form-group") do %>
-
-          <% @operators.each do |operator| %>
+            <% @operators.each do |operator| %>
             <% work = Work.find_by(id: operator.work_id) %>
             <% venue = work.venue %>
-            <%= radio_button_tag(:selected_operator, operator.id) %>
-            <%= label_tag("#{operator.name} | #{work.name}") %>
+            <%= link_to "#{operator.name} | #{work.name}", display_select_path(:selected_operator =>operator.id), method: :post%>
             </br>
           <% end %>
-          <%= button_tag "Continue", :type=>"submit", :class => "btn btn-primary" %>
-        <% end %>
       <% end %>
     <% end %>
   </div>
