@@ -8,11 +8,11 @@
   <% else %>
     <!--table showing all lines for the current script-->
     <table id="works" class='table'>
-    	<tr>
+      <tr>
         <% %w{Sequence Character Type Text Visibility Edit}.each do |header_name| %>
           <th><%= header_name %></th>
         <% end %>
-    	</tr>
+      </tr>
 
       <% @work.texts.each do |line| %>
         <tr>
@@ -20,7 +20,7 @@
           <td><%= line.element_name %></td>
           <td><%= line.element_type %></td>
           <td><%= line.content_text %></td>
-      		<td><span class='glyphicon glyphicon-eye-open visi <%= "visiTr" if line.visibility %>' data-id="<%= line.id %>"></span></td>
+          <td><span class='glyphicon glyphicon-eye-open visi <%= "visiTr" if line.visibility %>' data-id="<%= line.id %>"></span></td>
 
           <!--link to edit specific this line-->
           <td><%= link_to 'EDIT', works_editorview_path(:id => line.id) %></td>

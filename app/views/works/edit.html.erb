@@ -9,14 +9,14 @@
 
   <!--table showing all lines for the current script-->
     <table id="works" class='table'>
-    	<tr>
-    	<th>Sequence</th>
-    	<th>Character</th>
-    	<th>Type</th>
-    	<th>Text</th>
-    	<th>Visibility</th>
-    	<th>Edit</th>
-    	</tr>
+      <tr>
+      <th>Sequence</th>
+      <th>Character</th>
+      <th>Type</th>
+      <th>Text</th>
+      <th>Visibility</th>
+      <th>Edit</th>
+      </tr>
 
       <% @lines.each do |c| %>
       <% el = Element.find(c.element_id) %>
@@ -29,10 +29,10 @@
 
   <!--show an eye in the visibility column if this line is visible-->
       <% if c.visibility == true %>
-  			<td><span class='glyphicon glyphicon-eye-open visi visiTr' data-id="<%= c.id %>"></span></td>
-  		<% else %>
-  			<td><span class='glyphicon glyphicon-eye-open visi ' data-id="<%= c.id %>"></span></td>
-  		<% end %>
+        <td><span class='glyphicon glyphicon-eye-open visi visiTr' data-id="<%= c.id %>"></span></td>
+      <% else %>
+        <td><span class='glyphicon glyphicon-eye-open visi ' data-id="<%= c.id %>"></span></td>
+      <% end %>
 
   <!--link to edit specific this line-->
         <td> <%= link_to 'EDIT', works_editorview_path(:id => c.id) %></td>

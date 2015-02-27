@@ -16,221 +16,221 @@ $preview-break: 339px;
 
 @mixin fullheight{
 
-	height:100%;
+  height:100%;
 }
 
 @mixin vert-center{
-	position:relative;
-	display:block;
+  position:relative;
+  display:block;
 
-	top:50%;
-	transform: translateY(-50%);
+  top:50%;
+  transform: translateY(-50%);
 }
 
 @mixin line-disp{
-	display:none;
-	font-size:900%;
-	text-align: left;
-	word-break: keep-all;
-	/*padding for safe region of display-- just in case*/
-	padding:3%;
-	line-height:2em;
+  display:none;
+  font-size:900%;
+  text-align: left;
+  word-break: keep-all;
+  /*padding for safe region of display-- just in case*/
+  padding:3%;
+  line-height:2em;
 }
 
 
 .body-display{
-	background-color: $displayBgCol;
-	color:$displayTextCol;
+  background-color: $displayBgCol;
+  color:$displayTextCol;
 
 }
 
 /*watch out for this... might have to alter this*/
 html{
-	@include fullheight;
+  @include fullheight;
 
 }
 
 #body-display-index {
-	@include fullheight;
+  @include fullheight;
 }
 
 #line-holder-display{
-	@include fullheight;
+  @include fullheight;
 }
 
 #line-holder-display-multi{
-	@include fullheight;
-	/*overflow:auto;*/
+  @include fullheight;
+  /*overflow:auto;*/
 }
 
 #main-display{
 
-	@include fullheight;
-	/*added for multiline. needs testing*/
-	/*overflow:hidden;*/
+  @include fullheight;
+  /*added for multiline. needs testing*/
+  /*overflow:hidden;*/
 
 }
 #row-display{
 
-	@include fullheight;
+  @include fullheight;
 
 }
 
 
 .line-display{
-	@include line-disp;
-	@include fullheight;
+  @include line-disp;
+  @include fullheight;
 
-	span.line-full-display{
-		@include vert-center;
-		span.line-content-display{
+  span.line-full-display{
+    @include vert-center;
+    span.line-content-display{
 
-		}
-		span.line-char-display{
-			font-weight:bold;
-		}
-	}
-	@media screen and (max-width: $ipad-land-break){
-		padding:.5%;
-	}
-	@media screen and (max-width: $ipad-port-break){
-		font-size:3.3em;
+    }
+    span.line-char-display{
+      font-weight:bold;
+    }
+  }
+  @media screen and (max-width: $ipad-land-break){
+    padding:.5%;
+  }
+  @media screen and (max-width: $ipad-port-break){
+    font-size:3.3em;
 
-	}
-	@media screen and (max-width: $iphone-land-break){
-		font-size:1.3em;
+  }
+  @media screen and (max-width: $iphone-land-break){
+    font-size:1.3em;
 
-	}
-	@media screen and (max-width: $iphone-port-break){
-		font-size:2em;
-	}
-	@media screen and (max-width: $preview-break){
-		font-size:1em;
-	}
+  }
+  @media screen and (max-width: $iphone-port-break){
+    font-size:2em;
+  }
+  @media screen and (max-width: $preview-break){
+    font-size:1em;
+  }
 
 
 }
 
 .line-display-multi{
-	@include line-disp;
-	display:block;
-	/*color: $displayTextColBlur;*/
-	color: $displayTextCol;
-	span.line-full-display{
-		/*@include vert-center;*/
-		span.line-content-display{
+  @include line-disp;
+  display:block;
+  /*color: $displayTextColBlur;*/
+  color: $displayTextCol;
+  span.line-full-display{
+    /*@include vert-center;*/
+    span.line-content-display{
 
-		}
-		span.line-char-display{
-			font-weight:bold;
-		}
-	}
-	padding:0% 0% 0% 0%;
+    }
+    span.line-char-display{
+      font-weight:bold;
+    }
+  }
+  padding:0% 0% 0% 0%;
 
-	/* --- let's not worry about responsive for the moment
+  /* --- let's not worry about responsive for the moment
 
-	@media screen and (max-width: $ipad-land-break){
-		font-size:3.3em;
-		padding:5%;
-	}
-	@media screen and (max-width: $ipad-land-break){
-		padding:5% 0% 5% 0%;
-	}
-	@media screen and (max-width: $ipad-port-break){
-		font-size:3.3em;
+  @media screen and (max-width: $ipad-land-break){
+    font-size:3.3em;
+    padding:5%;
+  }
+  @media screen and (max-width: $ipad-land-break){
+    padding:5% 0% 5% 0%;
+  }
+  @media screen and (max-width: $ipad-port-break){
+    font-size:3.3em;
 
-	}
-	@media screen and (max-width: $iphone-land-break){
-		font-size:1.3em;
+  }
+  @media screen and (max-width: $iphone-land-break){
+    font-size:1.3em;
 
-	}
-	@media screen and (max-width: $iphone-port-break){
-		font-size:2em;
-	}
-	@media screen and (max-width: $preview-break){
-		font-size:1em;
-	}
+  }
+  @media screen and (max-width: $iphone-port-break){
+    font-size:2em;
+  }
+  @media screen and (max-width: $preview-break){
+    font-size:1em;
+  }
 */
 
 
 }
 
 #buffer-top-display-multi{
-	height:100%;
+  height:100%;
 }
 #buffer-bottom-display-multi{
-	height:40%;
+  height:40%;
 }
 
 
 .shown-display{
-	display:block;
+  display:block;
 }
 
 .focus-multi{
-	color:$displayTextCol;
+  color:$displayTextCol;
 }
 
 
 #shade-multi{
-	position:fixed;
-	background:$displayBgCol;
-	width:100%;
-	height:100%;
-	display:block;
-	top:0;
+  position:fixed;
+  background:$displayBgCol;
+  width:100%;
+  height:100%;
+  display:block;
+  top:0;
 }
 
 
 #row-display-multi{
-	height:100%;
+  height:100%;
 }
 .grad-shades-display-multi{
-	position:fixed;
-	height:40%;
-	width:100%;
+  position:fixed;
+  height:40%;
+  width:100%;
 }
 
 #gradient-top-display-multi{
-	top:0;
-	background: -moz-linear-gradient(top,  rgba($displayBgCol,1) 0%, rgba($displayBgCol,0.99) 15%, rgba($displayBgCol,0) 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba($displayBgCol,1)), color-stop(15%,rgba($displayBgCol,0.99)), color-stop(100%,rgba($displayBgCol,0))); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  rgba($displayBgCol,1) 0%,rgba($displayBgCol,0.99) 15%,rgba($displayBgCol,0) 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  rgba($displayBgCol,1) 0%,rgba($displayBgCol,0.99) 15%,rgba($displayBgCol,0) 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  rgba($displayBgCol,1) 0%,rgba($displayBgCol,0.99) 15%,rgba($displayBgCol,0) 100%); /* IE10+ */
-	background: linear-gradient(to bottom,  rgba($displayBgCol,1) 0%,rgba($displayBgCol,0.99) 15%,rgba($displayBgCol,0) 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
+  top:0;
+  background: -moz-linear-gradient(top,  rgba($displayBgCol,1) 0%, rgba($displayBgCol,0.99) 15%, rgba($displayBgCol,0) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba($displayBgCol,1)), color-stop(15%,rgba($displayBgCol,0.99)), color-stop(100%,rgba($displayBgCol,0))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  rgba($displayBgCol,1) 0%,rgba($displayBgCol,0.99) 15%,rgba($displayBgCol,0) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  rgba($displayBgCol,1) 0%,rgba($displayBgCol,0.99) 15%,rgba($displayBgCol,0) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  rgba($displayBgCol,1) 0%,rgba($displayBgCol,0.99) 15%,rgba($displayBgCol,0) 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  rgba($displayBgCol,1) 0%,rgba($displayBgCol,0.99) 15%,rgba($displayBgCol,0) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
 
 }
 
 #gradient-bottom-display-multi{
-	top:67%;
-	background: -moz-linear-gradient(top,  rgba($displayBgCol,0) 0%, rgba($displayBgCol,1) 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba($displayBgCol,0)), color-stop(100%,rgba($displayBgCol,1))); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  rgba($displayBgCol,0) 0%,rgba($displayBgCol,1) 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  rgba($displayBgCol,0) 0%,rgba($displayBgCol,1) 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  rgba($displayBgCol,0) 0%,rgba($displayBgCol,1) 100%); /* IE10+ */
-	background: linear-gradient(to bottom,  rgba($displayBgCol,0) 0%,rgba($displayBgCol,1) 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
+  top:67%;
+  background: -moz-linear-gradient(top,  rgba($displayBgCol,0) 0%, rgba($displayBgCol,1) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba($displayBgCol,0)), color-stop(100%,rgba($displayBgCol,1))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  rgba($displayBgCol,0) 0%,rgba($displayBgCol,1) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  rgba($displayBgCol,0) 0%,rgba($displayBgCol,1) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  rgba($displayBgCol,0) 0%,rgba($displayBgCol,1) 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  rgba($displayBgCol,0) 0%,rgba($displayBgCol,1) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
 }
 
 #shade-loading-display{
-	z-index:9999;
-	position:fixed;
-	left:0;
-	top:0;
-	width:100%;
-	height:100%;
-	background-color:$displayBgCol;
-	text-align:center;
-	font-size:4em;
+  z-index:9999;
+  position:fixed;
+  left:0;
+  top:0;
+  width:100%;
+  height:100%;
+  background-color:$displayBgCol;
+  text-align:center;
+  font-size:4em;
 }
 
 .line-display-multi{
-	width:1910px;
+  width:1910px;
 }
 
 #select_display_op{
-	width:100%;
-	font-size:2em;
+  width:100%;
+  font-size:2em;
 }
