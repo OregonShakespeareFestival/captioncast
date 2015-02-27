@@ -1,6 +1,5 @@
 <!--shows the contact information of the @contact person (one person set up in controller-->
 <!--create loop for an array holding elements containing lines-->
-<body id="body-edit-editor" class="body-editor">
   <h1>Lines available for editing</h1>
 
   <!--this is the view for showing all the contacts in the database-->
@@ -18,7 +17,7 @@
     	<th>Visibility</th>
     	<th>Edit</th>
     	</tr>
-   
+
       <% @lines.each do |c| %>
       <% el = Element.find(c.element_id) %>
 
@@ -37,9 +36,9 @@
 
   <!--link to edit specific this line-->
         <td> <%= link_to 'EDIT', works_editorview_path(:id => c.id) %></td>
-        
+
       </tr>
       <% end %>
     </table>
-    
+
   <% end %>

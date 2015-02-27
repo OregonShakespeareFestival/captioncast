@@ -50,12 +50,9 @@ html{
 
 }
 
-
-#body-index-display{
+#body-display-index {
 	@include fullheight;
 }
-
-
 
 #line-holder-display{
 	@include fullheight;
@@ -129,7 +126,7 @@ html{
 		}
 	}
 	padding:0% 0% 0% 0%;
-	
+
 	/* --- let's not worry about responsive for the moment
 
 	@media screen and (max-width: $ipad-land-break){

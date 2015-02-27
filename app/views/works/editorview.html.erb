@@ -1,5 +1,3 @@
-<body id="body-editorview-works" class="body-works">
-
 	<h1>View/Edit Script element</h1>
 	<p id="notice"><%= notice %></p>
 
@@ -25,7 +23,7 @@
 			<%= link_to 'Add Blank Line After', texts_addBlank_path(:id => @text.id) %> **<br>
 			<%= link_to 'Delete This Line', texts_removeLine_path(:id => @text.id) %> **<br>
 			<%= link_to 'Split This Line', texts_splitLine_path(:id => @text.id) %> **<br>
-			
+
 	</div>
 
 		<%= f.text_area :content_text, class: 'form-control', cols: 30, rows: 5 %>
