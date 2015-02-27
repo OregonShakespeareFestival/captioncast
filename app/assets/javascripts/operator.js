@@ -7,11 +7,9 @@ _.templateSettings = {
 var targeted = 0;
 var $targeted, $current;
 */
-<<<<<<< HEAD
-=======
+
 var line_count = 0;
 var blackout = false;
->>>>>>> f5918391f8a0eb0378690fa369cf13c4f3d7b554
 var autoCommit = true;
 var scrolling = false;
 var opScrollSpd= 300;
