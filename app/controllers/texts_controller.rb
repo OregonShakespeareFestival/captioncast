@@ -4,6 +4,12 @@ class TextsController < ApplicationController
     @texts = work.texts
   end
 
+  def edit
+    @work = Work.find(params[:work_id])
+    @text = @work.texts.find(params[:id])
+    @elements = @work.elements.sort_by(&:name)
+  end
+
   def show
   end
 

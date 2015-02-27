@@ -33,12 +33,6 @@ def deleteScript
   redirect_to:action => "index"
 end
 
-def editorview
-  @text = Text.find_by_id(params[:id])
-  @element = Element.where(:work_id => @text.work_id).order(:element_name)
-end
-
-
 def update
   @text = Text.where(:id => params[:id])
   if @text.update_attributes(message_params)

@@ -1,6 +1,7 @@
 class Work < ActiveRecord::Base
   belongs_to :venue
   has_many :texts, -> { order "sequence" }
+  has_many :elements
 
   validates_presence_of :work_name
   validates_presence_of :venue_id

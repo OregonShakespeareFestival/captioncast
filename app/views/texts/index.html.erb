@@ -23,7 +23,7 @@
           <td><span class='glyphicon glyphicon-eye-open visi <%= "visiTr" if line.visibility %>' data-id="<%= line.id %>"></span></td>
 
           <!--link to edit specific this line-->
-          <td><%= link_to 'EDIT', works_editorview_path(:id => line.id) %></td>
+          <td><%= link_to 'EDIT', edit_work_text_path(work_id: line.work_id, id: line.id) %></td>
         </tr>
       <% end %>
     </table>

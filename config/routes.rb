@@ -27,8 +27,6 @@ Rails.application.routes.draw do
   post 'operator/blackout'
 
   #for the editor view
-  post 'works/editorview'
-  get 'works/editorview'
   get 'texts/addBlank'
   post 'texts/addBlank'
   post 'texts/toggleVis'
@@ -42,9 +40,8 @@ Rails.application.routes.draw do
   post 'texts/addLine'
   get 'works/deleteScript'
   post 'works/deleteScript'
-  patch '/works/:id', to: 'works#editorview', as: 'work'
   resources :works, only: [:index, :show, :edit] do
-    resources :texts, only: [:index]
+    resources :texts, only: [:index, :edit]
   end
   resources :texts
   #resources :works, only: [:index]
