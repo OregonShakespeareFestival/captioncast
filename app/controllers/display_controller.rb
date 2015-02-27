@@ -57,8 +57,14 @@ class DisplayController < ApplicationController
     if(!defined? $current)
       $current = 0
     end
+    #get global variable for blackout
+    if(!defined? $blackout)
+      $blackout = 1
+    end
+
+    hash = {:seq => $current, :blackout => $blackout}
     
-    render json: $current
+    render json: hash
   end
 
   def select
