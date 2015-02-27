@@ -21,53 +21,53 @@ $gen-btn-pad: 10px;
 
 
 .body-cast{
-	background-color:$bgcol4;
-	color:$basetextcol;
+  background-color:$bgcol4;
+  color:$basetextcol;
 }
 #title-cast{
-	width:100%;
-	text-align:center;
-	font-size:3em;
-	display:inline-block;
-	padding:30px;
+  width:100%;
+  text-align:center;
+  font-size:3em;
+  display:inline-block;
+  padding:30px;
 }
 
 .button-cast{
-	height:250px;
+  height:250px;
 
-	div{
-		width:95%;
-		height:95%;
-		cursor:pointer;
-		background-color:$bgcol2;
-		font-size:6em;
-		color:$bgcol3;
-	}
-	.glyphicon{
-		transform:translateY(50%);
+  div{
+    width:95%;
+    height:95%;
+    cursor:pointer;
+    background-color:$bgcol2;
+    font-size:6em;
+    color:$bgcol3;
+  }
+  .glyphicon{
+    transform:translateY(50%);
 
-	}
-	span{
-		padding:8px;
-		width:100%;
-		text-align:center;
+  }
+  span{
+    padding:8px;
+    width:100%;
+    text-align:center;
 
-	}
-	.button-title-cast{
-		font-size:.5em;
-		display:block;
-		padding-top:40px;
-	}
-	&:active{
-		span{
-			text-decoration: none;
-			color:$currentcol;
-			font-weight:bold;
-		}
-	}
-	a:hover, a:visited, a:focus{
-		text-decoration:none;
-	}
+  }
+  .button-title-cast{
+    font-size:.5em;
+    display:block;
+    padding-top:40px;
+  }
+  &:active{
+    span{
+      text-decoration: none;
+      color:$currentcol;
+      font-weight:bold;
+    }
+  }
+  a:hover, a:visited, a:focus{
+    text-decoration:none;
+  }
 
 
 }

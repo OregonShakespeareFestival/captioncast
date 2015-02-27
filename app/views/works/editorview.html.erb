@@ -1,45 +1,43 @@
-<body id="body-editorview-works" class="body-works">
+  <h1>View/Edit Script element</h1>
+  <p id="notice"><%= notice %></p>
 
-	<h1>View/Edit Script element</h1>
-	<p id="notice"><%= notice %></p>
-
-	<!--**************************************************
-		shows the selected line of the script and its details
-		which are made available for editing
-	*******************************************************-->
-	<% provide(:title, "Edit contact") %>
+  <!--**************************************************
+    shows the selected line of the script and its details
+    which are made available for editing
+  *******************************************************-->
+  <% provide(:title, "Edit contact") %>
 <div>
-		<!--form for editing the content/settings of the line-->
-		<%= form_for(@text) do |f| %>
+    <!--form for editing the content/settings of the line-->
+    <%= form_for(@text) do |f| %>
 
-	<% @el = Element.find(@text.element_id) %>
-	<div id="element_attr">
-			<p><%="Character: " + @el.element_name%></p>
-			<p><%="Element: " + @el.element_type%></p>
-			<p><%="Sequence #: " + @text.sequence.to_s%></p>
-			Visibility: <p class='glyphicon glyphicon-eye-open visi <%= "visiTr" if @text.visibility %>' data-id="<%= @text.id %>"></p><br>
+  <% @el = Element.find(@text.element_id) %>
+  <div id="element_attr">
+      <p><%="Character: " + @el.element_name%></p>
+      <p><%="Element: " + @el.element_type%></p>
+      <p><%="Sequence #: " + @text.sequence.to_s%></p>
+      Visibility: <p class='glyphicon glyphicon-eye-open visi <%= "visiTr" if @text.visibility %>' data-id="<%= @text.id %>"></p><br>
 
 
-			<span id="boldIt">Uppercase Selection</span><br>
-			<span id="supBlank">Insert Blank Space</span><br>
-			<%= link_to 'Add Blank Line After', texts_addBlank_path(:id => @text.id) %> **<br>
-			<%= link_to 'Delete This Line', texts_removeLine_path(:id => @text.id) %> **<br>
-			<%= link_to 'Split This Line', texts_splitLine_path(:id => @text.id) %> **<br>
-			
-	</div>
+      <span id="boldIt">Uppercase Selection</span><br>
+      <span id="supBlank">Insert Blank Space</span><br>
+      <%= link_to 'Add Blank Line After', texts_addBlank_path(:id => @text.id) %> **<br>
+      <%= link_to 'Delete This Line', texts_removeLine_path(:id => @text.id) %> **<br>
+      <%= link_to 'Split This Line', texts_splitLine_path(:id => @text.id) %> **<br>
 
-		<%= f.text_area :content_text, class: 'form-control', cols: 30, rows: 5 %>
+  </div>
 
-	 <%= f.submit "Update" %>
-	<%= link_to 'Back to all lines', work_texts_path(work_id: @text.work) %>
+    <%= f.text_area :content_text, class: 'form-control', cols: 30, rows: 5 %>
+
+   <%= f.submit "Update" %>
+  <%= link_to 'Back to all lines', work_texts_path(work_id: @text.work) %>
 
 </div>
 
 <% end %>
 
 <div id="insert_line_form">
-	<h5>INSERT NEW LINE<br>
-		Line below will be inserted into the sequence following the line above</h5>
+  <h5>INSERT NEW LINE<br>
+    Line below will be inserted into the sequence following the line above</h5>
 <!--dropdown with possible elemnts-->
 <%= form_for :new_line, :url => texts_addLine_path(:id => @text.id) do |a| %>
 <%= label_tag 'character_name_dropdown', 'Select Character'%>
