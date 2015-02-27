@@ -18,7 +18,6 @@ end
 
 def edit
   @lines = Text.where(:work_id => params[:id]).order(:sequence)
-
 end
 
 
@@ -26,11 +25,13 @@ def new
   @text = Text.new
 end
 
+#**********************************************************
 #deletes all texts and elements related to a script
+#***********************************************************
 def deleteScript
   Text.delete_all(:work_id => params[:work_id])
   Element.delete_all(:work_id => params[:work_id])
-  redirect_to:action => "index"
+  redirect_to :controller => 'upload', :action => 'index'
 end
 
 def update
