@@ -12,6 +12,17 @@ class OperatorController < ApplicationController
 		# add the default position of 0 for an operator
 	end
 
+	def blackout
+		#global variable is used for blacking out the display
+		if $blackout == 1
+		  $blackout = 0
+		else
+		  $blackout = 1
+		end
+
+		render :json => $blackout
+	end
+
 	def pushTextSeq
 		#pulling operators from the db likely slows us down a lot
 		# operator = Operator.find_by(id: params[:operator])
