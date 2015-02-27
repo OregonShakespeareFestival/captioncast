@@ -7,7 +7,11 @@ RSpec.describe TextsController, type: :controller do
     it "returns http success" do
       get :index, work_id: work.id
       expect(response).to have_http_status(:success)
-      expect(assigns(:work)).to eq work
+    end
+
+    it "assigns variables for the view" do
+      get :index, work_id: work.id
+      expect(assigns(:texts)).not_to be_nil
     end
   end
 end

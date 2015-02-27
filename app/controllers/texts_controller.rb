@@ -1,6 +1,7 @@
 class TextsController < ApplicationController
   def index
-    @work = Work.find(params[:work_id])
+    work = Work.find(params[:work_id])
+    @texts = work.texts
   end
 
   def show
