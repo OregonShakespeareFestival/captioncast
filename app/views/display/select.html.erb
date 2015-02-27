@@ -2,16 +2,17 @@
 
   <div class="container" id="main-upload">
     <%= content_tag :div, :id=>"main-form-upload", :class=>"row" do %>
-      <%= content_tag :div, :id=>"attributes-upload", :class=>"col-xs-12 col-sm-6 col-md-4" do %>
+
 
         <h1 class="title-upload">Select An Operator</h1>
-
+        <div id="select_display_op">
             <% @operators.each do |operator| %>
             <% work = Work.find_by(id: operator.work_id) %>
             <% venue = work.venue %>
             <%= link_to "#{operator.name} | #{work.name}", display_select_path(:selected_operator =>operator.id), method: :post%>
             </br>
           <% end %>
-      <% end %>
+        </div>
+
     <% end %>
   </div>
