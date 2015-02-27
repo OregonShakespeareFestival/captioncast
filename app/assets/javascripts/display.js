@@ -206,7 +206,7 @@ $(document).ready(function(){
 				}, refresh);
 			}
 			function blackedOut(b) {
-				console.log('blackout toggled: ' + b);
+				console.log('blackout toggled: ' + b.blackout);
 				if(b.blackout == 1)
 					$blackOutCov.fadeIn(dispFadeSpd);
 				else

@@ -24,15 +24,6 @@ class DisplayController < ApplicationController
    # @poketext = "string"
   end
 
-  def blackout
-    #get global variable for blackout
-    if(!defined? $blackout)
-      $blackout = 1
-    end
-    
-    render json: $blackout
-  end
-
   def current
     #position = Rails.application.config.operator_positions[params[:operator]]
     #retrieve current position
