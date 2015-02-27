@@ -3,6 +3,7 @@ class UploadController < ApplicationController
   def index
     @venues = Venue.all
     @works = Work.all
+    @delete_work = Work.order(:work_name, :language)
     render :file => 'app/views/upload/uploadfile.html.erb'
   end
 
