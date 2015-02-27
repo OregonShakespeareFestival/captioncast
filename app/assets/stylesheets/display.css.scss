@@ -41,7 +41,7 @@ $preview-break: 339px;
 .body-display{
   background-color: $displayBgCol;
   color:$displayTextCol;
-
+  overflow:hidden;
 }
 
 /*watch out for this... might have to alter this*/
@@ -71,9 +71,7 @@ html{
 
 }
 #row-display{
-
   @include fullheight;
-
 }
 
 
@@ -185,6 +183,7 @@ html{
 #row-display-multi{
   height:100%;
 }
+
 .grad-shades-display-multi{
   position:fixed;
   height:40%;
