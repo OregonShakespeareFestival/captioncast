@@ -24,6 +24,15 @@ class DisplayController < ApplicationController
    # @poketext = "string"
   end
 
+  def blackout
+    #get global variable for blackout
+    if(!defined? $blackout)
+      $blackout = 1
+    end
+    
+    render json: $blackout
+  end
+
   def current
     #position = Rails.application.config.operator_positions[params[:operator]]
     #retrieve current position
@@ -46,7 +55,7 @@ class DisplayController < ApplicationController
     #we can extend to multi-operators by using an array or hash though
     #if current happens to be undefined let's just make it 0
     if(!defined? $current)
-      $current=0
+      $current = 0
     end
     
     render json: $current

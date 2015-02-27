@@ -7,8 +7,11 @@ _.templateSettings = {
 var targeted = 0;
 var $targeted, $current;
 */
+<<<<<<< HEAD
+=======
 var line_count = 0;
 var blackout = false;
+>>>>>>> f5918391f8a0eb0378690fa369cf13c4f3d7b554
 var autoCommit = true;
 var scrolling = false;
 var opScrollSpd= 300;
@@ -25,16 +28,8 @@ $(document).ready(function(){
 	//if this is operator view
 	if($('#main-operator').length>0){
 		curLinOp = 0;
-		//whenever the operator is restarted black out the screen -- can abstract this
-		$.ajax('/operator/pushTextSeq', {
-				type:'POST',
-				data: {
-					seq:0,
-			        operator: operator
-				},
-			success:dispOff,
-		});
-				$('#main-operator').height($(window).innerHeight()+'px');
+		
+		$('#main-operator').height($(window).innerHeight()+'px');
 
 		//set the middlepoint
 		var mid = Math.round($(window).innerHeight()/2);
@@ -409,42 +404,19 @@ $(document).ready(function(){
 				});
 			});
 		*/
-		function dispOff(d){
-			console.log('display cleared');
-			$('.current-operator').removeClass('current-operator');
+		function toggleDisp() {
 			$('#blackout-icon-operator').toggleClass('blackout-off-operator');
-			blackout=true;
-		}
-		function dispOn(d){
-			console.log('display is back');
-			var last = $.grep($('.line-operator'), function(n){
-				return $(n).attr('data-sequence') == currentOp;
-			})[0];
-			$(last).addClass('current-operator');
-			$('#blackout-icon-operator').toggleClass('blackout-off-operator');
-			blackout=false;
 		}
 
 		function toggleBlackout() {
-			if(!blackout){
-				$.ajax('/operator/pushTextSeq', {
-					type:'POST',
-					data: {
-						seq:0,
-	          operator: operator
-					},
-					success:dispOff,
-				});
-			}else{
-				$.ajax('/operator/pushTextSeq', {
-					type:'POST',
-					data: {
-						seq:currentOp,
-	          operator: operator
-					},
-					success:dispOn,
-				});
-			}
+			//send ajax request to controller
+			$.ajax('/operator/blackout', {
+				type:'POST',
+				data: {
+          			operator: operator
+				},
+				success:toggleDisp, //fix this
+			});
 		}
 
 		//blackout the display

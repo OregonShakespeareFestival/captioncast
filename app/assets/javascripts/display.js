@@ -135,7 +135,7 @@ $(document).ready(function(){
 		//if we're using multi-line view
 		}else{
 			//hide the initial cover the display view
-			$('#shade-multi').css('display', 'none');
+			//$('#shade-multi').css('display', 'none');
 
 			//set the templating function
 			var tLine = _.template($('#line-template-display-multi').html());
@@ -174,14 +174,23 @@ $(document).ready(function(){
 			//heartbeat is a recursive function linked to the success of an ajax poll
 			function heartbeat(){
 				//ajax goes here next timeout
-				$.ajax('/display/current',
-				  {
+				$.ajax('/display/current', {
 					data: {operator: operator},
 					dataType: 'json',
 					success:linePulled,
 					error:(function(e){
 						console.log('error: polling failed');
-					}),
+					})
+				});
+
+				//ajax for checkout for blackout
+				$.ajax('/display/blackout', {
+					data: { operator: operator },
+					dataType: 'json',
+					success: blackedOut,
+					error:(function(e) {
+						console.log('error: polling for blackout failed');
+					})
 				});
 			}
 			function linePulled(j){
@@ -189,36 +198,26 @@ $(document).ready(function(){
 				//if(current!=j){
 
 				//if the line has changed
-				if(curLin!=j){
+				if(curLin!=j) {
 					curLin=j;
-					//if the line ID is not 0 then proceed
-					if(curLin!==0){
-						$blackOutCov.fadeOut(dispFadeSpd);
-
-						//most importantly
-						//move view to the next line
-						$b.stop();
-						$b.animate({scrollTop:inc*curLin}, displayScrollSpd);
-
-						//set the next heartbeat
-						setTimeout(function(){
-							heartbeat();
-						}, refresh);
-					}else{
-						//if the line id is 0 then black out the screen
-						$blackOutCov.fadeIn(dispFadeSpd);
-						setTimeout(function(){
-							heartbeat();
-							}, refresh);
-					}
-
-				}else{
-					setTimeout(function(){
-						heartbeat();
-						}, refresh);
+			
+					//most importantly
+					//move view to the next line
+					$b.stop();
+					$b.animate({scrollTop:inc*curLin}, displayScrollSpd);
 				}
-
-
+				
+				//set the next heartbeat
+				setTimeout(function(){
+					heartbeat();
+				}, refresh);
+			}
+			function blackedOut(b) {
+				console.log('blackout toggled: ' + b);
+				if(b == 1)
+					$blackOutCov.fadeIn(dispFadeSpd);
+				else
+					$blackOutCov.fadeOut(dispFadeSpd);
 			}
 			//start the heartbeat for the first time
 			heartbeat();
