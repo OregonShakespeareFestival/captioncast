@@ -29,6 +29,19 @@ $(document).ready(function(){
 		
 		$('#main-operator').height($(window).innerHeight()+'px');
 
+		//reset global line sequence
+		$.ajax("/operator/pushTextSeq", {
+			type:"POST",
+			data: {
+				seq: 0,
+				operator: operator
+			},
+			success:linePushed,
+			error:(function() {
+				alert("initial position placement failed! Please check your connection");
+			})
+		})
+
 		//set the middlepoint
 		var mid = Math.round($(window).innerHeight()/2);
 
