@@ -1,6 +1,8 @@
 require 'nokogiri'
+require 'treat'
 
 class DataFile < ActiveRecord::Base
+  include Treat::Core::DSL
 
   @default_text_color = "#F7E694"
   @work
@@ -20,9 +22,9 @@ class DataFile < ActiveRecord::Base
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   #add element to the element table
-#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-  def self.add_element(name, type, color, work_id)      
+  def self.add_element(name, type, color, work_id)
       e = Element.find_or_create_by!(element_name: name, element_type: type, color: color, work: @work)
       e.save
   end
@@ -82,10 +84,10 @@ class DataFile < ActiveRecord::Base
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   #used to parse a .txt file script (typically other languages)
-  #        This requires that text files be encoded with 
+  #        This requires that text files be encoded with
   #
-  #   Western (Windows 1252)  or    Western (ISO 8859-1) or   Western European (ISO) (Word)  
-  #                               in .txt format 
+  #   Western (Windows 1252)  or    Western (ISO 8859-1) or   Western European (ISO) (Word)
+  #                               in .txt format
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
   def self.parse_text_file(f, work)
@@ -107,7 +109,7 @@ class DataFile < ActiveRecord::Base
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
   def self.parse_fdx(doc, work)
-   
+
     #XPath for any Nondialogue Elements
     nondialouge = doc.xpath("/FinalDraft/Content/*[not(@Type='Dialogue')]")
     #add any nondialouge elemnts to the database
@@ -131,7 +133,7 @@ class DataFile < ActiveRecord::Base
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 def self.add_character_elements(arr, work)
-    
+
     arr.each do |line|                                                                              #<- remove ".?" for future use (for error in spanish scripts)
       name = line.force_encoding("ISO-8859-1").encode("utf-8", replace: nil).match(/^[A-Z1-9\s\.]+(?=.?:)/)
       if (name != nil)
@@ -204,7 +206,7 @@ end
 
     arr.each do |line|
 
-      #look for a character name indicating the beginning of a dialogue                           <- remove ".?" for future use (for error in spanish scripts) 
+      #look for a character name indicating the beginning of a dialogue                           <- remove ".?" for future use (for error in spanish scripts)
       a = line.force_encoding("ISO-8859-1").encode("utf-8", replace: nil).match(/^[A-Z1-9\s]+(?=.?:)/)
 
       #we have a completed monologue and need to submit it to the db
@@ -260,18 +262,18 @@ end
   end
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-#takes any .txt line from the script, splits into centenses, and adds 
+#takes any .txt line from the script, splits into centenses, and adds
 # each centense into a line and adds that line to the database
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 def self.split_into_sentences(name, lineCount, cur_line, work)
-  
+
   #split the current line into its centences
-  sentences = self.split_by_sentence(cur_line)
+  sentences = self.split_by_sentence(line: cur_line)
 
   #add each sentence for this character into the database
   sentences.each do |sentence|
     self.add_char_line(name, lineCount, sentence, true, work)
-    lineCount += 1 
+    lineCount += 1
   end
   lineCount
 end
@@ -279,48 +281,35 @@ end
 
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-# takes a line from the script, splits into sentences and return an array 
+# takes a line from the script, splits into sentences and return an array
 # containing the sentences found
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-def self.split_by_sentence(line)
-   ary = line.gsub(/\n/," ").split(/([^\.\?\!]+[\.\?\!])/)
-     ary.delete("")
-     sentences = Array.new
-     str = ""
-     for i in 0..ary.size-1
-       next if ary[i].size == 0 || ary[i] =~ /^\s*$/
-       str << ary[i]
+def self.split_by_sentence(split_sentences: true, max_length: 60, line: nil)
+  results = []
 
-       #acceptions for abrev. with a period
-       while str =~ /(Mr|Sr|Mrs|Ms|Dr|Mt|St|Lt|Ave|Rd|Blvd)\.$/
-          if ary[i+1] == nil
-            break
-          else
-            str << ary[i+1]       
-          end
-          i += 1
-          ary[i] = ""
+  line_section = Treat::Entities::Paragraph.build line
+  line_section.apply :chunk, :segment
+
+  line_section.sentences.each do |sentence|
+
+    if split_sentences
+      split_sentence = ''
+
+      sentence.to_s.split(' ').each do |token|
+        proposed_length = split_sentence.length + token.length
+        if proposed_length > max_length
+          results << split_sentence.rstrip
+          split_sentence = ''
         end
-
-
-       if (i < ary.size-1)
-         next if ary[i] =~ /[A-Z]\.$/
-         next if ary[i+1] =~ /^\s*[a-z]/
-       end
-       if ary[i+1] =~ /^\"/
-         str << '"'
-         ary[i+1].sub!(/^\"/,"")
-       elsif ary[i+1] =~ /^\)/
-         str << ')'
-         ary[i+1].sub!(/^\)/,"")
-       elsif ary[i+1] =~ /^\.{2,}/
-         str << ''
-         ary[i+1].sub!(/^\.{2,}/,"")
-       end
-       sentences << str.sub(/^\s+/,"")
-       str = ""
-     end
-     sentences
+        split_sentence << Treat::Entities::Token.from_string(token)
+        split_sentence << " "
+      end
+      results << split_sentence.rstrip
+    else
+      results << sentence.to_s.rstrip
+    end
+  end
+  results
 end
 
 end #end class
