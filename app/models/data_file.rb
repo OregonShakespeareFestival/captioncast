@@ -158,6 +158,8 @@ end
     lines = doc.xpath("/FinalDraft/Content/Paragraph")
     lineCount = 0
     charName = ""
+    last_character = ""
+    character_changed = true
 
     #loops through the script and adds necessary lines into the database
     lines.each do |line|
@@ -166,12 +168,19 @@ end
       if par_type.upcase == "CHARACTER"
         charName = line.children.children.text
         charName = charName.lstrip.rstrip #strip leading and trailing whitespace from name
+        
+        if last_character == charName
+          character_changed = false
+        else 
+          character_changed = true
+          last_character = charName
+        end
 
       #gets the dialogue, character should alredy be set
       elsif par_type.upcase == "DIALOGUE"
         charLine = line.children.children.text
         #send the dialogue to be split into centenses and sent to database
-        lineCount = self.split_into_sentences(charName.upcase, lineCount, charLine, work)
+        lineCount = self.split_into_sentences(charName.upcase, lineCount, charLine, work, charName.length, character_changed)
         #self.add_char_line(charName.upcase, lineCount, charLine, true, work)
         #lineCount += 1
 
@@ -203,6 +212,9 @@ end
     haveline = false
     lineCount = 1
     name = ""
+    last_character = ""
+    character_changed = true
+
 
     arr.each do |line|
 
@@ -211,8 +223,17 @@ end
 
       #we have a completed monologue and need to submit it to the db
       if(a != nil and haveline == true)
+
+        #check if this is a new character line
+        if last_character == name
+          character_changed = false
+        else 
+          character_changed = true
+          last_character = name
+        end
+
         #here we send all the data to the database if its a dialogue
-        lineCount = self.split_into_sentences(name, lineCount, cur_line, work)
+        lineCount = self.split_into_sentences(name, lineCount, cur_line, work, name.length, character_changed)
         #self.add_char_line(name, lineCount, cur_line, true, work)
         haveline = false
         cur_line = ""
@@ -262,13 +283,18 @@ end
   end
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-#takes any .txt line from the script, splits into centenses, and adds
+#takes any line from the script, splits into centenses, and adds
 # each centense into a line and adds that line to the database
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-def self.split_into_sentences(name, lineCount, cur_line, work)
+def self.split_into_sentences(name, lineCount, cur_line, work, character_length, character_changed)
 
-  #split the current line into its centences
-  sentences = self.split_by_sentence(line: cur_line)
+  #split the current line into its centences and then space for view
+  if true
+    sentences = self.split_by_sentence(line: cur_line, character_length: character_length, character_changed: character_changed)
+  else
+  #does not split into sentences first. need to add a case for using this
+    sentences = self.split_for_max_characters_per_line(line: cur_line, character_length: character_length, character_changed: character_changed)
+  end
 
   #add each sentence for this character into the database
   sentences.each do |sentence|
@@ -281,35 +307,95 @@ end
 
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-# takes a line from the script, splits into sentences and return an array
-# containing the sentences found
+# takes a line from the script, splits into sentences, then splits for
+# appropriate spacing and return an array
+# containing the sentences found. This also accounts for space 
+# for including the character name on the display/operator view.
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-def self.split_by_sentence(split_sentences: true, max_length: 60, line: nil)
+def self.split_by_sentence(split_sentences: true, max_length: 40, line: nil, character_length: character_length, character_changed: character_changed)
   results = []
-
+  original_max_length = max_length
   line_section = Treat::Entities::Paragraph.build line
   line_section.apply :chunk, :segment
 
   line_section.sentences.each do |sentence|
+    iteration = 1
 
     if split_sentences
       split_sentence = ''
 
-      sentence.to_s.split(' ').each do |token|
-        proposed_length = split_sentence.length + token.length
+        sentence.to_s.split(' ').each do |token|
+
+        if iteration == 1 && character_changed
+          max_length = max_length - (character_length - 2)
+          proposed_length = split_sentence.length + token.length + character_length.to_i
+          #puts "centLen = " + split_sentence.length.to_s + " prop len= " + proposed_length.to_s + " tokenlength = " + token.length.to_s + " Charname_len = " + character_length.to_s
+        else
+          proposed_length = split_sentence.length + token.length
+          #puts " ** centLen = " + split_sentence.length.to_s + " prop len= " + proposed_length.to_s + " tokenlength = " + token.length.to_s + " Charname_len = " + character_length.to_s
+        end   
+
         if proposed_length > max_length
           results << split_sentence.rstrip
           split_sentence = ''
+          iteration += 1
+          max_length = original_max_length
         end
         split_sentence << Treat::Entities::Token.from_string(token)
         split_sentence << " "
       end
       results << split_sentence.rstrip
+
+
     else
       results << sentence.to_s.rstrip
     end
   end
   results
 end
+
+
+
+  #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  # takes a line from the script, splits for appropriate line length, and returns an array
+  # containing elements with <= max_lenght characters. This also accounts for space 
+  # for including the character name on the first line in the display/operator view.
+  #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  def self.split_for_max_characters_per_line(split_sentences: true, max_length: 40, line: nil, character_length: character_length, character_changed: character_changed)
+    results = []
+    original_max_length = max_length
+    line_section = Treat::Entities::Paragraph.build line
+    line_section.apply :chunk, :segment
+
+      iteration = 1
+
+      if split_sentences
+        split_sentence = ''
+
+          line_section.to_s.split(' ').each do |token|
+
+          if iteration == 1 && character_changed
+            max_length = max_length - (character_length - 2)
+            proposed_length = split_sentence.length + token.length + character_length.to_i
+          else
+            proposed_length = split_sentence.length + token.length
+          end   
+
+          if proposed_length > max_length
+            results << split_sentence.rstrip
+            split_sentence = ''
+            iteration += 1
+            max_length = original_max_length
+          end
+          split_sentence << Treat::Entities::Token.from_string(token)
+          split_sentence << " "
+        end
+        results << split_sentence.rstrip
+
+      else
+        results << sentence.to_s.rstrip
+      end
+    results
+  end
 
 end #end class
