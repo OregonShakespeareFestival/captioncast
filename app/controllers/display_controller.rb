@@ -25,37 +25,10 @@ class DisplayController < ApplicationController
   end
 
   def current
-    #position = Rails.application.config.operator_positions[params[:operator]]
+    position = Rails.application.config.operator_positions[params[:operator]]
     #retrieve current position
-
-    #test code --will run display in 'zombie' mode
     #@current = 1+rand(18)
-    #render json: @current
-
-    #more testing --incremented 'zombie' mode
-    #use this to test long term scrolling in an automated fashion
-    # if(defined? $current)
-    #   $current+=1
-    # else
-    #   $current=1
-    # end
-    # render json: $current
-
-    #now let's get back to basics
-    #this doesn't work with concurrent operators - yet
-    #we can extend to multi-operators by using an array or hash though
-    #if current happens to be undefined let's just make it 0
-    if(!defined? $current)
-      $current = 0
-    end
-    #get global variable for blackout
-    if(!defined? $blackout)
-      $blackout = 1
-    end
-
-    hash = {:seq => $current, :blackout => $blackout}
-    
-    render json: hash
+    render json: position
   end
 
   def select

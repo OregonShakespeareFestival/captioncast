@@ -3,44 +3,65 @@ _.templateSettings = {
     interpolate: /\{\{\=(.+?)\}\}/g,
     evaluate: /\{\{(.+?)\}\}/g
 };
-/*
 var targeted = 0;
 var $targeted, $current;
-*/
-
-var line_count = 0;
 var blackout = false;
 var autoCommit = true;
 var scrolling = false;
-var opScrollSpd= 300;
-
-//set the operator specific line scale
-//This must be the same (in percentage) as the font-size for .line-operator!!!
-var opScale = 300;
-var opInc, $oplh, curLinOp;
+var opScrollSpd= 400;
 
 //jquery object to hold line elements
 var $lines;
 var lAlias;
 $(document).ready(function(){
-	//if this is operator view
 	if($('#main-operator').length>0){
-		curLinOp = 0;
-		
-		$('#main-operator').height($(window).innerHeight()+'px');
+		var currentOp = 0;
+		//whenever the operator is restarted black out the screen -- can abstract this
+		$.ajax('/operator/pushTextSeq', {
+				type:'POST',
+				data: {
+					seq:0,
+			        operator: operator
+				},
+			success:dispOff,
+		});
 
-		//reset global line sequence
-		$.ajax("/operator/pushTextSeq", {
-			type:"POST",
-			data: {
-				seq: 0,
-				operator: operator
-			},
-			success:linePushed,
-			error:(function() {
-				alert("initial position placement failed! Please check your connection");
-			})
-		})
+		//this function will universally commit the targeted line
+		function seqPushed(d){
+			//display logic if successful
+			if($current){
+				$current.removeClass('current-operator');
+			}
+			$targeted.addClass('current-operator');
+			$current=$targeted;
+			if(blackout){
+				$('#blackout-icon-operator').addClass('blackout-off-operator');
+				blackout=false;
+			}
+			currentOp=targeted;
+			console.log(d + ' pushed ' + 'for index ' + currentOp );
+		}
+		function commit(){
+				//post the current sequence identifier through AJAX
+				if($targeted.attr('data-visibility')=="true"){
+					$.ajax('/operator/pushTextSeq', {
+						type:'POST',
+						data: {
+							seq:$targeted.attr('data-sequence'),
+				            operator: operator
+						},
+						success:seqPushed,
+						error:(function(){
+							//put in better error handling here
+							alert('Commit failed! Please check your connection.');
+						}),
+					});
+
+				}
+
+		}
+
+		$('#main-operator').height($(window).innerHeight()+'px');
 
 		//set the middlepoint
 		var mid = Math.round($(window).innerHeight()/2);
@@ -63,8 +84,7 @@ $(document).ready(function(){
 		$lineCont = $('#line-holder-sub-operator');
 		// var il = lines.length-1;
 		var il = 0;
-		var ll = lines.length;
-		line_count = lines.length; 
+		var ll = lines.length; 
 		var lc, cc;
 		while(il<ll){
 			if(lines[il]['visibility']){
@@ -81,155 +101,13 @@ $(document).ready(function(){
 			il++;
 		}
 
-		
-
-		//store the new DOM lines inside of a jquery object
-		$lines = $('.line-operator');
-
-		//set the width to correspond with the going scale
-		//!!! this equation will likely need to be tweaked
-		// $($lines).css('width', Math.round(1920*(opScale/scale)) + 'px');
-		
-		//populating this val artificially
-		//should eventually be dynamically calculated though
-		$($lines).css('width', '640px'); 
-
-
-
-		//set the line height
-		opInc = parseFloat($('.line-operator').css('line-height'));
-
-		//set the element to be scrolled
-		$oplh = $('#line-holder-operator');
-
-		function linePushed(j){
-			$oplh.stop();
-			$oplh.animate({scrollTop:curLinOp*opInc}, opScrollSpd);
-			console.log('line '+ j + ' pushed');
-		}
-
-		//originally attached, inline, to a click listener on the up and down
-		//button operators. These two functions have been abstracted so that
-		//we can provide the same functionality for the up and down keys
-		//on the keyboard, without needing the code in two seperate areas.
-		function textUp() {
-			if(curLinOp>1){
-
-				curLinOp--;
-				$.ajax('/operator/pushTextSeq', {
-					type:'POST',
-					data: {
-						seq:curLinOp,
-			            operator: operator
-					},
-					success:linePushed,
-					error:(function(){
-						curLinOp++;
-						//put in better error handling here
-						alert('Commit failed! Please check your connection.');
-					}),
-				});
-
-			}
-			console.log(curLinOp);
-		}
-
-		function textDown() {
-			if(curLinOp < line_count){
-				curLinOp++;		
-				
-				$.ajax('/operator/pushTextSeq', {
-					type:'POST',
-					data: {
-						seq:curLinOp,
-			            operator: operator
-					},
-					success:linePushed,
-					error:(function(){
-						curLinOp--;
-						//put in better error handling here
-						alert('Commit failed! Please check your connection.');
-					}),
-				});
-
-			}
-		}
-
 		//clear the lines object now that it's been used
 		lines=undefined;
 
-		//single up and down buttons
-		$('#up-button-operator').click(function(){
-			textUp();
-		});
-		$('#down-button-operator').click(function(){
-			textDown();
-		});
-
-		//prevent scrolling on keydown when the operator view is focused
-		$(document).keydown(function(e) {
-			e.preventDefault();
-			return false;
-		});
-		//up and down keys
-		$(document).keyup(function(e) {
-			e.preventDefault();
-			switch(e.which) {
-				case 38: //up
-					textUp();
-					break;
-				case 40: //down
-					textDown();
-					break;
-				case 32: //spacebar
-					toggleBlackout();
-					break;
-			}
-		});
-
-		//this function will universally commit the targeted line
-		/*
-		function seqPushed(d){
-			//display logic if successful
-			
-			if($current){
-				$current.removeClass('current-operator');
-			}
-			$targeted.addClass('current-operator');
-			$current=$targeted;
-			if(blackout){
-				$('#blackout-icon-operator').addClass('blackout-off-operator');
-				blackout=false;
-			}
-			currentOp=targeted;
-			console.log(d + ' pushed ' + 'for index ' + currentOp );
-		}
-		*/
-
-		/*
-		function commit(){
-				//post the current sequence identifier through AJAX
-				if($targeted.attr('data-visibility')=="true"){
-					$.ajax('/operator/pushTextSeq', {
-						type:'POST',
-						data: {
-							seq:$targeted.attr('data-sequence'),
-				            operator: operator
-						},
-						success:seqPushed,
-						error:(function(){
-							//put in better error handling here
-							alert('Commit failed! Please check your connection.');
-						}),
-					});
-
-				}
-
-		}
-		*/
-
+		//store the new DOM lines inside of a jquery object
+		$lines = $('.line-operator');
 		//actually, would be good if lines were read into the array with sequence numbers for index vals?
-		/*
+
 		$targeted = $lines.first();
 		$targeted.addClass('target-operator');
 		var minInd = 0; 
@@ -240,7 +118,6 @@ $(document).ready(function(){
 				$(this).addClass('line-non-visible-operator');
 			}
 		});
-
 		function boolSet(str){
 			if(str=='true'){
 				return 1;
@@ -354,7 +231,7 @@ $(document).ready(function(){
 		//old js for "skip to number" feature 
 		//let's hide this and see if anybody cares
 		//front-end features are like teeth: ignore them and they will go away
-		*/
+
 		/* 
 		//roll down the fast forward feature
 		$('#fforward-operator').click(function(){
@@ -415,26 +292,45 @@ $(document).ready(function(){
 				});
 			});
 		*/
-		function toggleDisp() {
+		function dispOff(d){
+			console.log('display cleared');
+			$('.current-operator').removeClass('current-operator');
 			$('#blackout-icon-operator').toggleClass('blackout-off-operator');
+			blackout=true;
 		}
-
-		function toggleBlackout() {
-			//send ajax request to controller
-			$.ajax('/operator/blackout', {
-				type:'POST',
-				data: {
-          			operator: operator
-				},
-				success:toggleDisp, //fix this
-			});
+		function dispOn(d){
+			console.log('display is back');
+			var last = $.grep($('.line-operator'), function(n){
+				return $(n).attr('data-sequence') == currentOp;
+			})[0];
+			$(last).addClass('current-operator');
+			$('#blackout-icon-operator').toggleClass('blackout-off-operator');
+			blackout=false;
 		}
-
 		//blackout the display
 		$('#blackout-operator').click(function(){
-			toggleBlackout();
+			if(!blackout){
+				$.ajax('/operator/pushTextSeq', {
+					type:'POST',
+					data: {
+						seq:0,
+	          operator: operator
+					},
+					success:dispOff,
+				});
+			}else{
+				$.ajax('/operator/pushTextSeq', {
+					type:'POST',
+					data: {
+						seq:currentOp,
+	          operator: operator
+					},
+					success:dispOn,
+				});
+			}
+
+
 		});
-		/*
 		$('#autocommit-operator').click(function(){
 			if(autoCommit){
 				autoCommit = false;
@@ -448,8 +344,7 @@ $(document).ready(function(){
 			console.log(this);
 			$('#autocommit-icon-operator').toggleClass('autocommit-on-operator')
 		});
-		*/
-		/*
+
 		//single up and down buttons
 		$('#up-button-operator').click(function(){
 			if(!scrolling){
@@ -481,7 +376,7 @@ $(document).ready(function(){
 			}
 		});
 
-		*/
+
 
 		$('#shade-loading-operator').fadeOut(1000, function(){});
 

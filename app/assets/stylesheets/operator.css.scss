@@ -24,258 +24,244 @@ $ipad-land-break: 1024px;
 
 
 @mixin centered{
-  float:none;
-  margin-left:auto;
-  margin-right:auto;
+	float:none;
+	margin-left:auto;
+	margin-right:auto;
 }
 /*
 @mixin vert-center{
-  float:none;
-  top:50%;
-  transform: translateY(50%);
+	float:none;
+	top:50%;
+	transform: translateY(50%);
 }
 */
 @mixin gen-btn-style-operator{
 
-  text-align:center;
-  cursor:pointer;
-   background-color:$bgcol1;
-   opacity:.96;
-  color:$targetcol;
+	text-align:center;
+	cursor:pointer;
+ 	background-color:$bgcol1;
+ 	opacity:.96;
+	color:$targetcol;
 
 
 
 }
 @mixin gen-btn-sizing-operator{
-  width:$gen-btn-sz;
-  height:$gen-btn-sz;
-  padding:$gen-btn-pad;
+	width:$gen-btn-sz;
+	height:$gen-btn-sz;
+	padding:$gen-btn-pad;
 
 }
 
 @mixin side-tab-operator{
-  .glyphicon{
-    float:left;
-  }
+	.glyphicon{
+		float:left;
+	}
 }
 
-#body-operator-index, #body-operator-select {
-  background-color:$bgcol4;
-  color: $lighttgcol;
+#body-ind-operator{
+	background-color:$bgcol4;
+	color: $lighttgcol;
 }
+
 
 #main-operator{
-  height:100%;
-  overflow:hidden;
-  color: $basetextcol;
-  input{
-    color:#121212;
-  }
+	height:100%;
+	overflow:hidden;
+	color: $basetextcol;
+	input{
+		color:#121212;
+	}
 }
 #main-row-operator{
 
-  height:100%;
+	height:100%;
 }
 
 
 #line-holder-operator{
-  background-color:$bgcol4;
-  height:100%;
-  overflow:auto;
+	background-color:$bgcol4;
+	height:100%;
+	overflow:auto;
 }
 
 #commit-column-operator{
-  background-color:$bgcol2;
-  height:100%;
+	background-color:$bgcol2;
+	height:100%;
 }
 #commit-button-operator{
-  background-color:$bgcol1;
-  padding-top:10px;
-  padding-bottom:10px;
-  padding-left:20px;
-  position:relative;
-  cursor:pointer;
-  font-size:12em;
-  text-align:center;
-  width:118%;
-  left:-40px;
-  height:220px;
-  color:$targetcol;
-  top:50%;
-  max-width:400px;
-  transform:translateY(-50%);
+	background-color:$bgcol1;
+	padding-top:10px;
+	padding-bottom:10px;
+	padding-left:20px;
+	position:relative;
+	cursor:pointer;
+	font-size:12em;
+	text-align:center;
+	width:118%;
+	left:-40px;
+	height:220px;	
+	color:$targetcol;
+	top:50%;
+	max-width:400px;
+	transform:translateY(-50%);
 
-  @media only screen and (min-width:$lg-break){
-    font-size:16em;
-    height:270px;
+	@media only screen and (min-width:$lg-break){
+		font-size:16em;
+		height:270px;
 
-  }
+	}
 
 
-  @media only screen and (max-width:$xs-break){
-    width:150%;
-    font-size:8em;
-    height:150px;
-  }
+	@media only screen and (max-width:$xs-break){
+		width:150%;
+		font-size:8em;
+		height:150px;
+	}
 
 }
 #commit-icon-operator{
-  /*@include vert-center;*/
+	/*@include vert-center;*/
 }
 
 #commit-button-operator:active, #fforward-operator:active, #preview-operator:active{
-  color:$currentcol;
-  font-weight:bold;
+	color:$currentcol;
+	font-weight:bold;
 }
 
 .line-operator{
 
-  /*font-size:2.5em;*/
-  /*padding:12px;*/
-  font-size:300%;
-  cursor:pointer;
-  line-height:2em;
+	font-size:2.5em;
+	padding:12px;
+	cursor:pointer;
 }
 .line-non-visible-operator{
-  font-style:italic;
-  color: $nonviscol;
+	font-style:italic;
+	color: $nonviscol;
 }
 .char-hl-operator{
-  font-weight:bold;
-  text-transform: uppercase;
+	font-weight:bold;
+	text-transform: uppercase;
 
 
 }
 .target-operator{
-  background-color:$targetcol;
-  color:$targettxt;
-  border: 2px solid $targethl;
+	background-color:$targetcol;
+	color:$targettxt;
+	border: 2px solid $targethl;
 
-}
-
-#target-overlay-operator{
-  opacity:.5;
-  background-color:$targethl;
-  border: 2px solid $targethl;
-  position:fixed;
-  top:50%;
-  width:100%;
-  height:50px;
-  /*transform:translateY(-50%);*/
 }
 .current-operator{
-  color:$currentcol;
-  /*font-weight:bold;*/
+	color:$currentcol;
+	/*font-weight:bold;*/
 }
 
-
-/*needs to be adjusted with the font size*/
 #buffer-top-operator{
-  height:57%;
-}
+	height:45%;
+} 
 #buffer-bottom-operator{
-  height:40%;
+	height:40%;
 }
 
 #line-holder-sub-operator{
 
 }
 #preview-operator{
-  z-index:100;
-  top:10px;
-  position:absolute;
-  width:120%;
-  left:-100%;
-  height:29%;
-  padding:5px;
-  @include gen-btn-style-operator;
-  #prev-holder-operator{
-    position:relative;
-    height:0;
-    width:80%;
-    float:left;
-    padding-top:44.25%;
-    transform: translate(-50%, -96%);
-    /* a special surprise for later
-    div{
-      z-index:120;
-      background-color:black;
-      color:yellow;
-      width:100%;
-      position:absolute;
-    }
-    */
+	z-index:100;
+	top:10px;
+	position:absolute;
+	width:120%;
+	left:-100%;
+	height:29%;
+	padding:5px;
+	@include gen-btn-style-operator;
+	#prev-holder-operator{
+		position:relative;
+		height:0;
+		width:80%;
+		float:left;
+		padding-top:44.25%;
+		transform: translate(-50%, -96%);
+		/* a special surprise for later
+		div{
+			z-index:120;
+			background-color:black;
+			color:yellow;
+			width:100%;
+			position:absolute;
+		}
+		*/
+		
+		iframe{
+			position:absolute;
+			z-index:120;
+			width:100%;
+			height:100%;
+			max-width: 320px;
+			max-height: 180px;
+			/*a hack for now */
+			transform:translateY(2%);
+			@media screen and (max-width:$ipad-land-break){
+				transform:translateY(25%);
+			}
+			/*
+			float:left;
+			transform:translateY(2%);
+			*/
+			
+		}
+		
 
-    iframe{
-      position:absolute;
-      z-index:120;
-      width:100%;
-      height:100%;
-      max-width: 320px;
-      max-height: 180px;
-      /*a hack for now */
-      transform:translateY(2%);
-      @media screen and (max-width:$ipad-land-break){
-        transform:translateY(25%);
-      }
-      /*
-      float:left;
-      transform:translateY(2%);
-      */
+	}
+	#prev-spinner-operator{
+		position:relative;
+		z-index:101;
+		width:80%;
+		height:95%;
+		/*top:-56%;
+		float:left;
+		transform:translateY(2%);
+		*/
+		font-size:2em;
+		font-weight: bold;
+		text-transform: uppercase;
+		color:$targetcol;
+		left:56%;
+		top:10px;
+		@media screen and (max-width:$ipad-land-break){
+			top:45px;		
+		}
 
-    }
-
-
-  }
-  #prev-spinner-operator{
-    position:relative;
-    z-index:101;
-    width:80%;
-    height:95%;
-    /*top:-56%;
-    float:left;
-    transform:translateY(2%);
-    */
-    font-size:2em;
-    font-weight: bold;
-    text-transform: uppercase;
-    color:$targetcol;
-    left:56%;
-    top:10px;
-    @media screen and (max-width:$ipad-land-break){
-      top:45px;
-    }
-
-    @media only screen and (max-width:$xs-break){
-      font-size:1em;
-    }
-
-
-  }
-  /*
-  @media only screen and (max-width:$xs-break){
-
-    width:16.6%;
-  }
-  */
-  @media only screen and (max-width:$xs-break){
-    width:130%;
-  }
-  #previcon-operator{
-  font-size:3em;
-  cursor:pointer;
-  padding-top:3px;
-  padding-right:.7%;
-  float:right;
-  top:50%;
-  transform: translateY(-50%);
-  @media only screen and (max-width:$xs-break){
-    font-size:2em;
-    padding-right:.2%;
-    }
+		@media only screen and (max-width:$xs-break){
+			font-size:1em;
+		}
 
 
-  }
+	}
+	/*
+	@media only screen and (max-width:$xs-break){
+
+		width:16.6%;
+	}
+	*/
+	@media only screen and (max-width:$xs-break){
+		width:130%;
+	}
+	#previcon-operator{
+	font-size:3em;
+	cursor:pointer;
+	padding-top:3px;
+	padding-right:.7%;
+	float:right;
+	top:50%;
+	transform: translateY(-50%);
+	@media only screen and (max-width:$xs-break){
+		font-size:2em;
+		padding-right:.2%;
+		}
+
+
+	}
 
 }
 
@@ -283,135 +269,129 @@ $ipad-land-break: 1024px;
 #blackout-operator{
 
 
-  z-index:150;
-  position:fixed;
-  top:0px;
-  @include gen-btn-sizing-operator;
-  @include gen-btn-style-operator;
-  right:20px;
+	z-index:150;
+	position:fixed;
+	top:0px;
+	@include gen-btn-sizing-operator;
+	@include gen-btn-style-operator;
+	right:20px;
 }
 #blackout-icon-operator{
-  font-size:4em;
-  cursor:pointer;
+	font-size:4em;
+	cursor:pointer;
 
 
 }
 #autocommit-operator{
 
 
-  z-index:200;
-  position:fixed;
-  top:0px;
-  @include gen-btn-sizing-operator;
-  @include gen-btn-style-operator;
-  right:100px;
+	z-index:200;
+	position:fixed;
+	top:0px;
+	@include gen-btn-sizing-operator;
+	@include gen-btn-style-operator;
+	right:100px;
 }
 #autocommit-icon-operator{
-  font-size:4em;
-  cursor:pointer;
+	font-size:4em;
+	cursor:pointer;
 
 
 }
 
 .blackout-off-operator, .autocommit-on-operator{
-  color:$currentcol;
-  font-weight:bold;
+	color:$currentcol;
+	font-weight:bold;
 
 }
 
 #fforward-operator{
-  z-index:100;
-  top:75%;
-  position:absolute;
-  width:120%;
-  left:-100%;
-  height:80px;
-  padding:5px;
-  transform:translateY(-50%);
-  @include gen-btn-style-operator;
+	z-index:100;
+	top:75%;
+	position:absolute;
+	width:120%;
+	left:-100%;
+	height:80px;
+	padding:5px;
+	transform:translateY(-50%);
+	@include gen-btn-style-operator;
 
-  @media only screen and (max-width:$xs-break){
+	@media only screen and (max-width:$xs-break){
 
-    width:130%;
-  }
-  div{
-    height:150px;
-    width:65%;
-    margin-bottom: 0;
-    float:left;
-    input{
-      font-size:2.3em;
-      width:90%;
-      padding:3px;
-      float:left;
-      position:relative;
-      top:5%;
-      left:7%;
-    }
-  }
-  #fforward-icon-operator{
-  font-size:3em;
-  cursor:pointer;
-  padding-right:.5%;
-  float:right;
-  top:50%;
-  transform:translateY(-50%);
-  @media only screen and (max-width:$xs-break){
-    font-size:2em;
-    }
-  }
+		width:130%;
+	}
+	div{
+		height:150px;
+		width:65%;
+		margin-bottom: 0;
+		float:left;
+		input{
+			font-size:2.3em;
+			width:90%;
+			padding:3px;
+			float:left;
+			position:relative;
+			top:5%;
+			left:7%;
+		}
+	}
+	#fforward-icon-operator{
+	font-size:3em;
+	cursor:pointer;
+	padding-right:.5%;
+	float:right;
+	top:50%;
+	transform:translateY(-50%);
+	@media only screen and (max-width:$xs-break){
+		font-size:2em;
+		}
+	}
 
 }
 
 .wide-button-operator{
-  background-color:#0E3544;
-  cursor:pointer;
-  width:100%;
-  /*width:72%;*/
-  position:fixed;
-  text-align:center;
-  font-size:3em;
-  color:$bgcol1;
-  height:75px;
-  user-select:none;
+	background-color:#0E3544;
+	cursor:pointer;
+	width:72%;
+	position:fixed;
+	text-align:center;
+	font-size:3em;
+	color:$bgcol1;
+	height:75px;
+	left:25%;
+	@media only screen and (max-width:$xs-break){
+		width:80%;
+		left:17%;
 
-  /*left:25%;*/
-
-  /* -- let's worry about responsive later
-  @media only screen and (max-width:$xs-break){
-    width:80%;
-    left:17%;
-
-  }
-  &:active{
-    color:$currentcol;
-    font-weight:bold;
-  }
-  span{
-    height:100%;
-    vertical-align: sub;
-  }
-  */
+	}
+	&:active{
+		color:$currentcol;
+		font-weight:bold;
+	}
+	span{
+		height:100%;
+		vertical-align: sub;
+	}
 }
 
 
 #up-button-operator{
-  top:0%;
+	top:0%;
 
 }
 #down-button-operator{
-  bottom:0;
+	bottom:0;
 
 }
 
 #shade-loading-operator{
-  z-index:9999;
-  position:fixed;
-  left:0;
-  top:0;
-  width:100%;
-  height:100%;
-  background-color:$bgcol4;
-  font-size:4em;
-  text-align:center;
+	z-index:9999;
+	position:fixed;
+	left:0;
+	top:0;
+	width:100%;
+	height:100%;
+	background-color:$bgcol4;
+	font-size:4em;
+	text-align:center;
 }
