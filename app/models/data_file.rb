@@ -167,20 +167,13 @@ end
       #if its a character, get who and set character name
       if par_type.upcase == "CHARACTER"
         charName = line.children.children.text
-        charName = charName.lstrip.rstrip #strip leading and trailing whitespace from name
+        charName = charName.lstrip.rstrip.upcase   
         
-        if last_character == charName
-          character_changed = false
-        else 
-          character_changed = true
-          last_character = charName
-        end
-
       #gets the dialogue, character should alredy be set
       elsif par_type.upcase == "DIALOGUE"
         charLine = line.children.children.text
         #send the dialogue to be split into centenses and sent to database
-        lineCount = self.split_into_sentences(charName.upcase, lineCount, charLine, work, charName.length, character_changed, characters_per_line, split_type)
+        lineCount = self.split_into_sentences(charName, lineCount, charLine, work, charName.length, character_changed, characters_per_line, split_type)
         #self.add_char_line(charName.upcase, lineCount, charLine, true, work)
         #lineCount += 1
 
@@ -197,6 +190,17 @@ end
         self.add_direction(par_type.upcase, lineCount, direction, false, work)
         lineCount += 1
       end
+
+      # set character changed which is used during for parsing
+      if last_character == charName
+        character_changed = false
+        #puts "Character not changed = " + character_changed.to_s + " last, this " + last_character.to_s + " == " + charName.to_s
+      else 
+        character_changed = true
+        last_character = charName
+          
+      end
+
     end
   end
 
@@ -342,8 +346,10 @@ def self.split_by_sentence(split_sentences: true, line: nil, character_length: c
       split_sentence << " "
     end
   results << split_sentence.rstrip
+  iteration += 1
   else
     results << sentence.to_s.rstrip
+    iteration += 1
   end
 end
 results
@@ -363,7 +369,7 @@ def self.split_for_max_characters_per_line(split_sentences: true, line: nil, cha
   line_section.apply :chunk, :segment
 
   iteration = 1
-
+  puts "C_Changed= " + character_changed.to_s
   if split_sentences
     split_sentence = ''
 
@@ -386,9 +392,10 @@ def self.split_for_max_characters_per_line(split_sentences: true, line: nil, cha
       split_sentence << " "
     end
     results << split_sentence.rstrip
-
+    iteration += 1
   else
     results << sentence.to_s.rstrip
+    iteration += 1
   end
   results
   end
