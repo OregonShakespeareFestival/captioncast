@@ -4,7 +4,7 @@
 
 $displayBgCol: #222222;
 $displayTextCol: #f7e694;
-$displayTextColBlur: #726A44;
+$displayTextColBlur: #f7e694;
 $xs-break: 992px;
 $lg-break: 1400px;
 $ipad-land-break: 1024px;
@@ -15,28 +15,24 @@ $preview-break: 339px;
 
 
 @mixin fullheight{
-
 	height:100%;
 }
 
 @mixin vert-center{
 	position:relative;
 	display:block;
-
 	top:50%;
 	transform: translateY(-50%);
 }
 
 @mixin line-disp{
 	display:none;
-	font-size:300%;
+	font-size:900%;
 	text-align: left;
 	word-break: keep-all;
 	/*padding for safe region of display-- just in case*/
 	padding:3%;
-	line-height:1.2em;
-
-
+	line-height: .8em;
 }
 
 
