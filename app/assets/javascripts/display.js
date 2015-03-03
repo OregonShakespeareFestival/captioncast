@@ -151,7 +151,7 @@ $(document).ready(function(){
 									var newElem = _.find($linesDisp, function(q){
 											return parseInt($(q).attr('data-sequence'))==j;
 									});
-									$('#body-display-index').animate({scrollTop:$(newElem).position().top-$(window).height()/2+$(newElem).height()+bottomPad}, displayScrollSpd);
+									$('#body-display-index').stop().animate({scrollTop:$(newElem).position().top-$(window).height()/2+$(newElem).height()+bottomPad}, displayScrollSpd);
 									//remove the focus class
 									$('.focus-multi').removeClass('focus-multi');
 									//console.log('class-removed');

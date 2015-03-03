@@ -198,7 +198,7 @@ $(document).ready(function(){
 		// });
 		//this auto-scrolls to a desired element
 		function aniScroll(el, c){
-			$lh.animate({scrollTop: el['offsetTop'] +  Math.round(el['offsetHeight']/2) - mid}, opScrollSpd, c);
+			$lh.stop().animate({scrollTop: el['offsetTop'] +  Math.round(el['offsetHeight']/2) - mid}, opScrollSpd, c);
 		}
 		//scroll to a line when it's clicked
 		$('.line-operator').click(function(){
