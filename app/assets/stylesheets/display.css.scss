@@ -43,7 +43,7 @@ $preview-break: 339px;
 .body-display{
 	background-color: $displayBgCol;
 	color:$displayTextCol;
-
+	overflow: hidden;
 }
 
 /*watch out for this... might have to alter this*/
@@ -115,6 +115,11 @@ html{
 	}
 
 
+}
+
+#select_display_op {
+	width:100%;
+	font-size:2em;
 }
 
 .line-display-multi{
