@@ -16,12 +16,21 @@ $(document).ready(function(){
 	if($('#main-operator').length>0){		
 		//blackout screen and move to text sequence 0 when the operator is reset -!!!-
 
+
+		//scrolls to desired element
+		//can include a callback function
+		function aniScroll(el, c){
+			$('#line-holder-operator').stop().animate({scrollTop: el['offsetTop'] +  Math.round(el['offsetHeight']/2) - mid}, opScrollSpd, c);
+		}
+
 		//traverse operator after commit
-		function seqPushed(d){
-			//move animations into this function -!!!-
-			$current.removeClass('current-operator');
-			$targeted.addClass('current-operator');
-			$current=$targeted;
+		function seqPushed(){
+			aniScroll($targeted.get(), function() {
+				$current.removeClass('current-operator');
+				$current=$targeted;
+				$current.addClass('current-operator');
+			});
+			//abstract this -!!!-
 			if(blackout){
 				$('#blackout-icon-operator').addClass('blackout-off-operator');
 				blackout=false;
@@ -30,7 +39,7 @@ $(document).ready(function(){
 		}
 
 		//push text sequence to operator controller
-		function commit(){
+		function commit(el){
 			if($targeted.attr('data-visibility')=="true"){
 				$.ajax('/operator/pushTextSeq', {
 					type:'POST',
@@ -40,17 +49,13 @@ $(document).ready(function(){
 					},
 					success:seqPushed,
 					error:(function(){
+						$targeted=$current;
 						alert('Commit failed! Please check your connection.');
 					})
 				});
 			}
 		}
 
-		//scrolls to desired element
-		//can include a callback function
-		function aniScroll(el, c){
-			$('#line-holder-operator').stop().animate({scrollTop: el['offsetTop'] +  Math.round(el['offsetHeight']/2) - mid}, opScrollSpd, c);
-		}
 
 		
 
@@ -161,10 +166,8 @@ $(document).ready(function(){
 			$targeted = $(this);
 			//commit the change
 			commit();
-			//scroll the operator view to the new line
-			aniScroll(this);
 		});
-		
+
 		//action that rolls down preview and poplates is
 		$('#preview-operator').click(function(){
 
