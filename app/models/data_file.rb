@@ -1,6 +1,8 @@
 require 'nokogiri'
+require 'treat'
 
 class DataFile < ActiveRecord::Base
+  include Treat::Core::DSL
 
   @default_text_color = "#F7E694"
   @work
@@ -20,9 +22,9 @@ class DataFile < ActiveRecord::Base
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   #add element to the element table
-#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-  def self.add_element(name, type, color, work_id)      
+  def self.add_element(name, type, color, work_id)
       e = Element.find_or_create_by!(element_name: name, element_type: type, color: color, work: @work)
       e.save
   end
@@ -56,7 +58,7 @@ class DataFile < ActiveRecord::Base
   # "CHARACTER NAME:" (all caps) "text goes here"
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-  def self.parse_fd(upload, work)
+  def self.parse_fd(upload, work, characters_per_line)
 
     #create the file path abd open the file
     name =  upload['datafile'].original_filename
@@ -67,13 +69,13 @@ class DataFile < ActiveRecord::Base
     @work = Work.find_by_id(work)
 
     if(File.extname(path) == ".txt")
-      self.parse_text_file(f, work)
+      self.parse_text_file(f, work, characters_per_line)
       return
 
     elsif(File.extname(path) == ".fdx")
       doc =  Nokogiri::XML(f)
       f.close
-      self.parse_fdx(doc, work)
+      self.parse_fdx(doc, work, characters_per_line)
       return
     end
   end
@@ -82,13 +84,13 @@ class DataFile < ActiveRecord::Base
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   #used to parse a .txt file script (typically other languages)
-  #        This requires that text files be encoded with 
+  #        This requires that text files be encoded with
   #
-  #   Western (Windows 1252)  or    Western (ISO 8859-1) or   Western European (ISO) (Word)  
-  #                               in .txt format 
+  #   Western (Windows 1252)  or    Western (ISO 8859-1) or   Western European (ISO) (Word)
+  #                               in .txt format
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-  def self.parse_text_file(f, work)
+  def self.parse_text_file(f, work, characters_per_line)
 
     #reads the file line by line into array
     arr = IO.readlines(f)
@@ -97,7 +99,7 @@ class DataFile < ActiveRecord::Base
     self.add_character_elements(arr, work)
 
     #add the lines in the script to the database depending on the character
-    self.add_text_lines_to_db(arr, work)
+    self.add_text_lines_to_db(arr, work, characters_per_line)
   end
 
 
@@ -106,8 +108,8 @@ class DataFile < ActiveRecord::Base
   #used for parsing script in .fdx format
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-  def self.parse_fdx(doc, work)
-   
+  def self.parse_fdx(doc, work, characters_per_line)
+
     #XPath for any Nondialogue Elements
     nondialouge = doc.xpath("/FinalDraft/Content/*[not(@Type='Dialogue')]")
     #add any nondialouge elemnts to the database
@@ -120,7 +122,7 @@ class DataFile < ActiveRecord::Base
     self.add_fdx_character(characters, work)
 
     #add the lines to the database
-    self.add_fdx_lines_to_db(doc, work)
+    self.add_fdx_lines_to_db(doc, work, characters_per_line)
 
   end
 
@@ -131,7 +133,7 @@ class DataFile < ActiveRecord::Base
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 def self.add_character_elements(arr, work)
-    
+
     arr.each do |line|                                                                              #<- remove ".?" for future use (for error in spanish scripts)
       name = line.force_encoding("ISO-8859-1").encode("utf-8", replace: nil).match(/^[A-Z1-9\s\.]+(?=.?:)/)
       if (name != nil)
@@ -150,12 +152,14 @@ end
   #adds visible and non visible lines to database for FDX script
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-  def self.add_fdx_lines_to_db(doc, work)
+  def self.add_fdx_lines_to_db(doc, work, characters_per_line)
 
     #xpath through the whole document for generaing entire script
     lines = doc.xpath("/FinalDraft/Content/Paragraph")
     lineCount = 0
     charName = ""
+    last_character = ""
+    character_changed = true
 
     #loops through the script and adds necessary lines into the database
     lines.each do |line|
@@ -164,12 +168,19 @@ end
       if par_type.upcase == "CHARACTER"
         charName = line.children.children.text
         charName = charName.lstrip.rstrip #strip leading and trailing whitespace from name
+        
+        if last_character == charName
+          character_changed = false
+        else 
+          character_changed = true
+          last_character = charName
+        end
 
       #gets the dialogue, character should alredy be set
       elsif par_type.upcase == "DIALOGUE"
         charLine = line.children.children.text
         #send the dialogue to be split into centenses and sent to database
-        lineCount = self.split_into_sentences(charName.upcase, lineCount, charLine, work)
+        lineCount = self.split_into_sentences(charName.upcase, lineCount, charLine, work, charName.length, character_changed, characters_per_line)
         #self.add_char_line(charName.upcase, lineCount, charLine, true, work)
         #lineCount += 1
 
@@ -195,22 +206,34 @@ end
   # - Takes an array which each index is a string/line from the script
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-  def self.add_text_lines_to_db(arr, work)
+  def self.add_text_lines_to_db(arr, work, characters_per_line)
 
     cur_line = ""
     haveline = false
     lineCount = 1
     name = ""
+    last_character = ""
+    character_changed = true
+
 
     arr.each do |line|
 
-      #look for a character name indicating the beginning of a dialogue                           <- remove ".?" for future use (for error in spanish scripts) 
+      #look for a character name indicating the beginning of a dialogue                           <- remove ".?" for future use (for error in spanish scripts)
       a = line.force_encoding("ISO-8859-1").encode("utf-8", replace: nil).match(/^[A-Z1-9\s]+(?=.?:)/)
 
       #we have a completed monologue and need to submit it to the db
       if(a != nil and haveline == true)
+
+        #check if this is a new character line
+        if last_character == name
+          character_changed = false
+        else 
+          character_changed = true
+          last_character = name
+        end
+
         #here we send all the data to the database if its a dialogue
-        lineCount = self.split_into_sentences(name, lineCount, cur_line, work)
+        lineCount = self.split_into_sentences(name, lineCount, cur_line, work, name.length, character_changed, characters_per_line)
         #self.add_char_line(name, lineCount, cur_line, true, work)
         haveline = false
         cur_line = ""
@@ -260,18 +283,23 @@ end
   end
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-#takes any .txt line from the script, splits into centenses, and adds 
+#takes any line from the script, splits into centenses, and adds
 # each centense into a line and adds that line to the database
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-def self.split_into_sentences(name, lineCount, cur_line, work)
-  
-  #split the current line into its centences
-  sentences = self.split_by_sentence(cur_line)
+def self.split_into_sentences(name, lineCount, cur_line, work, character_length, character_changed, characters_per_line)
+
+  #split the current line into its centences and then space for view
+  if true
+    sentences = self.split_by_sentence(line: cur_line, character_length: character_length, character_changed: character_changed, characters_per_line: characters_per_line)
+  else
+  #does not split into sentences first. need to add a case for using this
+    sentences = self.split_for_max_characters_per_line(line: cur_line, character_length: character_length, character_changed: character_changed, characters_per_line: characters_per_line)
+  end
 
   #add each sentence for this character into the database
   sentences.each do |sentence|
     self.add_char_line(name, lineCount, sentence, true, work)
-    lineCount += 1 
+    lineCount += 1
   end
   lineCount
 end
@@ -279,48 +307,97 @@ end
 
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-# takes a line from the script, splits into sentences and return an array 
-# containing the sentences found
+# takes a line from the script, splits into sentences, then splits for
+# appropriate spacing and return an array
+# containing the sentences found. This also accounts for space 
+# for including the character name on the display/operator view.
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-def self.split_by_sentence(line)
-   ary = line.gsub(/\n/," ").split(/([^\.\?\!]+[\.\?\!])/)
-     ary.delete("")
-     sentences = Array.new
-     str = ""
-     for i in 0..ary.size-1
-       next if ary[i].size == 0 || ary[i] =~ /^\s*$/
-       str << ary[i]
+def self.split_by_sentence(split_sentences: true, line: nil, character_length: character_length, character_changed: character_changed, characters_per_line: characters_per_line)
+  results = []
+  max_length = characters_per_line.to_i
+  original_max_length = max_length
+  line_section = Treat::Entities::Paragraph.build line
+  line_section.apply :chunk, :segment
 
-       #acceptions for abrev. with a period
-       while str =~ /(Mr|Sr|Mrs|Ms|Dr|Mt|St|Lt|Ave|Rd|Blvd)\.$/
-          if ary[i+1] == nil
-            break
-          else
-            str << ary[i+1]       
-          end
-          i += 1
-          ary[i] = ""
+  line_section.sentences.each do |sentence|
+    iteration = 1
+
+    if split_sentences
+      split_sentence = ''
+
+        sentence.to_s.split(' ').each do |token|
+
+        if iteration == 1 && character_changed
+          max_length = max_length - (character_length - 2)
+          proposed_length = split_sentence.length + token.length + character_length.to_i
+          #puts "centLen = " + split_sentence.length.to_s + " prop len= " + proposed_length.to_s + " tokenlength = " + token.length.to_s + " Charname_len = " + character_length.to_s
+        else
+          proposed_length = split_sentence.length + token.length
+          #puts " ** centLen = " + split_sentence.length.to_s + " prop len= " + proposed_length.to_s + " tokenlength = " + token.length.to_s + " Charname_len = " + character_length.to_s
+        end   
+
+        if proposed_length > max_length
+          results << split_sentence.rstrip
+          split_sentence = ''
+          iteration += 1
+          max_length = original_max_length
         end
+        split_sentence << Treat::Entities::Token.from_string(token)
+        split_sentence << " "
+      end
+      results << split_sentence.rstrip
 
 
-       if (i < ary.size-1)
-         next if ary[i] =~ /[A-Z]\.$/
-         next if ary[i+1] =~ /^\s*[a-z]/
-       end
-       if ary[i+1] =~ /^\"/
-         str << '"'
-         ary[i+1].sub!(/^\"/,"")
-       elsif ary[i+1] =~ /^\)/
-         str << ')'
-         ary[i+1].sub!(/^\)/,"")
-       elsif ary[i+1] =~ /^\.{2,}/
-         str << ''
-         ary[i+1].sub!(/^\.{2,}/,"")
-       end
-       sentences << str.sub(/^\s+/,"")
-       str = ""
-     end
-     sentences
+    else
+      results << sentence.to_s.rstrip
+    end
+  end
+  results
 end
+
+
+
+  #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  # takes a line from the script, splits for appropriate line length, and returns an array
+  # containing elements with <= max_lenght characters. This also accounts for space 
+  # for including the character name on the first line in the display/operator view.
+  #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  def self.split_for_max_characters_per_line(split_sentences: true, line: nil, character_length: character_length, character_changed: character_changed, characters_per_line: characters_per_line)
+    results = []
+    max_length = characters_per_line.to_i
+    original_max_length = max_length
+    line_section = Treat::Entities::Paragraph.build line
+    line_section.apply :chunk, :segment
+
+      iteration = 1
+
+      if split_sentences
+        split_sentence = ''
+
+          line_section.to_s.split(' ').each do |token|
+
+          if iteration == 1 && character_changed
+            max_length = max_length - (character_length - 2)
+            proposed_length = split_sentence.length + token.length + character_length.to_i
+          else
+            proposed_length = split_sentence.length + token.length
+          end   
+
+          if proposed_length > max_length
+            results << split_sentence.rstrip
+            split_sentence = ''
+            iteration += 1
+            max_length = original_max_length
+          end
+          split_sentence << Treat::Entities::Token.from_string(token)
+          split_sentence << " "
+        end
+        results << split_sentence.rstrip
+
+      else
+        results << sentence.to_s.rstrip
+      end
+    results
+  end
 
 end #end class

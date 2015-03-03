@@ -45,6 +45,9 @@ gem 'rails_admin'
 gem 'underscore-rails'
 gem 'resque'
 gem 'resque-scheduler'
+gem 'narray'
+gem 'scalpel'
+gem 'treat'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'

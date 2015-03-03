@@ -40,6 +40,7 @@ Install rails and run setup tasks.
 `bundle`  
 `rake db:migrate`  
 `rake db:seed`  
+`rake treat:install'  
 
 ####Running in development mode:  
 

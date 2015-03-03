@@ -24,7 +24,13 @@
             </br>
             <%= select_tag "work", options_from_collection_for_select(Work.order(:work_name), "id", "name" ), :class=>"form-control" %>
           <% end %>
-          </br>
+
+          <%= content_tag :div, :class=>"form-group" do %>
+               <%= label_tag("Select Characters Per Line to Display") %>
+            </br>
+            <%= select_tag "character_per_line", options_for_select(20..50, 40) , :class=>"form-control" %>
+          <% end %>
+
           <%= button_tag "Upload", :type=>"submit", :class => "btn btn-primary" %>
         <% end %>
 
