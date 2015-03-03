@@ -10,7 +10,6 @@ var scrolling = false;
 var opScrollSpd= 400;
 
 var $lines; //jquery object to hold line elements
-var lAlias;
 
 $(document).ready(function(){
 	if($('#main-operator').length>0){		
@@ -56,7 +55,21 @@ $(document).ready(function(){
 			}
 		}
 
-
+		function dispOff(d){
+			console.log('display cleared');
+			$('.current-operator').removeClass('current-operator');
+			$('#blackout-icon-operator').toggleClass('blackout-off-operator');
+			blackout=true;
+		}
+		function dispOn(d){
+			console.log('display is back');
+			var last = $.grep($('.line-operator'), function(n){
+				return $(n).attr('data-sequence') == currentOp;
+			})[0];
+			$(last).addClass('current-operator');
+			$('#blackout-icon-operator').toggleClass('blackout-off-operator');
+			blackout=false;
+		}
 		
 
 
@@ -134,27 +147,6 @@ $(document).ready(function(){
 		var minInd = 0; 
 		var maxInd = $lines.length-1;
 
-		function boolSet(str){
-			if(str=='true'){
-				return 1;
-			}else{
-				return 0;
-			}
-		}
-
-		//this is a very lean way to store frequently evaluated values for each line
-		function buildAlias(){
-			var la=[];
-			for(var i = $lines.length-1; i>=0; i--){
-				var line = $lines[i];
-				//var s = line['dataset']['sequence'];
-				la[i] = [line['offsetTop'], line['offsetHeight'], boolSet(line['dataset']['visibility'])];
-			};
-			return la;
-		}
-		//build lAlias again on resize
-		lAlias = buildAlias();
-
 		//bind click handler to commit button
 		$('#commit-button-operator').click(commit);
 
@@ -168,50 +160,36 @@ $(document).ready(function(){
 			commit();
 		});
 
-		//action that rolls down preview and poplates is
-		$('#preview-operator').click(function(){
-
-
+		//bind click event to the preview operator
+		$('#preview-operator').click(function() {
+			//if isn't visible
 			if($(this).attr('data-visible')=='false'){
-				$(this).animate({left:'0px'}, 1000, function(){
+				$(this).stop().animate({left:'0px'}, 1000, function(){
+					//make visible
 					$(this).attr('data-visible', 'true');
-					
+					//set src for iframe if not already set
 					if($('#preview-operator iframe').attr('src')==""){
 						$('#preview-operator iframe').attr('src', "/display/index?operator="+operator+"&view="+viewMode+"&work="+work);
 					}
-					
 				});
-			}else{
+			} else {
+				//make it no visible
 				$(this).animate({left:'-100%'}, 1000, function(){
 					$(this).attr('data-visible', 'false');
 				});
+				//should maybe reset the src of the iframe to "" so that it's not continuing to pull the server while hidden -!!!-
 			}
 
 		});
 		
-		function dispOff(d){
-			console.log('display cleared');
-			$('.current-operator').removeClass('current-operator');
-			$('#blackout-icon-operator').toggleClass('blackout-off-operator');
-			blackout=true;
-		}
-		function dispOn(d){
-			console.log('display is back');
-			var last = $.grep($('.line-operator'), function(n){
-				return $(n).attr('data-sequence') == currentOp;
-			})[0];
-			$(last).addClass('current-operator');
-			$('#blackout-icon-operator').toggleClass('blackout-off-operator');
-			blackout=false;
-		}
-		//blackout the display
+		//bind click event to the blackout operator
 		$('#blackout-operator').click(function(){
 			if(!blackout){
 				$.ajax('/operator/pushTextSeq', {
 					type:'POST',
 					data: {
 						seq:0,
-	          operator: operator
+	          			operator: operator
 					},
 					success:dispOff,
 				});
@@ -220,72 +198,40 @@ $(document).ready(function(){
 					type:'POST',
 					data: {
 						seq:currentOp,
-	          operator: operator
+	          			operator: operator
 					},
 					success:dispOn,
 				});
 			}
-
-
 		});
 
-		//single up and down buttons
+		//bind click event to the up button
 		$('#up-button-operator').click(function(){
-			if(!scrolling){
-				if(targeted!=minInd){
-					targeted--;
-					while(!lAlias[targeted][2]&&targeted>minInd){
-						targeted--;
-					}
- 				
-					aniScroll($lines[targeted], function(){
-						//console.log(targeted);
-						scrolling=false;
-						//removed the targeted class
-						$targeted.removeClass('target-operator');
-						//get scrolltop
-						var st = document.getElementById('line-holder-operator')['scrollTop'];
-						targeted = findMid(lAlias, st);
-						$targeted = $($lines[targeted]);
-						$targeted.addClass('target-operator');
-
-						//destroy the counter
-						window.counting=false;
-						commit();
-					});
-				}
-			}	
-		});
-		$('#down-button-operator').click(function(){
-			if(!scrolling){
-				if(targeted!=maxInd){
-					scrolling=true;
-					//removed the targeted class
-					$targeted.removeClass('target-operator');
-					targeted++;
-					while(!lAlias[targeted][2]&&targeted<maxInd){
-						targeted++;
-					}
-					aniScroll($lines[targeted], function(){
-						scrolling=false;
-						//get scrolltop
-						var st = document.getElementById('line-holder-operator')['scrollTop'];
-						targeted = findMid(lAlias, st);
-						$targeted = $($lines[targeted]);
-						$targeted.addClass('target-operator');
-
-						//destroy the counter
-						window.counting=false;
-						commit();
-					});
-				}
+			//if current is not data sequence 0
+			if($current.attr('data-sequence') != 0) {
+				//traverse previous line operators until a visible one is found
+				do {
+					$targeted = $targeted.prev();
+				} while($targeted.attr('data-visibility') == "false");
+				//commit
+				commit();
 			}
 		});
 
+		//bind click event to the down button
+		$('#down-button-operator').click(function(){
+			//if current is not the last data-sequence
+			if($current.attr('data-sequence') != $('.line_operator').last().attr('data-sequence')) {
+				//traverse next line operators until a visible one is found
+				do {
+					$targeted = $targeted.next();
+				} while($targeted.attr('data-visibility') == "false");
+				//commit
+				commit();
+			}
+		});
 
-
+		//hide the shade loading operator once the page has loaded
 		$('#shade-loading-operator').fadeOut(1000, function(){});
-
 	}
-
 });
