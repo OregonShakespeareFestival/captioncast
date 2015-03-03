@@ -4,6 +4,7 @@
 .body-texts{
   background-color: #082a36;
   color:#fff;
+  margin-left:10px;
 }
 tr:nth-child(even){
     background-color: #154553;
@@ -11,9 +12,11 @@ tr:nth-child(even){
 tr:nth-child(odd){
     background-color: #417486;
 }
-a{
+
+.link-edit{
 	color:#fff;
 }
-input[type="submit"] {
+
+input[type="submit"]{
 	background-color:#337ab7;
 }

@@ -43,25 +43,34 @@ span.glyphicon.glyphicon-eye-open{
   color:red;
 }
 #element_attr{
-  background-color: #BBBBBB;
+  background-color: #000;
   width: 200px;
   height:296px;
   display:inline-block;
   float:left;
 
 }
+#character_name_dropdown{
+  background-color: #337ab7;
+}
 textarea#text_content_text{
   display:inline-block;
   float:left;
   width:400px;
   height:296px;
+  background-color:#417486;
+  color: white;
+}
+#new_line_content_text{
+  background-color:#417486;
+  color: white;
 }
 input[type=submit]{
   clear:both;
   margin:3px;
 }
 #insert_line_form{
-  margin-top:30px;
+  margin-top:45px;
   border: 5px solid;
   width:609px;
 }
