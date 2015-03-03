@@ -6,7 +6,6 @@ _.templateSettings = {
 var targeted = 0;
 var $targeted, $current;
 var blackout = false;
-var autoCommit = true;
 var scrolling = false;
 var opScrollSpd= 400;
 
@@ -189,10 +188,7 @@ $(document).ready(function(){
 
 					//destroy the counter
 					window.counting=false;
-					if(autoCommit){
-						commit();
-					}
-
+					commit();
 			};
 			if(!window.counting){
 				window.counting = setTimeout(
@@ -330,19 +326,6 @@ $(document).ready(function(){
 			}
 
 
-		});
-		$('#autocommit-operator').click(function(){
-			if(autoCommit){
-				autoCommit = false;
-				console.log('autocommit off');
-
-			}else{
-				autoCommit = true;
-				console.log('autocommit on');
-
-			}
-			console.log(this);
-			$('#autocommit-icon-operator').toggleClass('autocommit-on-operator')
 		});
 
 		//single up and down buttons
