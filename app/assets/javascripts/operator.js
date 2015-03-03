@@ -174,35 +174,47 @@ $(document).ready(function(){
 		}
 		var $lh = $('#line-holder-operator');
 		//everytime the operator is scrolled, target a new line
-		$lh.scroll(function(){
-			var updateInt = 300;
-			//self destroying counter that updates the highlighting
-			function advanceTarget(){
-					//removed the targeted class
-					$targeted.removeClass('target-operator');
-					//get scrolltop
-					var st = document.getElementById('line-holder-operator')['scrollTop'];
-					targeted = findMid(lAlias, st);
-					$targeted = $($lines[targeted]);
-					$targeted.addClass('target-operator');
+		// $lh.scroll(function(){
+		// 	var updateInt = 300;
+		// 	//self destroying counter that updates the highlighting
+		// 	function advanceTarget(){
+		// 			//removed the targeted class
+		// 			$targeted.removeClass('target-operator');
+		// 			//get scrolltop
+		// 			var st = document.getElementById('line-holder-operator')['scrollTop'];
+		// 			targeted = findMid(lAlias, st);
+		// 			$targeted = $($lines[targeted]);
+		// 			$targeted.addClass('target-operator');
 
-					//destroy the counter
-					window.counting=false;
-					commit();
-			};
-			if(!window.counting){
-				window.counting = setTimeout(
-				advanceTarget, updateInt);
-			}
+		// 			//destroy the counter
+		// 			window.counting=false;
+		// 			commit();
+		// 	};
+		// 	if(!window.counting){
+		// 		window.counting = setTimeout(
+		// 		advanceTarget, updateInt);
+		// 	}
 
-		});
+		// });
 		//this auto-scrolls to a desired element
 		function aniScroll(el, c){
 			$lh.animate({scrollTop: el['offsetTop'] +  Math.round(el['offsetHeight']/2) - mid}, opScrollSpd, c);
 		}
 		//scroll to a line when it's clicked
 		$('.line-operator').click(function(){
-			aniScroll(this);
+			aniScroll(this, function() {
+				//removed the targeted class
+				$targeted.removeClass('target-operator');
+				//get scrolltop
+				var st = document.getElementById('line-holder-operator')['scrollTop'];
+				targeted = findMid(lAlias, st);
+				$targeted = $($lines[targeted]);
+				$targeted.addClass('target-operator');
+
+				//destroy the counter
+				window.counting=false;
+				//commit();
+			});
 		});
 		//action that rolls down preview and poplates is
 		$('#preview-operator').click(function(){
@@ -340,6 +352,17 @@ $(document).ready(function(){
 					aniScroll($lines[targeted], function(){
 						//console.log(targeted);
 						scrolling=false;
+						//removed the targeted class
+						$targeted.removeClass('target-operator');
+						//get scrolltop
+						var st = document.getElementById('line-holder-operator')['scrollTop'];
+						targeted = findMid(lAlias, st);
+						$targeted = $($lines[targeted]);
+						$targeted.addClass('target-operator');
+
+						//destroy the counter
+						window.counting=false;
+						commit();
 					});
 				}
 			}	
@@ -348,12 +371,23 @@ $(document).ready(function(){
 			if(!scrolling){
 				if(targeted!=maxInd){
 					scrolling=true;
+					//removed the targeted class
+					$targeted.removeClass('target-operator');
 					targeted++;
 					while(!lAlias[targeted][2]&&targeted<maxInd){
 						targeted++;
 					}
 					aniScroll($lines[targeted], function(){
 						scrolling=false;
+						//get scrolltop
+						var st = document.getElementById('line-holder-operator')['scrollTop'];
+						targeted = findMid(lAlias, st);
+						$targeted = $($lines[targeted]);
+						$targeted.addClass('target-operator');
+
+						//destroy the counter
+						window.counting=false;
+						commit();
 					});
 				}
 			}
