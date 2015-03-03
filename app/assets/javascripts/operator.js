@@ -352,6 +352,17 @@ $(document).ready(function(){
 					aniScroll($lines[targeted], function(){
 						//console.log(targeted);
 						scrolling=false;
+						//removed the targeted class
+						$targeted.removeClass('target-operator');
+						//get scrolltop
+						var st = document.getElementById('line-holder-operator')['scrollTop'];
+						targeted = findMid(lAlias, st);
+						$targeted = $($lines[targeted]);
+						$targeted.addClass('target-operator');
+
+						//destroy the counter
+						window.counting=false;
+						commit();
 					});
 				}
 			}	
