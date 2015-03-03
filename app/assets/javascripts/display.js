@@ -1,5 +1,5 @@
 //javascript for the display view goes here
-var refresh = 500;
+var refresh = 50;
 var dispFadeSpd = 400;
 var displayScrollSpd = 1200;
 var $linesDisp;
