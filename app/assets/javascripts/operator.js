@@ -26,8 +26,10 @@ $(document).ready(function(){
 		function seqPushed(){
 			aniScroll($targeted.get(), function() {
 				$current.removeClass('current-operator');
+				$current.removeClass('target-operator');
 				$current=$targeted;
 				$current.addClass('current-operator');
+				$current.addClass('target-operator')
 			});
 			//abstract this -!!!-
 			if(blackout){
@@ -139,7 +141,7 @@ $(document).ready(function(){
 
 
 
-		$targeted = $lines.first();
+		$targeted = $('.line-operator').first();
 		$targeted.addClass('target-operator');
 		$current = $targeted;
 		$current.addClass('current-operator');
@@ -150,11 +152,11 @@ $(document).ready(function(){
 		//bind click handler to line operators
 		$('.line-operator').click(function(){
 			//remove target operator class
-			$targeted.removeClass("target-operator");
+			$targeted.removeClass('target-operator');
 			//set targeted to the line that was clicked on
 			$targeted = $(this);
-			//commit the change
-			//commit();
+			//add targeted class to new line operator
+			$targeted.addClass('target-operator');
 		});
 
 		//bind click event to the preview operator
@@ -207,9 +209,9 @@ $(document).ready(function(){
 			//if current is not data sequence 0
 			if($current.attr('data-sequence') != 0) {
 				//traverse previous line operators until a visible one is found
-				do {
+				$targeted = $current.prev();
+				while($targeted.attr('data-visibility') == "false") 
 					$targeted = $targeted.prev();
-				} while($targeted.attr('data-visibility') == "false");
 				//commit
 				commit();
 			}
@@ -220,9 +222,9 @@ $(document).ready(function(){
 			//if current is not the last data-sequence
 			if($current.attr('data-sequence') != $('.line_operator').last().attr('data-sequence')) {
 				//traverse next line operators until a visible one is found
-				do {
+				$targeted = $current.next();
+				while($targeted.attr('data-visibility') == "false") 
 					$targeted = $targeted.next();
-				} while($targeted.attr('data-visibility') == "false");
 				//commit
 				commit();
 			}
