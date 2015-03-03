@@ -46,9 +46,13 @@ $(document).ready(function(){
 			}
 		}
 
+		//scrolls to desired element
+		//can include a callback function
+		function aniScroll(el, c){
+			$('#line-holder-operator').stop().animate({scrollTop: el['offsetTop'] +  Math.round(el['offsetHeight']/2) - mid}, opScrollSpd, c);
+		}
+
 		
-
-
 
 
 
@@ -105,21 +109,26 @@ $(document).ready(function(){
 		//store the new DOM lines inside of a jquery object
 		$lines = $('.line-operator');
 		//actually, would be good if lines were read into the array with sequence numbers for index vals?
-		//END TEMPLATING - all of this can eventually be moved to the controller -!!!-
 
-
-
-		
-		$targeted = $lines.first();
-		$targeted.addClass('target-operator');
-		var minInd = 0; 
-		var maxInd = $lines.length-1;
 		//ID for non-visual lines
 		$lines.each(function(){
 			if($(this).attr('data-visibility')=="false"){
 				$(this).addClass('line-non-visible-operator');
 			}
 		});
+		//END TEMPLATING - all of this can eventually be moved to the controller -!!!-
+
+
+
+
+		$targeted = $lines.first();
+		$targeted.addClass('target-operator');
+		$current = $targeted;
+		$current.addClass('current-operator');
+
+		var minInd = 0; 
+		var maxInd = $lines.length-1;
+
 		function boolSet(str){
 			if(str=='true'){
 				return 1;
@@ -127,6 +136,7 @@ $(document).ready(function(){
 				return 0;
 			}
 		}
+
 		//this is a very lean way to store frequently evaluated values for each line
 		function buildAlias(){
 			var la=[];
@@ -140,63 +150,21 @@ $(document).ready(function(){
 		//build lAlias again on resize
 		lAlias = buildAlias();
 
-		//this happens when you click the commit button
+		//bind click handler to commit button
 		$('#commit-button-operator').click(commit);
 
-		//this is a lean function that sorts the stack for the line closest to middle
-		function findMid(a, st){
-			//define midpoint relative to holder
-			var t = st+mid;
-			var i = a.length-1;
-			//set initial vals
-			var ci = i;
-			var ce = a[i][0]+Math.round(a[i][1]/2);
-			var cd = Math.abs(ce-t);
-			var ld = cd;
-			while(i>-1){
-				//find the currently evaluated sequence's elevation minus midpoint
-				var e=a[i][0]+Math.round(a[i][1]/2);
-				//set a distance to beat based on absolute value
-				var d = Math.abs(e-t);
-				//set the visibility
-				var v = a[i][2];
-				//if this distance is less than the one to beat and visible
-				if(d<cd&&v==1){
-					//then swap new vals
-					cd = d;
-					ci = i;
-				}
-				//if this distance is greater than the last and visible then break
-				if(d>ld&&v==1){
-					break;
-				}
-				ld=d;
-				i--;
-			}
-			return ci;
-		}
-		var $lh = $('#line-holder-operator');
-		
-		//this auto-scrolls to a desired element
-		function aniScroll(el, c){
-			$lh.stop().animate({scrollTop: el['offsetTop'] +  Math.round(el['offsetHeight']/2) - mid}, opScrollSpd, c);
-		}
-		//scroll to a line when it's clicked
+		//bind click handler to line operators
 		$('.line-operator').click(function(){
-			aniScroll(this, function() {
-				//removed the targeted class
-				$targeted.removeClass('target-operator');
-				//get scrolltop
-				var st = document.getElementById('line-holder-operator')['scrollTop'];
-				targeted = findMid(lAlias, st);
-				$targeted = $($lines[targeted]);
-				$targeted.addClass('target-operator');
-
-				//destroy the counter
-				window.counting=false;
-				//commit();
-			});
+			//remove target operator class
+			$targeted.removeClass("target-operator");
+			//set targeted to the line that was clicked on
+			$targeted = $(this);
+			//commit the change
+			commit();
+			//scroll the operator view to the new line
+			aniScroll(this);
 		});
+		
 		//action that rolls down preview and poplates is
 		$('#preview-operator').click(function(){
 
