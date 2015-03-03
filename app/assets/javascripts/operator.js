@@ -173,29 +173,7 @@ $(document).ready(function(){
 			return ci;
 		}
 		var $lh = $('#line-holder-operator');
-		//everytime the operator is scrolled, target a new line
-		// $lh.scroll(function(){
-		// 	var updateInt = 300;
-		// 	//self destroying counter that updates the highlighting
-		// 	function advanceTarget(){
-		// 			//removed the targeted class
-		// 			$targeted.removeClass('target-operator');
-		// 			//get scrolltop
-		// 			var st = document.getElementById('line-holder-operator')['scrollTop'];
-		// 			targeted = findMid(lAlias, st);
-		// 			$targeted = $($lines[targeted]);
-		// 			$targeted.addClass('target-operator');
-
-		// 			//destroy the counter
-		// 			window.counting=false;
-		// 			commit();
-		// 	};
-		// 	if(!window.counting){
-		// 		window.counting = setTimeout(
-		// 		advanceTarget, updateInt);
-		// 	}
-
-		// });
+		
 		//this auto-scrolls to a desired element
 		function aniScroll(el, c){
 			$lh.stop().animate({scrollTop: el['offsetTop'] +  Math.round(el['offsetHeight']/2) - mid}, opScrollSpd, c);
@@ -236,70 +214,7 @@ $(document).ready(function(){
 			}
 
 		});
-		//old js for "skip to number" feature 
-		//let's hide this and see if anybody cares
-		//front-end features are like teeth: ignore them and they will go away
-
-		/* 
-		//roll down the fast forward feature
-		$('#fforward-operator').click(function(){
-			if($(this).attr('data-visible')=='false'){
-				$(this).animate({left:'0px'}, 1000, function(){
-					$(this).attr('data-visible', 'true');
-					$(this).find('input').first().focus();
-				});
-			}else{
-				$(this).animate({left:'-100%'}, 1000, function(){
-					$(this).attr('data-visible', 'false');
-					$(this).find('input').first().blur();
-
-				});
-			}
-
-
-		});
-		//submit a line number
-		$('#fforward-operator input').keypress(function(e){
-			if(e.which == 13){
-				//console.log($(this).val());
-				var s = $(this).val();
-				var l = _.find($('.line-operator'), function(q){
-					return $(q).attr('data-sequence')==s;
-				});
-				//this may be able to be abstracted to a single function
-
-				if(l){
-				var diff = ($('.target-operator').position().top - $(l).position().top)*1.0;
-				$('#line-holder-operator').animate(
-					{scrollTop:
-						$('#line-holder-operator').scrollTop() - diff
-					}, opScrollSpd);
-				}else{
-					alert('Line ' + s + ' not found');
-				}
-
-				$('#fforward-operator').animate({left:'-100%'}, 1000, function(){
-					$(this).attr('data-visible', 'false');
-					var i = $(this).find('input').first();
-					i.blur();
-					i.val('');
-
-				});
-
-				return false;
-			}
-		});
-		//need to debug this block
-		$('#fforward-operator input').blur(function(){
-				$('#fforward-operator').animate({left:'-100%'}, 500, function(){
-					$(this).attr('data-visible', 'false');
-					var i = $(this).find('input').first();
-					i.blur();
-					i.val('');
-
-				});
-			});
-		*/
+		
 		function dispOff(d){
 			console.log('display cleared');
 			$('.current-operator').removeClass('current-operator');
