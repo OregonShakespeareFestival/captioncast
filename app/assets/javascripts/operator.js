@@ -144,9 +144,6 @@ $(document).ready(function(){
 		$current = $targeted;
 		$current.addClass('current-operator');
 
-		var minInd = 0; 
-		var maxInd = $lines.length-1;
-
 		//bind click handler to commit button
 		$('#commit-button-operator').click(commit);
 
@@ -157,7 +154,7 @@ $(document).ready(function(){
 			//set targeted to the line that was clicked on
 			$targeted = $(this);
 			//commit the change
-			commit();
+			//commit();
 		});
 
 		//bind click event to the preview operator
