@@ -3,68 +3,67 @@ _.templateSettings = {
     interpolate: /\{\{\=(.+?)\}\}/g,
     evaluate: /\{\{(.+?)\}\}/g
 };
-var targeted = 0;
+
 var $targeted, $current;
 var blackout = false;
 var scrolling = false;
 var opScrollSpd= 400;
 
-//jquery object to hold line elements
-var $lines;
+var $lines; //jquery object to hold line elements
 var lAlias;
-$(document).ready(function(){
-	if($('#main-operator').length>0){
-		var currentOp = 0;
-		//whenever the operator is restarted black out the screen -- can abstract this
-		$.ajax('/operator/pushTextSeq', {
-				type:'POST',
-				data: {
-					seq:0,
-			        operator: operator
-				},
-			success:dispOff,
-		});
 
-		//this function will universally commit the targeted line
+$(document).ready(function(){
+	if($('#main-operator').length>0){		
+		//blackout screen and move to text sequence 0 when the operator is reset -!!!-
+
+		//traverse operator after commit
 		function seqPushed(d){
-			//display logic if successful
-			if($current){
-				$current.removeClass('current-operator');
-			}
+			//move animations into this function -!!!-
+			$current.removeClass('current-operator');
 			$targeted.addClass('current-operator');
 			$current=$targeted;
 			if(blackout){
 				$('#blackout-icon-operator').addClass('blackout-off-operator');
 				blackout=false;
 			}
-			currentOp=targeted;
-			console.log(d + ' pushed ' + 'for index ' + currentOp );
+			console.log(d + ' pushed ');
 		}
+
+		//push text sequence to operator controller
 		function commit(){
-				//post the current sequence identifier through AJAX
-				if($targeted.attr('data-visibility')=="true"){
-					$.ajax('/operator/pushTextSeq', {
-						type:'POST',
-						data: {
-							seq:$targeted.attr('data-sequence'),
-				            operator: operator
-						},
-						success:seqPushed,
-						error:(function(){
-							//put in better error handling here
-							alert('Commit failed! Please check your connection.');
-						}),
-					});
-
-				}
-
+			if($targeted.attr('data-visibility')=="true"){
+				$.ajax('/operator/pushTextSeq', {
+					type:'POST',
+					data: {
+						seq:$targeted.attr('data-sequence'),
+			            operator: operator
+					},
+					success:seqPushed,
+					error:(function(){
+						alert('Commit failed! Please check your connection.');
+					})
+				});
+			}
 		}
 
+		
+
+
+
+
+
+		//set the main operator's height to the height of the window
+		//can do with with css by setting position:absolute top:0 bottom:0 -!!!-
 		$('#main-operator').height($(window).innerHeight()+'px');
 
 		//set the middlepoint
+		//don't think this is needed once the find mid method is removed -!!!-
 		var mid = Math.round($(window).innerHeight()/2);
 
+
+
+
+		//TEMPLATING - all of this can eventually be moved to the controller -!!!-
 		//set the templates
 		var tLine = _.template($('#line-template-operator').html());
 		//make sure the lines are sorted by sequence instead of index when read in
@@ -106,7 +105,11 @@ $(document).ready(function(){
 		//store the new DOM lines inside of a jquery object
 		$lines = $('.line-operator');
 		//actually, would be good if lines were read into the array with sequence numbers for index vals?
+		//END TEMPLATING - all of this can eventually be moved to the controller -!!!-
 
+
+
+		
 		$targeted = $lines.first();
 		$targeted.addClass('target-operator');
 		var minInd = 0; 
