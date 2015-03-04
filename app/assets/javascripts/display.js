@@ -6,7 +6,7 @@ var $linesDisp;
 
 $(document).ready(function(){
 	if($('#body-display-index').length>0){
-		var current=0;
+		var current=0; //can remove eventually - multi doesn't use this and once single is refactored this variable won't be referenced anywhere -!!!-
 
 
 		//TEMPLATING - this can be moved into the controller eventually -!!!-
@@ -118,65 +118,54 @@ $(document).ready(function(){
 			buildLinesDisp($lineCont);
 			//END MORE TEMPLATING - can be moved to the controller -!!!-
 
-			//set first interval
+			$('.line-display-multi').first().addClass('focus-multi');
+
+			//recursive function that scrapes the line sequence number checks for blackouts
 			function heartbeat(){
-				var bottomPad = 65;
+				var bottomPad = 65; //may be able to get rid of -!!!-
 				//ajax goes here next timeout
-				$.ajax('/display/current',
-				  {
-						data: {operator: operator},
-					  dataType: 'json',
-						success:(function(j){
-							console.log('sequence scraped ' + j);
-							if(current!=j){
-								//console.log(j);
-								current=j;
-
-								if(current!==0){
-									$('#shade-multi').fadeOut(dispFadeSpd);
-									var newElem = _.find($linesDisp, function(q){
-											return parseInt($(q).attr('data-sequence'))==j;
-									});
-									$('#body-display-index').stop().animate({scrollTop:$(newElem).position().top-$(window).height()/2+$(newElem).height()+bottomPad}, displayScrollSpd);
-									//remove the focus class
-									$('.focus-multi').removeClass('focus-multi');
-									//console.log('class-removed');
-
-									$(newElem).addClass('focus-multi');
-											//$(this).addClass('shown-display');
-									setTimeout(function(){
-										heartbeat();
-									}, refresh);
-								}else{
-									$('#shade-multi').fadeIn(dispFadeSpd);
-									setTimeout(function(){
-										heartbeat();
-										}, refresh);
-								}
-
-
-									//});
-
-							}else{
+				$.ajax('/display/current', {
+					data: { operator: operator },
+					dataType: 'json',
+					success:(function(j) {
+						console.log('sequence scraped ' + j);
+						//if the data sequence changed
+						if($('.focus-multi').attr('data-sequence') != j) {
+							//if the first line isn't focused
+							if($('.focus-multi').attr('data-sequence') !== 0) {
+								$('#shade-multi').fadeOut(dispFadeSpd);
+								//animate scroll to the changed data sequence
+								$('#body-display-index').stop().animate({scrollTop:$('#line-display-'+j).position().top-$(window).height()+$('#line-display-'+j).outerHeight()}, displayScrollSpd);
+								//remove the focus class
+								$('.focus-multi').removeClass('focus-multi');
+								//add the focus class to the new line
+								$('#line-display-'+j).addClass('focus-multi');
+								//set timer to repeat the heartbeat
+								setTimeout(function() {
+									heartbeat();
+								}, refresh);
+							} else {
+								$('#shade-multi').fadeIn(dispFadeSpd);
 								setTimeout(function(){
 									heartbeat();
 									}, refresh);
 							}
-
-
-						}),
+						} else {
+							setTimeout(function() {
+								heartbeat();
+							}, refresh);
+						}
+					}),
 				});
 			}
+
+			//initial heartbeat
 			heartbeat();
 
-
-
-
-
 		}
+
 		$('#shade-loading-display').fadeOut(1000, function(){});
 
 	}
-
 
 });
