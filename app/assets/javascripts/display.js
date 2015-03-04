@@ -157,27 +157,15 @@ $(document).ready(function(){
 									//console.log('class-removed');
 
 									$(newElem).addClass('focus-multi');
-											//$(this).addClass('shown-display');
-									setTimeout(function(){
-										heartbeat();
-									}, refresh);
 								}else{
-									$('#shade-multi').fadeIn(dispFadeSpd);
-									setTimeout(function(){
-										heartbeat();
-										}, refresh);
+								//TODO: blackout
 								}
 
-
-									//});
-
-							}else{
-								setTimeout(function(){
-									heartbeat();
-									}, refresh);
 							}
-
-
+							setTimeout(function(){
+								heartbeat();
+								}, refresh);
+							
 						}),
 				});
 			}
