@@ -6,9 +6,11 @@
   which are made available for editing
 *******************************************************-->
 <% provide(:title, "Edit contact") %>
-<div>
+<div id="this-text-to-edit">
   <!--form for editing the content/settings of the line-->
   <%= form_for(@text) do |f| %>
+    <%= f.label :operator_note %>
+    <%= f.text_area :operator_note, class: 'form-control', cols: 30, rows: 1 %>
     <div id="element_attr">
       <p><%="Character: " + @text.element.element_name%></p>
       <p><%="Element: " + @text.element.element_type%></p>

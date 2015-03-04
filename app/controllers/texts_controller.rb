@@ -176,7 +176,7 @@ class TextsController < ApplicationController
   #used for bringing in params sent to the update function
   #******************************************************************
   def message_params
-    params.require(:text).permit(:content_text, :visibility)
+    params.require(:text).permit(:content_text, :visibility, :operator_note)
   end
 
   def vis_params
