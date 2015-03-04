@@ -3,10 +3,13 @@ var refresh = 50;
 var dispFadeSpd = 400;
 var displayScrollSpd = 1200;
 var $linesDisp;
+
 $(document).ready(function(){
 	if($('#body-display-index').length>0){
 		var current=0;
 
+
+		//TEMPLATING - this can be moved into the controller eventually -!!!-
 		//make sure the lines are sorted by sequence instead of index when read in
 		lines = _.sortBy(lines,function(q){
 			return q.sequence;
@@ -30,8 +33,11 @@ $(document).ready(function(){
 				il++;
 			}
 		}
+		//END TEMPLATING - this can be moved into the controller eventually -!!!-
 
-		if($('#multi-flag-display').length<=0){
+		//if single
+		if($('#multi-flag-display').length<=0) {
+			//MORE TEMPLATING - can be moved to the controller -!!!-
 			$lineCont = $('#line-holder-display');
 			// template views
 			var tLine = _.template($('#line-template-display').html());
@@ -52,9 +58,10 @@ $(document).ready(function(){
 
 			//build the line dom
 			buildLinesDisp($lineCont);
+			//END MORE TEMPLATING - can be moved to the controller -!!!-
+
 			$linesDisp = $('.line-display');
-			//when the first line fade in it sets off the preiodic ajax scrape
-			//for now we're just grabbing a random number but soon it will be the number supplied by the operator
+
 			$linesDisp.first().fadeIn(dispFadeSpd, function(){
 				$(this).addClass('shown-display');
 				//set first interval
@@ -98,34 +105,14 @@ $(document).ready(function(){
 				}
 				heartbeat();
 			});
+		//if multi
+		} else {
 
 
-		//end of original block
-		//}
-		}else{
-			$('#shade-multi').css('display', 'none');
-			//this is specific JS for the multi-line view
-			console.log('welcome to multi-line mode');
-			// //template views
+			//MORE TEMPLATING - can be moved to the controller
 			var tLine = _.template($('#line-template-display-multi').html());
 
 			$lineCont = $('#line-holder-display-multi');
-
-
-			//seed sequence #0 with a blank line
-			$lineCont.append(
-				tLine({
-					"character":'',
-				    "id": 0,
-				    "sequence": 0,
-				    "content_type": "Non-Dialogue",
-				    "content_text": " ",
-				    "color": null,
-				    "visibility": false,
-				    "created_at": " ",
-				    "updated_at": " "
-					})
-				);
 
 			//build the line dom
 			buildLinesDisp($lineCont);
