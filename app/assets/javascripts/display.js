@@ -109,15 +109,14 @@ $(document).ready(function(){
 		} else {
 
 
-			//MORE TEMPLATING - can be moved to the controller
+			//MORE TEMPLATING - can be moved to the controller -!!!-
 			var tLine = _.template($('#line-template-display-multi').html());
 
 			$lineCont = $('#line-holder-display-multi');
 
 			//build the line dom
 			buildLinesDisp($lineCont);
-			$linesDisp = $('.line-display-multi');
-
+			//END MORE TEMPLATING - can be moved to the controller -!!!-
 
 			//set first interval
 			function heartbeat(){
