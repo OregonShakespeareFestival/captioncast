@@ -1,8 +1,13 @@
 //javascript for the display view goes here
 var refresh = 50;
 var dispFadeSpd = 400;
-var displayScrollSpd = 1200;
+var MAXSCROLLDURATION = 1200;
+var MINSCROLLDURATION = 500;
+var displayScrollSpd = MAXSCROLLDURATION;
 var $linesDisp;
+var lastScrollMS = (new Date).getTime();
+
+
 $(document).ready(function(){
 	if($('#body-display-index').length>0){
 		var current=0;
@@ -145,7 +150,10 @@ $(document).ready(function(){
 							if(current!=j){
 								//console.log(j);
 								current=j;
-
+								var now = (new Date).getTime();
+								displayScrollSpd = Math.max(MINSCROLLDURATION, (Math.min(MAXSCROLLDURATION, (now - lastScrollMS))));
+								lastScrollMS = now;
+								console.log(displayScrollSpd);
 								if(current!==0){
 									$('#shade-multi').fadeOut(dispFadeSpd);
 									var newElem = _.find($linesDisp, function(q){
