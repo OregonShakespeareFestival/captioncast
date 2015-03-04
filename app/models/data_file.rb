@@ -144,6 +144,7 @@ def self.add_character_elements(arr, work)
     end
     #adds a blank line character for the editor to use for this work
     self.add_element("", "BLANKLINE", @default_text_color, work )
+    self.add_element("", "OPERATOR_NOTE", @default_text_color, work )
 end
 
 
@@ -284,6 +285,7 @@ end
     end
   #adds a blank line character for editor to use for this work
   self.add_element("", "BLANKLINE", @default_text_color, work )
+  self.add_element("", "OPERATOR_NOTE", @default_text_color, work )
   end
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
