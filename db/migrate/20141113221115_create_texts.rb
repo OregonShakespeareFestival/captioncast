@@ -6,6 +6,7 @@ class CreateTexts < ActiveRecord::Migration
       t.string :color_override
       t.boolean :visibility
       t.timestamps
+      t.text :operator_note
     end
     add_reference :texts, :work, index: true
     add_reference :texts, :element, index: true
