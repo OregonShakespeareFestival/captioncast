@@ -26,12 +26,12 @@ $(document).ready(function(){
 		//scrolls to desired element
 		//can include a callback function
 		function aniScroll(el, c){
-			$('#line-holder-operator').stop().animate({scrollTop: el.offset().top}, opScrollSpd, c);
+			$('#line-holder-operator').stop().animate({scrollTop: el['offsetTop'] +  Math.round(el['offsetHeight']/2) - mid}, opScrollSpd, c);
 		}
 
 		//traverse operator after commit
 		function seqPushed(){
-			aniScroll($targeted);
+			aniScroll($targeted[0]);
 			$current.removeClass('current-operator');
 			$current.removeClass('target-operator');
 			$current=$targeted;
