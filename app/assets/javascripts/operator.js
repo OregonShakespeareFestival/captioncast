@@ -15,22 +15,28 @@ $(document).ready(function(){
 	if($('#main-operator').length>0){		
 		//blackout screen and move to text sequence 0 when the operator is reset -!!!-
 
+		//set the main operator's height to the height of the window
+		//can do with with css by setting position:absolute top:0 bottom:0 -!!!-
+		$('#main-operator').height($(window).innerHeight()+'px');
+
+		//set the middlepoint
+		//don't think this is needed once the find mid method is removed -!!!-
+		var mid = Math.round($(window).innerHeight()/2);
 
 		//scrolls to desired element
 		//can include a callback function
 		function aniScroll(el, c){
-			$('#line-holder-operator').stop().animate({scrollTop: el['offsetTop'] +  Math.round(el['offsetHeight']/2) - mid}, opScrollSpd, c);
+			$('#line-holder-operator').stop().animate({scrollTop: el.offset().top}, opScrollSpd, c);
 		}
 
 		//traverse operator after commit
 		function seqPushed(){
-			aniScroll($targeted.get(), function() {
-				$current.removeClass('current-operator');
-				$current.removeClass('target-operator');
-				$current=$targeted;
-				$current.addClass('current-operator');
-				$current.addClass('target-operator')
-			});
+			aniScroll($targeted);
+			$current.removeClass('current-operator');
+			$current.removeClass('target-operator');
+			$current=$targeted;
+			$current.addClass('current-operator');
+			$current.addClass('target-operator');
 			//abstract this -!!!-
 			if(blackout){
 				$('#blackout-icon-operator').addClass('blackout-off-operator');
@@ -40,7 +46,7 @@ $(document).ready(function(){
 		}
 
 		//push text sequence to operator controller
-		function commit(el){
+		function commit(){
 			if($targeted.attr('data-visibility')=="true"){
 				$.ajax('/operator/pushTextSeq', {
 					type:'POST',
@@ -72,20 +78,6 @@ $(document).ready(function(){
 			$('#blackout-icon-operator').toggleClass('blackout-off-operator');
 			blackout=false;
 		}
-		
-
-
-
-		//set the main operator's height to the height of the window
-		//can do with with css by setting position:absolute top:0 bottom:0 -!!!-
-		$('#main-operator').height($(window).innerHeight()+'px');
-
-		//set the middlepoint
-		//don't think this is needed once the find mid method is removed -!!!-
-		var mid = Math.round($(window).innerHeight()/2);
-
-
-
 
 		//TEMPLATING - all of this can eventually be moved to the controller -!!!-
 		//set the templates
