@@ -9,7 +9,7 @@
     <!--table showing all lines for the current script-->
     <table id="works" class='table'>
       <tr>
-        <% %w{Sequence Character Type Text Visibility Edit}.each do |header_name| %>
+        <% %w{Sequence Character Type Text Visibility Notes Edit}.each do |header_name| %>
           <th><%= header_name %></th>
         <% end %>
       </tr>
@@ -21,7 +21,7 @@
           <td><%= line.element_type %></td>
           <td><%= line.content_text %></td>
           <td><span class='glyphicon glyphicon-eye-open visi <%= "visiTr" if line.visibility %>' data-id="<%= line.id %>"></span></td>
-
+          <td><%= line.operator_note %></td>
           <!--link to edit specific this line-->
           <td><%= link_to 'EDIT', edit_work_text_path(work_id: line.work_id, id: line.id), :class => 'link-edit' %></td>
         </tr>
