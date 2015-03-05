@@ -5,6 +5,7 @@ var MAXSCROLLDURATION = 1200;
 var MINSCROLLDURATION = 500;
 var displayScrollSpd = MAXSCROLLDURATION;
 var $linesDisp;
+var blackout = 1;
 
 var lastScrollMS = (new Date).getTime();
 
@@ -132,25 +133,28 @@ $(document).ready(function(){
 					data: { operator: operator },
 					dataType: 'json',
 					success:(function(j) {
-						console.log('sequence scraped ' + j);
+						console.log('sequence scraped ' + j.pos + ' blackout: ' + j.blackout);
 						//if the data sequence changed
-						if($('.focus-multi').attr('data-sequence') != j) {
-							console.log("data sequence changed");
-
+						if($('.focus-multi').attr('data-sequence') != j.pos) {
 							//calculate scroll speed
 							var now = (new Date).getTime();
 							displayScrollSpd = Math.max(MINSCROLLDURATION, (Math.min(MAXSCROLLDURATION, (now - lastScrollMS))));
 							lastScrollMS = now;
 							console.log(displayScrollSpd);
-
 							$('#shade-multi').fadeOut(dispFadeSpd);
 							//animate scroll to the changed data sequence
-							$('#body-display-index').stop().animate({scrollTop:$('#line-display-'+j).position().top-$(window).height()/2+$('#line-display-'+j).height()+bottomPad}, displayScrollSpd);
+							$('#body-display-index').stop().animate({scrollTop:$('#line-display-'+j.pos).position().top-$(window).height()/2+$('#line-display-'+j.pos).height()+bottomPad}, displayScrollSpd);
 							//remove the focus class
 							$('.focus-multi').removeClass('focus-multi');
 							//add the focus class to the new line
-							$('#line-display-'+j).addClass('focus-multi');	
+							$('#line-display-'+j.pos).addClass('focus-multi');	
 						}
+						//if the blackout changed
+						if(blackout != j.blackout) {
+							$('#shade-multi').fadeToggle(dispFadeSpd);
+							blackout = j.blackout;
+						}
+
 						//set timer to repeat the heartbeat
 						setTimeout(function() {
 							heartbeat();

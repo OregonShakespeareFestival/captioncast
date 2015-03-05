@@ -11,7 +11,6 @@ Rails.application.routes.draw do
   post 'upload/uploadFile'
   get 'display/index'
   get 'display/current'
-  get 'display/blackout'
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
@@ -24,7 +23,7 @@ Rails.application.routes.draw do
   get 'operator/select'
   post 'operator/select'
   post 'operator/pushTextSeq'
-  post 'operator/blackout'
+  post 'operator/pushBlackout'
 
   #for the editor view
   get 'texts/addBlank'

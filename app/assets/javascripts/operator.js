@@ -5,7 +5,7 @@ _.templateSettings = {
 };
 
 var $targeted, $current;
-var blackout = false;
+var isBlackout = 1;
 var scrolling = false;
 var opScrollSpd= 400;
 
@@ -37,12 +37,8 @@ $(document).ready(function(){
 			$current=$targeted;
 			$current.addClass('current-operator');
 			$current.addClass('target-operator');
-			//abstract this -!!!-
-			if(blackout){
-				$('#blackout-icon-operator').addClass('blackout-off-operator');
-				blackout=false;
-			}
-	//		console.log(d + ' pushed ');
+			
+			console.log(d + ' pushed ');
 		}
 
 		//push text sequence to operator controller
@@ -63,20 +59,21 @@ $(document).ready(function(){
 			}
 		}
 
-		function dispOff(d){
-			console.log('display cleared');
-			$('.current-operator').removeClass('current-operator');
-			$('#blackout-icon-operator').toggleClass('blackout-off-operator');
-			blackout=true;
-		}
-		function dispOn(d){
-			console.log('display is back');
-			var last = $.grep($('.line-operator'), function(n){
-				return $(n).attr('data-sequence') == currentOp;
-			})[0];
-			$(last).addClass('current-operator');
-			$('#blackout-icon-operator').toggleClass('blackout-off-operator');
-			blackout=false;
+		function blackout() {
+			isBlackout = isBlackout == 1 ? 0 : 1;
+			$.ajax('/operator/pushBlackout', {
+				type:'POST',
+				data: {
+					blackout: isBlackout
+				},
+				success:(function(d) {
+					console.log("blackout: " + d);
+					$('#blackout-icon-operator').toggleClass('blackout-off-operator');
+				}),
+				error:(function() {
+					alert('Blackout failed! Please check your connection.');
+				})
+			});
 		}
 
 		//TEMPLATING - all of this can eventually be moved to the controller -!!!-
@@ -142,6 +139,8 @@ $(document).ready(function(){
 		$targeted.addClass('target-operator');
 		$current = $targeted;
 		$current.addClass('current-operator');
+		commit();
+		blackout();
 
 		//bind click handler to commit button
 		$('#commit-button-operator').click(commit);
@@ -180,25 +179,7 @@ $(document).ready(function(){
 		
 		//bind click event to the blackout operator
 		$('#blackout-operator').click(function(){
-			if(!blackout){
-				$.ajax('/operator/pushTextSeq', {
-					type:'POST',
-					data: {
-						seq:0,
-	          			operator: operator
-					},
-					success:dispOff,
-				});
-			}else{
-				$.ajax('/operator/pushTextSeq', {
-					type:'POST',
-					data: {
-						seq:currentOp,
-	          			operator: operator
-					},
-					success:dispOn,
-				});
-			}
+			blackout();
 		});
 
 		//bind click event to the up button
