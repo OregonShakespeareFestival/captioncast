@@ -1,12 +1,19 @@
 //javascript for the display view goes here
 var refresh = 50;
 var dispFadeSpd = 400;
-var displayScrollSpd = 1200;
+var MAXSCROLLDURATION = 1200;
+var MINSCROLLDURATION = 500;
+var displayScrollSpd = MAXSCROLLDURATION;
 var $linesDisp;
+
+var lastScrollMS = (new Date).getTime();
+
 $(document).ready(function(){
 	if($('#body-display-index').length>0){
-		var current=0;
+		var current=0; //can remove eventually - multi doesn't use this and once single is refactored this variable won't be referenced anywhere -!!!-
 
+
+		//TEMPLATING - this can be moved into the controller eventually -!!!-
 		//make sure the lines are sorted by sequence instead of index when read in
 		lines = _.sortBy(lines,function(q){
 			return q.sequence;
@@ -30,8 +37,11 @@ $(document).ready(function(){
 				il++;
 			}
 		}
+		//END TEMPLATING - this can be moved into the controller eventually -!!!-
 
-		if($('#multi-flag-display').length<=0){
+		//if single
+		if($('#multi-flag-display').length<=0) {
+			//MORE TEMPLATING - can be moved to the controller -!!!-
 			$lineCont = $('#line-holder-display');
 			// template views
 			var tLine = _.template($('#line-template-display').html());
@@ -52,9 +62,10 @@ $(document).ready(function(){
 
 			//build the line dom
 			buildLinesDisp($lineCont);
+			//END MORE TEMPLATING - can be moved to the controller -!!!-
+
 			$linesDisp = $('.line-display');
-			//when the first line fade in it sets off the preiodic ajax scrape
-			//for now we're just grabbing a random number but soon it will be the number supplied by the operator
+
 			$linesDisp.first().fadeIn(dispFadeSpd, function(){
 				$(this).addClass('shown-display');
 				//set first interval
@@ -98,99 +109,63 @@ $(document).ready(function(){
 				}
 				heartbeat();
 			});
+		//if multi
+		} else {
 
 
-		//end of original block
-		//}
-		}else{
-			$('#shade-multi').css('display', 'none');
-			//this is specific JS for the multi-line view
-			console.log('welcome to multi-line mode');
-			// //template views
+			//MORE TEMPLATING - can be moved to the controller -!!!-
 			var tLine = _.template($('#line-template-display-multi').html());
 
 			$lineCont = $('#line-holder-display-multi');
 
-
-			//seed sequence #0 with a blank line
-			$lineCont.append(
-				tLine({
-					"character":'',
-				    "id": 0,
-				    "sequence": 0,
-				    "content_type": "Non-Dialogue",
-				    "content_text": " ",
-				    "color": null,
-				    "visibility": false,
-				    "created_at": " ",
-				    "updated_at": " "
-					})
-				);
-
 			//build the line dom
 			buildLinesDisp($lineCont);
-			$linesDisp = $('.line-display-multi');
+			//END MORE TEMPLATING - can be moved to the controller -!!!-
 
+			$('.line-display-multi').first().addClass('focus-multi');
 
-			//set first interval
+			//recursive function that scrapes the line sequence number checks for blackouts
 			function heartbeat(){
-				var bottomPad = 65;
+				var bottomPad = 65; //may be able to get rid of -!!!-
 				//ajax goes here next timeout
-				$.ajax('/display/current',
-				  {
-						data: {operator: operator},
-					  dataType: 'json',
-						success:(function(j){
-							console.log('sequence scraped ' + j);
-							if(current!=j){
-								//console.log(j);
-								current=j;
+				$.ajax('/display/current', {
+					data: { operator: operator },
+					dataType: 'json',
+					success:(function(j) {
+						console.log('sequence scraped ' + j);
+						//if the data sequence changed
+						if($('.focus-multi').attr('data-sequence') != j) {
+							console.log("data sequence changed");
 
-								if(current!==0){
-									$('#shade-multi').fadeOut(dispFadeSpd);
-									var newElem = _.find($linesDisp, function(q){
-											return parseInt($(q).attr('data-sequence'))==j;
-									});
-									$('#body-display-index').stop().animate({scrollTop:$(newElem).position().top-$(window).height()/2+$(newElem).height()+bottomPad}, displayScrollSpd);
-									//remove the focus class
-									$('.focus-multi').removeClass('focus-multi');
-									//console.log('class-removed');
+							//calculate scroll speed
+							var now = (new Date).getTime();
+							displayScrollSpd = Math.max(MINSCROLLDURATION, (Math.min(MAXSCROLLDURATION, (now - lastScrollMS))));
+							lastScrollMS = now;
+							console.log(displayScrollSpd);
 
-									$(newElem).addClass('focus-multi');
-											//$(this).addClass('shown-display');
-									setTimeout(function(){
-										heartbeat();
-									}, refresh);
-								}else{
-									$('#shade-multi').fadeIn(dispFadeSpd);
-									setTimeout(function(){
-										heartbeat();
-										}, refresh);
-								}
-
-
-									//});
-
-							}else{
-								setTimeout(function(){
-									heartbeat();
-									}, refresh);
-							}
-
-
-						}),
+							$('#shade-multi').fadeOut(dispFadeSpd);
+							//animate scroll to the changed data sequence
+							$('#body-display-index').stop().animate({scrollTop:$('#line-display-'+j).position().top-$(window).height()/2+$('#line-display-'+j).height()+bottomPad}, displayScrollSpd);
+							//remove the focus class
+							$('.focus-multi').removeClass('focus-multi');
+							//add the focus class to the new line
+							$('#line-display-'+j).addClass('focus-multi');	
+						}
+						//set timer to repeat the heartbeat
+						setTimeout(function() {
+							heartbeat();
+						}, refresh);
+					}),
 				});
 			}
+
+			//initial heartbeat
 			heartbeat();
 
-
-
-
-
 		}
+
 		$('#shade-loading-display').fadeOut(1000, function(){});
 
 	}
-
 
 });

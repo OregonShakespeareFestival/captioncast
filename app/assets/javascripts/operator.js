@@ -30,7 +30,7 @@ $(document).ready(function(){
 		}
 
 		//traverse operator after commit
-		function seqPushed(){
+		function seqPushed(d){
 			aniScroll($targeted[0]);
 			$current.removeClass('current-operator');
 			$current.removeClass('target-operator');
@@ -42,7 +42,7 @@ $(document).ready(function(){
 				$('#blackout-icon-operator').addClass('blackout-off-operator');
 				blackout=false;
 			}
-			console.log(d + ' pushed ');
+	//		console.log(d + ' pushed ');
 		}
 
 		//push text sequence to operator controller
