@@ -5,7 +5,7 @@ _.templateSettings = {
 };
 
 var $targeted, $current;
-var isBlackout = false;
+var isBlackout = 1;
 var scrolling = false;
 var opScrollSpd= 400;
 
@@ -60,7 +60,7 @@ $(document).ready(function(){
 		}
 
 		function blackout() {
-			isBlackout = isBlackout ? false : true;
+			isBlackout = isBlackout == 0 ? 1 : 0;
 			$.ajax('/operator/pushBlackout', {
 				type:'POST',
 				data: {

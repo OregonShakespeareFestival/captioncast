@@ -13,8 +13,8 @@ class OperatorController < ApplicationController
 	end
 
 	def pushBlackout
-		@isBlackout = params[:blackout]
-		render :json => @isBlackout
+		$isBlackout = params[:blackout]
+		render :json => $isBlackout
 	end
 
 	def pushTextSeq
