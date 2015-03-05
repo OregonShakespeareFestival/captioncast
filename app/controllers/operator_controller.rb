@@ -12,6 +12,11 @@ class OperatorController < ApplicationController
 		# add the default position of 0 for an operator
 	end
 
+	def pushBlackout
+		@isBlackout = params[:blackout]
+		render :json => @isBlackout
+	end
+
 	def pushTextSeq
 		operator = Operator.find_by(id: params[:operator])
 		Rails.application.config.operator_positions.merge!({params[:operator] => params[:seq]})
