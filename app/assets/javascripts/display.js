@@ -131,30 +131,19 @@ $(document).ready(function(){
 						console.log('sequence scraped ' + j);
 						//if the data sequence changed
 						if($('.focus-multi').attr('data-sequence') != j) {
-							//if the first line isn't focused
-							if($('.focus-multi').attr('data-sequence') !== 0) {
-								$('#shade-multi').fadeOut(dispFadeSpd);
-								//animate scroll to the changed data sequence
-								$('#body-display-index').stop().animate({scrollTop:$('#line-display-'+j).position().top-$(window).height()+$('#line-display-'+j).outerHeight()}, displayScrollSpd);
-								//remove the focus class
-								$('.focus-multi').removeClass('focus-multi');
-								//add the focus class to the new line
-								$('#line-display-'+j).addClass('focus-multi');
-								//set timer to repeat the heartbeat
-								setTimeout(function() {
-									heartbeat();
-								}, refresh);
-							} else {
-								$('#shade-multi').fadeIn(dispFadeSpd);
-								setTimeout(function(){
-									heartbeat();
-									}, refresh);
-							}
-						} else {
-							setTimeout(function() {
-								heartbeat();
-							}, refresh);
+							console.log("data sequence changed");
+							$('#shade-multi').fadeOut(dispFadeSpd);
+							//animate scroll to the changed data sequence
+							$('#body-display-index').stop().animate({scrollTop:$('#line-display-'+j).position().top-$(window).height()+$('#line-display-'+j).height()+bottomPad}, displayScrollSpd);
+							//remove the focus class
+							$('.focus-multi').removeClass('focus-multi');
+							//add the focus class to the new line
+							$('#line-display-'+j).addClass('focus-multi');	
 						}
+						//set timer to repeat the heartbeat
+						setTimeout(function() {
+							heartbeat();
+						}, refresh);
 					}),
 				});
 			}
