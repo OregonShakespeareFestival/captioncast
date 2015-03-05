@@ -134,7 +134,7 @@ $(document).ready(function(){
 							console.log("data sequence changed");
 							$('#shade-multi').fadeOut(dispFadeSpd);
 							//animate scroll to the changed data sequence
-							$('#body-display-index').stop().animate({scrollTop:$('#line-display-'+j).position().top-$(window).height()+$('#line-display-'+j).height()+bottomPad}, displayScrollSpd);
+							$('#body-display-index').stop().animate({scrollTop:$('#line-display-'+j).position().top-$(window).height()/2+$('#line-display-'+j).height()+bottomPad}, displayScrollSpd);
 							//remove the focus class
 							$('.focus-multi').removeClass('focus-multi');
 							//add the focus class to the new line
