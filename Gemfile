@@ -48,6 +48,7 @@ gem 'resque-scheduler'
 gem 'narray'
 gem 'scalpel'
 gem 'treat'
+gem 'mysql2'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
