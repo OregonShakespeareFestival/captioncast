@@ -5,6 +5,7 @@ var MAXSCROLLDURATION = 1200;
 var MINSCROLLDURATION = 500;
 var displayScrollSpd = MAXSCROLLDURATION;
 var $linesDisp;
+var blackout = 1;
 
 var lastScrollMS = (new Date).getTime();
 
@@ -148,6 +149,12 @@ $(document).ready(function(){
 							//add the focus class to the new line
 							$('#line-display-'+j.pos).addClass('focus-multi');	
 						}
+						//if the blackout changed
+						if(blackout != j.blackout) {
+							$('#shade-multi').fadeToggle(dispFadeSpd);
+							blackout = j.blackout;
+						}
+
 						//set timer to repeat the heartbeat
 						setTimeout(function() {
 							heartbeat();
