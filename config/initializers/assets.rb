@@ -6,7 +6,11 @@ Rails.application.config.assets.version = '1.0'
 # Precompile additional assets.
 
 Rails.application.config.assets.compile = true
-Rails.application.config.assets.precompile =  [ '*.css', '*.css.erb'] 
+Rails.application.config.assets.digest  = true
+Rails.application.config.assets.precompile =  %w( '*.css' )
+Rails.application.config.assets.precompile += %w( '*.css.erb' )
+Rails.application.config.assets.precompile += %w( 'rails_admin/rails_admin.css' )
+Rails.application.config.assets.precompile += %w( 'rails_admin/rails_admin.js' )
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 Rails.application.config.assets.precompile += %w( application.js )
 Rails.application.config.assets.precompile += %w( cast.js )
