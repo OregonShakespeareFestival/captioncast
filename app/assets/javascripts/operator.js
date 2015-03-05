@@ -110,7 +110,12 @@ $(document).ready(function(){
 				}else{
 					cl['character']=' ';
 				}
-				$lineCont.append(tLine(cl));
+				if(lines[il]['operator_note']){
+					$lineCont.append(tLine(cl) + " ---" + lines[il]['operator_note'] + "-- ");
+				}
+				else{
+					$lineCont.append(tLine(cl));
+				}
 			}
 			il++;
 		}
