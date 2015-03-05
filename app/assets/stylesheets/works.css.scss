@@ -46,7 +46,7 @@ span.glyphicon.glyphicon-eye-open{
 #element_attr{
   background-color: #293B4C;
   width: 200px;
-  height:221px;
+  height:195px;
   display:inline-block;
   float:left;
 
@@ -71,7 +71,7 @@ input[type=submit]{
   margin:3px;
 }
 #insert_line_form{
-  margin-top:45px;
+  margin-top:20px;
   border: 5px solid;
   width:609px;
 }
@@ -80,4 +80,12 @@ h5{
 }
 #this-text-to-edit{
   height:275px ;
+  margin-bottom:20px;
+}
+#character-counter{
+  float:right;
+  clear:both;
+}
+#char_count, #char_allowed{
+  width: 50px;
 }

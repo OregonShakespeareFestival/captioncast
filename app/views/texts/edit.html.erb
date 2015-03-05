@@ -27,14 +27,16 @@
     <%= f.text_area :content_text, class: 'form-control', cols: 30, rows: 5 %>
 
     <%= f.submit "Update" ,:class => 'btn' %>
-    <%= link_to 'Back to all lines', work_texts_path(work_id: @text.work) %>
+    
 
-    <br />
+  <div id="character-counter">
     <%= label_tag 'character_count', 'Characters:'%>
-    <%= text_field @work.characters_per_line, readonly: true %>
-
+    <%= text_field_tag 'char_count'%>of<%= text_field_tag 'char_allowed', @work.characters_per_line, readonly: true %>
+  </div>
   <% end %>
 </div>
+
+<%= link_to 'Back to all lines', work_texts_path(work_id: @text.work) %>
 
 <div id="insert_line_form">
   <h5>
