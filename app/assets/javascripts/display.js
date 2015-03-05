@@ -1,8 +1,12 @@
 //javascript for the display view goes here
 var refresh = 50;
 var dispFadeSpd = 400;
-var displayScrollSpd = 1200;
+var MAXSCROLLDURATION = 1200;
+var MINSCROLLDURATION = 500;
+var displayScrollSpd = MAXSCROLLDURATION;
 var $linesDisp;
+
+var lastScrollMS = (new Date).getTime();
 
 $(document).ready(function(){
 	if($('#body-display-index').length>0){
@@ -132,6 +136,13 @@ $(document).ready(function(){
 						//if the data sequence changed
 						if($('.focus-multi').attr('data-sequence') != j) {
 							console.log("data sequence changed");
+
+							//calculate scroll speed
+							var now = (new Date).getTime();
+							displayScrollSpd = Math.max(MINSCROLLDURATION, (Math.min(MAXSCROLLDURATION, (now - lastScrollMS))));
+							lastScrollMS = now;
+							console.log(displayScrollSpd);
+
 							$('#shade-multi').fadeOut(dispFadeSpd);
 							//animate scroll to the changed data sequence
 							$('#body-display-index').stop().animate({scrollTop:$('#line-display-'+j).position().top-$(window).height()/2+$('#line-display-'+j).height()+bottomPad}, displayScrollSpd);
