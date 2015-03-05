@@ -1,9 +1,13 @@
 $(document).ready(function(){
 	console.log('hello there');
 	
-	//sets the value of the char_count box
-	$('#char_count').val($('#text_content_text').val().length);
-
+//**********************************************
+//sets the value and class of the char_count box
+//*********************************************
+$('#char_count').val($('#text_content_text').val().length);
+if($('#char_count').val() > $('#char_allowed').val()){
+	$('#char_count').addClass('above_limit');
+}
 
 //***********************************************
 //inserts a non visible newline on the screen
@@ -21,6 +25,13 @@ $(document).ready(function(){
 $('#text_content_text').keyup(function() {
     var cs = $(this).val().length;
     $('#char_count').val(cs);
+    if(cs > $('#char_allowed').val()){
+    	$('#char_count').addClass('above_limit');
+    }
+    else{
+    	$('#char_count').removeClass('above_limit');
+    }
+
 });
 
 //***********************************************
