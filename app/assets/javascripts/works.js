@@ -1,6 +1,10 @@
 $(document).ready(function(){
 	console.log('hello there');
 	
+	//sets the value of the char_count box
+	$('#char_count').val($('#text_content_text').val().length);
+
+
 //***********************************************
 //inserts a non visible newline on the screen
 //***********************************************
@@ -9,6 +13,15 @@ $(document).ready(function(){
 		$contentBox.val($contentBox.val() + '<br />');
 		});
 
+
+//***********************************************
+// updates the count of characters currently
+// in the editor textarea
+//***********************************************
+$('#text_content_text').keyup(function() {
+    var cs = $(this).val().length;
+    $('#char_count').val(cs);
+});
 
 //***********************************************
 //changes the database visible value for element
