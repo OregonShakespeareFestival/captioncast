@@ -8,14 +8,14 @@ $(document).ready(function(){
 //***********************************************
 //inserts a non visible newline on the screen
 //***********************************************
-	var $contentBox = $('#text_content_text');
-	$('#supBlank').click(function(){	
-		$contentBox.val($contentBox.val() + '<br />');
-		});
+//	var $contentBox = $('#text_content_text');
+//	$('#supBlank').click(function(){	
+//		$contentBox.val($contentBox.val() + '<br />');
+//		});
 
 
 //***********************************************
-// updates the count of characters currently
+// updates the count on change of characters currently
 // in the editor textarea
 //***********************************************
 $('#text_content_text').keyup(function() {
