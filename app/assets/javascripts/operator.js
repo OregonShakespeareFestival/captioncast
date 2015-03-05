@@ -30,7 +30,7 @@ $(document).ready(function(){
 		}
 
 		//traverse operator after commit
-		function seqPushed(){
+		function seqPushed(d){
 			aniScroll($targeted[0]);
 			$current.removeClass('current-operator');
 			$current.removeClass('target-operator');
