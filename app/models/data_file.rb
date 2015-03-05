@@ -70,18 +70,26 @@ class DataFile < ActiveRecord::Base
 
     if(File.extname(path) == ".txt")
       self.parse_text_file(f, work, characters_per_line, split_type)
+      self.set_work_characters_per_line(work, characters_per_line)
       return
 
     elsif(File.extname(path) == ".fdx")
       doc =  Nokogiri::XML(f)
       f.close
       self.parse_fdx(doc, work, characters_per_line, split_type)
+      self.set_work_characters_per_line(work, characters_per_line)
       return
     end
   end
 
+#++++++++++++++++++++++++++++++++++++++++++++++++++
+# Sets the characters per line to show for this work
+#++++++++++++++++++++++++++++++++++++++++++++++++++
+  def self.set_work_characters_per_line(work, characters_per_line)
+    Work.find_by_id(work).update_attributes(:characters_per_line => characters_per_line)
+  end
 
-
+  
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   #used to parse a .txt file script (typically other languages)
   #        This requires that text files be encoded with
