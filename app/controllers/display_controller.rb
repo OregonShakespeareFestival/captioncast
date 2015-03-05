@@ -28,7 +28,6 @@ class DisplayController < ApplicationController
     position = Rails.application.config.operator_positions[params[:operator]]
     #retrieve current position
     #@current = 1+rand(18)
-
     render json: {:pos => position, :blackout => $isBlackout}
   end
 

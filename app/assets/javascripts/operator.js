@@ -60,7 +60,7 @@ $(document).ready(function(){
 		}
 
 		function blackout() {
-			isBlackout = isBlackout == 0 ? 1 : 0;
+			isBlackout = isBlackout == 1 ? 0 : 1;
 			$.ajax('/operator/pushBlackout', {
 				type:'POST',
 				data: {
@@ -139,6 +139,8 @@ $(document).ready(function(){
 		$targeted.addClass('target-operator');
 		$current = $targeted;
 		$current.addClass('current-operator');
+		commit();
+		blackout();
 
 		//bind click handler to commit button
 		$('#commit-button-operator').click(commit);
