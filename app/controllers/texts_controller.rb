@@ -74,7 +74,7 @@ class TextsController < ApplicationController
     lne.remove_from_list
     lne.destroy
 
-    redirect_to :controller => 'texts', :action => 'index', :work_id => wid
+    redirect_to :controller => 'texts', :action => 'index', :work_id => wid, :page => params[:page]
   end
 
   #********************************************************************
