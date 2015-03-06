@@ -19,9 +19,9 @@
 
       <span id="boldIt">Uppercase Selection</span><br>
       <!--<span id="supBlank">Insert Blank Space</span><br>-->
-      <%= link_to 'Add Blank Line After', texts_addBlank_path(:id => @text.id) %> **<br>
-      <%= link_to 'Delete This Line', texts_removeLine_path(:id => @text.id, :page => params[:page]) %> **<br>
-      <%= link_to 'Split This Line', texts_splitLine_path(:id => @text.id) %> **<br>
+      <%= link_to 'Add Blank Line After', texts_addBlank_path(:id => @text.id) %><br>
+      <%= link_to 'Delete This Line', texts_removeLine_path(:id => @text.id, :page => params[:page]) %><br>
+      <!--<%= link_to 'Split This Line', texts_splitLine_path(:id => @text.id) %> **<br>-->
     </div>
 
     <%= f.text_area :content_text, class: 'form-control', cols: 30, rows: 5 %>
