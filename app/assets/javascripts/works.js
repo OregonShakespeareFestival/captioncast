@@ -5,7 +5,7 @@ $(document).ready(function(){
 //sets the value and class of the char_count box
 //*********************************************
 $('#char_count').val($('#text_content_text').val().length);
-if($('#char_count').val() > $('#char_allowed').val()){
+if(parseInt($('#char_count').val()) > parseInt($('#char_allowed').val())){
 	$('#char_count').addClass('above_limit');
 }
 
@@ -25,7 +25,7 @@ if($('#char_count').val() > $('#char_allowed').val()){
 $('#text_content_text').keyup(function() {
     var cs = $(this).val().length;
     $('#char_count').val(cs);
-    if(cs > $('#char_allowed').val()){
+    if(cs > parseInt($('#char_allowed').val())){
     	$('#char_count').addClass('above_limit');
     }
     else{
@@ -41,7 +41,7 @@ $('#text_content_text').keyup(function() {
 $('#new_line_content_text').keyup(function() {
     var cs = $(this).val().length;
     $('#added_char_count').val(cs);
-    if(cs > $('#char_allowed').val()){
+    if(cs > parseInt($('#char_allowed').val())){
     	$('#added_char_count').addClass('above_limit');
     }
     else{

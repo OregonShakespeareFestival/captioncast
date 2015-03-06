@@ -53,7 +53,7 @@
 
     <div id="character-counter">
     <%= label_tag 'character_count', 'Characters:'%>
-    <%= text_field_tag 'added_char_count'%>of<%= text_field_tag 'char_allowed', @work.characters_per_line, readonly: true %>
+    <%= text_field_tag 'added_char_count', '0' %>of<%= text_field_tag 'char_allowed', @work.characters_per_line, readonly: true %>
   </div>
   <%end%>
 </div>
