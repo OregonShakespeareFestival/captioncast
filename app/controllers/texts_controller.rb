@@ -53,10 +53,10 @@ class TextsController < ApplicationController
     )
     txt.insert_at(seqid + 1)
     if txt.save
-      flash[:notice] = "BLANK SPACE successfully added"
+      flash[:notice] = "BLANK LINE successfully added"
       redirect_to:back
     else
-      flash[:notice] = "BLANK SPACE NOT added"        # need to fix this
+      flash[:notice] = "BLANK LINE NOT added"        # need to fix this
       redirect_to:back
     end
   end
