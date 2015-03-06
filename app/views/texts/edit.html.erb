@@ -49,5 +49,10 @@
     <%= select_tag :character_name_dropdown, options_from_collection_for_select(@elements, 'id', 'name'), :class => 'btn' %>
     <%= a.text_area :content_text, class: 'form-control new_line_text', cols: 30, rows: 5 %>
     <%= a.submit "Create Line", :class => 'btn' %>
+
+    <div id="character-counter">
+    <%= label_tag 'character_count', 'Characters:'%>
+    <%= text_field_tag 'added_char_count'%>of<%= text_field_tag 'char_allowed', @work.characters_per_line, readonly: true %>
+  </div>
   <%end%>
 </div>
