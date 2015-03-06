@@ -21,26 +21,19 @@ class TextsController < ApplicationController
     lne = Text.find(params[:id]) #gives us the line
     wid = lne.work_id #gives us the work id to use for selecting the right whitespace element
     seqid = lne.sequence
-
-    #get all lines beyond seqid (sequence starts at seqid +1 and ID will be +2)
-    qry = "work_id = " + wid.to_s + " AND sequence > " + seqid.to_s
-    e_beyond = Text.where(qry)
-    e_beyond.each do |a|
-
-    #increment each line beyond the current one
-    a.increment!(:sequence, by = 1)
-    end
-
-
-    #create new line for character with a copy of the current text
-    txt = Text.create(sequence: (seqid + 1), element_id: lne.element_id, work_id: lne.work_id, content_text: lne.content_text, visibility: lne.visibility)
+    txt = Text.new(
+      element_id: lne.element_id,
+      work_id: lne.work_id,
+      content_text: lne.content_text,
+      visibility: lne.visibility
+    )
+    txt.insert_at(seqid + 1)
     if txt.save
       flash[:notice] = "SPLIT successfully made"
-      redirect_to:back
+      redirect_to :back
     else
       flash[:notice] = "SPLIT NOT successfully made!!"           #need to fix this
-      redirect_to:back
-
+      redirect_to :back
     end
   end
 
@@ -52,18 +45,13 @@ class TextsController < ApplicationController
     lne = Text.find(params[:id]) #gives us the line
     wid = lne.work_id #gives us the work id to use for selecting the right whitespace element
     seqid = lne.sequence
-
-    #get all lines beyond seqid (sequence starts at seqid +1 and ID will be +2)
-    qry = "work_id = " + wid.to_s + " AND sequence > " + seqid.to_s
-    e_beyond = Text.where(qry)
-    e_beyond.each do |a|
-
-    #increment each line beyond the current one
-    a.increment!(:sequence, by = 1)
-    end
-
-    #insert our new blankline element with (seqid + 1)
-    txt = Text.create(sequence: (seqid + 1), element_id: Element.find_by(element_type: 'BLANKLINE').id, work_id: wid, content_text: "<br /> <br />", visibility: true)
+    txt = Text.new(
+      element_id: Element.find_by(element_type: 'BLANKLINE').id,
+      work_id: wid,
+      content_text: "<br /> <br />",
+      visibility: true
+    )
+    txt.insert_at(seqid + 1)
     if txt.save
       flash[:notice] = "BLANK SPACE successfully added"
       redirect_to:back
@@ -82,19 +70,9 @@ class TextsController < ApplicationController
     wid = lne.work_id #gives us the work id to use for selecting the right whitespace element
     seqid = lne.sequence
 
-
     #remove the current line from the database
+    lne.remove_from_list
     lne.destroy
-
-    #get all lines beyond seqid (sequence starts at seqid +1 and ID will be +2)
-    qry = "work_id = " + wid.to_s + " AND sequence > " + seqid.to_s
-    e_beyond = Text.where(qry)
-
-    e_beyond.each do |a|
-
-    #increment each line beyond the current one
-    a.decrement!(:sequence, by = 1)
-    end
 
     redirect_to :controller => 'texts', :action => 'index', :work_id => wid
   end
@@ -148,25 +126,20 @@ class TextsController < ApplicationController
     lne = Text.find_by_id(params[:id]) #gives us the line we will insert after
     wid = lne.work_id #gives us the work id to use for selecting the right whitespace element
     seqid = lne.sequence
+    txt = Text.new(
+      element_id: Element.find_by_id(params['character_name_dropdown']).id,
+      work_id: wid,
+      content_text: char_text['content_text'],
+      visibility: true
+    )
+    txt.insert_at(seqid + 1)
 
-    #get all lines beyond seqid (sequence starts at seqid +1 and ID will be +2)
-    qry = "work_id = " + wid.to_s + " AND sequence > " + seqid.to_s
-    e_beyond = Text.where(qry)
-    e_beyond.each do |a|
-
-    #increment each line beyond the current one
-    a.increment!(:sequence, by = 1)
-    end
-
-    #insert our new line for character with text and (seqid + 1)
-    txt = Text.create(sequence: (seqid + 1), element_id: Element.find_by_id(params['character_name_dropdown']).id, work_id: wid, content_text: char_text['content_text'], visibility: true)
     if txt.save
       flash[:notice] = "New character line successfully added"
       redirect_to:back
     else
       flash[:notice] = "New Line NOT added"        # need to fix this
        redirect_to:back
-
     end
   end
 
