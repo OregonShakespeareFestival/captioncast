@@ -1,7 +1,7 @@
 //javascript for the display view goes here
 var refresh = 50;
 var dispFadeSpd = 400;
-var MAXSCROLLDURATION = 1200;
+var MAXSCROLLDURATION = 700;
 var MINSCROLLDURATION = 500;
 var displayScrollSpd = MAXSCROLLDURATION;
 var $linesDisp;
@@ -142,7 +142,7 @@ $(document).ready(function(){
 							console.log(displayScrollSpd);
 							$('#shade-multi').fadeOut(dispFadeSpd);
 							//animate scroll to the changed data sequence
-							$('#body-display-index').stop().animate({scrollTop:$('#line-display-'+j.pos).offset().top-$(window).height()+$('#line-display-'+j.pos).outerHeight()}, displayScrollSpd);
+							$('#body-display-index').stop().animate({scrollTop:$('#line-display-'+j.pos).offset().top-$(window).height()+$('#line-display-'+j.pos).outerHeight()}, displayScrollSpd, "linear");
 							//remove the focus class
 							$('.focus-multi').removeClass('focus-multi');
 							//add the focus class to the new line
