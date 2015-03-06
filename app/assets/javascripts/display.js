@@ -5,7 +5,7 @@ var MAXSCROLLDURATION = 1200;
 var MINSCROLLDURATION = 500;
 var displayScrollSpd = MAXSCROLLDURATION;
 var $linesDisp;
-var blackout = 1;
+var blackout = 0;
 
 var lastScrollMS = (new Date).getTime();
 
@@ -123,11 +123,10 @@ $(document).ready(function(){
 			buildLinesDisp($lineCont);
 			//END MORE TEMPLATING - can be moved to the controller -!!!-
 
-			$('.line-display-multi').first().addClass('focus-multi');
+			$('.line-display-multi').first().addClass('focus-multi');			
 
 			//recursive function that scrapes the line sequence number checks for blackouts
 			function heartbeat(){
-				var bottomPad = 65; //may be able to get rid of -!!!-
 				//ajax goes here next timeout
 				$.ajax('/display/current', {
 					data: { operator: operator },
@@ -143,7 +142,7 @@ $(document).ready(function(){
 							console.log(displayScrollSpd);
 							$('#shade-multi').fadeOut(dispFadeSpd);
 							//animate scroll to the changed data sequence
-							$('#body-display-index').stop().animate({scrollTop:$('#line-display-'+j.pos).position().top-$(window).height()/2+$('#line-display-'+j.pos).height()+bottomPad}, displayScrollSpd);
+							$('#body-display-index').stop().animate({scrollTop:$('#line-display-'+j.pos).offset().top-$(window).height()+$('#line-display-'+j.pos).outerHeight()}, displayScrollSpd);
 							//remove the focus class
 							$('.focus-multi').removeClass('focus-multi');
 							//add the focus class to the new line
