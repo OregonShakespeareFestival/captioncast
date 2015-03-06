@@ -6,6 +6,8 @@
   <% if @texts.blank? %>
     <p>No lines to display.</p>
   <% else %>
+    <%= paginate @texts %>
+
     <!--table showing all lines for the current script-->
     <table id="works" class='table'>
       <tr>
@@ -23,7 +25,7 @@
           <td><span class='glyphicon glyphicon-eye-open visi <%= "visiTr" if line.visibility %>' data-id="<%= line.id %>"></span></td>
           <td><%= line.operator_note %></td>
           <!--link to edit specific this line-->
-          <td><%= link_to 'EDIT', edit_work_text_path(work_id: line.work_id, id: line.id), :class => 'link-edit' %></td>
+          <td><%= link_to 'EDIT', edit_work_text_path(work_id: line.work_id, id: line.id, page: params[:page]), :class => 'link-edit' %></td>
         </tr>
       <% end %>
     </table>

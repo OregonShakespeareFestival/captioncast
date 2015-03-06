@@ -9,4 +9,6 @@ class Text < ActiveRecord::Base
 
   delegate :element_name, to: :element
   delegate :element_type, to: :element
+
+  acts_as_list column: :sequence
 end
