@@ -210,6 +210,45 @@ $(document).ready(function(){
 			}
 		});
 
+		//prevent scrolling on keydown when the operator view is focused
+		$(document).keydown(function(e) {
+			e.preventDefault();
+			return false;
+		});
+		//up and down keys
+		$(document).keyup(function(e) {
+			e.preventDefault();
+			switch(e.which) {
+				case 38: //up
+					//if current is not data sequence 0
+					if($current.attr('data-sequence') != 0) {
+						//traverse previous line operators until a visible one is found
+						$targeted.removeClass('target-operator');
+						$targeted = $current.prev();
+						while($targeted.attr('data-visibility') == "false") 
+							$targeted = $targeted.prev();
+						//commit
+						commit();
+					}
+					break;
+				case 40: //down
+					//if current is not the last data-sequence
+					if($current.attr('data-sequence') != $('.line_operator').last().attr('data-sequence')) {
+						//traverse next line operators until a visible one is found
+						$targeted.removeClass('target-operator');
+						$targeted = $current.next();
+						while($targeted.attr('data-visibility') == "false") 
+							$targeted = $targeted.next();
+						//commit
+						commit();
+					}
+					break;
+				case 32: //spacebar
+					blackout();
+					break;
+			}
+		});
+
 		//hide the shade loading operator once the page has loaded
 		$('#shade-loading-operator').fadeOut(1000, function(){});
 	}
