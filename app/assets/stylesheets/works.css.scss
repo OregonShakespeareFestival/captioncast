@@ -9,7 +9,6 @@
   margin:0;
 }
 #supBlank, #boldIt{
-  color:#337AB7;
   cursor:pointer;
 }
 #splitIt{
@@ -21,6 +20,7 @@
   width:604px;
   height:285px;
   background-color: #293B4C;
+  padding:3px;
 }
 span.glyphicon.glyphicon-eye-open{
   size: 75px;
@@ -49,6 +49,7 @@ span.glyphicon.glyphicon-eye-open{
   height:195px;
   display:inline-block;
   float:left;
+  padding:5px;
 
 }
 #character_name_dropdown{
@@ -57,7 +58,7 @@ span.glyphicon.glyphicon-eye-open{
 textarea#text_content_text{
   display:inline-block;
   float:left;
-  width:400px;
+  width:394px;
   height:150px;
   background-color:#073642;
   color: white;
@@ -89,4 +90,8 @@ h5{
 #char_count, #char_allowed, #added_char_count{
   width: 50px;
   color:black;
+}
+#text_operator_note{
+  width: 80%;
+  float: right;
 }
