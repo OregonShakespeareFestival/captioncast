@@ -149,7 +149,7 @@ $(document).ready(function(){
 						}
 						//if the blackout changed
 						if(blackout != j.blackout) {
-							$('#shade-multi').fadeToggle(dispFadeSpd);
+							$('#shade-multi').stop().fadeToggle(dispFadeSpd);
 							blackout = j.blackout;
 						}
 
