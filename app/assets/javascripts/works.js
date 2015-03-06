@@ -35,6 +35,23 @@ $('#text_content_text').keyup(function() {
 });
 
 //***********************************************
+// updates the count on change of characters currently
+// in the add a line textarea
+//***********************************************
+$('#new_line_content_text').keyup(function() {
+    var cs = $(this).val().length;
+    $('#added_char_count').val(cs);
+    if(cs > $('#char_allowed').val()){
+    	$('#added_char_count').addClass('above_limit');
+    }
+    else{
+    	$('#added_char_count').removeClass('above_limit');
+    }
+
+});
+
+
+//***********************************************
 //changes the database visible value for element
 //***********************************************
 	$('.visi').click(function(){

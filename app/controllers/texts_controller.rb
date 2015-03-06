@@ -15,7 +15,7 @@ class TextsController < ApplicationController
 
   #********************************************************************
   # inserts a line into the database. Used for splitting up a monologue
-  # we get the work id, then find the
+  # we get the work id, then find the _____ NOT ACTIVE______
   #******************************************************************
   def splitLine
     lne = Text.find(params[:id]) #gives us the line
