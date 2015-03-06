@@ -45,6 +45,7 @@ gem 'narray'
 gem 'scalpel'
 gem 'treat'
 gem 'mysql2'
+gem 'kaminari'
 
 group :development do
   gem 'capistrano-rails'

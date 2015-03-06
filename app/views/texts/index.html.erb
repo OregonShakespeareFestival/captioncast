@@ -6,6 +6,8 @@
   <% if @texts.blank? %>
     <p>No lines to display.</p>
   <% else %>
+    <%= paginate @texts %>
+
     <!--table showing all lines for the current script-->
     <table id="works" class='table'>
       <tr>
