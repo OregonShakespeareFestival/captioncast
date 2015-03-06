@@ -18,5 +18,5 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.provision "shell",
-    inline: 'sudo yum update -y; sudo yum install sqlite-devel openssl-devel ruby-devel rubygem-devel rubygem-bundler -y; sudo yum groupinstall "Development Tools" sudo iptables -I INPUT -j ACCEPT; sudo service iptables save'
+    inline: 'sudo yum update -y; sudo yum install sqlite-devel openssl-devel ruby-devel rubygem-devel rubygem-bundler mariadb-devel java-1.7.0-openjdk-devel nodejs -y; sudo yum groupinstall "Development Tools" sudo iptables -I INPUT -j ACCEPT; sudo service iptables save'
 end
