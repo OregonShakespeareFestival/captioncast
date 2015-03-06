@@ -1,7 +1,7 @@
 class TextsController < ApplicationController
   def index
     work = Work.find(params[:work_id])
-    @texts = work.texts.page(params[:page].presence || 1).per(100)
+    @texts = work.texts.page(params[:page]).per(100)
   end
 
   def edit
