@@ -140,7 +140,6 @@ $(document).ready(function(){
 							displayScrollSpd = Math.max(MINSCROLLDURATION, (Math.min(MAXSCROLLDURATION, (now - lastScrollMS))));
 							lastScrollMS = now;
 							console.log(displayScrollSpd);
-							$('#shade-multi').fadeOut(dispFadeSpd);
 							//animate scroll to the changed data sequence
 							$('#body-display-index').stop().animate({scrollTop:$('#line-display-'+j.pos).offset().top-$(window).height()+$('#line-display-'+j.pos).outerHeight()}, displayScrollSpd, "linear");
 							//remove the focus class
@@ -150,7 +149,7 @@ $(document).ready(function(){
 						}
 						//if the blackout changed
 						if(blackout != j.blackout) {
-							$('#shade-multi').fadeToggle(dispFadeSpd);
+							$('#shade-multi').stop().fadeToggle(dispFadeSpd);
 							blackout = j.blackout;
 						}
 
