@@ -135,6 +135,13 @@ $ipad-land-break: 1024px;
 	padding:12px;
 	cursor:pointer;
 }
+
+.line-operator.line-note {
+	font-size: 1.5em;
+  	color: #f7e694;
+  	padding-left: 100px;
+}
+
 .line-non-visible-operator{
 	font-style:italic;
 	color: $nonviscol;
@@ -157,10 +164,10 @@ $ipad-land-break: 1024px;
 }
 
 #buffer-top-operator{
-	height:45%;
+	height:100%;
 } 
 #buffer-bottom-operator{
-	height:40%;
+	height:100%;
 }
 
 #line-holder-sub-operator{

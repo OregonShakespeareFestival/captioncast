@@ -48,7 +48,7 @@ class TextsController < ApplicationController
     txt = Text.new(
       element_id: Element.find_by(element_type: 'BLANKLINE').id,
       work_id: wid,
-      content_text: "<br /> <br />",
+      content_text: "<br />",
       visibility: true
     )
     txt.insert_at(seqid + 1)

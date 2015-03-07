@@ -108,7 +108,7 @@ $(document).ready(function(){
 					cl['character']=' ';
 				}
 				if(lines[il]['operator_note']){
-					$lineCont.append(tLine(cl) + " ---" + lines[il]['operator_note'] + "-- ");
+					$lineCont.append(tLine(cl) + "<div class='line-operator line-note' data-visibility='false'> ---" + lines[il]['operator_note'] + "---</div>");
 				}
 				else{
 					$lineCont.append(tLine(cl));
@@ -146,7 +146,7 @@ $(document).ready(function(){
 		$('#commit-button-operator').click(commit);
 
 		//bind click handler to line operators
-		$('.line-operator').click(function(){
+		$('.line-operator').not('.line-note').click(function(){
 			//remove target operator class
 			$targeted.removeClass('target-operator');
 			//set targeted to the line that was clicked on
@@ -188,9 +188,9 @@ $(document).ready(function(){
 			if($current.attr('data-sequence') != 0) {
 				//traverse previous line operators until a visible one is found
 				$targeted.removeClass('target-operator');
-				$targeted = $current.prev();
+				$targeted = $current.prev(".line-operator");
 				while($targeted.attr('data-visibility') == "false") 
-					$targeted = $targeted.prev();
+					$targeted = $targeted.prev(".line-operator");
 				//commit
 				commit();
 			}
@@ -199,12 +199,12 @@ $(document).ready(function(){
 		//bind click event to the down button
 		$('#down-button-operator').click(function(){
 			//if current is not the last data-sequence
-			if($current.attr('data-sequence') != $('.line_operator').last().attr('data-sequence')) {
+			if($current.attr('data-sequence') != $('.line-operator').last().attr('data-sequence')) {
 				//traverse next line operators until a visible one is found
 				$targeted.removeClass('target-operator');
-				$targeted = $current.next();
+				$targeted = $current.next(".line-operator");
 				while($targeted.attr('data-visibility') == "false") 
-					$targeted = $targeted.next();
+					$targeted = $targeted.next(".line-operator");
 				//commit
 				commit();
 			}
@@ -224,21 +224,23 @@ $(document).ready(function(){
 					if($current.attr('data-sequence') != 0) {
 						//traverse previous line operators until a visible one is found
 						$targeted.removeClass('target-operator');
-						$targeted = $current.prev();
+						$targeted = $current.prev(".line-operator");
 						while($targeted.attr('data-visibility') == "false") 
-							$targeted = $targeted.prev();
+							$targeted = $targeted.prev(".line-operator");
 						//commit
 						commit();
 					}
 					break;
 				case 40: //down
 					//if current is not the last data-sequence
-					if($current.attr('data-sequence') != $('.line_operator').last().attr('data-sequence')) {
+					if($current.attr('data-sequence') != $('.line-operator').last().attr('data-sequence')) {
 						//traverse next line operators until a visible one is found
 						$targeted.removeClass('target-operator');
-						$targeted = $current.next();
+						$targeted = $current.next(".line-operator");
 						while($targeted.attr('data-visibility') == "false") 
-							$targeted = $targeted.next();
+							$targeted = $targeted.next(".line-operator");
+
+						console.log($targeted.get());
 						//commit
 						commit();
 					}
