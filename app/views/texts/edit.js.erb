@@ -49,34 +49,3 @@ $('#boldIt').click(function(){
     + $('textarea#text_content_text').val().substring(textComponent.selectionEnd)
   );
 });
-
-//***********************************************
-//changes the database visible value for element
-//***********************************************
-$('.visi').click(function(){
-  $vis = $(this);
-  $.ajax('/texts/toggleVis',
-  {
-    data:{
-      id: $vis.attr('data-id')
-    },
-    method: 'POST',
-    success:(function(d){
-      //console.log('success');
-      //console.log(d);
-      if($vis.hasClass("glyphicon-eye-open")) {
-        $vis.removeClass("glyphicon-eye-open");
-        $vis.addClass("glyphicon-eye-close");
-      }
-      else {
-        $vis.removeClass("glyphicon-eye-close");
-        $vis.addClass("glyphicon-eye-open");
-      }
-    }),
-    error:(function(e){
-      //console.log(e);
-      //console.log('error');
-      //console.log('i got nothing');
-    })
-  });
-});
