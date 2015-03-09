@@ -36,6 +36,7 @@ gem 'acts_as_list'
 
 gem 'nokogiri'
 gem 'bootstrap-sass', '~> 3.3.1.0'
+gem 'bootstrap-switch-rails'
 gem 'autoprefixer-rails'
 gem 'rails_admin'
 gem 'underscore-rails'
