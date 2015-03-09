@@ -8,14 +8,18 @@
       <% provide(:title, "Edit contact") %>
       <div>
         <%= form_for :new_line, :url => texts_addLine_path(:id => @text.id) do |f| %>
-          <%= label_tag 'character_name_label', 'Character', class: 'btn btn-default' %>
-          <%= select_tag 'character_name_dropdown', options_from_collection_for_select(@elements, 'id', 'name'), class: 'btn' %>
-
+          <div>
+            <%= label_tag 'character_name_label', 'Character', class: 'btn btn-default' %>
+            <%= select_tag 'character_name_dropdown', options_from_collection_for_select(@elements, 'id', 'name'), class: 'btn' %>
+            <%= label_tag 'visibility_name_label', 'Visibility', class: 'btn btn-default' %>
+            <%= f.check_box :visibility  %>
+          </div>
+          </br>
           <div class='input-group'>
             <span class='input-group-addon'>Operator Note</span>
             <%= f.text_field :operator_note, class: 'form-control', placeholder: "placeholder text" %>
           </div>
-
+          </br>
           <div class='input-group'>
             <%= label_tag 'content_text', 'Text', class: 'input-group-addon' %>
             <%= f.text_area :content_text, class: 'form-control input-xlarge', rows: 4 %>

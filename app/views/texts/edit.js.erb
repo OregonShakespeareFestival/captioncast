@@ -1,6 +1,7 @@
 $("#unique").remove();
 $("#edit_modal").append("<%= escape_javascript(render :partial => 'texts/edit') %>");
 $("#edit_modal").modal("show");
+$("#text_visibility").bootstrapSwitch();
 $('#text_content_text').keyup(function(){
   var element = document.getElementById('text_word_count');
   var len = document.getElementById('text_content_text').value.length;
