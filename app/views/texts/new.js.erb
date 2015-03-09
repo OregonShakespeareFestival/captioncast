@@ -1,4 +1,68 @@
 $("#unique").remove();
 $("#new_modal").append("<%= escape_javascript(render :partial => 'texts/new') %>");
 $("#new_modal").modal("show");
-$("#new_line_visibility").bootstrapSwitch();
+$("#new_line_visibility").bootstrapSwitch({size: 'mini'});
+
+$('#new_line_content_text').keyup(function(){
+ var element = document.getElementById('text_word_count');
+ var len = document.getElementById('new_line_content_text').value.length;
+ element.textContent = len;
+
+  var max_characters = <%= @work.characters_per_line %>;
+  console.log(max_characters);
+  var cs = $(this).val().length;
+    if(len > max_characters){
+      $('#text_word_count').addClass('above_limit');
+    }
+    else{
+      $('#text_word_count').removeClass('above_limit');
+    }
+});
+
+$('#boldIt').click(function(){
+  var textComponent = document.getElementById('new_line_content_text');
+  var selectedText;
+  // IE version
+  if (document.selection != undefined){
+    console.log('not ie')
+    textComponent.focus();
+    var sel = document.selection.createRange();
+    selectedText = sel.text;
+  }
+  // Mozilla version
+  else if (textComponent.selectionStart != undefined){
+    var startPos = textComponent.selectionStart;
+    var endPos = textComponent.selectionEnd;
+    selectedText = textComponent.value.substring(startPos, endPos)
+  }
+  //bolds the text that is highlighted in the textarea
+  $('textarea#new_line_content_text').val(
+  $('textarea#new_line_content_text').val().substring(0, textComponent.selectionStart)
+    + selectedText.toUpperCase()
+    + $('textarea#new_line_content_text').val().substring(textComponent.selectionEnd)
+  );
+});
+
+$('#lowercaseIt').click(function(){
+  var textComponent = document.getElementById('new_line_content_text');
+  var selectedText;
+  // IE version
+  if (document.selection != undefined){
+    console.log('not ie')
+    textComponent.focus();
+    var sel = document.selection.createRange();
+    selectedText = sel.text;
+  }
+  // Mozilla version
+  else if (textComponent.selectionStart != undefined){
+    var startPos = textComponent.selectionStart;
+    var endPos = textComponent.selectionEnd;
+    selectedText = textComponent.value.substring(startPos, endPos)
+  }
+  //bolds the text that is highlighted in the textarea
+  $('textarea#new_line_content_text').val(
+  $('textarea#new_line_content_text').val().substring(0, textComponent.selectionStart)
+    + selectedText.toLowerCase()
+    + $('textarea#new_line_content_text').val().substring(textComponent.selectionEnd)
+  );
+});
