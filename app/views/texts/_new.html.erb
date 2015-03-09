@@ -6,18 +6,16 @@
     </div>
     <div class="modal-body">
       <div class="alert alert-success">
-        <%= "#{@previous_line}" %>
+        <%= "#{@current_line}" %>
       </div>
       <% provide(:title, "Edit contact") %>
       <div>
         <%= form_for :new_line, :url => texts_addLine_path(:id => @text.id) do |f| %>
-          <div>
-            <%= label_tag 'character_name_label', 'Character', class: 'btn btn-default' %>
-            <%= select_tag 'character_name_dropdown', options_from_collection_for_select(@elements, 'id', 'name'), class: 'btn' %>
-            <%= label_tag 'visibility_name_label', 'Visibility', class: 'btn btn-default' %>
-            <%= f.check_box :visibility  %>
+          <div class="btn-group" role="group">
+            <button type="button" id="boldIt" class="btn btn-default">Uppercase</button>
+            <button type="button" id="lowercaseIt" class="btn btn-default">Lowercase</button>
           </div>
-          </br>
+          <br></br>
           <div class='input-group'>
             <span class='input-group-addon'>Operator Note</span>
             <%= f.text_field :operator_note, class: 'form-control', placeholder: "placeholder text" %>
@@ -27,13 +25,36 @@
             <%= label_tag 'content_text', 'Text', class: 'input-group-addon' %>
             <%= f.text_area :content_text, class: 'form-control input-xlarge', rows: 4 %>
           </div>
+          <br />
+          <div id="character-counter">
+            <ul class="list-group">
+              <li class="list-group-item">
+                <span class="pull-right"><%= select_tag 'character_name_dropdown',
+                  options_from_collection_for_select(@elements, 'id', 'name'),
+                  class: 'btn btn-default btn-xs' %>
+                </span>
+                Element
+              </li>
+              <li class="list-group-item">
+                Visibility
+                <div class="pull-right">
+                  <%= f.check_box :visibility %>
+                </div>
+                </li>
+              <li class="list-group-item">
+                <span id=text_word_count class="badge">0</span>
+                Characters
+              </li>
+            </ul>
+          </div>
+
           </br>
           <div class="alert alert-success">
             <%= "#{@next_line}" %>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Discard</button>
-            <%= f.submit "Create Line", :class => 'btn' %>
+            <button type="submit" class="btn btn-primary" >Save</button>
           </div>
         <%end%>
       </div>
