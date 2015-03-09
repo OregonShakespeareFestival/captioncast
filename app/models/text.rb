@@ -14,12 +14,20 @@ class Text < ActiveRecord::Base
 
   def previous_display_text(work, sequence)
     previous_text = work.texts.find_by sequence: sequence - 1
-    previous_text.display_string
+    if previous_text.nil?
+      "Start of Script"
+    else
+      previous_text.display_string
+    end
   end
 
   def next_display_text(work_id, sequence)
     next_text = work.texts.find_by sequence: sequence + 1
-    next_text.display_string
+    if next_text.nil?
+      "End of Script"
+    else
+      next_text.display_string
+    end
   end
 
   def display_string
