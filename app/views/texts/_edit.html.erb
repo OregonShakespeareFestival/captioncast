@@ -57,18 +57,19 @@
             </ul>
           </div>
 
-          <!-- button controls -->
-          <div class="btn-group btn-group-justified" role="group">
-            <span id="boldIt" class="btn btn-info">Uppercase Text</span>
-            <%= link_to 'Add Blank Line After', texts_addBlank_path(:id => @text.id), class: 'btn btn-primary' %>
-            <%= link_to 'Delete This Line', texts_removeLine_path(:id => @text.id, :page => params[:page]), class: 'btn btn-danger'%>
+          <div class="modal-footer">
+            <!-- button controls -->
+            <div class="pull-right" role="group">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Discard</button>
+              <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+
+            <div class="pull-left" role="group">
+              <%= link_to 'Delete This Line', texts_removeLine_path(:id => @text.id, :page => params[:page]), class: 'btn btn-danger'%>
+            </div>
           </div>
 
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Discard</button>
-          <%= f.submit "Update" ,:class => 'btn btn-primary' %>
-          <% end %>
-        </div>
+        <% end %>
       </div>
     </div>
   </div>
