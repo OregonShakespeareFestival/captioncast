@@ -7,7 +7,19 @@ class TextsController < ApplicationController
   def edit
     @work = Work.find(params[:work_id])
     @text = @work.texts.find(params[:id])
-    @elements = @work.elements.sort_by(&:name)
+    @previous_line = @text.previous_display_text(@work, @text.sequence)
+    @current_line  = @text.display_string
+    @next_line     = @text.next_display_text(@work, @text.sequence)
+    @elements      = @work.elements.sort_by(&:name)
+  end
+
+  def new
+    @work = Work.find(params[:work_id])
+    @text = @work.texts.find(params[:id])
+    @previous_line = @text.previous_display_text(@work, @text.sequence)
+    @current_line  = @text.display_string
+    @next_line     = @text.next_display_text(@work, @text.sequence)
+    @elements      = @work.elements.sort_by(&:name)
   end
 
   def show
@@ -25,7 +37,7 @@ class TextsController < ApplicationController
       element_id: lne.element_id,
       work_id: lne.work_id,
       content_text: lne.content_text,
-      visibility: lne.visibility
+      visibilit: lne.visibility
     )
     txt.insert_at(seqid + 1)
     if txt.save

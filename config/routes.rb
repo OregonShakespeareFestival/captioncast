@@ -40,9 +40,12 @@ Rails.application.routes.draw do
   get 'works/deleteScript'
   post 'works/deleteScript'
   resources :works, only: [:index, :show, :edit] do
-    resources :texts, only: [:index, :edit]
+    resources :texts, only: [:index, :edit, :new]
   end
   resources :texts
+
+  #get 'texts/_edit'
+
   #resources :works, only: [:index]
   # GET /works -> WorksController index
 

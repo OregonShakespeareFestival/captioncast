@@ -14,16 +14,22 @@ tr:nth-child(odd){
     background-color: #073642;
 }
 td{
-	max-width:350px;
+  max-width:350px;
 }
 .link-edit{
-	color:#d33682;
-	font-weight:600;
+  color:#d33682;
+  font-weight:600;
 }
 
 input[type="submit"]{
-	background-color:#337ab7;
+  background-color:#337ab7;
 }
 .above_limit{
-	background-color:red;
+  background-color:red !important;
+}
+.below_limit{
+  background-color: #777777;
+}
+#edit_modal, #new_modal {
+  color: #000;
 }
