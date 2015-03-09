@@ -5,6 +5,9 @@
       </br>
     </div>
     <div class="modal-body">
+      <div class="alert alert-success">
+        <%= "#{@previous_line}" %>
+      </div>
       <% provide(:title, "Edit contact") %>
       <div>
         <%= form_for :new_line, :url => texts_addLine_path(:id => @text.id) do |f| %>
@@ -23,6 +26,10 @@
           <div class='input-group'>
             <%= label_tag 'content_text', 'Text', class: 'input-group-addon' %>
             <%= f.text_area :content_text, class: 'form-control input-xlarge', rows: 4 %>
+          </div>
+          </br>
+          <div class="alert alert-success">
+            <%= "#{@next_line}" %>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Discard</button>
