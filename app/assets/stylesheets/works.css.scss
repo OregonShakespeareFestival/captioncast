@@ -3,11 +3,11 @@
   color:#fff;
 }
 
-.form-control{
+/*.form-control{
   width:75%;
   display:inline-block;
   margin:0;
-}
+}*/
 #supBlank, #boldIt{
   cursor:pointer;
 }
@@ -15,13 +15,13 @@
   color:blue;
   cursor:pointer;
 }
-.edit_text{
+/*.edit_text{
   border:2px solid;
   width:604px;
   height:285px;
   background-color: #293B4C;
   padding:3px;
-}
+}*/
 span.glyphicon.glyphicon-eye-open{
   size: 75px;
 }
@@ -44,7 +44,7 @@ span.glyphicon.glyphicon-eye-open{
   color:#2aa198;
   font-weight:bold;
 }
-#element_attr{
+/*#element_attr{
   background-color: #293B4C;
   width: 200px;
   height:195px;
@@ -52,47 +52,47 @@ span.glyphicon.glyphicon-eye-open{
   float:left;
   padding:5px;
 
-}
+}*/
 #character_name_dropdown{
   background-color: #337ab7;
 }
-textarea#text_content_text{
+/*textarea#text_content_text{
   display:inline-block;
   float:left;
   width:394px;
   height:150px;
   background-color:#fff;
   color: #000;
-}
-#new_line_content_text{
+}*/
+/*#new_line_content_text{
   background-color:#fff;
   color: #000;
-}
+}*/
 input[type=submit]{
   clear:both;
   margin:3px;
 }
-#insert_line_form{
+/*#insert_line_form{
   margin-top:20px;
   border: 5px solid;
   width:609px;
-}
+}*/
 h5{
   text-align: center;
 }
-#this-text-to-edit{
+/*#this-text-to-edit{
   height:275px ;
   margin-bottom:20px;
-}
-#character-counter{
+}*/
+/*#character-counter{
   float:right;
   clear:both;
-}
-#char_count, #char_allowed, #added_char_count{
+}*/
+#char_count, #char_allowed, #added_char_count {
   width: 50px;
   color:black;
 }
-#text_operator_note{
+/*#text_operator_note{
   width: 80%;
   float: right;
-}
+}*/
