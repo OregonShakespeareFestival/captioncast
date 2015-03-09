@@ -82,7 +82,7 @@ $('#new_line_content_text').keyup(function() {
 	//used for bolding selected lines in the editorview
 	//***********************************************
 	$('#boldIt').click(function(){
-
+			console.log("bold clicked");
 		   var textComponent = document.getElementById('text_content_text');
 		   
 		   var selectedText;

@@ -41,13 +41,10 @@
           <div id="character-counter">
             <ul class="list-group">
               <li class="list-group-item">
-                <% if @text.visibility %>
-                  <span class="glyphicon glyphicon-eye-open badge"> </span>
-                <% else %>
-                  <span class="glyphicon glyphicon-eye-close badge"> </span>
-                <% end %>
                 Visibility
-              </li>
+                <span class='glyphicon glyphicon-eye-open badge visi <%= "visiTr" if @text.visibility %>'
+                 data-id="<%= @text.id %>"> </span>
+                </li>
               <li class="list-group-item">
                 <span class="badge"><%= @text.sequence %></span>
                 Sequence Number
