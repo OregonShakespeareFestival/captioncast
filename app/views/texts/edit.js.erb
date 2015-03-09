@@ -1,11 +1,25 @@
 $("#unique").remove();
 $("#edit_modal").append("<%= escape_javascript(render :partial => 'texts/edit') %>");
 $("#edit_modal").modal("show");
+
 $('#text_content_text').keyup(function(){
-  var element = document.getElementById('text_word_count');
-  var len = document.getElementById('text_content_text').value.length;
-  element.textContent = len;
+ var element = document.getElementById('text_word_count');
+ var len = document.getElementById('text_content_text').value.length;
+ element.textContent = len;
+
+  var max_characters = <%= @work.characters_per_line %>;
+  console.log(max_characters);
+  var cs = $(this).val().length;
+    if(len > max_characters){
+    	$('#text_word_count').addClass('above_limit');
+    }
+    else{
+    	$('#text_word_count').removeClass('above_limit');
+    }
+
 });
+
+
 
 //***********************************************
 //used for bolding selected lines in the editorview
@@ -45,29 +59,14 @@ $('#boldIt').click(function(){
 		console.log(this);
 		console.log('visi changed');
 		//$(this).toggleClass('visiTr');
-		$.ajax('/texts/toggleVis',
-			{
-				data:{
-					id: $vis.attr('data-id')
-					},
-				method: 'POST',
-				success:(function(d){
-					//console.log('success');
-					//console.log(d);
-					if($vis.hasClass("glyphicon-eye-open")) {
-						$vis.removeClass("glyphicon-eye-open");
-						$vis.addClass("glyphicon-eye-close");
-					}
-					else {
-						$vis.removeClass("glyphicon-eye-close");
-						$vis.addClass("glyphicon-eye-open");
-					}
-				}),
-				error:(function(e){
-					//console.log(e);
-					//console.log('error');
-					//console.log('i got nothing');
-				})
-			}
-		);
+
+		if($vis.hasClass("glyphicon-eye-open")) {
+			$vis.removeClass("glyphicon-eye-open");
+			$vis.addClass("glyphicon-eye-close");
+		}
+		else {
+			$vis.removeClass("glyphicon-eye-close");
+			$vis.addClass("glyphicon-eye-open");
+		}
+
 	});
