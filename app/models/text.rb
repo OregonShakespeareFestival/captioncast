@@ -11,4 +11,19 @@ class Text < ActiveRecord::Base
   delegate :element_type, to: :element
 
   acts_as_list column: :sequence
+
+  def previous_display_text(work, sequence)
+    previous_text = work.texts.find_by sequence: sequence - 1
+    previous_text.display_string
+  end
+
+  def next_display_text(work_id, sequence)
+    next_text = work.texts.find_by sequence: sequence + 1
+    next_text.display_string
+  end
+
+  def display_string
+    "#{self.element.name}: #{self.content_text unless self.element.name == "BLANKLINE"}"
+  end
+
 end

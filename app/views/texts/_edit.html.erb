@@ -5,6 +5,9 @@
       </br>
     </div>
     <div class="modal-body">
+      <div class="alert alert-success">
+        <%= "#{@previous_line}" %>
+      </div>
       <% provide(:title, "Edit contact") %>
       <div>
         <!--form for editing the content/settings of the line-->
@@ -62,6 +65,10 @@
             <span id="boldIt" class="btn btn-info">Uppercase Text</span>
             <%= link_to 'Add Blank Line After', texts_addBlank_path(:id => @text.id), class: 'btn btn-primary' %>
             <%= link_to 'Delete This Line', texts_removeLine_path(:id => @text.id, :page => params[:page]), class: 'btn btn-danger'%>
+          </div>
+          <br />
+          <div class="alert alert-success">
+            <%= "#{@next_line}" %>
           </div>
 
         <div class="modal-footer">
