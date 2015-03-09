@@ -10,6 +10,12 @@ class TextsController < ApplicationController
     @elements = @work.elements.sort_by(&:name)
   end
 
+  def new
+    @work = Work.find(params[:work_id])
+    @text = @work.texts.find(params[:id])
+    @elements = @work.elements.sort_by(&:name)
+  end
+
   def show
   end
 
