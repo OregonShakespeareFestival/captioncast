@@ -25,7 +25,13 @@
           <td><%= line.element_name %></td>
           <td><%= line.element_type %></td>
           <td><%= line.content_text %></td>
-          <td><span class='glyphicon glyphicon-eye-open visi <%= "visiTr" if line.visibility %>' data-id="<%= line.id %>"></span></td>
+          <td>
+            <% if line.visibility %>
+              <span class='glyphicon visi visiTr glyphicon-eye-open' data-id="<%= line.id %>"></span>
+            <% else %>
+              <span class='glyphicon visi visiTr glyphicon-eye-close' data-id='<%= line.id %>'></span>
+            <% end %>
+          </td>
           <td><%= line.operator_note %></td>
           <!--link to edit specific this line-->
           <td><%= link_to 'EDIT', edit_work_text_path(work_id: line.work_id, id: line.id, page: params[:page]), :class => 'link-edit', method: :get, remote: true %></td>

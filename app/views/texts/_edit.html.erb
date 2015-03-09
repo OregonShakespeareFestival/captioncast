@@ -42,8 +42,11 @@
             <ul class="list-group">
               <li class="list-group-item">
                 Visibility
-                <span class='glyphicon glyphicon-eye-open badge visi <%= "visiTr" if @text.visibility %>'
-                 data-id="<%= @text.id %>"> </span>
+                <% if @text.visibility %>
+                  <span class='glyphicon visi badge glyphicon-eye-open' data-id="<%= @text.id %>"> </span>
+                <% else %>
+                  <span class='glyphicon visi badge glyphicon-eye-close' data-id='<%= @text.id %>'> </span>
+                <% end %>
                 </li>
               <li class="list-group-item">
                 <span class="badge"><%= @text.sequence %></span>

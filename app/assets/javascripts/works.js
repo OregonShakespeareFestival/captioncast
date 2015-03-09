@@ -66,7 +66,14 @@ $('#new_line_content_text').keyup(function() {
 				success:(function(d){
 					//console.log('success');
 					//console.log(d);
-					$vis.toggleClass('visiTr');
+					if($vis.hasClass("glyphicon-eye-open")) {
+						$vis.removeClass("glyphicon-eye-open");
+						$vis.addClass("glyphicon-eye-close");
+					}
+					else {
+						$vis.removeClass("glyphicon-eye-close");
+						$vis.addClass("glyphicon-eye-open");
+					}
 
 				}),
 				error:(function(e){
