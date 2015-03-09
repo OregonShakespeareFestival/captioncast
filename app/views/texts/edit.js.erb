@@ -49,3 +49,30 @@ $('#boldIt').click(function(){
     + $('textarea#text_content_text').val().substring(textComponent.selectionEnd)
   );
 });
+
+//***********************************************
+//used for bolding selected lines in the editorview
+//***********************************************
+$('#lowercaseIt').click(function(){
+  var textComponent = document.getElementById('text_content_text');
+  var selectedText;
+  // IE version
+  if (document.selection != undefined){
+    console.log('not ie')
+    textComponent.focus();
+    var sel = document.selection.createRange();
+    selectedText = sel.text;
+  }
+  // Mozilla version
+  else if (textComponent.selectionStart != undefined){
+    var startPos = textComponent.selectionStart;
+    var endPos = textComponent.selectionEnd;
+    selectedText = textComponent.value.substring(startPos, endPos)
+  }
+  //bolds the text that is highlighted in the textarea
+  $('textarea#text_content_text').val(
+  $('textarea#text_content_text').val().substring(0, textComponent.selectionStart)
+    + selectedText.toLowerCase()
+    + $('textarea#text_content_text').val().substring(textComponent.selectionEnd)
+  );
+});
