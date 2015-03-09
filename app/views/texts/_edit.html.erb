@@ -10,6 +10,12 @@
         <!--form for editing the content/settings of the line-->
         <%= form_for(@text) do |f| %>
 
+          <!-- toolbar -->
+          <div class="btn-group" role="toolbar">
+            <button type="button" id="boldIt" class="btn btn-default">Uppercase</button>
+          </div>
+          <br><br>
+
           <!-- operator note -->
           <div class='input-group'>
             <span class='input-group-addon'>Operator Note</span>
