@@ -6,11 +6,11 @@ $("#new_line_visibility").bootstrapSwitch({size: 'mini'});
 $('#character_name_dropdown').on('change', function() {
   if($(this).find('option:selected').text() == "BLANKLINE") {
     $("#text").val("<br />");
-    $("#text").prop("disabled", true);
+    $("#text").prop("readonly", true);
   }
   else {
     $("#text").val("");
-    $("#text").prop("disabled", false);
+    $("#text").prop("readonly", false);
   }
 });
 
