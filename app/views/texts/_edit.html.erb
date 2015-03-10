@@ -50,22 +50,36 @@
           <!-- the rest -->
           <div id="character-counter">
             <ul class="list-group">
+
+              <li class="list-group-item">
+                <%if @text.element.element_name.blank? %>
+                  Element Type
+                  <span class="badge"><%= @text.element.element_type %></span> 
+                <%else%>
+                  Character
+                  <span class="badge"><%= @text.element.element_name %></span>
+              <%end%>
+              </li>
+
               <li class="list-group-item">
                 Visibility
                 <div class="pull-right">
                   <%= f.check_box :visibility %>
                 </div>
-                </li>
+              </li>
+
               <li class="list-group-item">
                 <span class="badge"><%= @text.sequence %></span>
                 Sequence Number
               </li>
+
               <li class="list-group-item">
                 <span id=text_word_count class="badge"><%= @text.content_text.length.to_s%></span>
                 Characters
               </li>
             </ul>
           </div>
+
           <div class="alert alert-success">
             <%= "#{@next_line}" %>
           </div>
