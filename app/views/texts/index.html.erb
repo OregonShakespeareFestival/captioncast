@@ -24,7 +24,11 @@
           <td><%= line.sequence %></td>
           <td><%= line.element_name %></td>
           <td><%= line.element_type %></td>
-          <td><%= line.content_text %></td>
+          <%if line.element_type == 'BLANKLINE'%>
+            <td></td>
+          <%else%>
+            <td><%= line.content_text %></td>
+          <%end%>
           <td>
             <% if line.visibility %>
               <span class='glyphicon visi visiTr glyphicon-eye-open' data-id="<%= line.id %>"></span>
