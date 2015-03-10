@@ -5,12 +5,16 @@ $("#new_line_visibility").bootstrapSwitch({size: 'mini'});
 
 $('#character_name_dropdown').on('change', function() {
   if($(this).find('option:selected').text() == "BLANKLINE") {
-    $("#text").val("<br />");
-    $("#text").prop("readonly", true);
+    $("#new_line_content_text").val("<br />");
+    $("#new_line_content_text").prop("readonly", true);
+    $("#new_line_visibility").bootstrapSwitch("state", true); 
+    $("#new_line_visibility").bootstrapSwitch("readonly", true);
   }
   else {
-    $("#text").val("");
-    $("#text").prop("readonly", false);
+    $("#new_line_content_text").val("");
+    $("#new_line_content_text").prop("readonly", false);
+    $("#new_line_visibility").bootstrapSwitch("state", false); 
+    $("#new_line_visibility").bootstrapSwitch("readonly", false);
   }
 });
 
