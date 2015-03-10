@@ -26,8 +26,6 @@ Rails.application.routes.draw do
   post 'operator/pushBlackout'
 
   #for the editor view
-  get 'texts/addBlank'
-  post 'texts/addBlank'
   post 'texts/toggleVis'
   get 'texts/removeLine'
   post 'texts/removeLine'

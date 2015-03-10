@@ -50,30 +50,6 @@ class TextsController < ApplicationController
   end
 
   #********************************************************************
-  #inserts a blank line into the database after seqid of the line selected
-  # we get the work id, then find the
-  #******************************************************************
-  def addBlank
-    lne = Text.find(params[:id]) #gives us the line
-    wid = lne.work_id #gives us the work id to use for selecting the right whitespace element
-    seqid = lne.sequence
-    txt = Text.new(
-      element_id: Element.find_by(element_type: 'BLANKLINE').id,
-      work_id: wid,
-      content_text: "<br />",
-      visibility: true
-    )
-    txt.insert_at(seqid + 1)
-    if txt.save
-      flash[:notice] = "BLANK LINE successfully added"
-      redirect_to:back
-    else
-      flash[:notice] = "BLANK LINE NOT added"        # need to fix this
-      redirect_to:back
-    end
-  end
-
-  #********************************************************************
   # removes a line from the database and lines after seqid of the line selected
   # each line after will be decremented to fil in the gap
   #******************************************************************
