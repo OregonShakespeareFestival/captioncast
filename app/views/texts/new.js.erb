@@ -3,6 +3,17 @@ $("#new_modal").append("<%= escape_javascript(render :partial => 'texts/new') %>
 $("#new_modal").modal("show");
 $("#new_line_visibility").bootstrapSwitch({size: 'mini'});
 
+$('#character_name_dropdown').on('change', function() {
+  if($(this).find('option:selected').text() == "BLANKLINE") {
+    $("#text").val("<br />");
+    $("#text").prop("disabled", true);
+  }
+  else {
+    $("#text").val("");
+    $("#text").prop("disabled", false);
+  }
+});
+
 $('#new_line_content_text').keyup(function(){
  var element = document.getElementById('text_word_count');
  var len = document.getElementById('new_line_content_text').value.length;
