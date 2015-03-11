@@ -109,18 +109,19 @@ class TextsController < ApplicationController
   # beyond the line selected to insert at
   #******************************************************************
   def addLine
-    char_text = params['new_line']
+    new_text = params['new_line']
 
-    lne = Text.find_by_id(params[:id]) #gives us the line we will insert after
-    wid = lne.work_id #gives us the work id to use for selecting the right whitespace element
-    seqid = lne.sequence
+    line = Text.find_by_id(params[:id]) #gives us the line we will insert after
+    work_id = line.work_id #gives us the work id to use for selecting the right whitespace element
+    sequence_id = line.sequence
     txt = Text.new(
       element_id: Element.find_by_id(params['character_name_dropdown']).id,
-      work_id: wid,
-      content_text: char_text['content_text'],
-      visibility: true
+      work_id: work_id,
+      content_text: new_text['content_text'],
+      visibility: new_text['visibility'],
+      operator_note: new_text['operator_note']
     )
-    txt.insert_at(seqid + 1)
+    txt.insert_at(sequence_id + 1)
 
     if txt.save
       flash[:notice] = "New character line successfully added"
