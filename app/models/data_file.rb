@@ -75,6 +75,7 @@ class DataFile < ActiveRecord::Base
     elsif(File.extname(path) == ".rtf")
       self.parse_rtf_file(f, work, characters_per_line, split_type)
       self.set_work_characters_per_line(work, characters_per_line)
+      return
     elsif(File.extname(path) == ".fdx")
       doc =  Nokogiri::XML(f)
       f.close
@@ -113,11 +114,12 @@ class DataFile < ActiveRecord::Base
   end
 
 
-  def parse_rtf_file(f, work, characters_per_line, split_type)
+  def self.parse_rtf_file(f, work, characters_per_line, split_type)
     rtf_dump = Yomu.read :text, f.read()
     lines = rtf_dump.split("\n")
     self.add_character_elements(lines, work)
     self.add_text_lines_to_db(lines, work, characters_per_line, split_type)
+  end
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   #used for parsing script in .fdx format
