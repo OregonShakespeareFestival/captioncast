@@ -212,8 +212,10 @@ $(document).ready(function(){
 
 		//prevent scrolling on keydown when the operator view is focused
 		$(document).keydown(function(e) {
-			e.preventDefault();
-			return false;
+			if(e.which == 38 || e.which == 40) {
+				e.preventDefault();
+				return false;
+			}
 		});
 		//up and down keys
 		$(document).keyup(function(e) {
