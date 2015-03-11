@@ -47,6 +47,7 @@ gem 'scalpel'
 gem 'treat'
 gem 'mysql2'
 gem 'kaminari'
+gem 'yomu'
 
 group :development do
   gem 'capistrano-rails'
