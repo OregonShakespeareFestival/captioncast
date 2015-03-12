@@ -16,4 +16,6 @@
 //= require bootstrap-sprockets
 //= require bootstrap-switch
 //= require turbolinks
+//= require spin
+//= require jquery.spin
 //= require_tree .
