@@ -3,7 +3,7 @@
       <%= content_tag :div, :id=>"attributes-upload", :class=>"col-xs-12 col-sm-6 col-md-4" do %>
 
         <h1 class="title-upload">File Upload</h1>
-        <p id="notice"><%= notice %></p>
+        <p id="upload_notice"><%= notice %></p>
         <%= form_tag({:action => "uploadFile"},
           :multipart => true, :class => "form-group") do %>
 

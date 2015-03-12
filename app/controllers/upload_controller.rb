@@ -15,7 +15,7 @@ class UploadController < ApplicationController
     script_loaded = DataFile.parse_fd(params[:upload], params[:work], params[:character_per_line], params[:split_type])
     
     if !script_loaded
-      flash[:notice] = "Script was not loaded, check that file is .fdx .rtf or .txt"
+      flash[:notice] = "Script not loaded, check that file is .fdx .rtf or .txt"
       redirect_to :back
     else
       flash[:notice] = ""
