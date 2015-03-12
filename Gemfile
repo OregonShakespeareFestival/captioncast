@@ -48,6 +48,7 @@ gem 'treat'
 gem 'mysql2'
 gem 'kaminari'
 gem 'yomu'
+gem 'spinjs-rails'
 
 group :development do
   gem 'capistrano-rails'

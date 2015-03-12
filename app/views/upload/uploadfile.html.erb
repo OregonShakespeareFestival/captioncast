@@ -37,7 +37,7 @@
             <%= select_tag "split_type", options_for_select({"Split on Sentences" => "S_sentences", "Split on Characters Only" => "S_characters"}, "Split on Sentences") , :class=>"form-control" %>
           <% end %>          
 
-          <%= button_tag "Upload", :type=>"submit", :class => "btn btn-primary" %>
+          <%= button_tag "Upload", :type=>"submit", :id => "submit_upload", :class => "btn btn-primary" %>
         <% end %>
 
         <h3>Select a script below to delete from the database</h3>
