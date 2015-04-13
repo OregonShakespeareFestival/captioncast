@@ -7,7 +7,19 @@ class TextsController < ApplicationController
   def edit
     @work = Work.find(params[:work_id])
     @text = @work.texts.find(params[:id])
-    @elements = @work.elements.sort_by(&:name)
+    @previous_line = @text.previous_display_text(@work, @text.sequence)
+    @current_line  = @text.display_string
+    @next_line     = @text.next_display_text(@work, @text.sequence)
+    @elements      = @work.elements.sort_by(&:name)
+  end
+
+  def new
+    @work = Work.find(params[:work_id])
+    @text = @work.texts.find(params[:id])
+    @previous_line = @text.previous_display_text(@work, @text.sequence)
+    @current_line  = @text.display_string
+    @next_line     = @text.next_display_text(@work, @text.sequence)
+    @elements      = @work.elements.sort_by(&:name)
   end
 
   def show
@@ -25,7 +37,7 @@ class TextsController < ApplicationController
       element_id: lne.element_id,
       work_id: lne.work_id,
       content_text: lne.content_text,
-      visibility: lne.visibility
+      visibilit: lne.visibility
     )
     txt.insert_at(seqid + 1)
     if txt.save
@@ -34,30 +46,6 @@ class TextsController < ApplicationController
     else
       flash[:notice] = "SPLIT NOT successfully made!!"           #need to fix this
       redirect_to :back
-    end
-  end
-
-  #********************************************************************
-  #inserts a blank line into the database after seqid of the line selected
-  # we get the work id, then find the
-  #******************************************************************
-  def addBlank
-    lne = Text.find(params[:id]) #gives us the line
-    wid = lne.work_id #gives us the work id to use for selecting the right whitespace element
-    seqid = lne.sequence
-    txt = Text.new(
-      element_id: Element.find_by(element_type: 'BLANKLINE').id,
-      work_id: wid,
-      content_text: "<br />",
-      visibility: true
-    )
-    txt.insert_at(seqid + 1)
-    if txt.save
-      flash[:notice] = "BLANK LINE successfully added"
-      redirect_to:back
-    else
-      flash[:notice] = "BLANK LINE NOT added"        # need to fix this
-      redirect_to:back
     end
   end
 
@@ -121,18 +109,19 @@ class TextsController < ApplicationController
   # beyond the line selected to insert at
   #******************************************************************
   def addLine
-    char_text = params['new_line']
+    new_text = params['new_line']
 
-    lne = Text.find_by_id(params[:id]) #gives us the line we will insert after
-    wid = lne.work_id #gives us the work id to use for selecting the right whitespace element
-    seqid = lne.sequence
+    line = Text.find_by_id(params[:id]) #gives us the line we will insert after
+    work_id = line.work_id #gives us the work id to use for selecting the right whitespace element
+    sequence_id = line.sequence
     txt = Text.new(
       element_id: Element.find_by_id(params['character_name_dropdown']).id,
-      work_id: wid,
-      content_text: char_text['content_text'],
-      visibility: true
+      work_id: work_id,
+      content_text: new_text['content_text'],
+      visibility: new_text['visibility'],
+      operator_note: new_text['operator_note']
     )
-    txt.insert_at(seqid + 1)
+    txt.insert_at(sequence_id + 1)
 
     if txt.save
       flash[:notice] = "New character line successfully added"

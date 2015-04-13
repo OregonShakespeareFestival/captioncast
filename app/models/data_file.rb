@@ -68,17 +68,22 @@ class DataFile < ActiveRecord::Base
 
     @work = Work.find_by_id(work)
 
-    if(File.extname(path) == ".txt")
+    if(File.extname(path).downcase == ".txt" )
       self.parse_text_file(f, work, characters_per_line, split_type)
       self.set_work_characters_per_line(work, characters_per_line)
-      return
-
-    elsif(File.extname(path) == ".fdx")
+      return true
+    elsif(File.extname(path).downcase == ".rtf")
+      self.parse_rtf_file(f, work, characters_per_line, split_type)
+      self.set_work_characters_per_line(work, characters_per_line)
+      return true
+    elsif(File.extname(path).downcase == ".fdx")
       doc =  Nokogiri::XML(f)
       f.close
       self.parse_fdx(doc, work, characters_per_line, split_type)
       self.set_work_characters_per_line(work, characters_per_line)
-      return
+      return true
+    else 
+      return false
     end
   end
 
@@ -111,6 +116,12 @@ class DataFile < ActiveRecord::Base
   end
 
 
+  def self.parse_rtf_file(f, work, characters_per_line, split_type)
+    rtf_dump = Yomu.read :text, f.read()
+    lines = rtf_dump.split("\n")
+    self.add_character_elements(lines, work)
+    self.add_text_lines_to_db(lines, work, characters_per_line, split_type)
+  end
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   #used for parsing script in .fdx format
@@ -232,7 +243,7 @@ end
     arr.each do |line|
 
       #look for a character name indicating the beginning of a dialogue                           <- remove ".?" for future use (for error in spanish scripts)
-      a = line.force_encoding("ISO-8859-1").encode("utf-8", replace: nil).match(/^[A-Z1-9\s]+(?=.?:)/)
+      a = line.force_encoding("ISO-8859-1").encode("utf-8", replace: nil).match(/^[A-Z1-9\s\.]+(?=.?:)/)
 
       #we have a completed monologue and need to submit it to the db
       if(a != nil and haveline == true)
@@ -258,12 +269,12 @@ end
         #get the character speaking
         name = a[0].upcase.lstrip.rstrip
         #returns just the line said by the character (removing excess whitespace)                     <- remove ".?" for future use (for error in spanish scripts)
-        cur_line = line.force_encoding("ISO-8859-1").encode("utf-8", replace: nil).sub(/^[A-Z1-9\s]+.?:\s?/,"").squish
+        cur_line = line.force_encoding("ISO-8859-1").encode("utf-8", replace: nil).sub(/^[A-Z1-9\s\.]+.?:\s?/,"").squish
         haveline = true
 
       #we just append this line to our current characters script
       elsif (a == nil)                                                                                      #  <- remove ".?" for future use (for error in spanish scripts)
-        cur_line += " " + line.force_encoding("ISO-8859-1").encode("utf-8", replace: nil).sub(/^[A-Z1-9\s]+.?:\s?/,"").squish
+        cur_line += " " + line.force_encoding("ISO-8859-1").encode("utf-8", replace: nil).sub(/^[A-Z1-9\s\.]+.?:\s?/,"").squish
       end
     end
   end

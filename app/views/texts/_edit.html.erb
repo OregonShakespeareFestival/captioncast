@@ -1,0 +1,104 @@
+<div class="modal-dialog" id="unique">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </br>
+    </div>
+    <div class="modal-body">
+      <h2>Edit</h2>
+      <div class="alert alert-success">
+        <%= "#{@previous_line}" %>
+      </div>
+      <% provide(:title, "Edit contact") %>
+      <div>
+        <!--form for editing the content/settings of the line-->
+        <%= form_for(@text) do |f| %>
+
+          <!-- toolbar -->
+          <div class="btn-group" role="group">
+            <button type="button" id="boldIt" class="btn btn-default">Uppercase</button>
+            <button type="button" id="lowercaseIt" class="btn btn-default">Lowercase</button>
+          </div>
+          <br><br>
+
+          <!-- operator note -->
+          <div class='input-group'>
+            <span class='input-group-addon'>Operator Note</span>
+            <%= f.text_field :operator_note, class: 'form-control', placeholder: "placeholder text" %>
+          </div>
+          </br>
+          <!-- content_text -->
+          <div class='input-group'>
+            <span class='input-group-addon'>Text</span>
+            <%= f.text_area :content_text, class: 'form-control input-xlarge', rows: 4 %>
+          </div>
+          </br>
+          <!-- character -->
+          <div class='input-group'>
+            <!--
+            <span class='input-group-addon'>Character</span>
+            <label class='form-control'><%= @text.element.name %></label>
+            -->
+          </div>
+
+          <!-- element -->
+          <div class='input-group'>
+            <!--
+            <p><%="Element: " + @text.element.element_type%></p>
+            -->
+          </div>
+
+          <!-- the rest -->
+          <div id="character-counter">
+            <ul class="list-group">
+
+              <li class="list-group-item">
+                <%if @text.element.element_name.blank? %>
+                  Element Type
+                  <span class="badge"><%= @text.element.element_type %></span> 
+                <%else%>
+                  Character
+                  <span class="badge"><%= @text.element.element_name %></span>
+              <%end%>
+              </li>
+
+              <li class="list-group-item">
+                Visibility
+                <div class="pull-right">
+                  <%= f.check_box :visibility %>
+                </div>
+              </li>
+
+              <li class="list-group-item">
+                <span class="badge"><%= @text.sequence %></span>
+                Sequence Number
+              </li>
+
+              <li class="list-group-item">
+                <span id="text_word_count" class="badge"><%= @text.content_text.length.to_s%></span>
+                Characters
+              </li>
+            </ul>
+          </div>
+
+          <div class="alert alert-success">
+            <%= "#{@next_line}" %>
+          </div>
+
+          <div class="modal-footer">
+            <!-- button controls -->
+            <div class="pull-right" role="group">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Discard</button>
+              <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+
+            <div class="pull-left" role="group">
+              <%= link_to 'Delete This Line', texts_removeLine_path(:id => @text.id, :page => params[:page]), class: 'btn btn-danger'%>
+            </div>
+          </div>
+
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
