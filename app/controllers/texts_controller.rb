@@ -2,6 +2,7 @@ class TextsController < ApplicationController
   def index
     work = Work.find(params[:work_id])
     @texts = work.texts.page(params[:page]).per(100)
+    @operator = params[:operator]
   end
 
   def edit
