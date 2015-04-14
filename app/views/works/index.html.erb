@@ -8,8 +8,17 @@
     <ul id="works">
       <% @works.each do |work| %>
         <li>
+          <!--if there is a work, create a form for the editor to submit-->
           <% if work.texts.present? %>
-            <%= link_to work_details(work), work_texts_path(work_id: work.id) %>
+              <%= form_tag({:action => "select"}, :multipart => true, :class => "form-group") do%>
+                <%= hidden_field_tag :work, work.id%>
+                <%= hidden_field_tag :view , "multi"%>
+                <%= work_details(work) %><br><%=work.id%>
+                <%= label_tag("Enter Editor Name") %>
+                <%= text_field(:operator, :name, size: 20, :class=>"form-control editwork-textbox") %>
+              <%= button_tag "Continue", :type=>"submit", :class => "btn btn-primary" %>
+            <% end %>
+          
           <% else %>
             <%= work_details(work) %>
           <% end %>

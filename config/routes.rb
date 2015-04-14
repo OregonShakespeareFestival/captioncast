@@ -37,6 +37,7 @@ Rails.application.routes.draw do
   post 'texts/addLine'
   get 'works/deleteScript'
   post 'works/deleteScript'
+  post 'works/select'
   resources :works, only: [:index, :show, :edit] do
     resources :texts, only: [:index, :edit, :new]
   end
