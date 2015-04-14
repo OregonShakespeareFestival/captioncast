@@ -1,6 +1,7 @@
 class WorksController < ApplicationController
   def index
     @works = Work.order(:work_name, :language)
+    @operators = Operator.all
   end
 
 def select
@@ -31,7 +32,7 @@ def select
         view_mode = params[:view]
         work = params[:work]
         puts "$$$$ " + operator_name[:name] + " " + work
-        operator = Operator.create!(name: operator_name[:name],
+        operator = Operator.create!(name: "EDITOR_" + operator_name[:name],
           view_attributes: params[:view], work_id: work, position: 0)
       end
 
@@ -39,7 +40,7 @@ def select
       Rails.application.config.operator_positions.merge!(
         {operator.id => operator.position})
       redirect_to :controller => 'texts', :action => 'index',
-        work_id: params[:work], :view_mode => view_mode,
+        work_id: work, :view_mode => view_mode,
         :operator => operator.id
     end
   end
