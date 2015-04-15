@@ -13,7 +13,7 @@
               <%= form_tag({:action => "select"}, :multipart => true, :class => "form-group") do%>
                 <%= hidden_field_tag :work, work.id%>
                 <%= hidden_field_tag :view , "multi"%>
-                <%= work_details(work) %><br><%=work.id%>
+                <%= work_details(work) %><br>
                 <%= label_tag("Enter Editor Name") %>
                 <%= text_field(:operator, :name, size: 20, :class=>"form-control editwork-textbox") %>
               <%= button_tag "Continue", :type=>"submit", :class => "btn btn-primary" %>
