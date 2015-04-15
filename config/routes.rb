@@ -2,6 +2,8 @@ require 'resque/server'
 
 Rails.application.routes.draw do
 
+  get 'preview/index'
+  post 'preview/index'
 
   get 'display/select'
   post 'display/select'
