@@ -31,7 +31,6 @@ def select
         operator_name = params[:operator]
         view_mode = params[:view]
         work = params[:work]
-        puts "$$$$ " + operator_name[:name] + " " + work
         operator = Operator.create!(name: "EDITOR_" + operator_name[:name],
           view_attributes: params[:view], work_id: work, position: 0)
       end
