@@ -40,6 +40,7 @@ Rails.application.routes.draw do
   get 'works/deleteScript'
   post 'works/deleteScript'
   post 'works/select'
+  post 'texts/pushTextSeq'
   resources :works, only: [:index, :show, :edit] do
     resources :texts, only: [:index, :edit, :new]
   end

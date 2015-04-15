@@ -12,6 +12,7 @@ class TextsController < ApplicationController
     @current_line  = @text.display_string
     @next_line     = @text.next_display_text(@work, @text.sequence)
     @elements      = @work.elements.sort_by(&:name)
+    pushTextSeq(params[:seq], params[:operator])
   end
 
   def new
@@ -132,6 +133,20 @@ class TextsController < ApplicationController
        redirect_to:back
     end
   end
+
+  #********************************************************************
+  # Updates the editor/operator position for the priview window 
+  #******************************************************************
+  def pushTextSeq
+    operator = Operator.find_by(id: params[:operator])
+    Rails.application.config.operator_positions.merge!({params[:operator] => params[:seq]})
+    operator.position = params[:seq]
+    operator.save
+
+    # for debug purposes
+    render :json => params[:seq]
+  end
+
 
   private
 
