@@ -9,10 +9,6 @@ $iphone-land-break: 568px;
 $iphone-port-break: 340px;
 $preview-break: 339px;
 
-@mixin fullheight{
-	height:100%;
-}
-
 @mixin vert-center{
 	position:relative;
 	display:block;
@@ -21,7 +17,6 @@ $preview-break: 339px;
 }
 
 @mixin line-disp{
-	display:none;
 	font-size:800%;
 	text-align: left;
 	word-break: keep-all;
@@ -37,7 +32,6 @@ html{
 .body-preview {
 	background-color: $previewBgCol;
 	color:$previewTextCol;
-	overflow: hidden;
 	height: 100%;
 }
 
@@ -51,12 +45,16 @@ html{
 
 .line-preview {
 	@include line-disp;
-	@include fullheight;
+
+	position: absolute;
 
 	span.line-preview {
 		@include vert-center;
 		
+		position: relative;
+
 		span.line-char-preview {
+			position: relative;
 			font-weight:bold;
 		}
 	}
