@@ -1,36 +1,27 @@
 $(document).ready(function(){
 	
-//**********************************************
-//sets the value and class of the char_count box
-//*********************************************
-//$('#char_count').val($('#text_content_text').val().length);
-//if(parseInt($('#char_count').val()) > parseInt($('#char_allowed').val())){
-//	$('#char_count').addClass('above_limit');
-//}
-
 //***********************************************
-//inserts a non visible newline on the screen
+//updates the operator position 
 //***********************************************
-//	var $contentBox = $('#text_content_text');
-//	$('#supBlank').click(function(){	
-//		$contentBox.val($contentBox.val() + '<br />');
-//		});
-
-
-//***********************************************
-// updates the count on change of characters currently
-// in the editor textarea
-//***********************************************
-//$('#text_content_text').keyup(function() {
-//    var cs = $(this).val().length;
-//    $('#char_count').val(cs);
-//    if(cs > parseInt($('#char_allowed').val())){
-//    	$('#char_count').addClass('above_limit');
-//    }
-//    else{
-//    	$('#char_count').removeClass('above_limit'); }
-//
-//});
+	$('.operator_location').click(function(){
+		$line_seq = $(this);
+		//$(this).toggleClass('visiTr');
+		$.ajax('/texts/pushTextSeq',
+			{
+				data:{
+					seq: $line_seq.attr('seq'),
+					operator: $line_seq.attr('operator')
+					},
+				method: 'POST',
+				success:(function(d){
+					console.log('updated text sequence');
+				}),
+				error:(function(e){
+					console.log(e);
+				})
+			}
+		);
+	});
 
 //***********************************************
 // updates the count on change of characters currently
