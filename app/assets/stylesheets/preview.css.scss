@@ -1,3 +1,78 @@
-// Place all the styles related to the preview controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+$previewBgCol: #222222;
+$previewTextCol: #f7e694;
+$previewTextColBlur: #f7e694;
+$xs-break: 992px;
+$lg-break: 1400px;
+$ipad-land-break: 1024px;
+$ipad-port-break: 768px;
+$iphone-land-break: 568px;
+$iphone-port-break: 340px;
+$preview-break: 339px;
+
+@mixin fullheight{
+	height:100%;
+}
+
+@mixin vert-center{
+	position:relative;
+	display:block;
+	top:50%;
+	transform: translateY(-50%);
+}
+
+@mixin line-disp{
+	display:none;
+	font-size:800%;
+	text-align: left;
+	word-break: keep-all;
+	/*padding for safe region of display-- just in case*/
+	padding:3%;
+	line-height: .8em;
+}
+
+html{
+	height: 100%;
+}
+
+.body-preview {
+	background-color: $previewBgCol;
+	color:$previewTextCol;
+	overflow: hidden;
+	height: 100%;
+}
+
+#line-holder-preview{
+	height: 100%;
+}
+
+#row-preview {
+	height: 100%;
+}
+
+.line-preview {
+	@include line-disp;
+	@include fullheight;
+
+	span.line-preview {
+		@include vert-center;
+		
+		span.line-char-preview {
+			font-weight:bold;
+		}
+	}
+	@media screen and (max-width: $ipad-land-break){
+		padding:.5%;
+	}
+	@media screen and (max-width: $ipad-port-break){
+		font-size:3.3em;
+	}
+	@media screen and (max-width: $iphone-land-break){
+		font-size:1.3em;
+	}
+	@media screen and (max-width: $iphone-port-break){
+		font-size:2em;
+	}
+	@media screen and (max-width: $preview-break){
+		font-size:1em;
+	}
+}
