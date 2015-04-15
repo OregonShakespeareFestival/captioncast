@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   get 'preview/index'
   post 'preview/index'
+  post 'preview/getLineSequence'
 
   get 'display/select'
   post 'display/select'
