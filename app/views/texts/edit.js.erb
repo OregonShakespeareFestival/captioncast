@@ -76,3 +76,80 @@ $('#lowercaseIt').click(function(){
     + $('textarea#text_content_text').val().substring(textComponent.selectionEnd)
   );
 });
+
+//*****************************************************************
+//saves the CHANGED line to the database then updates the operator position 
+//*****************************************************************
+  $('.modal_operator_location').click(function(){
+    $line_seq = $(this);
+    $sequence = $line_seq.attr('seq');
+    $note = $('#text_operator_note').val();
+    $text = $('textarea#text_content_text').val();
+    $visib = $('#text_visibility').prop('checked');
+
+
+    //update the database with text info
+     $.ajax('/texts/update_from_ajax',
+      {
+        data:{
+            content_text: $text, 
+            visibility: $visib,
+            operator_note: $note,
+            id: $line_seq.attr('text-id'),
+          },
+        method: 'POST',
+        //on successfull update
+        success:(function(d){
+            console.log('updated changes');  
+            //then we update the preview with the new text   
+            $.ajax('/texts/pushTextSeq',
+              {
+                data:{
+                  seq: $line_seq.attr('seq'),
+                  operator: $line_seq.attr('operator')
+                  },
+                method: 'POST',
+                success:(function(d){
+                  console.log('updated text sequence for preview');
+                }),
+                error:(function(e){
+                  console.log(e);
+                })
+              }
+            );
+        }),
+         error:(function(e){
+          console.log(e);
+        })
+      }
+    );
+  });
+
+
+//*****************************************************************
+//reverts any changes to the original text before opening the modal
+//*****************************************************************
+  $('.revert-change').click(function(){
+    $id = $('#hidden_id').val();
+    $note = $('#hidden_operator_note').val();
+    $text = $('#hidden_content_text').val();
+    $visib = $('#hidden_visibility').prop('checked');
+
+    $.ajax('/texts/revert',
+      {
+        data:{
+          id: $id,
+          text: $text, 
+          visibility: $visib,
+          operator_note: $note,
+          },
+        method: 'POST',
+        success:(function(d){
+          console.log('reverted changes');
+        }),
+        error:(function(e){
+          console.log(e);
+        })
+      }
+    );
+  });
