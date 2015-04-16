@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	if($("#body-preview-index").length > 0) {
-		var refreshRate = 300;
+		var refreshRate = 1000;
 
 		//make update happen
 		function updatePreview(current) {
@@ -18,7 +18,8 @@ $(document).ready(function() {
 				url:"/preview/getLineSequence",
 				type:"post",
 				data: {
-					operator: operator
+					operator: operator,
+					work: work
 				},
 				success:function(data) {
 					if(data.content != $("#line-preview-current").html().trim())
@@ -30,6 +31,7 @@ $(document).ready(function() {
 			});
 		}
 
+		//heartbeat();
 		window.setInterval(heartbeat, refreshRate);
 	}
 });
