@@ -12,7 +12,7 @@
       <% provide(:title, "Edit contact") %>
       <div>
         <!--form for editing the content/settings of the line-->
-        <%= form_for(@text) do |f| %>
+        <%= form_for(@text) :action => "test" do |f| %>
 
           <!-- toolbar -->
           <div class="btn-group" role="group">

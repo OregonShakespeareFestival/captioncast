@@ -96,6 +96,8 @@ class TextsController < ApplicationController
   def update
     @text2 = Text.find(params[:id])
 
+    
+
     if @text2.update_attributes(message_params)
       # Handle a successful update.
       flash[:notice] = "Text successfully updated"
