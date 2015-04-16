@@ -5,8 +5,8 @@ class PreviewController < ApplicationController
   end
 
   def getLineSequence
-  	# get the current line sequence number -!!!-
-  	line_sequence_number = 9
+  	# get the current line sequence number
+  	line_sequence_number = Rails.application.config.operator_positions[params[:operator]]
   	# get the current and previous line and character
   	work = Work.find_by(:id => params[:work])
   	line_current_record = work.texts.where(:sequence => line_sequence_number)
