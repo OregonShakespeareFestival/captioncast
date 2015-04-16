@@ -29,8 +29,11 @@ class DisplayController < ApplicationController
       view = operator.view_attributes
       work = Work.find_by(id: operator.work_id)
 
-      redirect_to :controller => 'display', :action => 'index', :view => view,
-        :work => work, :operator => operator
+      if(view = "preview")
+        redirect_to :controller => 'preview', :action => 'index', :work => work, :operator => operator
+      else
+        redirect_to :controller => 'display', :action => 'index', :view => view, :work => work, :operator => operator
+      end
     end
   end
 

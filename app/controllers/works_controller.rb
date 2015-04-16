@@ -29,10 +29,10 @@ def select
       else
         # Create Operator record
         operator_name = params[:operator]
-        view_mode = params[:view]
+        view_mode = "preview"
         work = params[:work]
         operator = Operator.create!(name: "EDITOR_" + operator_name[:name],
-          view_attributes: params[:view], work_id: work, position: 0)
+          view_attributes: view_mode, work_id: work, position: 0)
       end
 
       # set position to the value stored in the operator record
