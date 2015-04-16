@@ -187,9 +187,9 @@ class TextsController < ApplicationController
   #********************************************************************
   # Updates the editor/operator position for the preview window (used inside controller)
   #******************************************************************
-  def pushTextSeq_edit(seq, operator)
-    operator = Operator.find_by(id: operator)
-    Rails.application.config.operator_positions.merge!({operator => seq})
+  def pushTextSeq_edit(seq, operator_id)
+    operator = Operator.find_by(id: operator_id)
+    Rails.application.config.operator_positions.merge!({operator_id => seq})
     operator.position = seq
     operator.save
   end
