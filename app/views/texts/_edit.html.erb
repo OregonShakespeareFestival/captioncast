@@ -86,9 +86,14 @@
           </div>
 
           <div class="modal-footer">
+            <%= hidden_field_tag 'hidden_id', @text.id %>
+            <%= hidden_field_tag 'hidden_visibility', @text.visibility %>
+            <%= hidden_field_tag 'hidden_content_text', @text.content_text %>
+            <%= hidden_field_tag 'hidden_operator_note', @text.operator_note %>
             <!-- button controls -->
             <div class="pull-right" role="group">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Discard</button>
+              <button type="button" class="btn btn-default modal_operator_location" text-id="<%= @text.id %>" seq="<%= @text.sequence %>" operator="<%= params[:operator] %>" >Save And Preview</button>
+              <button type="button" class="btn btn-default revert-change" data-dismiss="modal">Discard</button>
               <button type="submit" class="btn btn-primary">Update</button>
             </div>
 

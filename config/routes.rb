@@ -42,6 +42,11 @@ Rails.application.routes.draw do
   post 'works/deleteScript'
   post 'works/select'
   post 'texts/pushTextSeq'
+  post 'texts/pushTextSeq_update'
+  post 'texts/update'
+  post 'texts/revert'
+  post 'texts/update_from_ajax'
+
   resources :works, only: [:index, :show, :edit] do
     resources :texts, only: [:index, :edit, :new]
   end
