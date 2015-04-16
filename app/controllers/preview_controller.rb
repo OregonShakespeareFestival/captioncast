@@ -7,7 +7,7 @@ class PreviewController < ApplicationController
   def getLineSequence
   	# get the current line sequence number
     # if the current line sequence number doesn't exist
-  	if(Rails.application.config.operator_positions[params[:operator]] == 0)
+  	if(Rails.application.config.operator_positions[params[:operator]] == "0")
       line_sequence_number = 1 # throw back 1
     else
       line_sequence_number = Rails.application.config.operator_positions[params[:operator]] # get the current line sequence number
