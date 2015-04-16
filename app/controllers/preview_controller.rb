@@ -10,7 +10,7 @@ class PreviewController < ApplicationController
   	# get the current and previous line and character
   	work = Work.find_by(:id => params[:work])
   	line_current_record = work.texts.where(:sequence => line_sequence_number)
-  	line_previous_record = work.texts.where(:sequence => line_sequence_number - 1)
+  	line_previous_record = work.texts.where(:sequence => line_sequence_number.to_i - 1)
   	character_current = Element.find_by(:id => line_current_record.pluck(:element_id)).name
   	character_previous = Element.find_by(:id => line_previous_record.pluck(:element_id)).name
   	# check if previous line is spoken by different character
