@@ -18,6 +18,7 @@ class PreviewController < ApplicationController
   		content =  character_current.to_s + ": " + line_current_record.pluck(:content_text)[0]
   	else
   		content = line_current_record.pluck(:content_text)[0]
+  	end
 
   	# render current line
   	render :json => { :content => content}
