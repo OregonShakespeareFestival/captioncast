@@ -29,11 +29,11 @@ class PreviewController < ApplicationController
   	  character_previous = Element.find_by(:id => line_previous_record.element_id)
     end
 
-    # set the content to be display initially as a string without name attached
-    content = line_current_record.content_text
     # check if the name needs to be attached. if so, attach it
     if(character_current != character_previous || line_sequence_number == 1)
-    		content =  character_current.name + ": " + line_current_record.content_text
+    	content =  character_current.name + ": " + line_current_record.content_text
+    else
+      content = line_current_record.content_text
     end
 
   	# render current line
