@@ -141,7 +141,7 @@ $(document).ready(function(){
 							lastScrollMS = now;
 							console.log(displayScrollSpd);
 							//animate scroll to the changed data sequence
-							$('#body-display-index').stop().animate({scrollTop:$('#line-display-'+j.pos).offset().top-$(window).height()+$('#line-display-'+j.pos).outerHeight()}, displayScrollSpd, "linear");
+							$('#body-display-index, html').stop().animate({scrollTop:$('#line-display-'+j.pos).offset().top-$(window).height()+$('#line-display-'+j.pos).outerHeight()}, displayScrollSpd, "linear");
 							//remove the focus class
 							$('.focus-multi').removeClass('focus-multi');
 							//add the focus class to the new line
