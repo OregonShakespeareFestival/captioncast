@@ -62,7 +62,7 @@ $(document).ready(function(){
 							//fade out the shown display
 							$('.shown-display').stop().fadeOut(dispFadeSpd);
 							//remove the shown display class
-							$('.shown-display').removeClass('.shown-display');
+							$('.shown-display').removeClass('shown-display');
 							//add the focus class to the new line
 							$('#line-display-'+j.pos).addClass('shown-display');
 							//animate scroll to the changed data sequence
