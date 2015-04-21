@@ -212,7 +212,7 @@ $(document).ready(function(){
 
 		//prevent scrolling on keydown when the operator view is focused
 		$(document).keydown(function(e) {
-			if(e.which == 38 || e.which == 40) {
+			if(e.which == 38 || e.which == 40 || e.which == 32) {
 				e.preventDefault();
 				return false;
 			}
