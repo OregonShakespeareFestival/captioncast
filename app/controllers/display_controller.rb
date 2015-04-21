@@ -8,6 +8,8 @@ class DisplayController < ApplicationController
     #pick between multi-line view and single line with a parameter
     if params[:view] == "multi"
       render "multi"
+    elsif params[:view] == "single"
+      render "index"
     end
   end
 
