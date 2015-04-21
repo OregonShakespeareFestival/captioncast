@@ -44,49 +44,45 @@ $(document).ready(function(){
 			buildLinesDisp($lineCont);
 			//END MORE TEMPLATING - can be moved to the controller -!!!-
 
-			$linesDisp = $('.line-display');
-
-			$linesDisp.first().fadeIn(dispFadeSpd, function(){
-				$(this).addClass('shown-display');
+			$('.line-display').first.addClass('shown-display');
 
 			function heartbeat(){
-				//ajax goes here next timeout
-				$.ajax('/display/current',
-			  	{
-					data: {operator: operator},
-				  	dataType: 'json',
-					success:(function(j){
+				$.ajax('/display/current', {
+					data: { operator: operator },
+					dataType: 'json',
+					success:(function(j) {
 						console.log('sequence scraped ' + j.pos + ' blackout: ' + j.blackout);
-						if(current!=j){
-							//console.log(j);
-							current=j;
-							$('.shown-display').fadeOut(dispFadeSpd, function(){
-								$(this).removeClass('shown-display');
-								//console.log('class-removed');
-								$(_.find($linesDisp, function(q){
-									return parseInt($(q).attr('data-sequence'))==j;
-									})).fadeIn(dispFadeSpd, function(){
-										$(this).addClass('shown-display');
-										setTimeout(function(){
-											heartbeat();
-										}, refresh);
-									});
+						//if the data sequence changed
+						if($('.shown-display').attr('data-sequence') != j.pos) {
+							//calculate scroll speed
+							var now = (new Date).getTime();
+							displayScrollSpd = Math.max(MINSCROLLDURATION, (Math.min(MAXSCROLLDURATION, (now - lastScrollMS))));
+							lastScrollMS = now;
+							console.log(displayScrollSpd);
+							//fade out the shown display
+							$('.shown-display').stop().fadeOut(dispFadeSpd);
+							//remove the shown display class
+							$('.shown-display').removeClass('.shown-display');
+							//add the focus class to the new line
+							$('#line-display-'+j.pos).addClass('shown-display');
+							//animate scroll to the changed data sequence
+							$('.shown-display').stop().fadeIn(dispFadeSpd);
+						}
+						//if the blackout changed
+						if(blackout != j.blackout) {
+							$('#shade-multi').stop().fadeToggle(dispFadeSpd);
+							blackout = j.blackout;
+						}
 
-
-									});
-
-								}else{
-									setTimeout(function(){
-										heartbeat();
-										}, refresh);
-								}
-
-
-							}),
-					});
-				}
-				heartbeat();
-			});
+						//set timer to repeat the heartbeat
+						setTimeout(function() {
+							heartbeat();
+						}, refresh);
+					}),
+				});
+			}
+			
+			heartbeat();
 		//if multi
 		} else {
 			//MORE TEMPLATING - can be moved to the controller -!!!-
