@@ -44,7 +44,7 @@ $(document).ready(function(){
 			buildLinesDisp($lineCont);
 			//END MORE TEMPLATING - can be moved to the controller -!!!-
 
-			$('.line-display').first.addClass('shown-display');
+			$('.line-display').first().addClass('shown-display');
 
 			function heartbeat(){
 				$.ajax('/display/current', {
@@ -81,7 +81,7 @@ $(document).ready(function(){
 					}),
 				});
 			}
-			
+
 			heartbeat();
 		//if multi
 		} else {
@@ -129,6 +129,7 @@ $(document).ready(function(){
 
 			heartbeat();
 		}
+
 		$('#shade-loading-display').fadeOut(1000, function(){});
 	}
 });
