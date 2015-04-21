@@ -70,7 +70,7 @@ $(document).ready(function(){
 						}
 						//if the blackout changed
 						if(blackout != j.blackout) {
-							$('#shade-multi').stop().fadeToggle(dispFadeSpd);
+							$('#shade-single').stop().fadeToggle(dispFadeSpd);
 							blackout = j.blackout;
 						}
 
