@@ -76,7 +76,7 @@ $(document).ready(function(){
 
 						//set timer to repeat the heartbeat
 						setTimeout(function() {
-							heartbeat();
+							singleHeartbeat();
 						}, refresh);
 					}),
 				});
@@ -121,7 +121,7 @@ $(document).ready(function(){
 
 						//set timer to repeat the heartbeat
 						setTimeout(function() {
-							heartbeat();
+							multiHeartbeat();
 						}, refresh);
 					}),
 				});
