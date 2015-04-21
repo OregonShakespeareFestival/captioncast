@@ -46,7 +46,7 @@ $(document).ready(function(){
 
 			$('.line-display').first().addClass('shown-display');
 
-			function heartbeat(){
+			function singleHeartbeat(){
 				$.ajax('/display/current', {
 					data: { operator: operator },
 					dataType: 'json',
@@ -81,8 +81,8 @@ $(document).ready(function(){
 					}),
 				});
 			}
-			
-			heartbeat();
+
+			singleHeartbeat();
 		//if multi
 		} else {
 			//MORE TEMPLATING - can be moved to the controller -!!!-
@@ -93,7 +93,7 @@ $(document).ready(function(){
 
 			$('.line-display-multi').first().addClass('focus-multi');			
 
-			function heartbeat(){
+			function multiHeartbeat(){
 				$.ajax('/display/current', {
 					data: { operator: operator },
 					dataType: 'json',
@@ -127,8 +127,9 @@ $(document).ready(function(){
 				});
 			}
 
-			heartbeat();
+			multiHeartbeat();
 		}
+
 		$('#shade-loading-display').fadeOut(1000, function(){});
 	}
 });
