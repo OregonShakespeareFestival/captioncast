@@ -46,20 +46,6 @@ $(document).ready(function(){
 			$lineCont = $('#line-holder-display');
 			// template views
 			var tLine = _.template($('#line-template-display').html());
-			//seed sequence #0 with a blank line
-			$lineCont.append(
-				tLine({
-					"character":'',
-				    "id": 0,
-				    "sequence": 0,
-				    "content_type": "Non-Dialogue",
-				    "content_text": " ",
-				    "color": null,
-				    "visibility": false,
-				    "created_at": " ",
-				    "updated_at": " "
-					})
-				);
 
 			//build the line dom
 			buildLinesDisp($lineCont);
