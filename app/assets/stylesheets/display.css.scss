@@ -27,11 +27,9 @@ $preview-break: 339px;
 
 @mixin line-disp{
 	display:none;
-	font-size:800%;
+	font-size:5.8vw;
 	text-align: left;
-	word-break: keep-all;
 	/*padding for safe region of display-- just in case*/
-	padding:3%;
 	line-height: .8em;
 }
 
@@ -77,6 +75,9 @@ html{
 
 }
 
+.container-fluid {
+	padding: 0 1% 0 1% !important;
+}
 
 .line-display{
 	@include line-disp;
@@ -131,32 +132,7 @@ html{
 			font-weight:bold;
 		}
 	}
-	padding:5% 0% 5% 0%;/*
-	@media screen and (max-width: $ipad-land-break){
-		font-size:3.3em;
-		padding:5%;
-	}
-*/
-	@media screen and (max-width: $ipad-land-break){
-		/*font-size:4em;*/
-		padding:3.5% 0% 3.5% 0%;
-	}
-	@media screen and (max-width: $ipad-port-break){
-		font-size:3.3em;
-
-	}
-	@media screen and (max-width: $iphone-land-break){
-		font-size:1.3em;
-
-	}
-	@media screen and (max-width: $iphone-port-break){
-		font-size:2em;
-	}
-	@media screen and (max-width: $preview-break){
-		font-size:1em;
-	}
-
-
+	padding:5% 0% 5% 0%;
 }
 
 #buffer-top-display-multi{
