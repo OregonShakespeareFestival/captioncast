@@ -2,6 +2,9 @@ require 'resque/server'
 
 Rails.application.routes.draw do
 
+  get 'preview/index'
+  post 'preview/index'
+  post 'preview/getLineSequence'
 
   get 'display/select'
   post 'display/select'
@@ -37,6 +40,13 @@ Rails.application.routes.draw do
   post 'texts/addLine'
   get 'works/deleteScript'
   post 'works/deleteScript'
+  post 'works/select'
+  post 'texts/pushTextSeq'
+  post 'texts/pushTextSeq_update'
+  post 'texts/update'
+  post 'texts/revert'
+  post 'texts/update_from_ajax'
+
   resources :works, only: [:index, :show, :edit] do
     resources :texts, only: [:index, :edit, :new]
   end

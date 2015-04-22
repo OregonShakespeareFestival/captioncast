@@ -21,7 +21,7 @@
 
       <% @texts.each do |line| %>
         <tr>
-          <td><%= line.sequence %></td>
+          <td class="operator_location" seq="<%= line.sequence %>" operator="<%= @operator %>"><%= line.sequence %></td>
           <td><%= line.element_name %></td>
           <td><%= line.element_type %></td>
           <%if line.element_type == 'BLANKLINE'%>
@@ -38,7 +38,7 @@
           </td>
           <td><%= line.operator_note %></td>
           <!--link to edit specific this line-->
-          <td><%= link_to 'EDIT', edit_work_text_path(work_id: line.work_id, id: line.id, page: params[:page]), :class => 'link-edit', method: :get, remote: true %></td>
+          <td><%= link_to 'EDIT', edit_work_text_path(work_id: line.work_id, id: line.id, seq: line.sequence, operator: @operator, page: params[:page]), :class => 'link-edit', method: :get, remote: true %></td>
           <td><%= link_to 'NEW', new_work_text_path(work_id: line.work_id, id: line.id, page: params[:page]), :class => 'link-edit', method: :get, remote: true %></td>
         </tr>
       <% end %>

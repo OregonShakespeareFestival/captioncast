@@ -8,8 +8,17 @@
     <ul id="works">
       <% @works.each do |work| %>
         <li>
+          <!--if there is a work, create a form for the editor to submit-->
           <% if work.texts.present? %>
-            <%= link_to work_details(work), work_texts_path(work_id: work.id) %>
+              <%= form_tag({:action => "select"}, :multipart => true, :class => "form-group") do%>
+                <%= hidden_field_tag :work, work.id%>
+                <%= hidden_field_tag :view , "multi"%>
+                <%= work_details(work) %><br>
+                <%= label_tag("Enter Editor Name") %>
+                <%= text_field(:operator, :name, size: 20, :class=>"form-control editwork-textbox") %>
+              <%= button_tag "Continue", :type=>"submit", :class => "btn btn-primary" %>
+            <% end %>
+          
           <% else %>
             <%= work_details(work) %>
           <% end %>
@@ -17,3 +26,25 @@
       <% end %>
     </ul>
   <% end %>
+
+
+      <%= content_tag :div, :id=>"main-form-upload", :class=>"row" do %>
+      <%= content_tag :div, :id=>"attributes-upload", :class=>"col-xs-12 col-sm-6 col-md-4" do %>
+
+        <h1 class="title-upload">Existing Editor Sessions</h1>
+
+        <%= form_tag({:action => "select"},
+          :multipart => true, :class => "form-group") do %>
+
+          <% @operators.each do |operator| %>
+            <% work = Work.find_by(id: operator.work_id) %>
+            <% venue = work.venue %>
+            <!--<%= hidden_field_tag :work_id, operator.work_id%>-->
+            <%= radio_button_tag(:selected_operator, operator.id) %>
+            <%= label_tag("#{operator.name}:  #{work.name}") %>
+            </br>
+          <% end %>
+          <%= button_tag "Continue", :type=>"submit", :class => "btn btn-primary" %>
+        <% end %>
+      <% end %>
+    <% end %>

@@ -2,6 +2,7 @@ class TextsController < ApplicationController
   def index
     work = Work.find(params[:work_id])
     @texts = work.texts.page(params[:page]).per(100)
+    @operator = params[:operator]
   end
 
   def edit
@@ -11,6 +12,7 @@ class TextsController < ApplicationController
     @current_line  = @text.display_string
     @next_line     = @text.next_display_text(@work, @text.sequence)
     @elements      = @work.elements.sort_by(&:name)
+    pushTextSeq_edit(params[:seq], params[:operator])
   end
 
   def new
@@ -20,6 +22,7 @@ class TextsController < ApplicationController
     @current_line  = @text.display_string
     @next_line     = @text.next_display_text(@work, @text.sequence)
     @elements      = @work.elements.sort_by(&:name)
+
   end
 
   def show
@@ -94,7 +97,10 @@ class TextsController < ApplicationController
   def update
     @text2 = Text.find(params[:id])
 
+    
+
     if @text2.update_attributes(message_params)
+
       # Handle a successful update.
       flash[:notice] = "Text successfully updated"
       redirect_to:back
@@ -104,8 +110,39 @@ class TextsController < ApplicationController
     end
   end
 
+
+
   #********************************************************************
-  # adds a visible line with text for a specified character in the form
+  #updates the fields in the Text table when the editor changes the lines in a script
+  #******************************************************************
+  def update_from_ajax
+    text_to_update = Text.find(params[:id])
+    text_to_update.update_attributes(:visibility => params[:visibility], :operator_note => params[:operator_note], :content_text => params[:content_text])
+    # for debug purposes
+    render :json => params[:id]
+  end
+
+
+
+  #********************************************************************
+  #reverts any changes made to a text
+  #******************************************************************
+  def revert
+    text_to_revert = Text.find(params[:id])
+
+    if text_to_revert.update_attributes(:visibility => params[:visib], :operator_note => params[:note], :content_text => params[:text])
+
+      # Handle a successful update.
+      flash[:notice] = "Text successfully reverted"
+      redirect_to:back
+    else
+      flash[:notice] = "NOTICE: ERROR DURING REVERT"
+      redirect_to:back
+    end
+  end
+
+  #********************************************************************
+  # adds a line with text for a specified character in the form
   # beyond the line selected to insert at
   #******************************************************************
   def addLine
@@ -123,7 +160,7 @@ class TextsController < ApplicationController
     )
     txt.insert_at(sequence_id + 1)
 
-    if txt.save
+    if txt.save  
       flash[:notice] = "New character line successfully added"
       redirect_to:back
     else
@@ -131,6 +168,50 @@ class TextsController < ApplicationController
        redirect_to:back
     end
   end
+
+  
+  #********************************************************************
+  # Updates the editor/operator position for the preview window (used with ajax call)
+  #******************************************************************
+  def pushTextSeq
+    operator = Operator.find_by(id: params[:operator])
+    Rails.application.config.operator_positions.merge!({params[:operator] => params[:seq]})
+    operator.position = params[:seq]
+    operator.save
+
+    # for debug purposes
+    render :json => params[:seq]
+  end
+
+
+  #********************************************************************
+  # Updates the editor/operator position for the preview window (used inside controller)
+  #******************************************************************
+  def pushTextSeq_edit(seq, operator_id)
+    operator = Operator.find_by(id: operator_id)
+    Rails.application.config.operator_positions.merge!({operator_id => seq})
+    operator.position = seq
+    operator.save
+  end
+
+
+  #********************************************************************
+  # Saves the state of the text being edited, then Updates the editor/operator
+  # position for the preview window (used with ajax)
+  #******************************************************************
+  def pushTextSeq_update
+    @text2 = Text.find_by(id: params[:text_id])
+    if @text2.update_attributes(:visibility => params[:visib], :operator_note => params[:note], :content_text => params[:text])
+      operator = Operator.find_by(id: params[:operator])
+      Rails.application.config.operator_positions.merge!({params[:operator] => params[:seq]})
+      operator.position = params[:seq]
+      operator.save
+    end
+      # for debug purposes
+      render :json => params[:seq]
+    
+  end
+
 
   private
 

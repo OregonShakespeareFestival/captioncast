@@ -16,7 +16,7 @@ tr:nth-child(odd){
 td{
   max-width:350px;
 }
-.link-edit{
+.link-edit, .operator_location{
   color:#d33682;
   font-weight:600;
 }
@@ -36,4 +36,13 @@ input[type="submit"]{
 .modal-body h2{
   margin-top: 5px;
   text-align:center;
+}
+.editwork-textbox{
+  width: auto !important;
+  display: inline !important;
+}
+.operator_location{
+  color:#d33682;
+  font-size: 1.2em;
+  cursor:pointer;
 }
