@@ -49,6 +49,7 @@ gem 'mysql2'
 gem 'kaminari'
 gem 'yomu'
 gem 'spinjs-rails'
+gem 'require_all', '~> 1.3.2'
 
 group :development do
   gem 'capistrano-rails'

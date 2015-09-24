@@ -26,5 +26,4 @@ class UploadController < ApplicationController
     end
   end
 
-
 end
