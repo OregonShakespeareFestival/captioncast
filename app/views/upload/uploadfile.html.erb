@@ -1,56 +1,55 @@
-  <div class="container" id="main-upload">
-    <%= content_tag :div, :id=>"main-form-upload", :class=>"row" do %>
-      <%= content_tag :div, :id=>"attributes-upload", :class=>"col-xs-12 col-sm-6 col-md-4" do %>
+<div class="container" id="main-upload">
+  <%= content_tag :div, :id=>"main-form-upload", :class=>"row" do %>
+    <%= content_tag :div, :id=>"attributes-upload", :class=>"col-xs-12 col-sm-6 col-md-4" do %>
 
-        <h1 class="title-upload">File Upload</h1>
-        <p id="upload_notice"><%= notice %></p>
-        <%= form_tag({:action => "uploadFile"},
-          :multipart => true, :class => "form-group") do %>
+      <h1 class="title-upload">File Upload</h1>
+      <p id="upload_notice"><%= notice %></p>
+      <%= form_tag({:action => "uploadFile"},
+        :multipart => true, :class => "form-group") do %>
 
-          <%= content_tag :div, :class=>"form-group" do %>
-               <%= label_tag("Select a Script File") %>
-            </br>
-            <%= file_field "upload", "datafile", :class => "btn btn-small btn-primary btn-inverse" %>
-          <% end %>
-
-          <%= content_tag :div, :class=>"form-group" do %>
-               <%= label_tag("Select a Venue") %>
-            </br>
-            <%= select_tag "venue", options_from_collection_for_select(@venues, "id", "name"), :class=>"form-control" %>
-          <% end %>
-
-          <%= content_tag :div, :class=>"form-group" do %>
-               <%= label_tag("Select a Work") %>
-            </br>
-            <%= select_tag "work", options_from_collection_for_select(Work.order(:work_name), "id", "name" ), :class=>"form-control" %>
-          <% end %>
-
-          <%= content_tag :div, :class=>"form-group" do %>
-               <%= label_tag("Select Characters Per Line to Display") %>
-            </br>
-            <%= select_tag "character_per_line", options_for_select(20..50, 40) , :class=>"form-control" %>
-          <% end %>
-
-          <%= content_tag :div, :class=>"form-group" do %>
-               <%= label_tag("Select Script Split Style") %>
-            </br>
-            <%= select_tag "split_type", options_for_select({"Split on Sentences" => "S_sentences", "Split on Characters Only" => "S_characters"}, "Split on Sentences") , :class=>"form-control" %>
-          <% end %>          
-
-          <%= button_tag "Upload", :type=>"submit", :id => "submit_upload", :class => "btn btn-primary" %>
+        <%= content_tag :div, :class=>"form-group" do %>
+             <%= label_tag("Select a Script File") %>
+          </br>
+          <%= file_field "upload", "data", :class => "btn btn-small btn-primary btn-inverse" %>
         <% end %>
 
-        <h3>Select a script below to delete from the database</h3>
-        <% @delete_work.each do |work| %>
-          <% if work.texts.present? %>
-            <li>
-              <%= link_to work_details(work), works_deleteScript_path(work_id: work.id)%>
-            </li>
-          <% end %>
+        <%= content_tag :div, :class=>"form-group" do %>
+             <%= label_tag("Select a Venue") %>
+          </br>
+          <%= select_tag "venue", options_from_collection_for_select(@venues, "id", "name"), :class=>"form-control" %>
         <% end %>
 
-        
+        <%= content_tag :div, :class=>"form-group" do %>
+             <%= label_tag("Select a Work") %>
+          </br>
+          <%= select_tag "work", options_from_collection_for_select(Work.order(:work_name), "id", "name" ), :class=>"form-control" %>
+        <% end %>
+
+        <%= content_tag :div, :class=>"form-group" do %>
+             <%= label_tag("Select Characters Per Line to Display") %>
+          </br>
+          <%= select_tag "character_per_line", options_for_select(20..50, 40) , :class=>"form-control" %>
+        <% end %>
+
+        <%= content_tag :div, :class=>"form-group" do %>
+             <%= label_tag("Select Script Split Style") %>
+          </br>
+          <%= select_tag "split_type", options_for_select({"Split on Sentences" => "S_sentences", "Split on Characters Only" => "S_characters"}, "Split on Sentences") , :class=>"form-control" %>
+        <% end %>
+
+        <%= button_tag "Upload", :type=>"submit", :id => "submit_upload", :class => "btn btn-primary" %>
       <% end %>
-    <% end %>
-  </div>
 
+      <h3>Select a script below to delete from the database</h3>
+      <% @delete_work.each do |work| %>
+        <% if work.texts.present? %>
+          <li>
+            <%= link_to work_details(work), works_deleteScript_path(work_id: work.id)%>
+          </li>
+        <% end %>
+      <% end %>
+
+
+    <% end %>
+  <% end %>
+</div>

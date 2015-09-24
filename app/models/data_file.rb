@@ -5,20 +5,6 @@ class DataFile < ActiveRecord::Base
   include Treat::Core::DSL
 
   @default_text_color = "#F7E694"
-  @work
-
-#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-#uploads and saves the file
-#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-  def self.save(upload)
-    name =  upload['datafile'].original_filename
-    directory = "public/data"
-    #create the file path
-    path = File.join(directory, name)
-    File.open(path, "wb") { |f| f.write(upload['datafile'].read) }
-  end
-
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   #add element to the element table
@@ -49,52 +35,48 @@ class DataFile < ActiveRecord::Base
     txt.save
   end
 
-
-
-#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-  #this is called in the controlers file when a file is uploaded
-  # ** ONLY ACCEPTS .TXT OR .FDX FILES
-  # .TXT file should be in the format
-  # "CHARACTER NAME:" (all caps) "text goes here"
-#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-  def self.parse_fd(upload, work, characters_per_line, split_type)
-
-    #create the file path abd open the file
-    name =  upload['datafile'].original_filename
+  def self.getPath(upload)
+    file_name = upload[:data].original_filename
     directory = "public/data"
-    path = File.join(directory, name)
-    f = File.open(path)
+    return File.join(directory, file_name)
+  end
 
-    @work = Work.find_by_id(work)
+  def self.save(upload)
+    path = getPath(upload)
+    File.open(path, "wb") { |f| f.write(upload[:data].read) }
+  end
 
-    if(File.extname(path).downcase == ".txt" )
-      self.parse_text_file(f, work, characters_per_line, split_type)
-      self.set_work_characters_per_line(work, characters_per_line)
-      return true
-    elsif(File.extname(path).downcase == ".rtf")
-      self.parse_rtf_file(f, work, characters_per_line, split_type)
-      self.set_work_characters_per_line(work, characters_per_line)
-      return true
-    elsif(File.extname(path).downcase == ".fdx")
-      doc =  Nokogiri::XML(f)
-      f.close
-      self.parse_fdx(doc, work, characters_per_line, split_type)
-      self.set_work_characters_per_line(work, characters_per_line)
-      return true
-    else 
+  def self.clean(upload)
+    path = getPath(upload)
+    File.delete(path)
+  end
+
+  def self.parse(upload, work, characters_per_line, split_type)
+    @work = Work.find_by_id(work) # TODO: remove
+    # save file
+    save(upload)
+    # open saved file
+    path = getPath(upload)
+    file = File.open(path)
+    # check the file extension and parse the file
+    if File.extname(path) == ".txt"
+      parse_text_file(file, work, characters_per_line, split_type)
+    elsif File.extname(path) == ".rtf"
+      parse_rtf_file(file, work, characters_per_line, split_type)
+    elsif File.extname(path) == ".fdx"
+      doc =  Nokogiri::XML(file)
+      scrip_data.close
+      parse_fdx(doc, work, characters_per_line, split_type)
+    else
       return false
     end
-  end
-
-#++++++++++++++++++++++++++++++++++++++++++++++++++
-# Sets the characters per line to show for this work
-#++++++++++++++++++++++++++++++++++++++++++++++++++
-  def self.set_work_characters_per_line(work, characters_per_line)
+    # save characters_per_line to work
     Work.find_by_id(work).update_attributes(:characters_per_line => characters_per_line)
+    # parse ran succesfully
+    clean(upload)
+    return true
   end
 
-  
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   #used to parse a .txt file script (typically other languages)
   #        This requires that text files be encoded with
