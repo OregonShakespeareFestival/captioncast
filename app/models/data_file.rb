@@ -1,4 +1,5 @@
 require 'nokogiri'
+require 'charlock_holmes/string'
 require_all 'lib/parsers/'
 
 class DataFile < ActiveRecord::Base
@@ -27,7 +28,8 @@ class DataFile < ActiveRecord::Base
     save(upload)
     # open saved file
     path = getPath(upload)
-    file = File.open(path)
+    encoding = File.read(path).detect_encoding[:encoding]
+    file = File.read(path, :encoding => encoding)
     # get the work
     work = Work.find_by_id(work_id)
     # check the file extension and parse the file
@@ -39,13 +41,11 @@ class DataFile < ActiveRecord::Base
       doc =  Nokogiri::XML(file)
       FDXParser.parse(doc, work, characters_per_line, split_type)
     else
-      file.close
       return false
     end
     # save characters_per_line to work
     Work.find_by_id(work).update_attributes(:characters_per_line => characters_per_line)
     # parse ran succesfully
-    file.close
     clean(upload)
     return true
   end

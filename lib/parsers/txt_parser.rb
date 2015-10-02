@@ -11,7 +11,7 @@ class TXTParser
     # iterate over each line in file
     file.each_line do |line|
       # split line into components
-      line_components = line.force_encoding("ISO-8859-1").encode("utf-8", replace: nil).split(":")
+      line_components = line.split(":")
       # line contains character and text
       if line_components.length == 2
         # if not the first character

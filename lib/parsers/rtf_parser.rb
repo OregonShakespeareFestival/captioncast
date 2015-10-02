@@ -18,7 +18,7 @@ class RTFParser
 
   def self.add_character_elements(arr, work)
     arr.each do |line|
-      name = line.force_encoding("ISO-8859-1").encode("utf-8", replace: nil).match(/^[A-Z1-9\s\.]+(?=.?:)/)
+      name = line.match(/^[A-Z1-9\s\.]+(?=.?:)/)
       if (name != nil)
         #add the character "element" to the table if it does not exist
         character_name = name[0].upcase.lstrip.rstrip

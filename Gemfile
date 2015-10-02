@@ -50,6 +50,7 @@ gem 'kaminari'
 gem 'yomu'
 gem 'spinjs-rails'
 gem 'require_all', '~> 1.3.2'
+gem 'charlock_holmes_bundle_icu', '~> 0.6.9.2'
 
 group :development do
   gem 'capistrano-rails'
