@@ -13,7 +13,7 @@ class UploadController < ApplicationController
     file_uploaded = DataFile.parse(
       params[:upload],
       params[:work],
-      params[:character_per_line],
+      params[:character_per_line].to_i,
       params[:split_type]
     )
 

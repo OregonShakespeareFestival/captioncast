@@ -125,8 +125,8 @@ class RTFParser
     results
   end
 
-  def self.add_char_line(character, lineCount, charLine, visibility, work_id)
-    txt = Text.create(sequence: lineCount, element: Element.find_by(element_name: character, element_type: 'CHARACTER'), work: @work, content_text: charLine, visibility: visibility)
+  def self.add_char_line(character, lineCount, charLine, visibility, work)
+    txt = Text.create(sequence: lineCount, element: Element.find_by(element_name: character, element_type: 'CHARACTER'), work: work, content_text: charLine, visibility: visibility)
     txt.save
   end
 

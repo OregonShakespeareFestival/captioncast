@@ -22,8 +22,8 @@ class FDXParser
 
   end
 
-  def self.add_char_line(character, lineCount, charLine, visibility, work_id)
-    txt = Text.create(sequence: lineCount, element: Element.find_by(element_name: character, element_type: 'CHARACTER'), work: @work, content_text: charLine, visibility: visibility)
+  def self.add_char_line(character, lineCount, charLine, visibility, work)
+    txt = Text.create(sequence: lineCount, element: Element.find_by(element_name: character, element_type: 'CHARACTER'), work: work, content_text: charLine, visibility: visibility)
     txt.save
   end
 
@@ -87,8 +87,8 @@ class FDXParser
       e.save
   end
 
-  def self.add_direction(e_type, lineCount, direction, visibility, work_id)
-    txt = Text.create(sequence: lineCount, element: Element.find_by(element_type: e_type), work: @work, content_text: direction, visibility: visibility)
+  def self.add_direction(e_type, lineCount, direction, visibility, work)
+    txt = Text.create(sequence: lineCount, element: Element.find_by(element_type: e_type), work: work, content_text: direction, visibility: visibility)
     txt.save
   end
 

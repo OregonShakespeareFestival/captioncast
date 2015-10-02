@@ -1,5 +1,4 @@
 require 'nokogiri'
-require 'treat'
 require_all 'lib/parsers/'
 
 class DataFile < ActiveRecord::Base
