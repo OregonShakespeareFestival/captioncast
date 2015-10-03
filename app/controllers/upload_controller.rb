@@ -9,20 +9,16 @@ class UploadController < ApplicationController
 
   def uploadFile
     Text.all.where(work: params[:work]).delete_all
-
-    file_uploaded = DataFile.parse(
-      params[:upload],
+    data_file = DataFile.new(
       params[:work],
       params[:character_per_line].to_i,
       params[:split_type]
     )
-
-   if !file_uploaded
+    if data_file.parse(params[:upload])
+      redirect_to :controller => 'cast', :action => 'index'
+    else
       flash[:notice] = "Script not loaded, check that file is .fdx .rtf or .txt"
       redirect_to :back
-    else
-      flash[:notice] = ""
-      redirect_to :controller => 'cast', :action => 'index'
     end
   end
 
