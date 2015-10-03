@@ -3,7 +3,6 @@ require 'charlock_holmes/string'
 require_all 'lib/parsers/'
 
 class DataFile < ActiveRecord::Base
-  include Treat::Core::DSL
 
   def initialize(work, characters_per_line, split_type)
     @default_text_color = "#F7E694"

@@ -1,6 +1,7 @@
 require 'nokogiri'
 
 class FDXParser
+  include Treat::Core::DSL
 
   @default_text_color = "#F7E694"
 

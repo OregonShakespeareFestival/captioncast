@@ -1,6 +1,7 @@
 require 'treat'
 
 class TXTParser
+  include Treat::Core::DSL
 
   @default_text_color = "#F7E694"
 

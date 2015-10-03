@@ -1,6 +1,7 @@
 require 'yomu'
 
 class RTFParser
+  include Treat::Core::DSL
 
   @default_text_color = "#F7E694"
 
