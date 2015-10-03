@@ -6,19 +6,19 @@ class DataFile < ActiveRecord::Base
 
   @default_text_color = "#F7E694"
 
-  def self.getPath(upload)
+  def self.get_path(upload)
     file_name = upload[:data].original_filename
     directory = "public/data"
     return File.join(directory, file_name)
   end
 
   def self.save(upload)
-    path = getPath(upload)
+    path = get_path(upload)
     File.open(path, "wb") { |f| f.write(upload[:data].read) }
   end
 
   def self.clean(upload)
-    path = getPath(upload)
+    path = get_path(upload)
     File.delete(path)
   end
 
@@ -26,7 +26,7 @@ class DataFile < ActiveRecord::Base
     # save file
     save(upload)
     # open saved file
-    path = getPath(upload)
+    path = get_path(upload)
     encoding = File.read(path).detect_encoding[:encoding]
     file = File.read(path, :encoding => encoding)
     # get the work
