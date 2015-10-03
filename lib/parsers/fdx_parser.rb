@@ -1,164 +1,131 @@
-# helper class for parsing fdx files
+require 'nokogiri'
 
 class FDXParser
 
   @default_text_color = "#F7E694"
 
-  def self.parse(doc, work, characters_per_line, split_type)
-
-    #XPath for any Nondialogue Elements
-    nondialouge = doc.xpath("/FinalDraft/Content/*[not(@Type='Dialogue')]")
-    #add any nondialouge elemnts to the database
-    self.add_fdx_nondialouge(nondialouge, work)
-
-
-    #XPath for any characters.
-    characters = doc.xpath("/FinalDraft/Content/Paragraph[@Type='Character']//Text")
-    #add any nondialouge elemnts to the database
-    self.add_fdx_character(characters, work)
-
-    #add the lines to the database
-    self.add_fdx_lines_to_db(doc, work, characters_per_line, split_type)
-
-  end
-
-  def self.add_char_line(character, lineCount, charLine, visibility, work)
-    txt = Text.create(sequence: lineCount, element: Element.find_by(element_name: character, element_type: 'CHARACTER'), work: work, content_text: charLine, visibility: visibility)
-    txt.save
-  end
-
-  def self.split_by_sentence(split_sentences: true, line: nil, character_length: character_length, character_changed: character_changed, characters_per_line: characters_per_line)
-    results = []
-    max_length = characters_per_line.to_i
-    original_max_length = max_length
-    line_section = Treat::Entities::Paragraph.build line
-    line_section.apply :chunk, :segment
-
-    line_section.sentences.each do |sentence|
-      iteration = 1
-
-      if split_sentences
-        split_sentence = ''
-
-        sentence.to_s.split(' ').each do |token|
-
-          if iteration == 1 && character_changed
-            max_length = max_length - (character_length - 2)
-            proposed_length = split_sentence.length + token.length + character_length.to_i
-          else
-            proposed_length = split_sentence.length + token.length
+  def self.parse(file, work, characters_per_line, split_type)
+    doc =  Nokogiri::XML(file)
+    # add non dialogue elements
+    doc.xpath("/FinalDraft/Content/*[not(@Type='Dialogue')]").each do |nondialogue|
+      type = nondialogue.attributes["Type"].value
+      Element.find_or_create_by!(element_name: "", element_type: type.to_s.upcase, color: @default_text_color, work: work)
+    end
+    # add "BLANKLINE" and "OPERATOR_NOTE" elements
+    Element.find_or_create_by!(element_name: "", element_type: "BLANKLINE", color: @default_text_color, work: work)
+    Element.find_or_create_by!(element_name: "", element_type: "OPERATOR_NOTE", color: @default_text_color, work: work)
+    # add paragraphs
+    text_sequence = 1
+    current_text = ""
+    current_character = ""
+    # iterate over each paragraph
+    doc.xpath("/FinalDraft/Content/Paragraph").each do |line|
+      line_type = line.attributes["Type"].value.strip.upcase
+      if line_type == "CHARACTER"
+        # if not the first character
+        if not current_character == ""
+          # add previous character's text to database
+          text_components = segment_text(current_text, current_character, characters_per_line, split_type)
+          text_components.each do |text_component|
+            Text.create(sequence: text_sequence, element: Element.find_by(element_name: current_character, element_type: "CHARACTER"), work: work, content_text: text_component, visibility: true)
+            text_sequence += 1
           end
-
-          if proposed_length > max_length
-            results << split_sentence.rstrip
-            split_sentence = ''
-            iteration += 1
-            max_length = original_max_length
-          end
-          split_sentence << Treat::Entities::Token.from_string(token)
-          split_sentence << " "
         end
-      results << split_sentence.rstrip
-      iteration += 1
+        current_character = line.text.delete("\n").squeeze(" ").strip
+        Element.find_or_create_by!(element_name: current_character, element_type: "CHARACTER", color: @default_text_color, work: work)
+        current_text = ""
+      elsif line_type == "DIALOGUE"
+        temp = ""
+        line.xpath("Text").each do |text|
+          temp << text
+        end
+        current_text << " " << temp
       else
-        results << sentence.to_s.rstrip
-        iteration += 1
+        direction = line.text.delete("\n").squeeze(" ").strip
+        Text.create(sequence: text_sequence, element: Element.find_by(element_type: line_type), work: work, content_text: direction, visibility: false)
+        text_sequence += 1
       end
     end
-    results
-  end
-
-  def self.split_into_sentences(name, lineCount, cur_line, work, character_length, character_changed, characters_per_line, split_type)
-    if split_type == "S_sentences"
-      sentences = self.split_by_sentence(line: cur_line, character_length: character_length, character_changed: character_changed, characters_per_line: characters_per_line)
-    elsif split_type == "S_characters"
-      sentences = self.split_for_max_characters_per_line(line: cur_line, character_length: character_length, character_changed: character_changed, characters_per_line: characters_per_line)
+    text_components = segment_text(current_text, current_character, characters_per_line, split_type)
+    text_components.each do |text_component|
+      Text.create(sequence: text_sequence, element: Element.find_by(element_name: current_character, element_type: "CHARACTER"), work: work, content_text: text_component, visibility: true)
+      text_sequence += 1
     end
-    #add each sentence for this character into the database
-    sentences.each do |sentence|
-      self.add_char_line(name, lineCount, sentence, true, work)
-      lineCount += 1
+  end
+
+  def self.segment_text(text, character_name, characters_per_line, split_type)
+    if split_type == "S_characters"
+      return segment_text_by_char_count(text, character_name, characters_per_line)
+    elsif split_type == "S_sentences"
+      return segment_text_by_sentences(text, character_name, characters_per_line)
     end
-    lineCount
   end
 
-  def self.add_element(name, type, color, work)
-      e = Element.find_or_create_by!(element_name: name, element_type: type, color: color, work: work)
-      e.save
-  end
-
-  def self.add_direction(e_type, lineCount, direction, visibility, work)
-    txt = Text.create(sequence: lineCount, element: Element.find_by(element_type: e_type), work: work, content_text: direction, visibility: visibility)
-    txt.save
-  end
-
-  def self.add_fdx_lines_to_db(doc, work, characters_per_line, split_type)
-
-    #xpath through the whole document for generaing entire script
-    lines = doc.xpath("/FinalDraft/Content/Paragraph")
-    lineCount = 0
-    charName = ""
-    last_character = ""
-    character_changed = true
-
-    #loops through the script and adds necessary lines into the database
-    lines.each do |line|
-      par_type = line.attributes["Type"].value.lstrip.rstrip
-      #if its a character, get who and set character name
-      if par_type.upcase == "CHARACTER"
-        charName = line.children.children.text
-        charName = charName.lstrip.rstrip.upcase
-
-      #gets the dialogue, character should alredy be set
-      elsif par_type.upcase == "DIALOGUE"
-        charLine = line.children.children.text
-        #send the dialogue to be split into centenses and sent to database
-        lineCount = self.split_into_sentences(charName, lineCount, charLine, work, charName.length, character_changed, characters_per_line, split_type)
-        #self.add_char_line(charName.upcase, lineCount, charLine, true, work)
-        #lineCount += 1
-
-      #gets parenthetical or action description (currently being ignored per request or Alayha)
-      elsif par_type.upcase == "PARENTHETICAL" or par_type.upcase == "ACTION"
-        #direction = line.children.children.text
-        #self.add_direction(par_type.upcase, lineCount, direction, false, work)
-        #lineCount += 1
-
-
-      #catches all other non visible lines
+  def self.segment_text_by_sentences(text, character_name, characters_per_line)
+    results = []
+    text = text.strip
+    # set the initial limit using the character name
+    # add a blank line if the character name is too long
+    if(character_name + ": ").length > characters_per_line
+      results << ""
+      limit = characters_per_line
+    else
+      limit = characters_per_line - (character_name + ": ").length - 1
+    end
+    # break the text into sentences
+    paragraph = Treat::Entities::Paragraph.build text
+    paragraph.apply :segment
+    # break the sentences that are too long by character count
+    temp_text = ""
+    paragraph.each do |segment|
+      segment_string = segment.to_s
+      if segment_string.length <= limit && temp_text == ""
+        results << segment_string
       else
-        direction = line.children.children.text
-        self.add_direction(par_type.upcase, lineCount, direction, false, work)
-        lineCount += 1
+        segment_string = temp_text + " " + segment_string
+        while limit < segment_string.length do
+          if (index = segment_string.rindex(" ", limit)) != nil || (index = segment_string.index(" ", limit)) != nil
+            results << segment_string[0...index]
+            segment_string = segment_string[index+1..-1]
+          else
+            break
+          end
+          limit = characters_per_line
+        end
+        # add the remaining text
+        temp_text = segment_string
       end
+    end
+    if temp_text != ""
+      results << temp_text
+    end
+    return results
+  end
 
-      # set character changed which is used during for parsing
-      if last_character == charName
-        character_changed = false
-        #puts "Character not changed = " + character_changed.to_s + " last, this " + last_character.to_s + " == " + charName.to_s
+  def self.segment_text_by_char_count(text, character_name, characters_per_line)
+    results = []
+    text = text.strip
+    # set the initial limit using the character name
+    # add a blank line if the character name is too long
+    if (character_name + ": ").length > characters_per_line
+      results << ""
+      limit = characters_per_line
+    else
+      limit = characters_per_line - (character_name + ": ").length - 1
+    end
+    # segment the text
+    while limit < text.length do
+      if (index = text.rindex(" ", limit)) != nil || (index = text.index(" ", limit)) != nil
+        results << text[0...index]
+        text = text[index+1..-1]
       else
-        character_changed = true
-        last_character = charName
-
+        break
       end
-
+      limit = characters_per_line
     end
-  end
-
-  def self.add_fdx_nondialouge(nondialouge, work)
-      nondialouge.each do |nondialouge|
-        type = nondialouge.attributes["Type"].value
-        self.add_element("", type.to_str.upcase, @default_text_color, work)
-    end
-  end
-
-  def self.add_fdx_character(characters, work)
-    characters.each do |character|
-      name = character.text.to_str.upcase.lstrip.rstrip
-      self.add_element(name, "CHARACTER", @default_text_color, work)
-    end
-    #adds a blank line and note element for editor to use for this work
-    self.add_element("", "BLANKLINE", @default_text_color, work )
-    self.add_element("", "OPERATOR_NOTE", @default_text_color, work )
+    # add the remaining text
+    results << text
+    return results
   end
 
 end

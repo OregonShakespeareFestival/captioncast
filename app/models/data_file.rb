@@ -1,4 +1,3 @@
-require 'nokogiri'
 require 'charlock_holmes/string'
 require_all 'lib/parsers/'
 
@@ -38,8 +37,7 @@ class DataFile < ActiveRecord::Base
     elsif File.extname(path) == ".rtf"
       RTFParser.parse(file, work, characters_per_line, split_type)
     elsif File.extname(path) == ".fdx"
-      doc =  Nokogiri::XML(file)
-      FDXParser.parse(doc, work, characters_per_line, split_type)
+      FDXParser.parse(file, work, characters_per_line, split_type)
     else
       return false
     end

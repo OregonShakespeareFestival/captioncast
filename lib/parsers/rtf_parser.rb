@@ -24,6 +24,7 @@ class RTFParser
           end
         end
         current_character = line.strip
+        current_text = ""
         Element.find_or_create_by(element_name: current_character, element_type: "CHARACTER", color: @default_text_color, work: work)
       # line contains text
       else
@@ -47,6 +48,7 @@ class RTFParser
 
   def self.segment_text_by_sentences(text, character_name, characters_per_line)
     results = []
+    text = text.strip
     # set the initial limit using the character name
     # add a blank line if the character name is too long
     if(character_name + ": ").length > characters_per_line
@@ -87,6 +89,7 @@ class RTFParser
 
   def self.segment_text_by_char_count(text, character_name, characters_per_line)
     results = []
+    text = text.strip
     # set the initial limit using the character name
     # add a blank line if the character name is too long
     if (character_name + ": ").length > characters_per_line
