@@ -6,7 +6,7 @@ class DataFile
 
   def initialize(work, characters_per_line, split_type)
     @default_text_color = "#F7E694"
-    @work= work
+    @work = work
     @characters_per_line = characters_per_line
     @split_type = split_type
   end
@@ -22,11 +22,14 @@ class DataFile
     work_id = Work.find_by_id(@work)
     # check the file extension and parse the file
     if File.extname(path) == ".txt"
-      TXTParser.parse(file, work_id, @characters_per_line, @split_type)
+      txt_parser = TXTParser.new(@default_text_color, work_id, @characters_per_line, @split_type)
+      txt_parser.parse(file)
     elsif File.extname(path) == ".rtf"
-      RTFParser.parse(file, work_id, @characters_per_line, @split_type)
+      rtf_parser = RTFParser.new(@default_text_color, work_id, @characters_per_line, @split_type)
+      rtf_parser.parse(file)
     elsif File.extname(path) == ".fdx"
-      FDXParser.parse(file, work_id, @characters_per_line, @split_type)
+      fdx_parser = FDXParser.new(@default_text_color, work_id, @characters_per_line, @split_type)
+      fdx_parser.parse(file)
     else
       return false
     end
