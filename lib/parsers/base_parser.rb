@@ -1,8 +1,8 @@
 class BaseParser
   include Treat::Core::DSL
 
-  def initialize(default_text_color, work_id, characters_per_line, split_type)
-    @default_text_color = default_text_color
+  def initialize(work_id, characters_per_line, split_type)
+    @default_text_color = "#F7E694"
     @work_id = work_id
     @characters_per_line = characters_per_line
     @split_type = split_type
