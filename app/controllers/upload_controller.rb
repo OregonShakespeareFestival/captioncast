@@ -8,6 +8,7 @@ class UploadController < ApplicationController
   end
 
   def uploadFile
+    Work.find_by_id(params[:work]).update_attributes(:uploading => true)
     Text.all.where(work: params[:work]).delete_all
     # save the file to the system
     save(params[:upload])

@@ -26,6 +26,7 @@ class Uploads < Resque::Job
     end
     # save characters_per_line to work
     Work.find_by_id(work).update_attributes(:characters_per_line => characters_per_line)
+    Work.find_by_id(work).update_attributes(:uploading => false)
     # parse ran succesfully
     File.delete(path)
     return true
