@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151003190914) do
+ActiveRecord::Schema.define(version: 20151004211604) do
 
   create_table "elements", force: true do |t|
     t.string   "element_name"
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 20151003190914) do
     t.string   "language"
     t.integer  "characters_per_line"
     t.integer  "venue_id"
+    t.boolean  "uploading",           default: false
   end
 
   add_index "works", ["venue_id"], name: "index_works_on_venue_id"
