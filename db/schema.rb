@@ -11,12 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150122172125) do
-
-  create_table "data_files", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(version: 20151004211604) do
 
   create_table "elements", force: true do |t|
     t.string   "element_name"
@@ -68,6 +63,7 @@ ActiveRecord::Schema.define(version: 20150122172125) do
     t.string   "language"
     t.integer  "characters_per_line"
     t.integer  "venue_id"
+    t.boolean  "uploading",           default: false
   end
 
   add_index "works", ["venue_id"], name: "index_works_on_venue_id"

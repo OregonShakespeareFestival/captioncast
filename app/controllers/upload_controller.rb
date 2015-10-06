@@ -8,20 +8,34 @@ class UploadController < ApplicationController
   end
 
   def uploadFile
-
+    Work.find_by_id(params[:work]).update_attributes(:uploading => true)
     Text.all.where(work: params[:work]).delete_all
-
-    save_file = DataFile.save(params[:upload])
-    script_loaded = DataFile.parse_fd(params[:upload], params[:work], params[:character_per_line], params[:split_type])
-    
-    if !script_loaded
-      flash[:notice] = "Script not loaded, check that file is .fdx .rtf or .txt"
-      redirect_to :back
-    else
-      flash[:notice] = ""
-      redirect_to :controller => 'cast', :action => 'index'
-    end
+    # save the file to the system
+    save(params[:upload])
+    # get the path of the save file
+    path = get_path(params[:upload])
+    # queue resque task
+    Resque.enqueue(
+      Uploads,
+      path,
+      params[:work],
+      params[:characters_per_line].to_i,
+      params[:split_type]
+    )
+    redirect_to :controller => 'cast', :action => 'index'
   end
 
+  private
+
+  def get_path(upload)
+    file_name = upload[:data].original_filename
+    directory = "public/data"
+    return File.join(directory, file_name)
+  end
+
+  def save(upload)
+    path = get_path(upload)
+    File.open(path, "wb") { |f| f.write(upload[:data].read) }
+  end
 
 end

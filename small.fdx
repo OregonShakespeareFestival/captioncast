@@ -1,0 +1,1111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<FinalDraft DocumentType="Script" Template="No" Version="1">
+
+  <Content>
+    <Paragraph Alignment="Left" FirstIndent="0.00" Label="Scene 1 [1.1]" Leading="Regular" LeftIndent="1.19" RightIndent="6.50" SpaceBefore="14" Spacing="1" StartsNewPage="Yes" Type="Scene Heading">
+      <SceneProperties Length="5 3/8" Page="1" Title=""/>
+      <Text>SCENE 1 [1.1]: ISRAELITE IN BABYLON</Text>
+    </Paragraph>
+    <Paragraph Type="Action">
+      <Text>Enter Richard Duke of Gloucester </Text>
+      <Text AdornmentStyle="-1" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="10" Style="Italic">solus</Text>
+      <Text>.</Text>
+    </Paragraph>
+    <Paragraph Type="Character">
+      <Text>RICHARD</Text>
+    </Paragraph>
+    <Paragraph Number="1" Type="Dialogue">
+      <Text>Now is the winter of our discontent</Text>
+    </Paragraph>
+    <Paragraph Number="2" Type="Dialogue">
+      <Text>Made glorious summer by this sun of York;</Text>
+    </Paragraph>
+    <Paragraph Number="3" Type="Dialogue">
+      <Text>And all the clouds that </Text>
+      <Text AdornmentStyle="-1" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="12" Style="">lour’d</Text>
+      <Text> upon our house</Text>
+    </Paragraph>
+    <Paragraph Number="4" Type="Dialogue">
+      <Text>In the deep bosom of the ocean buried.</Text>
+    </Paragraph>
+    <Paragraph Number="5" Type="Dialogue">
+      <Text>Now are our brows bound with victorious wreaths;</Text>
+    </Paragraph>
+    <Paragraph Number="6" Type="Dialogue">
+      <Text>Our bruised arms hung up for monuments;</Text>
+    </Paragraph>
+    <Paragraph Number="7" Type="Dialogue">
+      <Text>Our stern </Text>
+      <Text AdornmentStyle="-1" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="12" Style="">alarums</Text>
+      <Text> changed to merry meetings,</Text>
+    </Paragraph>
+    <Paragraph Number="8" Type="Dialogue">
+      <Text>Our dreadful marches to delightful measures.</Text>
+    </Paragraph>
+    <Paragraph Number="9" Type="Dialogue">
+      <Text>Grim-visaged war hath </Text>
+      <Text AdornmentStyle="-1" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="12" Style="">smooth’d</Text>
+      <Text> his wrinkled front;</Text>
+    </Paragraph>
+    <Paragraph Number="10" Type="Dialogue">
+      <Text>And now, instead of mounting barbed steeds</Text>
+    </Paragraph>
+    <Paragraph Number="11" Type="Dialogue">
+      <Text>To fright the souls of fearful adversaries,</Text>
+    </Paragraph>
+    <Paragraph Number="12" Type="Dialogue">
+      <Text>He capers nimbly in a lady’s chamber</Text>
+    </Paragraph>
+    <Paragraph Number="13" Type="Dialogue">
+      <Text>To the lascivious pleasing of a lute.</Text>
+    </Paragraph>
+    <Paragraph Number="14" Type="Dialogue">
+      <Text>But I, that am not shaped for sportive tricks,</Text>
+    </Paragraph>
+    <Paragraph Number="15" Type="Dialogue">
+      <Text>Nor made to court an amorous looking-glass;</Text>
+    </Paragraph>
+    <Paragraph Number="16" Type="Dialogue">
+      <Text>I, that am rudely </Text>
+      <Text AdornmentStyle="-1" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="12" Style="">stamp’d</Text>
+      <Text>, and want love’s majesty</Text>
+    </Paragraph>
+    <Paragraph Number="17" Type="Dialogue">
+      <Text>To strut before a wanton ambling nymph;</Text>
+    </Paragraph>
+
+  </Content>
+
+  <HeaderAndFooter FooterFirstPage="Yes" FooterVisible="Yes" HeaderFirstPage="Yes" HeaderVisible="Yes" StartingPage="1">
+    <Header>
+      <Paragraph Alignment="Right" FirstIndent="0.00" Leading="Regular" LeftIndent="1.25" RightIndent="-1.25" SpaceBefore="0" Spacing="1" StartsNewPage="No">
+        <DynamicLabel Type="Label"/>
+        <Text AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="8" Style="">.</Text>
+      </Paragraph>
+    </Header>
+    <Footer>
+      <Paragraph Alignment="Left" FirstIndent="0.00" Leading="Regular" LeftIndent="1.25" RightIndent="-1.25" SpaceBefore="0" Spacing="1" StartsNewPage="No">
+        <Text AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="8" Style="Italic">Richard the Third</Text>
+        <Text AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="8" Style="">     </Text>
+        <Text AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="8" Style="Bold">Rehearsal Draft</Text>
+        <Text AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="8" Style="">     June 14, 2014     </Text>
+        <DynamicLabel Type="Last Revised"/>
+        <Text AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="10" Style="">	</Text>
+        <DynamicLabel Type="Page #"/>
+        <Text AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="10" Style=""> </Text>
+        <Tabstops>
+          <Tabstop Position="7.00" Type="Right"/>
+        </Tabstops>
+      </Paragraph>
+    </Footer>
+  </HeaderAndFooter>
+
+  <SpellCheckIgnoreLists>
+    <IgnoredRanges>
+      <Range End="34914" Start="34905"/>
+      <Range End="36857" Start="36850"/>
+      <Range End="92224" Start="92217"/>
+      <Range End="92232" Start="92225"/>
+    </IgnoredRanges>
+    <IgnoredWords>
+      <Word>Alarums</Word>
+      <Word>Bosworth</Word>
+      <Word>Dar’st</Word>
+      <Word>Hath</Word>
+      <Word>Know’st</Word>
+      <Word>L1</Word>
+      <Word>Richmonds</Word>
+      <Word>appearèd</Word>
+      <Word>ascendeth</Word>
+      <Word>bedash’d</Word>
+      <Word>canst</Word>
+      <Word>crownèd</Word>
+      <Word>disgracious</Word>
+      <Word>doth</Word>
+      <Word>dream’st</Word>
+      <Word>hast</Word>
+      <Word>hath</Word>
+      <Word>keep’st</Word>
+      <Word>long-usurpèd</Word>
+      <Word>meetst</Word>
+      <Word>sayst</Word>
+      <Word>sennet</Word>
+      <Word>sing’st</Word>
+      <Word>standers-by</Word>
+      <Word>sunrising</Word>
+      <Word>ta’en</Word>
+      <Word>thrice-renownèd</Word>
+      <Word>troublest</Word>
+      <Word>unswayed</Word>
+      <Word>untired</Word>
+      <Word>wast</Word>
+      <Word>wrongèd</Word>
+    </IgnoredWords>
+  </SpellCheckIgnoreLists>
+
+  <PageLayout BackgroundColor="#FFFFFFFFFFFF" BottomMargin="72" BreakDialogueAndActionAtSentences="Yes" DocumentLeading="Normal" FooterMargin="36" ForegroundColor="#000000000000" HeaderMargin="36" InvisiblesColor="#A0A0A0A0A0A0" TopMargin="63" UsesSmartQuotes="Yes">
+    <AutoCastList AddParentheses="Yes" AutomaticallyGenerate="No" CastListElement="Cast List"/>
+  </PageLayout>
+
+  <WindowState Height="737" Left="8" Mode="Normal" Top="5" Width="1124"/>
+
+  <TextState Scaling="175" Selection="15959,15959" ShowInvisibles="No"/>
+
+  <ElementSettings Type="General">
+    <FontSpec AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="12" Style=""/>
+    <ParagraphSpec Alignment="Left" FirstIndent="0.00" Leading="Regular" LeftIndent="1.50" RightIndent="7.50" SpaceBefore="0" Spacing="1" StartsNewPage="No"/>
+    <Behavior PaginateAs="General" ReturnKey="General" Shortcut="0"/>
+  </ElementSettings>
+
+  <ElementSettings Type="Scene Heading">
+    <FontSpec AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="12" Style="AllCaps"/>
+    <ParagraphSpec Alignment="Left" FirstIndent="0.00" Leading="Regular" LeftIndent="1.19" RightIndent="6.50" SpaceBefore="14" Spacing="1" StartsNewPage="Yes"/>
+    <Behavior PaginateAs="Scene Heading" ReturnKey="Action" Shortcut="1"/>
+  </ElementSettings>
+
+  <ElementSettings Type="Action">
+    <FontSpec AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="10" Style="Italic"/>
+    <ParagraphSpec Alignment="Left" FirstIndent="0.00" Leading="Regular" LeftIndent="1.75" RightIndent="6.50" SpaceBefore="12" Spacing="1" StartsNewPage="No"/>
+    <Behavior PaginateAs="Action" ReturnKey="Action" Shortcut="2"/>
+  </ElementSettings>
+
+  <ElementSettings Type="Character">
+    <FontSpec AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="10" Style="AllCaps"/>
+    <ParagraphSpec Alignment="Left" FirstIndent="0.00" Leading="Regular" LeftIndent="1.19" RightIndent="6.25" SpaceBefore="12" Spacing="1" StartsNewPage="No"/>
+    <Behavior PaginateAs="Character" ReturnKey="Dialogue" Shortcut="3"/>
+  </ElementSettings>
+
+  <ElementSettings Type="Parenthetical">
+    <FontSpec AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="10" Style="Italic"/>
+    <ParagraphSpec Alignment="Left" FirstIndent="-0.04" Leading="Regular" LeftIndent="1.88" RightIndent="5.50" SpaceBefore="0" Spacing="1" StartsNewPage="No"/>
+    <Behavior PaginateAs="Parenthetical" ReturnKey="Dialogue" Shortcut="4"/>
+  </ElementSettings>
+
+  <ElementSettings Type="Dialogue">
+    <FontSpec AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="12" Style=""/>
+    <ParagraphSpec Alignment="Left" FirstIndent="0.00" Leading="Regular" LeftIndent="2.00" RightIndent="6.00" SpaceBefore="0" Spacing="1" StartsNewPage="No"/>
+    <Behavior PaginateAs="Dialogue" ReturnKey="Action" Shortcut="5"/>
+  </ElementSettings>
+
+  <ElementSettings Type="Transition">
+    <FontSpec AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="12" Style="AllCaps"/>
+    <ParagraphSpec Alignment="Right" FirstIndent="0.00" Leading="Regular" LeftIndent="5.50" RightIndent="7.10" SpaceBefore="0" Spacing="1" StartsNewPage="No"/>
+    <Behavior PaginateAs="Transition" ReturnKey="Scene Heading" Shortcut="6"/>
+  </ElementSettings>
+
+  <ElementSettings Type="Shot">
+    <FontSpec AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="12" Style="AllCaps"/>
+    <ParagraphSpec Alignment="Left" FirstIndent="0.00" Leading="Regular" LeftIndent="1.50" RightIndent="7.50" SpaceBefore="28" Spacing="1" StartsNewPage="No"/>
+    <Behavior PaginateAs="Scene Heading" ReturnKey="Action" Shortcut="7"/>
+  </ElementSettings>
+
+  <ElementSettings Type="Cast List">
+    <FontSpec AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="12" Style="AllCaps"/>
+    <ParagraphSpec Alignment="Left" FirstIndent="0.00" Leading="Regular" LeftIndent="1.50" RightIndent="7.50" SpaceBefore="0" Spacing="1" StartsNewPage="No"/>
+    <Behavior PaginateAs="Action" ReturnKey="Action" Shortcut="8"/>
+  </ElementSettings>
+
+  <TitlePage>
+    <HeaderAndFooter FooterFirstPage="Yes" FooterVisible="No" HeaderFirstPage="No" HeaderVisible="No" StartingPage="1">
+      <Header>
+        <Paragraph Alignment="Right" FirstIndent="0.00" Leading="Regular" LeftIndent="1.25" RightIndent="-1.25" SpaceBefore="0" Spacing="1" StartsNewPage="No">
+          <DynamicLabel Type="Page #"/>
+          <Text AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Courier Final Draft" RevisionID="0" Size="12" Style="">.</Text>
+        </Paragraph>
+      </Header>
+      <Footer>
+        <Paragraph Alignment="Right" FirstIndent="0.00" Leading="Regular" LeftIndent="1.25" RightIndent="-1.25" SpaceBefore="0" Spacing="1" StartsNewPage="No">
+          <Text AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Courier Final Draft" RevisionID="0" Size="12" Style=""> </Text>
+        </Paragraph>
+      </Footer>
+    </HeaderAndFooter>
+    <Content>
+      <Paragraph Alignment="Center" FirstIndent="0.00" Leading="Regular" LeftIndent="1.00" RightIndent="7.50" SpaceBefore="0" Spacing="1" StartsNewPage="No">
+        <Text AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="28" Style=""></Text>
+      </Paragraph>
+      <Paragraph Alignment="Center" FirstIndent="0.00" Leading="Regular" LeftIndent="1.00" RightIndent="7.50" SpaceBefore="0" Spacing="1" StartsNewPage="No">
+        <Text AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="28" Style=""></Text>
+      </Paragraph>
+      <Paragraph Alignment="Center" FirstIndent="0.00" Leading="Regular" LeftIndent="1.00" RightIndent="7.50" SpaceBefore="0" Spacing="1" StartsNewPage="No">
+        <Text AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="28" Style=""></Text>
+      </Paragraph>
+      <Paragraph Alignment="Center" FirstIndent="0.00" Leading="Regular" LeftIndent="1.00" RightIndent="7.50" SpaceBefore="0" Spacing="1" StartsNewPage="No">
+        <Text AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="28" Style=""></Text>
+      </Paragraph>
+      <Paragraph Alignment="Center" FirstIndent="0.00" Leading="Regular" LeftIndent="1.00" RightIndent="7.50" SpaceBefore="0" Spacing="1" StartsNewPage="No">
+        <Text AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="28" Style="Bold+SmallCaps">The Tragedy of</Text>
+      </Paragraph>
+      <Paragraph Alignment="Center" FirstIndent="0.00" Leading="Regular" LeftIndent="1.00" RightIndent="7.50" SpaceBefore="0" Spacing="1" StartsNewPage="No">
+        <Text AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="28" Style="Bold+SmallCaps">King Richard the Third</Text>
+      </Paragraph>
+      <Paragraph Alignment="Center" FirstIndent="0.00" Leading="Regular" LeftIndent="1.00" RightIndent="7.50" SpaceBefore="0" Spacing="1" StartsNewPage="No">
+        <Text AdornmentStyle="-1" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="14" Style="">by</Text>
+      </Paragraph>
+      <Paragraph Alignment="Center" FirstIndent="0.00" Leading="Regular" LeftIndent="1.00" RightIndent="7.50" SpaceBefore="0" Spacing="1" StartsNewPage="No">
+        <Text AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="18" Style="">William Shakespeare</Text>
+      </Paragraph>
+      <Paragraph Alignment="Center" FirstIndent="0.00" Leading="Regular" LeftIndent="1.00" RightIndent="7.50" SpaceBefore="0" Spacing="1" StartsNewPage="No">
+        <Text AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="28" Style=""></Text>
+      </Paragraph>
+      <Paragraph Alignment="Center" FirstIndent="0.00" Leading="Regular" LeftIndent="1.00" RightIndent="7.50" SpaceBefore="0" Spacing="1" StartsNewPage="No">
+        <Text AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="28" Style=""></Text>
+      </Paragraph>
+      <Paragraph Alignment="Center" FirstIndent="0.00" Leading="Regular" LeftIndent="1.00" RightIndent="7.50" SpaceBefore="0" Spacing="1" StartsNewPage="No">
+        <Text AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="16" Style="Bold">Rehearsal Draft</Text>
+      </Paragraph>
+      <Paragraph Alignment="Center" FirstIndent="0.00" Leading="Regular" LeftIndent="1.00" RightIndent="7.50" SpaceBefore="0" Spacing="1" StartsNewPage="No">
+        <Text AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="14" Style="">as of </Text>
+      </Paragraph>
+      <Paragraph Alignment="Center" FirstIndent="0.00" Leading="Regular" LeftIndent="1.00" RightIndent="7.50" SpaceBefore="0" Spacing="1" StartsNewPage="No">
+        <Text AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="14" Style="">June 14, 2014</Text>
+      </Paragraph>
+      <Paragraph Alignment="Center" FirstIndent="0.00" Leading="Regular" LeftIndent="1.00" RightIndent="7.50" SpaceBefore="0" Spacing="1" StartsNewPage="No">
+        <Text AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="28" Style=""></Text>
+      </Paragraph>
+      <Paragraph Alignment="Center" FirstIndent="0.00" Leading="Regular" LeftIndent="1.00" RightIndent="7.50" SpaceBefore="0" Spacing="1" StartsNewPage="No">
+        <Text AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="28" Style=""></Text>
+      </Paragraph>
+      <Paragraph Alignment="Center" FirstIndent="0.00" Leading="Regular" LeftIndent="1.00" RightIndent="7.50" SpaceBefore="0" Spacing="1" StartsNewPage="No">
+        <Text AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="28" Style=""></Text>
+      </Paragraph>
+      <Paragraph Alignment="Center" FirstIndent="0.00" Leading="Regular" LeftIndent="1.00" RightIndent="7.50" SpaceBefore="0" Spacing="1" StartsNewPage="No">
+        <Text AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="28" Style=""></Text>
+      </Paragraph>
+      <Paragraph Alignment="Center" FirstIndent="0.00" Leading="Regular" LeftIndent="1.00" RightIndent="7.50" SpaceBefore="0" Spacing="1" StartsNewPage="No">
+        <Text AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="14" Style="">Oregon Shakespeare Festival 2014</Text>
+        <Text AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="12" Style="">
+</Text>      </Paragraph>
+      <Paragraph Alignment="Center" FirstIndent="0.00" Leading="Regular" LeftIndent="1.00" RightIndent="7.50" SpaceBefore="0" Spacing="1" StartsNewPage="No">
+        <Text AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="12" Style="Bold+SmallCaps">Characters</Text>
+        <Text AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="12" Style=""> 
+</Text>      </Paragraph>
+      <Paragraph Alignment="Left" FirstIndent="0.00" Leading="Regular" LeftIndent="1.00" RightIndent="7.50" SpaceBefore="0" Spacing="1" StartsNewPage="No">
+        <Text AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="11" Style="">KING EDWARD </Text>
+        <Text AdornmentStyle="-1" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="11" Style="">IV</Text>
+        <Text AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="11" Style="">
+DUCHESS OF YORK, his mother
+EDWARD, PRINCE OF WALES, (later Edward V), son of Edward </Text>
+        <Text AdornmentStyle="-1" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="11" Style="">IV</Text>
+        <Text AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="11" Style="">
+RICHARD, DUKE OF YORK, son of Edward </Text>
+        <Text AdornmentStyle="-1" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="11" Style="">IV</Text>
+        <Text AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="11" Style="">
+GEORGE, DUKE OF CLARENCE, brother of Edward </Text>
+        <Text AdornmentStyle="-1" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="11" Style="">IV</Text>
+        <Text AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="11" Style="">
+RICHARD, DUKE OF GLOUCESTER (later Richard </Text>
+        <Text AdornmentStyle="-1" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="11" Style="">III</Text>
+        <Text AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="11" Style="">), brother of Edward </Text>
+        <Text AdornmentStyle="-1" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="11" Style="">IV</Text>
+        <Text AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="11" Style="">
+
+QUEEN ELIZABETH, wife of Edward </Text>
+        <Text AdornmentStyle="-1" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="11" Style="">IV</Text>
+        <Text AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="11" Style="">
+ANTHONY </Text>
+        <Text AdornmentStyle="-1" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="11" Style="">WOODEVILLE</Text>
+        <Text AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="11" Style="">, EARL RIVERS, her brother
+MARQUESS OF DORSET, her son
+LORD GREY, her son
+SIR THOMAS VAUGHAN
+
+QUEEN MARGARET, widow of Henry VI
+LADY ANNE, Prince Edward's widow
+
+WILLIAM, LORD HASTINGS, Lord Chamberlain
+LORD STANLEY, EARL OF DERBY
+HENRY, EARL OF RICHMOND (later Henry </Text>
+        <Text AdornmentStyle="-1" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="11" Style="">VII</Text>
+        <Text AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="11" Style="">, son-in-law to Stanley)
+EARL OF OXFORD, follower of Richmond
+SIR JAMES BLUNT, follower of Richmond
+
+DUKE OF BUCKINGHAM, follower of Richard, Duke of Gloucester
+DUKE OF NORFOLK, follower of Richard, Duke of Gloucester
+SIR RICHARD RATCLIFFE, follower of Richard, Duke of Gloucester
+SIR WILLIAM CATESBY, follower of Richard, Duke of Gloucester
+SIR JAMES TYRREL, follower of Richard, Duke of Gloucester
+TWO MURDERERS, follower of Richard, Duke of Gloucester
+
+CARDINAL </Text>
+        <Text AdornmentStyle="-1" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="11" Style="">BOURCHIER</Text>
+        <Text AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="11" Style="">, Archbishop of Canterbury
+ARCHBISHOP OF YORK
+BISHOP OF ELY
+
+SIR ROBERT BRAKENBURY, Lieutenant of the Tower of London
+LORD MAYOR OF LONDON
+A SCRIVENER</Text>
+      </Paragraph>
+    </Content>
+    <TextState Scaling="175" Selection="97,97" ShowInvisibles="No"/>
+  </TitlePage>
+
+  <ScriptNoteDefinitions Active="1">
+    <ScriptNoteDefinition Color="#000000000000" ID="1" Marker="!" Name="Important"/>
+    <ScriptNoteDefinition Color="#000000000000" ID="2" Marker="?" Name="Information"/>
+    <ScriptNoteDefinition Color="#000000000000" ID="3" Marker="*" Name="Suggestion"/>
+  </ScriptNoteDefinitions>
+
+  <SmartType>
+    <Characters>
+      <Character>ALL</Character>
+      <Character>ALL GHOSTS</Character>
+      <Character>ANNE</Character>
+      <Character>ARCHBISHOP</Character>
+      <Character>BISHOP OF ELY</Character>
+      <Character>BLUNT</Character>
+      <Character>BOTH MURDERERS</Character>
+      <Character>BRAKENBURY</Character>
+      <Character>BUCKINGHAM</Character>
+      <Character>CARDINAL BOURCHIER</Character>
+      <Character>CATESBY</Character>
+      <Character>CLARENCE</Character>
+      <Character>DORSET</Character>
+      <Character>DUCHESS OF YORK</Character>
+      <Character>FIRST MESSENGER</Character>
+      <Character>FIRST MURDERER</Character>
+      <Character>GENTLEMAN</Character>
+      <Character>GHOST of Anne</Character>
+      <Character>GHOST of Buckingham</Character>
+      <Character>GHOST of Clarence</Character>
+      <Character>GHOST OF GREY</Character>
+      <Character>GHOST of Hastings</Character>
+      <Character>GHOST OF RIVERS</Character>
+      <Character>GHOST OF VAUGHAN</Character>
+      <Character>GHOSTS of Princes</Character>
+      <Character>GREY</Character>
+      <Character>HALBERD</Character>
+      <Character>HASTINGS</Character>
+      <Character>KING EDWARD</Character>
+      <Character>KING RICHARD</Character>
+      <Character>LORD MAYOR</Character>
+      <Character>LOVELL</Character>
+      <Character>MESSENGER</Character>
+      <Character>OXFORD</Character>
+      <Character>PRINCE EDWARD</Character>
+      <Character>QUEEN ELIZABETH</Character>
+      <Character>QUEEN ELIZABETH AND DUCHESS OF YORK</Character>
+      <Character>QUEEN MARGARET</Character>
+      <Character>RATCLIFFE</Character>
+      <Character>RICHARD</Character>
+      <Character>RICHMOND</Character>
+      <Character>RIVERS</Character>
+      <Character>SCRIVENER</Character>
+      <Character>SECOND MESSENGER</Character>
+      <Character>SECOND MURDERER</Character>
+      <Character>STANLEY</Character>
+      <Character>THIRD MESSENGER</Character>
+      <Character>TYRREL</Character>
+      <Character>VAUGHAN</Character>
+      <Character>YORK</Character>
+      <Character>YOUNG GEORGE STANLEY</Character>
+      <Character>Third Citizen</Character>
+      <Character>First Citizen</Character>
+      <Character>Second Citizen</Character>
+      <Character>Gloucester</Character>
+    </Characters>
+    <Extensions>
+      <Extension>(V.O.)</Extension>
+      <Extension>(O.S.)</Extension>
+      <Extension>(O.C.)</Extension>
+      <Extension>(SUBTITLE)</Extension>
+    </Extensions>
+    <SceneIntros Separator=". ">
+      <SceneIntro>INT</SceneIntro>
+      <SceneIntro>EXT</SceneIntro>
+      <SceneIntro>I/E</SceneIntro>
+    </SceneIntros>
+    <Locations>
+      <Location>THE[L1] TRAGEDY OF KING RICHARD THE THIRD</Location>
+      <Location>SCENE 1 [1.1] ISRAELITE IN BABYLON</Location>
+      <Location>SCENE 2 [1.2] OVER THE CORPSE OF HENRY</Location>
+      <Location>SCENE 3 [1.3] QUARREL IN THE PALACE</Location>
+      <Location>SCENE 4 [1.4] CLARENCE IN THE TOWER MURDERED</Location>
+      <Location>SCENE 5 [2.1] KING EDWARD'S TRUCE</Location>
+      <Location>SCENE 6 [2.2] EDWARD IS DEAD</Location>
+      <Location>DUCHESS OF YORK</Location>
+      <Location>QUEEN ELIZABETH AND DUCHESS OF YORK</Location>
+      <Location>SCENE 7 [2.4] IN ELIZABETH'S CHAMBER</Location>
+      <Location>SCENE 8 [3.1] PRINCES IN LONDON</Location>
+      <Location>SCENE 9 [3.2] HASTINGS' HOUSE</Location>
+      <Location>YOUNG GEORGE STANLEY</Location>
+      <Location>SCENE 10 [3.3] MURDER IN POMFRET</Location>
+      <Location>SCENE 11 [3.4] THE COUNCIL MEETS</Location>
+      <Location>BISHOP OF ELY</Location>
+      <Location>SCENE 12 [3.5] ROTTEN ARMOR</Location>
+      <Location>SCENE 13 [3.6] THE SCRIVENER</Location>
+      <Location>SCENE 14 [3.7] RICHARD AND THE BISHOPS</Location>
+      <Location>SCENE 15 [4.1] WOMEN AT THE TOWER</Location>
+      <Location>SCENE 16 [4.2] RICHARD CROWNED</Location>
+      <Location>SCENE 17 [4.3] TYRREL AFTER THE MURDERS</Location>
+      <Location>SCENE 18 [4.4] THE COURT AFTER THE MURDERS</Location>
+      <Location>SCENE 19 [4.5] STANLEY/DORSET</Location>
+      <Location>SCENE 20 [5.1] BUCKINGHAM'S LAST WORD</Location>
+      <Location>SCENE 21 [5.2] ENTRANCE OF RICHMOND</Location>
+      <Location>SCENE 22 [5.3] THE TENTS</Location>
+      <Location>GHOST OF RIVERS</Location>
+      <Location>GHOST OF GREY</Location>
+      <Location>GHOST OF VAUGHAN</Location>
+      <Location>SCENE 23 [5.4] BATTLE</Location>
+      <Location>SCENE 24 [5.5] THE DEATH OF RICHARD</Location>
+      <Location>SCENE 13 [3.6]: THE SCRIVENER</Location>
+      <Location>SCENE 6.5 [2.3]: THE CITIZENS</Location>
+    </Locations>
+    <TimesOfDay Separator=" - ">
+      <TimeOfDay>DAY</TimeOfDay>
+      <TimeOfDay>NIGHT</TimeOfDay>
+      <TimeOfDay>AFTERNOON</TimeOfDay>
+      <TimeOfDay>MORNING</TimeOfDay>
+      <TimeOfDay>EVENING</TimeOfDay>
+      <TimeOfDay>LATER</TimeOfDay>
+      <TimeOfDay>MOMENTS LATER</TimeOfDay>
+      <TimeOfDay>CONTINUOUS</TimeOfDay>
+      <TimeOfDay>THE NEXT DAY</TimeOfDay>
+    </TimesOfDay>
+    <Transitions>
+      <Transition>CUT TO:</Transition>
+      <Transition>FADE IN:</Transition>
+      <Transition>FADE OUT.</Transition>
+      <Transition>FADE TO:</Transition>
+      <Transition>DISSOLVE TO:</Transition>
+      <Transition>BACK TO:</Transition>
+      <Transition>MATCH CUT TO:</Transition>
+      <Transition>JUMP CUT TO:</Transition>
+      <Transition>FADE TO BLACK.</Transition>
+    </Transitions>
+  </SmartType>
+
+  <MoresAndContinueds>
+    <FontSpec AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="8" Style=""/>
+    <DialogueBreaks AutomaticCharacterContinueds="Yes" BottomOfPage="Yes" DialogueBottom="(MORE)" DialogueTop="(CONT'D)" TopOfNext="Yes"/>
+    <SceneBreaks ContinuedNumber="No" SceneBottom="(CONTINUED)" SceneBottomOfPage="No" SceneTop="CONTINUED:" SceneTopOfNext="No"/>
+  </MoresAndContinueds>
+
+  <LockedPages>
+    <LockedPage LevelIndex="0" LockLevel="0" PageNumber="1" Position="0"/>
+    <LockedPage LevelIndex="1" LockLevel="0" PageNumber="2" Position="1558"/>
+    <LockedPage LevelIndex="2" LockLevel="0" PageNumber="3" Position="3116"/>
+    <LockedPage LevelIndex="3" LockLevel="0" PageNumber="4" Position="4431"/>
+    <LockedPage LevelIndex="4" LockLevel="0" PageNumber="5" Position="5719"/>
+    <LockedPage LevelIndex="5" LockLevel="0" PageNumber="6" Position="7149"/>
+    <LockedPage LevelIndex="6" LockLevel="0" PageNumber="7" Position="7906"/>
+    <LockedPage LevelIndex="7" LockLevel="0" PageNumber="8" Position="9440"/>
+    <LockedPage LevelIndex="8" LockLevel="0" PageNumber="9" Position="10756"/>
+    <LockedPage LevelIndex="9" LockLevel="0" PageNumber="10" Position="11722"/>
+    <LockedPage LevelIndex="10" LockLevel="0" PageNumber="11" Position="12585"/>
+    <LockedPage LevelIndex="11" LockLevel="0" PageNumber="12" Position="13581"/>
+    <LockedPage LevelIndex="12" LockLevel="0" PageNumber="13" Position="15341"/>
+    <LockedPage LevelIndex="13" LockLevel="0" PageNumber="14" Position="16054"/>
+    <LockedPage LevelIndex="14" LockLevel="0" PageNumber="15" Position="17075"/>
+    <LockedPage LevelIndex="15" LockLevel="0" PageNumber="16" Position="18588"/>
+    <LockedPage LevelIndex="16" LockLevel="0" PageNumber="17" Position="19637"/>
+    <LockedPage LevelIndex="17" LockLevel="0" PageNumber="18" Position="20787"/>
+    <LockedPage LevelIndex="18" LockLevel="0" PageNumber="19" Position="22101"/>
+    <LockedPage LevelIndex="19" LockLevel="0" PageNumber="20" Position="23340"/>
+    <LockedPage LevelIndex="20" LockLevel="0" PageNumber="21" Position="24575"/>
+    <LockedPage LevelIndex="21" LockLevel="0" PageNumber="22" Position="25925"/>
+    <LockedPage LevelIndex="22" LockLevel="0" PageNumber="23" Position="27614"/>
+    <LockedPage LevelIndex="23" LockLevel="0" PageNumber="24" Position="28647"/>
+    <LockedPage LevelIndex="24" LockLevel="0" PageNumber="25" Position="29809"/>
+    <LockedPage LevelIndex="25" LockLevel="0" PageNumber="26" Position="30894"/>
+    <LockedPage LevelIndex="26" LockLevel="0" PageNumber="27" Position="32154"/>
+    <LockedPage LevelIndex="27" LockLevel="0" PageNumber="28" Position="32565"/>
+    <LockedPage LevelIndex="28" LockLevel="0" PageNumber="29" Position="33995"/>
+    <LockedPage LevelIndex="29" LockLevel="0" PageNumber="30" Position="35786"/>
+    <LockedPage LevelIndex="30" LockLevel="0" PageNumber="31" Position="36778"/>
+    <LockedPage LevelIndex="31" LockLevel="0" PageNumber="32" Position="38078"/>
+    <LockedPage LevelIndex="32" LockLevel="0" PageNumber="33" Position="38966"/>
+    <LockedPage LevelIndex="33" LockLevel="0" PageNumber="34" Position="40071"/>
+    <LockedPage LevelIndex="34" LockLevel="0" PageNumber="35" Position="41146"/>
+    <LockedPage LevelIndex="35" LockLevel="0" PageNumber="36" Position="42417"/>
+    <LockedPage LevelIndex="36" LockLevel="0" PageNumber="37" Position="43634"/>
+    <LockedPage LevelIndex="37" LockLevel="0" PageNumber="38" Position="45019"/>
+    <LockedPage LevelIndex="38" LockLevel="0" PageNumber="39" Position="46265"/>
+    <LockedPage LevelIndex="39" LockLevel="0" PageNumber="40" Position="47041"/>
+    <LockedPage LevelIndex="40" LockLevel="0" PageNumber="41" Position="48226"/>
+    <LockedPage LevelIndex="41" LockLevel="0" PageNumber="42" Position="49499"/>
+    <LockedPage LevelIndex="42" LockLevel="0" PageNumber="43" Position="51567"/>
+    <LockedPage LevelIndex="43" LockLevel="0" PageNumber="44" Position="52701"/>
+    <LockedPage LevelIndex="44" LockLevel="0" PageNumber="45" Position="53491"/>
+    <LockedPage LevelIndex="45" LockLevel="0" PageNumber="46" Position="53994"/>
+    <LockedPage LevelIndex="46" LockLevel="0" PageNumber="47" Position="55227"/>
+    <LockedPage LevelIndex="47" LockLevel="0" PageNumber="48" Position="56621"/>
+    <LockedPage LevelIndex="48" LockLevel="0" PageNumber="49" Position="58230"/>
+    <LockedPage LevelIndex="49" LockLevel="0" PageNumber="50" Position="59100"/>
+    <LockedPage LevelIndex="50" LockLevel="0" PageNumber="51" Position="60145"/>
+    <LockedPage LevelIndex="51" LockLevel="0" PageNumber="52" Position="61453"/>
+    <LockedPage LevelIndex="52" LockLevel="0" PageNumber="53" Position="62018"/>
+    <LockedPage LevelIndex="53" LockLevel="0" PageNumber="54" Position="63131"/>
+    <LockedPage LevelIndex="54" LockLevel="0" PageNumber="55" Position="64289"/>
+    <LockedPage LevelIndex="55" LockLevel="0" PageNumber="56" Position="65491"/>
+    <LockedPage LevelIndex="56" LockLevel="0" PageNumber="57" Position="65638"/>
+    <LockedPage LevelIndex="57" LockLevel="0" PageNumber="58" Position="66650"/>
+    <LockedPage LevelIndex="58" LockLevel="0" PageNumber="59" Position="67828"/>
+    <LockedPage LevelIndex="59" LockLevel="0" PageNumber="60" Position="68864"/>
+    <LockedPage LevelIndex="60" LockLevel="0" PageNumber="61" Position="70010"/>
+    <LockedPage LevelIndex="61" LockLevel="0" PageNumber="62" Position="71335"/>
+    <LockedPage LevelIndex="62" LockLevel="0" PageNumber="63" Position="72222"/>
+    <LockedPage LevelIndex="63" LockLevel="0" PageNumber="64" Position="73517"/>
+    <LockedPage LevelIndex="64" LockLevel="0" PageNumber="65" Position="74838"/>
+    <LockedPage LevelIndex="65" LockLevel="0" PageNumber="66" Position="75172"/>
+    <LockedPage LevelIndex="66" LockLevel="0" PageNumber="67" Position="75837"/>
+    <LockedPage LevelIndex="67" LockLevel="0" PageNumber="68" Position="76987"/>
+    <LockedPage LevelIndex="68" LockLevel="0" PageNumber="69" Position="78211"/>
+    <LockedPage LevelIndex="69" LockLevel="0" PageNumber="70" Position="79592"/>
+    <LockedPage LevelIndex="70" LockLevel="0" PageNumber="71" Position="81233"/>
+    <LockedPage LevelIndex="71" LockLevel="0" PageNumber="72" Position="82468"/>
+    <LockedPage LevelIndex="72" LockLevel="0" PageNumber="73" Position="83521"/>
+    <LockedPage LevelIndex="73" LockLevel="0" PageNumber="74" Position="84571"/>
+    <LockedPage LevelIndex="74" LockLevel="0" PageNumber="75" Position="85797"/>
+    <LockedPage LevelIndex="75" LockLevel="0" PageNumber="76" Position="87185"/>
+    <LockedPage LevelIndex="76" LockLevel="0" PageNumber="77" Position="87861"/>
+    <LockedPage LevelIndex="77" LockLevel="0" PageNumber="78" Position="88853"/>
+    <LockedPage LevelIndex="78" LockLevel="0" PageNumber="79" Position="89791"/>
+    <LockedPage LevelIndex="79" LockLevel="0" PageNumber="80" Position="90771"/>
+    <LockedPage LevelIndex="80" LockLevel="0" PageNumber="81" Position="91848"/>
+    <LockedPage LevelIndex="81" LockLevel="0" PageNumber="82" Position="92716"/>
+    <LockedPage LevelIndex="82" LockLevel="0" PageNumber="83" Position="93249"/>
+    <LockedPage LevelIndex="83" LockLevel="0" PageNumber="84" Position="94583"/>
+    <LockedPage LevelIndex="84" LockLevel="0" PageNumber="85" Position="95604"/>
+    <LockedPage LevelIndex="85" LockLevel="0" PageNumber="86" Position="96761"/>
+    <LockedPage LevelIndex="86" LockLevel="0" PageNumber="87" Position="98143"/>
+    <LockedPage LevelIndex="87" LockLevel="0" PageNumber="88" Position="99837"/>
+    <LockedPage LevelIndex="88" LockLevel="0" PageNumber="89" Position="101062"/>
+    <LockedPage LevelIndex="89" LockLevel="0" PageNumber="90" Position="102145"/>
+    <LockedPage LevelIndex="90" LockLevel="0" PageNumber="91" Position="103238"/>
+    <LockedPage LevelIndex="91" LockLevel="0" PageNumber="92" Position="104346"/>
+    <LockedPage LevelIndex="92" LockLevel="0" PageNumber="93" Position="105332"/>
+    <LockedPage LevelIndex="93" LockLevel="0" PageNumber="94" Position="106786"/>
+    <LockedPage LevelIndex="94" LockLevel="0" PageNumber="95" Position="107686"/>
+    <LockedPage LevelIndex="95" LockLevel="0" PageNumber="96" Position="109080"/>
+    <LockedPage LevelIndex="96" LockLevel="0" PageNumber="97" Position="110160"/>
+    <LockedPage LevelIndex="97" LockLevel="0" PageNumber="98" Position="111103"/>
+    <LockedPage LevelIndex="98" LockLevel="0" PageNumber="99" Position="112190"/>
+    <LockedPage LevelIndex="99" LockLevel="0" PageNumber="100" Position="113315"/>
+    <LockedPage LevelIndex="100" LockLevel="0" PageNumber="101" Position="114491"/>
+    <LockedPage LevelIndex="101" LockLevel="0" PageNumber="102" Position="115104"/>
+    <LockedPage LevelIndex="102" LockLevel="0" PageNumber="103" Position="115900"/>
+    <LockedPage LevelIndex="103" LockLevel="0" PageNumber="104" Position="117066"/>
+    <LockedPage LevelIndex="104" LockLevel="0" PageNumber="105" Position="118263"/>
+    <LockedPage LevelIndex="105" LockLevel="0" PageNumber="106" Position="119187"/>
+    <LockedPage LevelIndex="106" LockLevel="0" PageNumber="107" Position="120444"/>
+    <LockedPage LevelIndex="107" LockLevel="0" PageNumber="108" Position="121721"/>
+    <LockedPage LevelIndex="108" LockLevel="0" PageNumber="109" Position="123202"/>
+    <LockedPage LevelIndex="109" LockLevel="0" PageNumber="110" Position="124552"/>
+    <LockedPage LevelIndex="110" LockLevel="0" PageNumber="111" Position="125820"/>
+    <LockedPage LevelIndex="111" LockLevel="0" PageNumber="112" Position="127029"/>
+    <LockedPage LevelIndex="112" LockLevel="0" PageNumber="113" Position="128020"/>
+    <LockedPage LevelIndex="113" LockLevel="0" PageNumber="114" Position="128708"/>
+    <LockedPage LevelIndex="114" LockLevel="0" PageNumber="115" Position="130200"/>
+  </LockedPages>
+
+  <Revisions ActiveSet="25" Location="7.75" RevisionMode="Yes" RevisionsShown="All" ShowAllMarks="Yes" ShowAllSets="Yes">
+    <Revision Color="#FFFF00000000" FullRevision="No" ID="1" Mark=" " Name="(Rev. 3/9/14)" Style=""/>
+    <Revision Color="#FFFF00000000" FullRevision="No" ID="2" Mark="*" Name="(Rev, 4/5/14)" Style=""/>
+    <Revision Color="#FFFF00000000" FullRevision="No" ID="3" Mark="*" Name="(Rev. 4/6/14)" Style=""/>
+    <Revision Color="#FFFF00000000" FullRevision="No" ID="4" Mark="*" Name="(Rev. 4/12/14)" Style=""/>
+    <Revision Color="#FFFF00000000" FullRevision="No" ID="5" Mark="*" Name="(Rev. 4/17/14)" Style=""/>
+    <Revision Color="#FFFF00000000" FullRevision="No" ID="6" Mark="*" Name="(Rev. 4/20/14)" Style=""/>
+    <Revision Color="#FFFF00000000" FullRevision="No" ID="7" Mark="*" Name="(Rev. 4/22/14)" Style=""/>
+    <Revision Color="#FFFF00000000" FullRevision="No" ID="8" Mark="*" Name="(Rev. 4/24/14)" Style=""/>
+    <Revision Color="#FFFF00000000" FullRevision="No" ID="9" Mark="*" Name="(Rev. 4/25/14)" Style=""/>
+    <Revision Color="#FFFF00000000" FullRevision="No" ID="11" Mark="*" Name="(Rev. 4/26/14)" Style=""/>
+    <Revision Color="#FFFF00000000" FullRevision="No" ID="10" Mark="*" Name="(Rev. 4/30/14)" Style=""/>
+    <Revision Color="#FFFF00000000" FullRevision="No" ID="12" Mark="*" Name="(Rev. 5/1/14)" Style=""/>
+    <Revision Color="#FFFF00000000" FullRevision="No" ID="13" Mark="*" Name="(Rev. 5/3/14)" Style=""/>
+    <Revision Color="#FFFF00000000" FullRevision="No" ID="14" Mark="*" Name="(Rev. 5/4/14)" Style=""/>
+    <Revision Color="#FFFF00000000" FullRevision="No" ID="15" Mark="*" Name="(Rev. 5/6/14)" Style=""/>
+    <Revision Color="#FFFF00000000" FullRevision="No" ID="16" Mark="*" Name="(Rev. 5/7/14)" Style=""/>
+    <Revision Color="#FFFF00000000" FullRevision="No" ID="17" Mark="*" Name="(Rev. 5/13/14)" Style=""/>
+    <Revision Color="#FFFF00000000" FullRevision="No" ID="18" Mark="*" Name="(Rev. 5/14/14)" Style=""/>
+    <Revision Color="#FFFF00000000" FullRevision="No" ID="19" Mark="*" Name="(Rev. 5/18/14)" Style=""/>
+    <Revision Color="#FFFF00000000" FullRevision="No" ID="20" Mark="*" Name="(Rev. 5/23/14)" Style=""/>
+    <Revision Color="#FFFF00000000" FullRevision="No" ID="21" Mark="*" Name="(Rev. 5/24/14)" Style=""/>
+    <Revision Color="#FFFF00000000" FullRevision="No" ID="22" Mark="*" Name="(Rev. 5/29/14)" Style=""/>
+    <Revision Color="#FFFF00000000" FullRevision="No" ID="23" Mark="*" Name="(Rev. 6/1/14)" Style=""/>
+    <Revision Color="#FFFF00000000" FullRevision="No" ID="24" Mark="*" Name="(Rev. 6/3/14)" Style=""/>
+    <Revision Color="#FFFF00000000" FullRevision="No" ID="25" Mark="*" Name="(Rev. 6/14/14)" Style=""/>
+  </Revisions>
+
+  <DeletedText>
+    <DeletedTextLocation Offset="8787" RevisionID="11"/>
+    <DeletedTextLocation Offset="8863" RevisionID="11"/>
+    <DeletedTextLocation Offset="11062" RevisionID="11"/>
+    <DeletedTextLocation Offset="11062" RevisionID="11"/>
+    <DeletedTextLocation Offset="13046" RevisionID="11"/>
+    <DeletedTextLocation Offset="13052" RevisionID="11"/>
+    <DeletedTextLocation Offset="13053" RevisionID="11"/>
+    <DeletedTextLocation Offset="13053" RevisionID="11"/>
+    <DeletedTextLocation Offset="13096" RevisionID="5"/>
+    <DeletedTextLocation Offset="13097" RevisionID="5"/>
+    <DeletedTextLocation Offset="13108" RevisionID="18"/>
+    <DeletedTextLocation Offset="13119" RevisionID="5"/>
+    <DeletedTextLocation Offset="13135" RevisionID="5"/>
+    <DeletedTextLocation Offset="14015" RevisionID="21"/>
+    <DeletedTextLocation Offset="14018" RevisionID="21"/>
+    <DeletedTextLocation Offset="14024" RevisionID="21"/>
+    <DeletedTextLocation Offset="14032" RevisionID="21"/>
+    <DeletedTextLocation Offset="14114" RevisionID="21"/>
+    <DeletedTextLocation Offset="14133" RevisionID="21"/>
+    <DeletedTextLocation Offset="14174" RevisionID="21"/>
+    <DeletedTextLocation Offset="14265" RevisionID="21"/>
+    <DeletedTextLocation Offset="14267" RevisionID="21"/>
+    <DeletedTextLocation Offset="14339" RevisionID="21"/>
+    <DeletedTextLocation Offset="14375" RevisionID="21"/>
+    <DeletedTextLocation Offset="14378" RevisionID="21"/>
+    <DeletedTextLocation Offset="14415" RevisionID="21"/>
+    <DeletedTextLocation Offset="15927" RevisionID="25"/>
+    <DeletedTextLocation Offset="15933" RevisionID="25"/>
+    <DeletedTextLocation Offset="16841" RevisionID="5"/>
+    <DeletedTextLocation Offset="16845" RevisionID="5"/>
+    <DeletedTextLocation Offset="16845" RevisionID="5"/>
+    <DeletedTextLocation Offset="16858" RevisionID="5"/>
+    <DeletedTextLocation Offset="16862" RevisionID="5"/>
+    <DeletedTextLocation Offset="19119" RevisionID="7"/>
+    <DeletedTextLocation Offset="20612" RevisionID="5"/>
+    <DeletedTextLocation Offset="20626" RevisionID="5"/>
+    <DeletedTextLocation Offset="24858" RevisionID="20"/>
+    <DeletedTextLocation Offset="24861" RevisionID="20"/>
+    <DeletedTextLocation Offset="24879" RevisionID="20"/>
+    <DeletedTextLocation Offset="24882" RevisionID="20"/>
+    <DeletedTextLocation Offset="24972" RevisionID="20"/>
+    <DeletedTextLocation Offset="24977" RevisionID="20"/>
+    <DeletedTextLocation Offset="25005" RevisionID="20"/>
+    <DeletedTextLocation Offset="25018" RevisionID="20"/>
+    <DeletedTextLocation Offset="34791" RevisionID="5"/>
+    <DeletedTextLocation Offset="34811" RevisionID="5"/>
+    <DeletedTextLocation Offset="34822" RevisionID="5"/>
+    <DeletedTextLocation Offset="34824" RevisionID="5"/>
+    <DeletedTextLocation Offset="34843" RevisionID="5"/>
+    <DeletedTextLocation Offset="34846" RevisionID="5"/>
+    <DeletedTextLocation Offset="34852" RevisionID="5"/>
+    <DeletedTextLocation Offset="34916" RevisionID="5"/>
+    <DeletedTextLocation Offset="34959" RevisionID="5"/>
+    <DeletedTextLocation Offset="34981" RevisionID="5"/>
+    <DeletedTextLocation Offset="35046" RevisionID="5"/>
+    <DeletedTextLocation Offset="35063" RevisionID="5"/>
+    <DeletedTextLocation Offset="35087" RevisionID="5"/>
+    <DeletedTextLocation Offset="36939" RevisionID="5"/>
+    <DeletedTextLocation Offset="37068" RevisionID="5"/>
+    <DeletedTextLocation Offset="37115" RevisionID="5"/>
+    <DeletedTextLocation Offset="37170" RevisionID="5"/>
+    <DeletedTextLocation Offset="37192" RevisionID="5"/>
+    <DeletedTextLocation Offset="37265" RevisionID="5"/>
+    <DeletedTextLocation Offset="37280" RevisionID="5"/>
+    <DeletedTextLocation Offset="42831" RevisionID="5"/>
+    <DeletedTextLocation Offset="42883" RevisionID="5"/>
+    <DeletedTextLocation Offset="42903" RevisionID="5"/>
+    <DeletedTextLocation Offset="42964" RevisionID="5"/>
+    <DeletedTextLocation Offset="42974" RevisionID="5"/>
+    <DeletedTextLocation Offset="43465" RevisionID="25"/>
+    <DeletedTextLocation Offset="47009" RevisionID="25"/>
+    <DeletedTextLocation Offset="47029" RevisionID="25"/>
+    <DeletedTextLocation Offset="47029" RevisionID="25"/>
+    <DeletedTextLocation Offset="47966" RevisionID="20"/>
+    <DeletedTextLocation Offset="50617" RevisionID="1"/>
+    <DeletedTextLocation Offset="50909" RevisionID="1"/>
+    <DeletedTextLocation Offset="50935" RevisionID="1"/>
+    <DeletedTextLocation Offset="51121" RevisionID="1"/>
+    <DeletedTextLocation Offset="51236" RevisionID="1"/>
+    <DeletedTextLocation Offset="51442" RevisionID="1"/>
+    <DeletedTextLocation Offset="51537" RevisionID="1"/>
+    <DeletedTextLocation Offset="62213" RevisionID="7"/>
+    <DeletedTextLocation Offset="65182" RevisionID="7"/>
+    <DeletedTextLocation Offset="66741" RevisionID="25"/>
+    <DeletedTextLocation Offset="66742" RevisionID="25"/>
+    <DeletedTextLocation Offset="67759" RevisionID="25"/>
+    <DeletedTextLocation Offset="74848" RevisionID="23"/>
+    <DeletedTextLocation Offset="74956" RevisionID="6"/>
+    <DeletedTextLocation Offset="75025" RevisionID="6"/>
+    <DeletedTextLocation Offset="75085" RevisionID="6"/>
+    <DeletedTextLocation Offset="80019" RevisionID="18"/>
+    <DeletedTextLocation Offset="80081" RevisionID="17"/>
+    <DeletedTextLocation Offset="80093" RevisionID="17"/>
+    <DeletedTextLocation Offset="80112" RevisionID="17"/>
+    <DeletedTextLocation Offset="80135" RevisionID="17"/>
+    <DeletedTextLocation Offset="80502" RevisionID="18"/>
+    <DeletedTextLocation Offset="93477" RevisionID="16"/>
+    <DeletedTextLocation Offset="93494" RevisionID="16"/>
+    <DeletedTextLocation Offset="95014" RevisionID="18"/>
+    <DeletedTextLocation Offset="99736" RevisionID="9"/>
+    <DeletedTextLocation Offset="99739" RevisionID="9"/>
+    <DeletedTextLocation Offset="99741" RevisionID="9"/>
+    <DeletedTextLocation Offset="99744" RevisionID="9"/>
+    <DeletedTextLocation Offset="99746" RevisionID="9"/>
+    <DeletedTextLocation Offset="99750" RevisionID="9"/>
+    <DeletedTextLocation Offset="99785" RevisionID="9"/>
+    <DeletedTextLocation Offset="99786" RevisionID="9"/>
+    <DeletedTextLocation Offset="99935" RevisionID="9"/>
+    <DeletedTextLocation Offset="100086" RevisionID="9"/>
+    <DeletedTextLocation Offset="100129" RevisionID="9"/>
+    <DeletedTextLocation Offset="100899" RevisionID="22"/>
+    <DeletedTextLocation Offset="100917" RevisionID="22"/>
+    <DeletedTextLocation Offset="100971" RevisionID="22"/>
+    <DeletedTextLocation Offset="100973" RevisionID="22"/>
+    <DeletedTextLocation Offset="108323" RevisionID="7"/>
+    <DeletedTextLocation Offset="108331" RevisionID="7"/>
+    <DeletedTextLocation Offset="108352" RevisionID="7"/>
+    <DeletedTextLocation Offset="108437" RevisionID="9"/>
+    <DeletedTextLocation Offset="108439" RevisionID="9"/>
+    <DeletedTextLocation Offset="108457" RevisionID="9"/>
+    <DeletedTextLocation Offset="108474" RevisionID="7"/>
+    <DeletedTextLocation Offset="108487" RevisionID="7"/>
+    <DeletedTextLocation Offset="108491" RevisionID="9"/>
+    <DeletedTextLocation Offset="124027" RevisionID="17"/>
+    <DeletedTextLocation Offset="125549" RevisionID="25"/>
+    <DeletedTextLocation Offset="125555" RevisionID="25"/>
+    <DeletedTextLocation Offset="126074" RevisionID="12"/>
+    <DeletedTextLocation Offset="127545" RevisionID="25"/>
+    <DeletedTextLocation Offset="129253" RevisionID="12"/>
+    <DeletedTextLocation Offset="129256" RevisionID="12"/>
+    <DeletedTextLocation Offset="129853" RevisionID="20"/>
+    <DeletedTextLocation Offset="129872" RevisionID="20"/>
+  </DeletedText>
+
+  <SplitState ActivePanel="1" SplitMode="None" SplitterPosition="1104">
+    <ScriptPanel DisplayMode="Page">
+      <FontSpec AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Verdana" RevisionID="0" Size="9" Style=""/>
+    </ScriptPanel>
+  </SplitState>
+
+  <Macros>
+    <Macro Element="Scene Heading" Name="INT" Shortcut="Ctrl+Alt+1" Text="INT. " Transition="None">
+      <Alias Confirm="No" MatchCase="No" SmartReplace="Yes" Text="" WordOnly="No">
+        <ActivateIn Element="General"/>
+        <ActivateIn Element="Scene Heading"/>
+        <ActivateIn Element="Action"/>
+        <ActivateIn Element="Character"/>
+        <ActivateIn Element="Parenthetical"/>
+        <ActivateIn Element="Dialogue"/>
+        <ActivateIn Element="Transition"/>
+        <ActivateIn Element="Shot"/>
+        <ActivateIn Element="Cast List"/>
+      </Alias>
+    </Macro>
+    <Macro Element="Scene Heading" Name="EXT" Shortcut="Ctrl+Alt+2" Text="EXT. " Transition="None">
+      <Alias Confirm="No" MatchCase="No" SmartReplace="Yes" Text="" WordOnly="No">
+        <ActivateIn Element="General"/>
+        <ActivateIn Element="Scene Heading"/>
+        <ActivateIn Element="Action"/>
+        <ActivateIn Element="Character"/>
+        <ActivateIn Element="Parenthetical"/>
+        <ActivateIn Element="Dialogue"/>
+        <ActivateIn Element="Transition"/>
+        <ActivateIn Element="Shot"/>
+        <ActivateIn Element="Cast List"/>
+      </Alias>
+    </Macro>
+    <Macro Element="Scene Heading" Name="I/E" Shortcut="Ctrl+Alt+3" Text="I/E " Transition="None">
+      <Alias Confirm="No" MatchCase="No" SmartReplace="Yes" Text="" WordOnly="No">
+        <ActivateIn Element="General"/>
+        <ActivateIn Element="Scene Heading"/>
+        <ActivateIn Element="Action"/>
+        <ActivateIn Element="Character"/>
+        <ActivateIn Element="Parenthetical"/>
+        <ActivateIn Element="Dialogue"/>
+        <ActivateIn Element="Transition"/>
+        <ActivateIn Element="Shot"/>
+        <ActivateIn Element="Cast List"/>
+      </Alias>
+    </Macro>
+    <Macro Element="Scene Heading" Name="DAY" Shortcut="Ctrl+Alt+4" Text=" - DAY" Transition="Action">
+      <Alias Confirm="No" MatchCase="No" SmartReplace="Yes" Text="" WordOnly="No">
+        <ActivateIn Element="General"/>
+        <ActivateIn Element="Scene Heading"/>
+        <ActivateIn Element="Action"/>
+        <ActivateIn Element="Character"/>
+        <ActivateIn Element="Parenthetical"/>
+        <ActivateIn Element="Dialogue"/>
+        <ActivateIn Element="Transition"/>
+        <ActivateIn Element="Shot"/>
+        <ActivateIn Element="Cast List"/>
+      </Alias>
+    </Macro>
+    <Macro Element="Scene Heading" Name="NIGHT" Shortcut="Ctrl+Alt+5" Text=" - NIGHT" Transition="Action">
+      <Alias Confirm="No" MatchCase="No" SmartReplace="Yes" Text="" WordOnly="No">
+        <ActivateIn Element="General"/>
+        <ActivateIn Element="Scene Heading"/>
+        <ActivateIn Element="Action"/>
+        <ActivateIn Element="Character"/>
+        <ActivateIn Element="Parenthetical"/>
+        <ActivateIn Element="Dialogue"/>
+        <ActivateIn Element="Transition"/>
+        <ActivateIn Element="Shot"/>
+        <ActivateIn Element="Cast List"/>
+      </Alias>
+    </Macro>
+    <Macro Element="Scene Heading" Name="SUNRISE" Shortcut="Ctrl+Alt+6" Text=" - SUNRISE" Transition="Action">
+      <Alias Confirm="No" MatchCase="No" SmartReplace="Yes" Text="" WordOnly="No">
+        <ActivateIn Element="General"/>
+        <ActivateIn Element="Scene Heading"/>
+        <ActivateIn Element="Action"/>
+        <ActivateIn Element="Character"/>
+        <ActivateIn Element="Parenthetical"/>
+        <ActivateIn Element="Dialogue"/>
+        <ActivateIn Element="Transition"/>
+        <ActivateIn Element="Shot"/>
+        <ActivateIn Element="Cast List"/>
+      </Alias>
+    </Macro>
+    <Macro Element="Scene Heading" Name="MAGIC" Shortcut="Ctrl+Alt+7" Text=" - MAGIC" Transition="Action">
+      <Alias Confirm="No" MatchCase="No" SmartReplace="Yes" Text="" WordOnly="No">
+        <ActivateIn Element="General"/>
+        <ActivateIn Element="Scene Heading"/>
+        <ActivateIn Element="Action"/>
+        <ActivateIn Element="Character"/>
+        <ActivateIn Element="Parenthetical"/>
+        <ActivateIn Element="Dialogue"/>
+        <ActivateIn Element="Transition"/>
+        <ActivateIn Element="Shot"/>
+        <ActivateIn Element="Cast List"/>
+      </Alias>
+    </Macro>
+    <Macro Element="Parenthetical" Name="CONT" Shortcut="Ctrl+Alt+8" Text="continuing" Transition="Dialogue">
+      <Alias Confirm="No" MatchCase="No" SmartReplace="Yes" Text="" WordOnly="No">
+        <ActivateIn Element="General"/>
+        <ActivateIn Element="Scene Heading"/>
+        <ActivateIn Element="Action"/>
+        <ActivateIn Element="Character"/>
+        <ActivateIn Element="Parenthetical"/>
+        <ActivateIn Element="Dialogue"/>
+        <ActivateIn Element="Transition"/>
+        <ActivateIn Element="Shot"/>
+        <ActivateIn Element="Cast List"/>
+      </Alias>
+    </Macro>
+    <Macro Element="Parenthetical" Name="INTER" Shortcut="Ctrl+Alt+9" Text="interrupting" Transition="Dialogue">
+      <Alias Confirm="No" MatchCase="No" SmartReplace="Yes" Text="" WordOnly="No">
+        <ActivateIn Element="General"/>
+        <ActivateIn Element="Scene Heading"/>
+        <ActivateIn Element="Action"/>
+        <ActivateIn Element="Character"/>
+        <ActivateIn Element="Parenthetical"/>
+        <ActivateIn Element="Dialogue"/>
+        <ActivateIn Element="Transition"/>
+        <ActivateIn Element="Shot"/>
+        <ActivateIn Element="Cast List"/>
+      </Alias>
+    </Macro>
+    <Macro Element="None" Name="" Shortcut="Ctrl+Alt+0" Text="" Transition="None">
+      <Alias Confirm="No" MatchCase="No" SmartReplace="Yes" Text="" WordOnly="No">
+        <ActivateIn Element="General"/>
+        <ActivateIn Element="Scene Heading"/>
+        <ActivateIn Element="Action"/>
+        <ActivateIn Element="Character"/>
+        <ActivateIn Element="Parenthetical"/>
+        <ActivateIn Element="Dialogue"/>
+        <ActivateIn Element="Transition"/>
+        <ActivateIn Element="Shot"/>
+        <ActivateIn Element="Cast List"/>
+      </Alias>
+    </Macro>
+    <Macro Element="Transition" Name="CUTTO" Shortcut="Ctrl+Shift+Alt+1" Text="CUT TO:" Transition="Scene Heading">
+      <Alias Confirm="No" MatchCase="No" SmartReplace="Yes" Text="" WordOnly="No">
+        <ActivateIn Element="General"/>
+        <ActivateIn Element="Scene Heading"/>
+        <ActivateIn Element="Action"/>
+        <ActivateIn Element="Character"/>
+        <ActivateIn Element="Parenthetical"/>
+        <ActivateIn Element="Dialogue"/>
+        <ActivateIn Element="Transition"/>
+        <ActivateIn Element="Shot"/>
+        <ActivateIn Element="Cast List"/>
+      </Alias>
+    </Macro>
+    <Macro Element="Action" Name="FADEIN" Shortcut="Ctrl+Shift+Alt+2" Text="FADE IN:" Transition="Scene Heading">
+      <Alias Confirm="No" MatchCase="No" SmartReplace="Yes" Text="" WordOnly="No">
+        <ActivateIn Element="General"/>
+        <ActivateIn Element="Scene Heading"/>
+        <ActivateIn Element="Action"/>
+        <ActivateIn Element="Character"/>
+        <ActivateIn Element="Parenthetical"/>
+        <ActivateIn Element="Dialogue"/>
+        <ActivateIn Element="Transition"/>
+        <ActivateIn Element="Shot"/>
+        <ActivateIn Element="Cast List"/>
+      </Alias>
+    </Macro>
+    <Macro Element="Transition" Name="FADEOUT" Shortcut="Ctrl+Shift+Alt+3" Text="FADE OUT." Transition="Scene Heading">
+      <Alias Confirm="No" MatchCase="No" SmartReplace="Yes" Text="" WordOnly="No">
+        <ActivateIn Element="General"/>
+        <ActivateIn Element="Scene Heading"/>
+        <ActivateIn Element="Action"/>
+        <ActivateIn Element="Character"/>
+        <ActivateIn Element="Parenthetical"/>
+        <ActivateIn Element="Dialogue"/>
+        <ActivateIn Element="Transition"/>
+        <ActivateIn Element="Shot"/>
+        <ActivateIn Element="Cast List"/>
+      </Alias>
+    </Macro>
+    <Macro Element="Transition" Name="FADETO" Shortcut="Ctrl+Shift+Alt+4" Text="FADE TO:" Transition="Scene Heading">
+      <Alias Confirm="No" MatchCase="No" SmartReplace="Yes" Text="" WordOnly="No">
+        <ActivateIn Element="General"/>
+        <ActivateIn Element="Scene Heading"/>
+        <ActivateIn Element="Action"/>
+        <ActivateIn Element="Character"/>
+        <ActivateIn Element="Parenthetical"/>
+        <ActivateIn Element="Dialogue"/>
+        <ActivateIn Element="Transition"/>
+        <ActivateIn Element="Shot"/>
+        <ActivateIn Element="Cast List"/>
+      </Alias>
+    </Macro>
+    <Macro Element="Transition" Name="DISSLV" Shortcut="Ctrl+Shift+Alt+5" Text="DISSOLVE TO:" Transition="Scene Heading">
+      <Alias Confirm="No" MatchCase="No" SmartReplace="Yes" Text="" WordOnly="No">
+        <ActivateIn Element="General"/>
+        <ActivateIn Element="Scene Heading"/>
+        <ActivateIn Element="Action"/>
+        <ActivateIn Element="Character"/>
+        <ActivateIn Element="Parenthetical"/>
+        <ActivateIn Element="Dialogue"/>
+        <ActivateIn Element="Transition"/>
+        <ActivateIn Element="Shot"/>
+        <ActivateIn Element="Cast List"/>
+      </Alias>
+    </Macro>
+    <Macro Element="Transition" Name="BACKTO" Shortcut="Ctrl+Shift+Alt+6" Text="BACK TO:" Transition="Scene Heading">
+      <Alias Confirm="No" MatchCase="No" SmartReplace="Yes" Text="" WordOnly="No">
+        <ActivateIn Element="General"/>
+        <ActivateIn Element="Scene Heading"/>
+        <ActivateIn Element="Action"/>
+        <ActivateIn Element="Character"/>
+        <ActivateIn Element="Parenthetical"/>
+        <ActivateIn Element="Dialogue"/>
+        <ActivateIn Element="Transition"/>
+        <ActivateIn Element="Shot"/>
+        <ActivateIn Element="Cast List"/>
+      </Alias>
+    </Macro>
+    <Macro Element="Transition" Name="MATCHCUT" Shortcut="Ctrl+Shift+Alt+7" Text="MATCH CUT TO:" Transition="Scene Heading">
+      <Alias Confirm="No" MatchCase="No" SmartReplace="Yes" Text="" WordOnly="No">
+        <ActivateIn Element="General"/>
+        <ActivateIn Element="Scene Heading"/>
+        <ActivateIn Element="Action"/>
+        <ActivateIn Element="Character"/>
+        <ActivateIn Element="Parenthetical"/>
+        <ActivateIn Element="Dialogue"/>
+        <ActivateIn Element="Transition"/>
+        <ActivateIn Element="Shot"/>
+        <ActivateIn Element="Cast List"/>
+      </Alias>
+    </Macro>
+    <Macro Element="Transition" Name="JUMPCUT" Shortcut="Ctrl+Shift+Alt+8" Text="JUMP CUT TO:" Transition="Scene Heading">
+      <Alias Confirm="No" MatchCase="No" SmartReplace="Yes" Text="" WordOnly="No">
+        <ActivateIn Element="General"/>
+        <ActivateIn Element="Scene Heading"/>
+        <ActivateIn Element="Action"/>
+        <ActivateIn Element="Character"/>
+        <ActivateIn Element="Parenthetical"/>
+        <ActivateIn Element="Dialogue"/>
+        <ActivateIn Element="Transition"/>
+        <ActivateIn Element="Shot"/>
+        <ActivateIn Element="Cast List"/>
+      </Alias>
+    </Macro>
+    <Macro Element="Transition" Name="FBLACK" Shortcut="Ctrl+Shift+Alt+9" Text="FADE TO BLACK." Transition="None">
+      <Alias Confirm="No" MatchCase="No" SmartReplace="Yes" Text="" WordOnly="No">
+        <ActivateIn Element="General"/>
+        <ActivateIn Element="Scene Heading"/>
+        <ActivateIn Element="Action"/>
+        <ActivateIn Element="Character"/>
+        <ActivateIn Element="Parenthetical"/>
+        <ActivateIn Element="Dialogue"/>
+        <ActivateIn Element="Transition"/>
+        <ActivateIn Element="Shot"/>
+        <ActivateIn Element="Cast List"/>
+      </Alias>
+    </Macro>
+    <Macro Element="None" Name="" Shortcut="Ctrl+Shift+Alt+0" Text="" Transition="None">
+      <Alias Confirm="No" MatchCase="No" SmartReplace="Yes" Text="" WordOnly="No">
+        <ActivateIn Element="General"/>
+        <ActivateIn Element="Scene Heading"/>
+        <ActivateIn Element="Action"/>
+        <ActivateIn Element="Character"/>
+        <ActivateIn Element="Parenthetical"/>
+        <ActivateIn Element="Dialogue"/>
+        <ActivateIn Element="Transition"/>
+        <ActivateIn Element="Shot"/>
+        <ActivateIn Element="Cast List"/>
+      </Alias>
+    </Macro>
+  </Macros>
+
+  <Actors>
+    <Actor MacVoice="" Name="Man 1" Pitch="Normal" Speed="Medium" WinVoice="H"/>
+    <Actor MacVoice="" Name="Man 2" Pitch="Normal" Speed="Medium" WinVoice="H"/>
+    <Actor MacVoice="" Name="Woman 1" Pitch="Normal" Speed="Medium" WinVoice="H"/>
+    <Actor MacVoice="" Name="Woman 2" Pitch="Normal" Speed="Fast" WinVoice="H"/>
+    <Actor MacVoice="" Name="Boy 1" Pitch="Very High" Speed="Medium" WinVoice="H"/>
+    <Actor MacVoice="" Name="Boy 2" Pitch="High" Speed="Slow" WinVoice="H"/>
+    <Actor MacVoice="" Name="Girl 1" Pitch="Very High" Speed="Medium" WinVoice="H"/>
+    <Actor MacVoice="" Name="Girl 2" Pitch="Very High" Speed="Slow" WinVoice="H"/>
+    <Actor MacVoice="" Name="Old Man" Pitch="Low" Speed="Slow" WinVoice="H"/>
+    <Actor MacVoice="" Name="Old Woman" Pitch="Low" Speed="Slow" WinVoice="H"/>
+  </Actors>
+
+  <Cast>
+    <Narrator Actor="Man 1"/>
+    <Member Actor="Man 1" Character="ALL"/>
+    <Member Actor="Man 1" Character="ALL GHOSTS"/>
+    <Member Actor="Man 1" Character="ANNE"/>
+    <Member Actor="Man 1" Character="ARCHBISHOP"/>
+    <Member Actor="Man 1" Character="BISHOP OF ELY"/>
+    <Member Actor="Man 1" Character="BLUNT"/>
+    <Member Actor="Man 1" Character="BOTH MURDERERS"/>
+    <Member Actor="Man 1" Character="BRAKENBURY"/>
+    <Member Actor="Man 1" Character="BUCKINGHAM"/>
+    <Member Actor="Man 1" Character="CARDINAL BOURCHIER"/>
+    <Member Actor="Man 1" Character="CATESBY"/>
+    <Member Actor="Man 1" Character="CLARENCE"/>
+    <Member Actor="Man 1" Character="DORSET"/>
+    <Member Actor="Man 1" Character="DUCHESS OF YORK"/>
+    <Member Actor="Man 1" Character="FIRST MESSENGER"/>
+    <Member Actor="Man 1" Character="FIRST MURDERER"/>
+    <Member Actor="Man 1" Character="GENTLEMAN"/>
+    <Member Actor="Man 1" Character="GHOST of Anne"/>
+    <Member Actor="Man 1" Character="GHOST of Buckingham"/>
+    <Member Actor="Man 1" Character="GHOST of Clarence"/>
+    <Member Actor="Man 1" Character="GHOST OF GREY"/>
+    <Member Actor="Man 1" Character="GHOST of Hastings"/>
+    <Member Actor="Man 1" Character="GHOST OF RIVERS"/>
+    <Member Actor="Man 1" Character="GHOST OF VAUGHAN"/>
+    <Member Actor="Man 1" Character="GHOSTS of Princes"/>
+    <Member Actor="Man 1" Character="GREY"/>
+    <Member Actor="Man 1" Character="HALBERD"/>
+    <Member Actor="Man 1" Character="HASTINGS"/>
+    <Member Actor="Man 1" Character="KING EDWARD"/>
+    <Member Actor="Man 1" Character="KING RICHARD"/>
+    <Member Actor="Man 1" Character="LORD MAYOR"/>
+    <Member Actor="Man 1" Character="LOVELL"/>
+    <Member Actor="Man 1" Character="MESSENGER"/>
+    <Member Actor="Man 1" Character="OXFORD"/>
+    <Member Actor="Man 1" Character="PRINCE EDWARD"/>
+    <Member Actor="Man 1" Character="QUEEN ELIZABETH"/>
+    <Member Actor="Man 1" Character="QUEEN ELIZABETH AND DUCHESS OF YORK"/>
+    <Member Actor="Man 1" Character="QUEEN MARGARET"/>
+    <Member Actor="Man 1" Character="RATCLIFFE"/>
+    <Member Actor="Man 1" Character="RICHARD"/>
+    <Member Actor="Man 1" Character="RICHMOND"/>
+    <Member Actor="Man 1" Character="RIVERS"/>
+    <Member Actor="Man 1" Character="SCRIVENER"/>
+    <Member Actor="Man 1" Character="SECOND MESSENGER"/>
+    <Member Actor="Man 1" Character="SECOND MURDERER"/>
+    <Member Actor="Man 1" Character="STANLEY"/>
+    <Member Actor="Man 1" Character="THIRD MESSENGER"/>
+    <Member Actor="Man 1" Character="TYRREL"/>
+    <Member Actor="Man 1" Character="VAUGHAN"/>
+    <Member Actor="Man 1" Character="YORK"/>
+    <Member Actor="Man 1" Character="YOUNG GEORGE STANLEY"/>
+    <Member Actor="Man 1" Character="Third Citizen"/>
+    <Member Actor="Man 1" Character="First Citizen"/>
+    <Member Actor="Man 1" Character="Second Citizen"/>
+    <Member Actor="Man 1" Character="Gloucester"/>
+  </Cast>
+
+  <SceneNumberOptions LeftLocation="0.75" RightLocation="7.38" ShowNumbersOnLeft="Yes" ShowNumbersOnRight="No">
+    <FontSpec AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000" Font="Thorndale MT" RevisionID="0" Size="8" Style=""/>
+  </SceneNumberOptions>
+
+</FinalDraft>
