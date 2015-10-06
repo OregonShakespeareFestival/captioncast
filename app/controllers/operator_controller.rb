@@ -1,4 +1,5 @@
 class OperatorController < ApplicationController
+
   def index
     #convert all lines to json and pass along in variable
     @operator = params[:operator]
@@ -10,17 +11,15 @@ class OperatorController < ApplicationController
   end
 
   def pushBlackout
-    operator_key = "operator_" << params[:operator]
-    DataCache.data.set(operator_key,
+    redis_key = "operator_" << params[:operator] << "_blackout"
+    DataCache.data.set(redis_key, params[:blackout])
+    render :json => params[:blackout]
   end
 
   def pushTextSeq
-    operator = Operator.find_by(id: params[:operator])
-    Rails.application.config.operator_positions.merge!({params[:operator] => params[:seq]})
-    operator.position = params[:seq]
-    operator.save
-    # for debug purposes
-    render :json => params[:seq]
+    redis_key = "operator_" << params[:operator] << "_sequence"
+    DataCache.data.set(redis_key, params[:seq])
+    render :json => params[:sequence]
   end
 
   def select
