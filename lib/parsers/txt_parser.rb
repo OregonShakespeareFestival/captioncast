@@ -3,10 +3,12 @@ class TXTParser < BaseParser
   def parse(file)
     ActiveRecord::Base.transaction do
       text_sequence = 1
+      current_line_number = 1
       current_text = ""
       current_character = ""
       # iterate over each line in file
       file.each_line do |line|
+        current_line_number += 1
         # split line into components
         line_components = line.split(":")
         # line contains character and text
@@ -26,9 +28,8 @@ class TXTParser < BaseParser
         # line contains text
         elsif line_components.length == 1
           current_text << " " << line_components[0].strip
-        # line is unparsable
         else
-          return false
+          raise current_line_number.to_s << ": " << line
         end
       end
       text_components = segment_text(current_text, current_character)

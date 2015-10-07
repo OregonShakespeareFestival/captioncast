@@ -15,13 +15,14 @@ class UploadController < ApplicationController
     # get the path of the save file
     path = get_path(params[:upload])
     # queue resque task
-    Resque.enqueue(
-      Uploads,
-      path,
-      params[:work],
-      params[:characters_per_line].to_i,
-      params[:split_type]
-    )
+    Uploads.perform(path, params[:work], params[:characters_per_line].to_i, params[:split_type])
+    # Resque.enqueue(
+    #   Uploads,
+    #   path,
+    #   params[:work],
+    #   params[:characters_per_line].to_i,
+    #   params[:split_type]
+    # )
     redirect_to :controller => 'cast', :action => 'index'
   end
 

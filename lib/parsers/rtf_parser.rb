@@ -22,7 +22,7 @@ class RTFParser < BaseParser
               text_sequence += 1
             end
           end
-          current_character = line.strip
+          current_character = line.delete(":").strip
           current_text = ""
           Element.find_or_create_by(element_name: current_character, element_type: "CHARACTER", color: @default_text_color, work: @work_id)
         # line contains text
