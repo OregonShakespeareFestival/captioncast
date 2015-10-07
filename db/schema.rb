@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150122172125) do
+ActiveRecord::Schema.define(version: 20151007175844) do
 
   create_table "data_files", force: true do |t|
     t.datetime "created_at"
@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 20150122172125) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "language"
-    t.integer  "characters_per_line"
+    t.integer  "characters_per_line", default: 0
     t.integer  "venue_id"
   end
 
