@@ -67,22 +67,20 @@ class DataFile < ActiveRecord::Base
     f = File.open(path)
 
     @work = Work.find_by_id(work)
+    self.set_work_characters_per_line(work, characters_per_line)
 
     if(File.extname(path).downcase == ".txt" )
       self.parse_text_file(f, work, characters_per_line, split_type)
-      self.set_work_characters_per_line(work, characters_per_line)
       return true
     elsif(File.extname(path).downcase == ".rtf")
       self.parse_rtf_file(f, work, characters_per_line, split_type)
-      self.set_work_characters_per_line(work, characters_per_line)
       return true
     elsif(File.extname(path).downcase == ".fdx")
       doc =  Nokogiri::XML(f)
       f.close
       self.parse_fdx(doc, work, characters_per_line, split_type)
-      self.set_work_characters_per_line(work, characters_per_line)
       return true
-    else 
+    else
       return false
     end
   end
