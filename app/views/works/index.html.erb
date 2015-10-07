@@ -9,7 +9,11 @@
       <% @works.each do |work| %>
         <li>
           <% if work.texts.present? %>
-            <%= link_to work_details(work), work_texts_path(work_id: work.id) %>
+            <% if work.uploading != true %>
+              <%= link_to work_details(work), work_texts_path(work_id: work.id) %>
+            <% else %>
+              <%= work_details(work) %> (uploading...)
+            <% end %>
           <% else %>
             <%= work_details(work) %>
           <% end %>
