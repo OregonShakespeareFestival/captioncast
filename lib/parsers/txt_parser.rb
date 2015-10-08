@@ -10,7 +10,7 @@ class TXTParser < BaseParser
       file.each_line do |line|
         current_line_number += 1
         # split line into components
-        line_components = line.split(":")
+        line_components = line.split(":", 2)
         # line contains character and text
         if line_components.length == 2
           # if not the first character
