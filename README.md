@@ -40,7 +40,9 @@ Install rails and run setup tasks.
 `bundle`  
 `rake db:migrate`  
 `rake db:seed`  
-`rake treat:install'  
+`rake treat:install'
+`sudo iptables -F`
+`sudo service iptables save`
 
 ####Running in development mode:  
 
