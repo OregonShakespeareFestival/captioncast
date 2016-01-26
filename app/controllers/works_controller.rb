@@ -30,6 +30,7 @@ end
 #***********************************************************
 def deleteScript
   Work.find_by_id(params[:work_id]).update_attributes(:characters_per_line => 0)
+  Operator.delete_all(:work_id => params[:work_id])
   Text.delete_all(:work_id => params[:work_id])
   Element.delete_all(:work_id => params[:work_id])
   redirect_to :controller => 'upload', :action => 'index'
