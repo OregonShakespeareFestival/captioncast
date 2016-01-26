@@ -1,56 +1,61 @@
-  <div class="container" id="main-upload">
 
-    <%= content_tag :div, :id=>"main-form-upload", :class=>"row" do %>
-      <%= content_tag :div, :id=>"attributes-upload", :class=>"col-xs-12 col-sm-6 col-md-4" do %>
+  <div class="container" id="main-select-operator">
+    <div id="operator-select-wrapper" class="col-xs-12 col-sm-12 col-md-8 col-lg-6">
+      <span id="title-operator">Operator</span>
+      <% if @operators.count != 0 %>
+        <%= content_tag :div, :id=>"operator-select-existing" do %>
+          <%= content_tag :div, :id=>"list-sessions" do %>
 
-        <h1 class="title-upload">Select An Existing Session</h1>
+            <h2 class="form-title">Select An Existing Session</h2>
 
-        <%= form_tag({:action => "select"},
-          :multipart => true, :class => "form-group") do %>
-
-          <% @operators.each do |operator| %>
-            <% work = Work.find_by(id: operator.work_id) %>
-            <% venue = work.venue %>
-            <%= radio_button_tag(:selected_operator, operator.id) %>
-            <%= label_tag("#{operator.name}:  #{work.name}") %>
-            </br>
+            <%= form_tag({:action => "select"},
+              :multipart => true, :class => "form-group") do %>
+              <div id="radio-button-list">
+                <% @operators.each do |operator| %>
+                  <% work = Work.find_by(id: operator.work_id) %>
+                  
+                  <%= radio_button_tag(:selected_operator, operator.id) %>
+                  <%= label_tag("#{operator.name}:  #{work.name}") %>
+                  </br>
+                <% end %>
+              </div>
+              <div id="continue-session">
+                <%= button_tag "Continue", :type=>"submit", :class => "btn btn-primary" %><em style="padding-left:1em">(Reloading a session will reset it's position to 0)</em>
+              <div>
+            <% end %>
           <% end %>
-           </br>
-          <h2 class="title-upload">Reloading a session will reset it's position</h2>
-          </br>
-          <%= button_tag "Continue", :type=>"submit", :class => "btn btn-primary" %>
         <% end %>
       <% end %>
-    <% end %>
 
-    <%= content_tag :div, :id=>"main-form-upload", :class=>"row" do %>
-      <%= content_tag :div, :id=>"attributes-upload", :class=>"col-xs-12 col-sm-6 col-md-4" do %>
+    <% if Work.where.not(uploading: true, characters_per_line: 0).present? %>
+      <%= content_tag :div, :id=>"create-operator" do %>
+        <%= content_tag :div, :id=>"operator-details" do %>
 
-        <h1 class="title-upload">Make A New Session</h1>
+          <h2 class="form-title">Make A New Session</h2>
+          <%= form_tag({:action => "select"}, :multipart => true, :class => "form-group") do %>
 
-        <%= form_tag({:action => "select"},
-          :multipart => true, :class => "form-group") do %>
-
-          <%= content_tag :div, :class=>"form-group" do %>
-            <%= label_tag("Select a Work") %>
-            </br>
-            <%= select_tag "work", options_from_collection_for_select(Work.where.not(uploading: true).order(:work_name), "id", "name" ), :class=>"form-control" %>
+                <%= content_tag :div, :class=>"form-group" do %>
+                  <%= label_tag("Select a Work") %></br>
+                  <%= select_tag "work", options_from_collection_for_select(Work.where.not(uploading: true, characters_per_line: 0).order(:work_name), "id", "name" ), :class=>"form-control"%>
+                <% end %>
+                </br>
+                <%= content_tag :div, :class=>"form-group" do %>
+                  <%= label_tag("Select a view style") %></br>
+                  <%= select_tag "view", "<option>multi</option><option>single</option>".html_safe, :class=>"form-control" %>
+                <% end %>
+                </br>
+                <%= content_tag :div, :class=>"form-group" do %>
+                  <%= label_tag("Enter Your Name") %></br>
+                  <%= text_field(:operator, :name, size: 20, :class=>"form-control") %>
+                <% end %>
+                </br>
+                <%= button_tag "Continue", :type=>"submit", :class => "btn btn-primary" %>
+              <% end %>
           <% end %>
-          </br>
-          <%= content_tag :div, :class=>"form-group" do %>
-            <%= label_tag("Select a view style") %>
-            </br>
-            <%= select_tag "view", "<option>multi</option><option>single</option>".html_safe, :class=>"form-control" %>
-          <% end %>
-          </br>
-          <%= content_tag :div, :class=>"form-group" do %>
-            <%= label_tag("Enter Your Name") %>
-            </br>
-            <%= text_field(:operator, :name, size: 20, :class=>"form-control") %>
-          <% end %>
-          </br>
-          <%= button_tag "Continue", :type=>"submit", :class => "btn btn-primary" %>
         <% end %>
-      <% end %>
+      <% else %>
+        <h2>There are no scripts available</h2>
+        <%= button_to 'Back to Main', cast_index_path, :class => 'btn', method: :get %>
     <% end %>
+    </div>
   </div>

@@ -29,6 +29,7 @@ end
 #deletes all texts and elements related to a script
 #***********************************************************
 def deleteScript
+  Work.find_by_id(params[:work_id]).update_attributes(:characters_per_line => 0)
   Text.delete_all(:work_id => params[:work_id])
   Element.delete_all(:work_id => params[:work_id])
   redirect_to :controller => 'upload', :action => 'index'
