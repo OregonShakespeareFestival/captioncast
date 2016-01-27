@@ -22,6 +22,32 @@ $gen-btn-sz: 74px;
 $gen-btn-pad: 10px;
 $ipad-land-break: 1024px;
 
+#body-operator-select{
+	margin: 10px;
+}
+
+h2.form-title{
+	font-family: serif;
+    font-style: italic;
+    color: #f7e694;
+}
+
+#title-operator{
+  width:100%;
+  text-align:center;
+  font-size:3em;
+  display:inline-block;
+  padding:20px;
+  color: #f7e694;
+}
+
+#radio-button-list{
+	margin: 10px;
+}
+
+#operator-details{
+	margin-top: 15%;
+}
 
 @mixin centered{
 	float:none;
