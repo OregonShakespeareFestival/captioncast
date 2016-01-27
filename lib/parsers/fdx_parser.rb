@@ -39,6 +39,8 @@ class FDXParser < BaseParser
             temp << text
           end
           current_text << " " << temp
+        elsif line_type == "PARENTHETICAL" or line_type == "ACTION"
+            #currently we dont want to see either of these in the database
         else
           direction = line.text.delete("\n").squeeze(" ").strip
           Text.create(sequence: text_sequence, element: Element.find_by(element_type: line_type), work: @work_id, content_text: direction, visibility: false)
