@@ -1,8 +1,8 @@
 <div class="container" id="main-upload">
   <%= content_tag :div, :id=>"main-form-upload", :class=>"row" do %>
-    <%= content_tag :div, :id=>"attributes-upload", :class=>"col-xs-12 col-sm-6 col-md-4" do %>
+    <%= content_tag :div, :id=>"attributes-upload", :class=>"col-xs-12 col-sm-12 col-md-8 col-lg-6" do %>
 
-      <h1 class="title-upload">File Upload</h1>
+      <span id="title-upload">Upload a script</span>
       <p id="upload_notice"><%= notice %></p>
       <%= form_tag({:action => "uploadFile"},
         :multipart => true, :class => "form-group") do %>
@@ -28,27 +28,28 @@
         <%= content_tag :div, :class=>"form-group" do %>
              <%= label_tag("Select Characters Per Line to Display") %>
           </br>
-          <%= select_tag "characters_per_line", options_for_select(20..50, 40) , :class=>"form-control" %>
+          <%= select_tag "characters_per_line", options_for_select(20..50, 32) , :class=>"form-control" %>
         <% end %>
 
         <%= content_tag :div, :class=>"form-group" do %>
              <%= label_tag("Select Script Split Style") %>
           </br>
-          <%= select_tag "split_type", options_for_select({"Split on Sentences" => "S_sentences", "Split on Characters Only" => "S_characters"}, "Split on Sentences") , :class=>"form-control" %>
+          <%= select_tag "split_type", options_for_select({"Split on Sentences" => "S_sentences", "Split on Characters Only" => "S_characters"}, "S_characters") , :class=>"form-control" %>
         <% end %>
 
         <%= button_tag "Upload", :type=>"submit", :id => "submit_upload", :class => "btn btn-primary" %>
       <% end %>
 
-      <h3>Select a script below to delete from the database</h3>
-      <% @delete_work.each do |work| %>
-        <% if work.texts.present? and work.uploading != true %>
-          <li>
-            <%= link_to work_details(work), works_deleteScript_path(work_id: work.id)%>
-          </li>
+      <div id="delete-script">
+        <h2 class="form-title">Click a title below to delete it</h2>
+        <% @delete_work.each do |work| %>
+          <% if work.texts.present? and work.uploading != true %>
+            <li>
+              <%= link_to work_details(work), works_deleteScript_path(work_id: work.id)%>
+            </li>
+          <% end %>
         <% end %>
-      <% end %>
-
+      </div>
 
     <% end %>
   <% end %>
