@@ -1,8 +1,8 @@
-  <div class="container" id="main-upload">
+<div class="container" id="main-upload">
+  <div id="display-select-wrapper" class="col-xs-12 col-sm-12 col-md-8 col-md-push-2 col-lg-6 col-lg-push-3">
     <%= content_tag :div, :id=>"main-form-upload", :class=>"row" do %>
 
-
-        <h1 class="title-upload">Select An Operator</h1>
+        <span id="title-display">Select An Operator</span>
         <div id="select_display_op">
             <% @operators.each do |operator| %>
             <% work = Work.find_by(id: operator.work_id) %>
@@ -14,3 +14,4 @@
 
     <% end %>
   </div>
+</div>

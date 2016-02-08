@@ -26,12 +26,6 @@ $ipad-land-break: 1024px;
 	margin: 10px;
 }
 
-h2.form-title{
-	font-family: serif;
-    font-style: italic;
-    color: #f7e694;
-}
-
 #title-operator{
   width:100%;
   text-align:center;
@@ -39,6 +33,7 @@ h2.form-title{
   display:inline-block;
   padding:20px;
   color: #f7e694;
+  font-style: italic;
 }
 
 #radio-button-list{
