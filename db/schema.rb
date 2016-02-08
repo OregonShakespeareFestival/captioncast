@@ -13,11 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20151007175844) do
 
-  create_table "data_files", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "elements", force: true do |t|
     t.string   "element_name"
     t.string   "element_type"
@@ -68,6 +63,7 @@ ActiveRecord::Schema.define(version: 20151007175844) do
     t.string   "language"
     t.integer  "characters_per_line", default: 0
     t.integer  "venue_id"
+    t.boolean  "uploading",           default: false
   end
 
   add_index "works", ["venue_id"], name: "index_works_on_venue_id"

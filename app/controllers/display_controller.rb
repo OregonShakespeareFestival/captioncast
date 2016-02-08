@@ -14,8 +14,11 @@ class DisplayController < ApplicationController
   end
 
   def current
-    position = Rails.application.config.operator_positions[params[:operator]]
-    render json: {:pos => position, :blackout => $isBlackout}
+    blackout_redis_key = "operator_" << params[:operator] << "_blackout"
+    sequence_redis_key = "operator_" << params[:operator] << "_sequence"
+    blackout = DataCache.data.get(blackout_redis_key)
+    text_sequence = DataCache.data.get(sequence_redis_key)
+    render json: {:pos => text_sequence, :blackout => blackout}
   end
 
   def select

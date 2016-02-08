@@ -1,6 +1,7 @@
 .body-works{
   background-color: #082a36;
   color:#fff;
+  margin: 2%;
 }
 #supBlank, #boldIt{
   cursor:pointer;
@@ -41,4 +42,13 @@ h5{
 #char_count, #char_allowed, #added_char_count {
   width: 50px;
   color:black;
+}
+#title-work {
+  width: 100%;
+  text-align: center;
+  font-size: 3em;
+  display: inline-block;
+  padding: 20px;
+  color: #f7e694;
+  font-style: italic;
 }

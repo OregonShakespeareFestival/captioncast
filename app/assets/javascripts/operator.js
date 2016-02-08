@@ -12,7 +12,7 @@ var opScrollSpd= 400;
 var $lines; //jquery object to hold line elements
 
 $(document).ready(function(){
-	if($('#main-operator').length>0){		
+	if($('#main-operator').length>0){
 		//blackout screen and move to text sequence 0 when the operator is reset -!!!-
 
 		//set the main operator's height to the height of the window
@@ -64,7 +64,8 @@ $(document).ready(function(){
 			$.ajax('/operator/pushBlackout', {
 				type:'POST',
 				data: {
-					blackout: isBlackout
+					blackout: isBlackout,
+                    operator: operator
 				},
 				success:(function(d) {
 					console.log("blackout: " + d);
