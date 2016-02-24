@@ -95,27 +95,27 @@ $(document).ready(function(){
 	
 		$lineCont = $('#line-holder-sub-operator');
 		// var il = lines.length-1;
-		var il = 0;
-		var ll = lines.length; 
-		var lc, cc;
-		while(il<ll){
-			if(lines[il]['visibility']){
-				var cl = lines[il];
-				cc = cl['element']['element_name'];
-				if(cc.length>0&&cc!=lc){
-					cl['character'] = cl['element']['element_name'] + ':';
-					lc = cc;
+		var lineSequence = 0;
+		var totalLines = lines.length; 
+		var lastCharacter, currentCharacter;
+		while(lineSequence < totalLines){
+			if(lines[lineSequence]['visibility']){
+				var lineData = lines[lineSequence];
+				currentCharacter = lineData['element']['element_name'];
+				if(currentCharacter.length>0&&currentCharacter!=lastCharacter){
+					lineData['character'] = lineData['element']['element_name'] + ':';
+					lastCharacter = currentCharacter;
 				}else{
-					cl['character']=' ';
+					lineData['character']=' ';
 				}
-				if(lines[il]['operator_note']){
-					$lineCont.append(tLine(cl) + "<div class='line-operator line-note' data-visibility='false'> ---" + lines[il]['operator_note'] + "---</div>");
+				if(lines[lineSequence]['operator_note']){
+					$lineCont.append(tLine(lineData) + "<div class='line-operator line-note' data-visibility='false'> ---" + lines[lineSequence]['operator_note'] + "---</div>");
 				}
 				else{
-					$lineCont.append(tLine(cl));
+					$lineCont.append(tLine(lineData));
 				}
 			}
-			il++;
+			lineSequence++;
 		}
 
 		//clear the lines object now that it's been used

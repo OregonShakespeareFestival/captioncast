@@ -84,6 +84,9 @@
           <div class="alert alert-success">
             <%= "#{@next_line}" %>
           </div>
+            <!--additional parameters for scrolling to line in editor after modal closes-->
+            <%= hidden_field_tag 'page', params[:page]  %>
+            <%= hidden_field_tag 'sequence', @text.sequence  %>
 
           <div class="modal-footer">
             <!-- button controls -->

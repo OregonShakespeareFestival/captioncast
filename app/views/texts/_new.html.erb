@@ -39,7 +39,7 @@
               <li class="list-group-item">
                 Visibility
                 <div class="pull-right">
-                  <%= f.check_box :visibility %>
+                  <%= f.check_box :visibility, :checked => true %>
                 </div>
                 </li>
               <li class="list-group-item">
@@ -48,7 +48,9 @@
               </li>
             </ul>
           </div>
-
+            <!--additional parameters for scrolling to line in editor after modal closes-->
+            <%= hidden_field_tag 'page', params[:page]  %>
+            <%= hidden_field_tag 'sequence', @text.sequence  %>
           </br>
           <div class="alert alert-success">
             <%= "#{@next_line}" %>

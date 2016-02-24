@@ -20,10 +20,14 @@
       </tr>
 
       <% @texts.each do |line| %>
-        <tr>
-          <td><%= line.sequence %></td>
-          <td><%= line.element_name %></td>
-          <td><%= line.element_type %></td>
+          <% if line.sequence == @sequence.to_i %>
+            <tr class="focus-here">
+          <% else %>
+            <tr>
+          <% end %>
+            <td><%= line.sequence %></td>
+            <td><%= line.element_name %></td>
+            <td><%= line.element_type %></td>
           <%if line.element_type == 'BLANKLINE'%>
             <td></td>
           <%else%>

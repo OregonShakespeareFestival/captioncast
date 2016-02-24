@@ -2,6 +2,7 @@ class TextsController < ApplicationController
   def index
     work = Work.find(params[:work_id])
     @texts = work.texts.page(params[:page]).per(100)
+    @sequence = params[:lineSequence]
   end
 
   def edit
@@ -62,7 +63,7 @@ class TextsController < ApplicationController
     lne.remove_from_list
     lne.destroy
 
-    redirect_to :controller => 'texts', :action => 'index', :work_id => wid, :page => params[:page]
+    redirect_to :controller => 'texts', :action => 'index', :work_id => wid, :page => params[:page], :lineSequence => seqid
   end
 
   #********************************************************************
@@ -97,10 +98,10 @@ class TextsController < ApplicationController
     if @text2.update_attributes(message_params)
       # Handle a successful update.
       flash[:notice] = "Text successfully updated"
-      redirect_to:back
+      redirect_to :controller => 'texts', :action => 'index', :work_id => @text2.work_id.to_s, :page => params[:page], :lineSequence => params[:sequence]
     else
       flash[:notice] = "NOTICE: ERROR DURING UPDATE"
-      redirect_to:back
+      redirect_to :controller => 'texts', :action => 'index', :work_id => @text2.work_id.to_s, :page => params[:page], :lineSequence => params[:sequence]
     end
   end
 
@@ -113,7 +114,7 @@ class TextsController < ApplicationController
 
     line = Text.find_by_id(params[:id]) #gives us the line we will insert after
     work_id = line.work_id #gives us the work id to use for selecting the right whitespace element
-    sequence_id = line.sequence
+    sequence = line.sequence
     txt = Text.new(
       element_id: Element.find_by_id(params['character_name_dropdown']).id,
       work_id: work_id,
@@ -121,14 +122,14 @@ class TextsController < ApplicationController
       visibility: new_text['visibility'],
       operator_note: new_text['operator_note']
     )
-    txt.insert_at(sequence_id + 1)
+    txt.insert_at(sequence + 1)
 
     if txt.save
       flash[:notice] = "New character line successfully added"
-      redirect_to:back
+      redirect_to :controller => 'texts', :action => 'index', :work_id => work_id, :page => params[:page], :lineSequence => sequence + 1
     else
       flash[:notice] = "New Line NOT added"        # need to fix this
-       redirect_to:back
+       redirect_to :controller => 'texts', :action => 'index', :work_id => work_id, :page => params[:page], :lineSequence => sequence + 1
     end
   end
 
