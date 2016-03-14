@@ -37,8 +37,32 @@ $gen-btn-pad: 10px;
 
 #delete-script{
 	margin-top: 10%;
+  border: 2px solid;
+  padding: 10px;
+  border-radius: 10px;
 }
 
 #upload_notice{
 	color:#d33682;
+}
+.delete_item{
+  color: red;
+}
+
+#delete-script ul{
+  padding: 10px;
+  list-style: none;
+}
+
+#delete-script li{
+  padding: 3px;
+  border: 1px solid;
+  border-radius: 3px;
+  border-color: red;
+  color: white;
+  margin-bottom: 5%;
+}
+
+a.delete_item:hover{
+  color: white;
 }
