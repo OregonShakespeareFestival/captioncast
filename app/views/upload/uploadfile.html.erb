@@ -46,7 +46,7 @@
         <% @delete_work.each do |work| %>
           <% if work.texts.present? and work.uploading != true %>
             <li>
-              <%= link_to work_details(work), works_deleteScript_path(work_id: work.id), data: { confirm: "ARE YOU SURE YOU WANT TO DELETE THIS SCRIPT?"}, class: 'btn btn-danger' %>
+              <%= link_to work_details(work), works_deleteScript_path(work_id: work.id), data: { confirm: "Are you sure you want to delete the script #{work.name.upcase}"}, class: 'btn btn-danger' %>
             </li>
           <% end %>
         <% end %>
