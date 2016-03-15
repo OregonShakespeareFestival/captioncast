@@ -3,6 +3,9 @@ require 'yomu'
 class RTFParser < BaseParser
 
   def parse(file)
+    # add "BLANKLINE" and "OPERATOR_NOTE" elements
+    Element.find_or_create_by!(element_name: "", element_type: "BLANKLINE", color: @default_text_color, work: @work_id)
+    Element.find_or_create_by!(element_name: "", element_type: "OPERATOR_NOTE", color: @default_text_color, work: @work_id)
     ActiveRecord::Base.transaction do
       text_sequence = 1
       current_text = ""
