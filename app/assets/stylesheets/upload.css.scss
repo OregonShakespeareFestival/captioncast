@@ -51,18 +51,16 @@ $gen-btn-pad: 10px;
 
 #delete-script ul{
   padding: 10px;
+  padding-left: 0px;
   list-style: none;
 }
 
 #delete-script li{
   padding: 3px;
-  border: 1px solid;
-  border-radius: 3px;
-  border-color: red;
   color: white;
   margin-bottom: 5%;
 }
 
-a.delete_item:hover{
-  color: white;
+#delete-script li a{
+  width: 100%
 }
