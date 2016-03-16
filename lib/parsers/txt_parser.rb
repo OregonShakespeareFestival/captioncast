@@ -42,8 +42,12 @@ class TXTParser < BaseParser
             # reset blank indicator
             added_blank = false
 
+          # if we are adding additional blank lines in a row
+          elsif added_blank == true && line_components[0].strip == "##"
+            Text.create(sequence: text_sequence, element: Element.find_by(element_name: "", element_type: "BLANKLINE"), work: @work_id, content_text: "<br/>", visibility: true)
+            text_sequence += 1
 
-          # If this is a blankline
+          # If this is a blankline and the first time
           elsif line_components[0].strip == "##"
             # add previous character's already built text to database
             text_components = segment_text(current_text, current_character)
