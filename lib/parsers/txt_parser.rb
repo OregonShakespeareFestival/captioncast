@@ -23,7 +23,7 @@ class TXTParser < BaseParser
             # add previous character's text to database
             text_components = segment_text(current_text, current_character)
             text_components.each do |text_component|
-              Text.create(sequence: text_sequence, element: Element.find_by(element_name: current_character, element_type: "CHARACTER"), work: @work_id, content_text: text_component, visibility: true)
+              Text.create(sequence: text_sequence, element: Element.find_by(element_name: current_character, element_type: "CHARACTER", work: @work_id), work: @work_id, content_text: text_component, visibility: true)
               text_sequence += 1
             end
           end
@@ -44,7 +44,7 @@ class TXTParser < BaseParser
 
           # if we are adding additional blank lines in a row
           elsif added_blank == true && line_components[0].strip == "##"
-            Text.create(sequence: text_sequence, element: Element.find_by(element_name: "", element_type: "BLANKLINE"), work: @work_id, content_text: "<br/>", visibility: true)
+            Text.create(sequence: text_sequence, element: Element.find_by(element_name: "", element_type: "BLANKLINE", work: @work_id), work: @work_id, content_text: "<br/>", visibility: true)
             text_sequence += 1
 
           # If this is a blankline and the first time
@@ -52,14 +52,14 @@ class TXTParser < BaseParser
             # add previous character's already built text to database
             text_components = segment_text(current_text, current_character)
             text_components.each do |text_component|
-              Text.create(sequence: text_sequence, element: Element.find_by(element_name: current_character, element_type: "CHARACTER"), work: @work_id, content_text: text_component, visibility: true)
+              Text.create(sequence: text_sequence, element: Element.find_by(element_name: current_character, element_type: "CHARACTER", work: @work_id), work: @work_id, content_text: text_component, visibility: true)
               text_sequence += 1
             end
             # Set the indicator
             added_blank = true 
 
             # then add our blankline
-            Text.create(sequence: text_sequence, element: Element.find_by(element_name: "", element_type: "BLANKLINE"), work: @work_id, content_text: "<br/>", visibility: true)
+            Text.create(sequence: text_sequence, element: Element.find_by(element_name: "", element_type: "BLANKLINE", work: @work_id), work: @work_id, content_text: "<br/>", visibility: true)
             text_sequence += 1
           else
             current_text << " " << line_components[0].strip
@@ -70,7 +70,7 @@ class TXTParser < BaseParser
       end
       text_components = segment_text(current_text, current_character)
       text_components.each do |text_component|
-        Text.create(sequence: text_sequence, element: Element.find_by(element_name: current_character, element_type: "CHARACTER"), work: @work_id, content_text: text_component, visibility: true)
+        Text.create(sequence: text_sequence, element: Element.find_by(element_name: current_character, element_type: "CHARACTER", work: @work_id), work: @work_id, content_text: text_component, visibility: true)
         text_sequence += 1
       end
     end
