@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-$displayBgCol: #222222;
+$displayBgCol: #000000;
 $displayTextCol: #f7e694;
 $displayTextColBlur: #f7e694;
 $xs-break: 992px;
@@ -223,4 +223,15 @@ html{
   padding:20px;
   color: #f7e694;
   font-style: italic;
+}
+
+.greeting-header{
+	text-align: center;
+	font-size: 5.8vw;
+padding-bottom: 70px;
+}
+
+.greeting-body{
+	text-align: center;
+	font-size: 3.0vw;
 }
