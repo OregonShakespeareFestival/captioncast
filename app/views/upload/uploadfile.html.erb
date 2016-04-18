@@ -22,7 +22,7 @@
         <%= content_tag :div, :class=>"form-group" do %>
              <%= label_tag("Select a Work") %>
           </br>
-          <%= select_tag "work", options_from_collection_for_select(Work.where.not(uploading: true).order(:work_name), "id", "name" ), :class=>"form-control" %>
+          <%= select_tag "work", options_from_collection_for_select(Work.where.not(uploading: true).where(characters_per_line: 0).order(:work_name), "id", "name" ), :class=>"form-control" %>
         <% end %>
 
         <%= content_tag :div, :class=>"form-group" do %>
