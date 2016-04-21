@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   post 'texts/boldLine'
   get 'texts/addLine'
   post 'texts/addLine'
+  get 'texts/delete'
   get 'works/deleteScript'
   post 'works/deleteScript'
   resources :works, only: [:index, :show, :edit] do

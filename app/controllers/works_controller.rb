@@ -33,7 +33,7 @@ def deleteScript
   Operator.delete_all(:work_id => params[:work_id])
   Text.delete_all(:work_id => params[:work_id])
   Element.delete_all(:work_id => params[:work_id])
-  redirect_to :controller => 'upload', :action => 'index'
+  redirect_to :controller => 'cast', :action => 'index'
 end
 
 def update

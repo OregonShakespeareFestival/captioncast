@@ -39,20 +39,6 @@
 
         <%= button_tag "Upload", :type=>"submit", :id => "submit_upload", :class => "btn btn-primary" %>
       <% end %>
-
-      <div id="delete-script">
-        <h2 class="form-title">Click a title below to <b class="delete_item">DELETE</b> it</h2>
-        <ul>
-        <% @delete_work.each do |work| %>
-          <% if work.texts.present? and work.uploading != true %>
-            <li>
-              <%= link_to work_details(work), works_deleteScript_path(work_id: work.id), data: { confirm: "Are you sure you want to delete the script #{work.name.upcase}"}, class: 'btn btn-danger' %>
-            </li>
-          <% end %>
-        <% end %>
-        </ul>
-      </div>
-
     <% end %>
   <% end %>
 </div>

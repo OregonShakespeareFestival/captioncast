@@ -26,6 +26,10 @@ class TextsController < ApplicationController
   def show
   end
 
+  def delete
+    @work = Work.find_by_id(params[:id])
+  end
+
   #********************************************************************
   # inserts a line into the database. Used for splitting up a monologue
   # we get the work id, then find the _____ NOT ACTIVE______
