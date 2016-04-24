@@ -4,13 +4,20 @@
     <% if @works.blank? %>
       <p>No works to display.</p>
     <% else %>
-      <div id="works" class="list-group">
+      <ul id="works" class="list-group">
         <% @works.each do |work| %>
             <% if work.texts.present? %>
-                <%= link_to work_details(work), work_texts_path(work_id: work.id), class: "list-group-item" %>
+                <li class="list-group-item clearfix">
+                    <%= link_to work_details(work), work_texts_path(work.id) %>
+                    <span class="pull-right">
+                        <%= button_to edit_work_path(work.id), class: "btn btn-xs btn-primary", method: "get" do %>
+                            Settings
+                        <% end %>
+                    </span>
+                </li>
             <% end %>
         <% end %>
-      </div>
+      </ul>
     <% end %>
   </div>
 </div>
