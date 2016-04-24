@@ -54,6 +54,9 @@ h5{
 }
 #works{
   list-style: none;
+  .list-group-item {
+    color: #000000;
+  }
 }
 .white{
   color: #FFFFFF;

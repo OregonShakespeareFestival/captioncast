@@ -6,7 +6,14 @@
     <% else %>
       <ul id="works" class="list-group">
         <% @works.each do |work| %>
-            <% if work.texts.present? %>
+            <% if work.uploading %>
+                <li class="list-group-item">
+                    <%= work_details(work) %>
+                    <span class="label label-warning label-pill pull-right">
+                        Uploading
+                    </span>
+                </li>
+            <% elsif work.texts.present? %>
                 <li class="list-group-item clearfix">
                     <%= link_to work_details(work), work_texts_path(work.id) %>
                     <span class="pull-right">
