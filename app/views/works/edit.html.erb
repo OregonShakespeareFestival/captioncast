@@ -3,8 +3,8 @@
   <hr />
     <h2 class="form-title delete_item">Danger</h2>
       <% if @work.texts.present? and @work.uploading != true %>
-
+        <%= link_to "Click to delete #{@work.name.upcase}", work_path(@work.id), data: { confirm: "Are you sure you want to delete the script #{@work.name.upcase}?" }, class: "btn btn-danger", method: "delete" %>
       <% else %>
-        <li>This work does not contain texts</li>
+        <p>This work does not contain texts</p>
       <% end %>
 </div>
