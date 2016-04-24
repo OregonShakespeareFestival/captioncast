@@ -1,23 +1,16 @@
 <div class="container" id="main-work">
   <div id="work-wrapper" class="col-xs-12 col-sm-12 col-md-8 col-md-push-2 col-lg-6 col-lg-push-3">
     <span id="title-work">Select a script to edit</span>
-    <!-- creates the form for selecting the play to edit. -->
     <% if @works.blank? %>
       <p>No works to display.</p>
     <% else %>
-      <ul id="works">
+      <div id="works" class="list-group">
         <% @works.each do |work| %>
             <% if work.texts.present? %>
-              <li>
-              <% if work.uploading != true %>
-                <%= link_to work_details(work), work_texts_path(work_id: work.id), class: "white" %>
-              <% else %>
-                <%= work_details(work) %> (uploading...)
-              <% end %>
-              </li>
+                <%= link_to work_details(work), work_texts_path(work_id: work.id), class: "list-group-item" %>
             <% end %>
         <% end %>
-      </ul>
+      </div>
     <% end %>
   </div>
 </div>
