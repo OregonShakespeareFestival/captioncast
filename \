@@ -42,8 +42,8 @@
           </td>
           <td><%= line.operator_note %></td>
           <!--link to edit specific this line-->
-          <td><%= link_to 'EDIT', edit_work_text_path(work_id: line.work_id, id: line.id, page: params[:page], format: :js), :class => 'link-edit', :remote => true %></td>
-          <td><%= link_to 'NEW', new_work_text_path(work_id: line.work_id, id: line.id, page: params[:page], format: :js), :class => 'link-edit', :remote => true %></td>
+          <td><%= link_to 'EDIT', edit_work_text_path(work_id: line.work_id, id: line.id, page: params[:page]), :class => 'link-edit', method: :get, remote: true %></td>
+          <td><%= link_to 'NEW', new_work_text_path(work_id: line.work_id, id: line.id, page: params[:page], format: :js), :class => 'link-edit', method: :get, remote: true %></td>
         </tr>
       <% end %>
     </table>

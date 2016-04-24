@@ -1,11 +1,9 @@
 <div class="container" id="main-work">
   <div id="work-wrapper" class="col-xs-12 col-sm-12 col-md-8 col-md-push-2 col-lg-6 col-lg-push-3">
     <span id="title-work">Select a script to edit</span>
-    <!--**********************************************
-    creates the form for selecting the play to edit.
-    *****************************************************-->
+    <!-- creates the form for selecting the play to edit. -->
     <% if @works.blank? %>
-     <p>No works to display.</p>
+      <p>No works to display.</p>
     <% else %>
       <ul id="works">
         <% @works.each do |work| %>

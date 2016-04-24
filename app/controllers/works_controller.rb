@@ -1,59 +1,25 @@
 class WorksController < ApplicationController
+
   def index
     @works = Work.order(:work_name, :language)
   end
 
-  def select
-
+  def edit
+    @work = Work.find_by_id(params[:id])
   end
 
-#********************************************************************
-#called by our views/works/index.html.erb to show all the scripts lines
-#********************************************************************
-def show
-  @text = Text.find_by_id(params[:id])
-end
-
-
-
-def edit
-  @lines = Text.where(:work_id => params[:id]).order(:sequence)
-end
-
-
-def new
-  @text = Text.new
-end
-
-#**********************************************************
-#deletes all texts and elements related to a script
-#***********************************************************
-def deleteScript
-  Work.find_by_id(params[:work_id]).update_attributes(:characters_per_line => 0)
-  Operator.delete_all(:work_id => params[:work_id])
-  Text.delete_all(:work_id => params[:work_id])
-  Element.delete_all(:work_id => params[:work_id])
-  redirect_to :controller => 'cast', :action => 'index'
-end
-
-def update
-  @text = Text.where(:id => params[:id])
-  if @text.update_attributes(message_params)
-    # Handle a successful update.
-    redirect_to:action => "index"
-  else
-    render 'edit'
+  def destroy
+    Operator.delete_all(:work_id => params[:id])
+    Text.delete_all(:work_id => params[:id])
+    Element.delete_all(:work_id => params[:id])
+    redirect_to :controller => 'cast', :action => 'index'
   end
-end
 
+  private
 
-   private
-   #********************************************************************
-   #used for bringing in params sent to the create function
-   #******************************************************************
-   def message_params
-      params.require(:text).permit(:content_text)
-   end
-
+  # used for bringing in params sent to the create function
+  def message_params
+    params.require(:text).permit(:content_text)
+  end
 
 end

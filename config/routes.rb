@@ -2,22 +2,21 @@ require 'resque/server'
 
 Rails.application.routes.draw do
 
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  mount Resque::Server.new, at: "/resque"
+
+  root 'cast#index'
+  get 'cast/index'
+  get 'cast/about'
 
   get 'display/select'
   post 'display/select'
+  get 'display/index'
+  get 'display/current'
 
   get 'upload/index'
   post 'upload/index'
   post 'upload/uploadFile'
-  get 'display/index'
-  get 'display/current'
-
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-
-  root 'cast#index'
-
-  get 'cast/index'
-  get 'cast/about'
 
   get 'operator/index'
   get 'operator/select'
@@ -25,28 +24,10 @@ Rails.application.routes.draw do
   post 'operator/pushTextSeq'
   post 'operator/pushBlackout'
 
-  #for the editor view
   post 'texts/toggleVis'
-  get 'texts/removeLine'
-  post 'texts/removeLine'
-  get 'texts/splitLine'
-  post 'texts/splitLine'
-  get 'texts/boldLine'
-  post 'texts/boldLine'
-  get 'texts/addLine'
-  post 'texts/addLine'
-  get 'texts/delete'
-  get 'works/deleteScript'
-  post 'works/deleteScript'
-  resources :works, only: [:index, :show, :edit] do
-    resources :texts, only: [:index, :edit, :new]
+
+  resources :works, only: [:index, :edit, :destroy] do
+    resources :texts, except: [:show]
   end
-  resources :texts
 
-  #get 'texts/_edit'
-
-  #resources :works, only: [:index]
-  # GET /works -> WorksController index
-
-  mount Resque::Server.new, at: "/resque"
 end

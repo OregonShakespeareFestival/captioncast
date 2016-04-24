@@ -11,7 +11,7 @@
       </div>
       <% provide(:title, "Edit contact") %>
       <div>
-        <%= form_for :new_line, :url => texts_addLine_path(:id => @text.id) do |f| %>
+        <%= form_for :new_line, :url => work_texts_path(:work_id => @work.id, :id => @text.id), :method => "post" do |f| %>
           <div class="btn-group" role="group">
             <button type="button" id="boldIt" class="btn btn-default">Uppercase</button>
             <button type="button" id="lowercaseIt" class="btn btn-default">Lowercase</button>

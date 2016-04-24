@@ -1,0 +1,10 @@
+<div class="container" id="main-upload">
+  <span class="glyphicon glyphicon-cog pull-right"></span><h2>Settings for <%= @work.name %></h2>
+  <hr />
+    <h2 class="form-title delete_item">Danger</h2>
+      <% if @work.texts.present? and @work.uploading != true %>
+
+      <% else %>
+        <li>This work does not contain texts</li>
+      <% end %>
+</div>
