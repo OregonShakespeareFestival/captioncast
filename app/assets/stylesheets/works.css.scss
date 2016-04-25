@@ -52,3 +52,19 @@ h5{
   color: #f7e694;
   font-style: italic;
 }
+#works{
+  list-style: none;
+  .list-group-item {
+    color: #000000;
+  }
+}
+.white{
+  color: #FFFFFF;
+}
+.glyphicon-cog {
+    font-size: 42px;
+    display: block;
+    text-align: center;
+    margin: 10px auto 20px;
+    color: #fff;
+}
