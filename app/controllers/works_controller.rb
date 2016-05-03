@@ -12,6 +12,7 @@ class WorksController < ApplicationController
     Operator.delete_all(:work_id => params[:id])
     Text.delete_all(:work_id => params[:id])
     Element.delete_all(:work_id => params[:id])
+    Work.find_by_id(params[:id]).update_attribute(:characters_per_line, 0)
     redirect_to :controller => 'cast', :action => 'index'
   end
 
