@@ -26,7 +26,7 @@ Rails.application.routes.draw do
 
   post 'texts/toggleVis'
 
-  resources :works, only: [:index, :edit, :destroy] do
+  resources :works, only: [:index, :edit, :destroy, :update] do
     resources :texts, except: [:show]
   end
 
