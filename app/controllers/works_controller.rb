@@ -12,6 +12,13 @@ class WorksController < ApplicationController
     Operator.delete_all(:work_id => params[:id])
     Text.delete_all(:work_id => params[:id])
     Element.delete_all(:work_id => params[:id])
+    Work.find_by_id(params[:id]).delete
+    redirect_to :controller => 'cast', :action => 'index'
+  end
+
+  def update
+    @work = Work.find_by_id(params[:id])
+    @work.update(params.require(:work).permit(:work_name))
     redirect_to :controller => 'cast', :action => 'index'
   end
 

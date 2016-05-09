@@ -1,10 +1,20 @@
 <div class="container" id="main-upload">
-  <span class="glyphicon glyphicon-cog pull-right"></span><h2>Settings for <%= @work.name %></h2>
+  <span class="glyphicon glyphicon-cog pull-right"></span>
+  <h2>Settings for <%= @work.name %></h2>
   <hr />
-    <h2 class="form-title delete_item">Danger</h2>
-      <% if @work.texts.present? and @work.uploading != true %>
-        <%= link_to "Click to delete #{@work.name.upcase}", work_path(@work.id), data: { confirm: "Are you sure you want to delete the script #{@work.name.upcase}?" }, class: "btn btn-danger", method: "delete" %>
-      <% else %>
-        <p>This work does not contain texts</p>
-      <% end %>
+  <%= form_for @work do |f| %>
+    <fieldset class="form-group">
+      <label>Work Name: </label>
+      <%= f.text_field :work_name, :class => "form-control" %>
+    </fieldset>
+    <!-- form is already set up to update all the attributes of the work.
+           just add more fields to this form. -->
+    <%= f.submit nil, :class => "btn btn-primary" %>
+  <% end %>
+
+  <h2 class="form-title delete_item">Danger</h2>
+  <hr />
+  <%= link_to "Delete", work_path(@work.id),
+    data: { confirm: "Are you sure you want to delete #{@work.name.upcase}?" },
+    class: "btn btn-danger", method: "delete" %>
 </div>
