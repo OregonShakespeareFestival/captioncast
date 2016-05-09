@@ -3,13 +3,19 @@ class UploadController < ApplicationController
   def index
     @venues = Venue.all
     @works = Work.all
-    @delete_work = Work.order(:work_name, :language)
+    @languages = ["English", "Spanish", "Mandarine"]
     render :file => 'app/views/upload/uploadfile.html.erb'
   end
 
   def uploadFile
-    # let program know it's uploading
-    Work.find_by_id(params[:work]).update_attributes(:uploading => true)
+    # create work and let program know it's uploading
+    work_id = Work.create(
+      :work_name => params[:work],
+      :language => params[:language],
+      :characters_per_line => params[:characters_per_line],
+      :venue => Venue.find_by_id(params[:venue]),
+      :uploading => true
+    ).id
     # save the file to the system
     save(params[:upload])
     # get the path of the save file
@@ -18,7 +24,7 @@ class UploadController < ApplicationController
     Resque.enqueue(
       Uploads,
       path,
-      params[:work],
+      work_id,
       params[:characters_per_line].to_i,
       params[:split_type]
     )

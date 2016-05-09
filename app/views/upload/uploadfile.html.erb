@@ -5,7 +5,7 @@
       <span id="title-upload">Upload a script</span>
       <p id="upload_notice"><%= notice %></p>
       <%= form_tag({:action => "uploadFile"},
-        :multipart => true, :class => "form-group") do %>
+        :multipart => true, :id => "upload-form", :class => "form-group") do %>
 
         <%= content_tag :div, :class=>"form-group" do %>
              <%= label_tag("Select a Script File") %>
@@ -20,9 +20,15 @@
         <% end %>
 
         <%= content_tag :div, :class=>"form-group" do %>
-             <%= label_tag("Select a Work") %>
+             <%= label_tag("Work Name: ") %>
           </br>
-          <%= select_tag "work", options_from_collection_for_select(Work.where.not(uploading: true).where(characters_per_line: 0).order(:work_name), "id", "name" ), :class=>"form-control" %>
+          <%= text_field_tag "work", nil,  :class => "form-control" %>
+        <% end %>
+
+        <%= content_tag :div, :class=>"form-group" do %>
+             <%= label_tag("Language: ") %>
+          </br>
+          <%= select_tag "language", options_for_select(@languages),  :class => "form-control" %>
         <% end %>
 
         <%= content_tag :div, :class=>"form-group" do %>
