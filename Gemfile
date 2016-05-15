@@ -53,6 +53,7 @@ gem 'require_all', '~> 1.3.2'
 gem 'charlock_holmes_bundle_icu', '~> 0.6.9.2'
 gem 'resque-logger', '~> 0.2.0'
 gem 'rest-client', '~> 1.8.0'
+gem 'xml-simple', '~> 1.1', '>= 1.1.5'
 
 group :development do
   gem 'capistrano-rails'
