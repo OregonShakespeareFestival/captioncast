@@ -1,10 +1,13 @@
 class AuthController < ApplicationController
 
-  def login
+  def new
+  end
+
+  def create
     session[:user] = "test"
   end
 
-  def logout
+  def destroy
     session[:user] = nil
   end
 
