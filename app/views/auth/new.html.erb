@@ -1,6 +1,6 @@
 <form method="post" action="/login">
   <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
-  <input>
-  <input>
+  <input name="username">
+  <input name="password">
   <button type="submit">Submit</button>
 </form>
