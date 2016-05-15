@@ -1,5 +1,7 @@
 class OperatorController < ApplicationController
 
+  before_filter :authorize
+
   def index
     #convert all lines to json and pass along in variable
     @operator = params[:operator]

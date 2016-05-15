@@ -1,5 +1,7 @@
 class UploadController < ApplicationController
 
+  before_filter :authorize
+
   def index
     @venues = Venue.all
     @works = Work.all
