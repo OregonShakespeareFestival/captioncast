@@ -42,4 +42,17 @@
         </a>
       </div>
     </div>
+    <% if session[:user] != nil %>
+      <div class="row">
+        <div class="col-lg-3 col-md-6 col-xs-12 button-cast" id="logout-button-cast">
+          <a href="/logout" border="0">
+          <div>
+            <span class="glyphicon glyphicon-log-out">
+            </span>
+            <span class="button-title-cast">Logout</span>
+          </div>
+          </a>
+        </div>
+      </div>
+    <% end %>
   </div>
