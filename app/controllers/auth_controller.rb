@@ -6,34 +6,18 @@ class AuthController < ApplicationController
   end
 
   def create
-    # generate rest request for authentication with crowd
-    rest_auth = "Basic " + Base64.encode64("broken-props:admin")
-    rest_url = "https://crowd.osfashland.org/crowd/rest/usermanagement/latest/authentication?username=#{params[:username]}"
-    rest_body = "<?xml version='1.0' encoding='UTF-8'?><password><value>#{params[:password]}</value></password>"
-    # send request
-    begin
-      response = RestClient.post(rest_url, rest_body, :Content_Type => :xml, :Accept => :xml, :Authorization => rest_auth)
-    rescue => e
-      # failed login
-      flash[:error] = "Invalid Username or Password."
-      redirect_to "/login"
-      return
-    end
-    # see if the user is part of the captioncast group in AD
-    rest_url = "https://crowd.osfashland.org/crowd/rest/usermanagement/latest/user/group/direct?username=#{params[:username]}&groupname=captioncast"
-    begin
-      response2 = RestClient.get(rest_url, :Content_Type => :xml, :Accept => :xml, :Authorization => rest_auth)
-    rescue => e
+    if Auth.is_member_of(params[:username], "captioncast")
+      if user = Auth.is_user(params[:username], params[:password])
+        session[:user] = user['display-name'][0]
+        redirect_to "/"
+      else
+        flash[:error] = "Invalid Username or Password."
+        redirect_to "/login"
+      end
+    else
       flash[:error] = "Access to this application is not permitted."
       redirect_to "/login"
-      return
     end
-    # get the user hash from the response
-    response_hash = XmlSimple.xml_in(response)
-    # set the current user's display name
-    session[:user] = response_hash['display-name'][0]
-    # redirect back to the homepage
-    redirect_to "/"
   end
 
   def destroy
