@@ -6,8 +6,9 @@ class AuthController < ApplicationController
   end
 
   def create
+    pass = REXML::Text.new(params[:password], false, nil, false).to_s
     if Auth.is_member_of(params[:username], "captioncast")
-      if user = Auth.is_user(params[:username], params[:password])
+      if user = Auth.is_user(params[:username], pass)
         session[:user] = user['display-name'][0]
         redirect_to "/"
       else
