@@ -19,6 +19,15 @@ class AuthController < ApplicationController
       redirect_to "/login"
       return
     end
+    # see if the user is part of the captioncast group in AD
+    rest_url = "https://crowd.osfashland.org/crowd/rest/usermanagement/latest/user/group/direct?username=#{params[:username]}&groupname=captioncast"
+    begin
+      response2 = RestClient.get(rest_url, :Content_Type => :xml, :Accept => :xml, :Authorization => rest_auth)
+    rescue => e
+      flash[:error] = "Access to this application is not permitted."
+      redirect_to "/login"
+      return
+    end
     # get the user hash from the response
     response_hash = XmlSimple.xml_in(response)
     # set the current user's display name
