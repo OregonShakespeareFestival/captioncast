@@ -15,6 +15,7 @@ class AuthController < ApplicationController
       response = RestClient.post(rest_url, rest_body, :Content_Type => :xml, :Accept => :xml, :Authorization => rest_auth)
     rescue => e
       # failed login
+      flash[:error] = "Invalid Username or Password."
       redirect_to "/login"
       return
     end
