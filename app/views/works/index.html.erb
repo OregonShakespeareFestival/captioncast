@@ -13,7 +13,7 @@
                         Uploading
                     </span>
                 </li>
-            <% elsif work.texts.present? %>
+            <% elsif not work.texts.empty? %>
                 <li class="list-group-item clearfix">
                     <%= link_to work_details(work), work_texts_path(work.id) %>
                     <span class="pull-right">
