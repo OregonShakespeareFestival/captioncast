@@ -10,6 +10,7 @@ class TXTParser < BaseParser
       current_line_number = 1
       current_text = ""
       current_character = ""
+      character_object = ""
       added_blank = false
       # iterate over each line in file
       file.each_line do |line|
@@ -21,9 +22,10 @@ class TXTParser < BaseParser
           # if we know who is speaking
           if current_character != "" && added_blank == false
             # add previous character's text to database
+            character_object = Element.find_by(element_name: current_character, element_type: "CHARACTER", work: @work_id)
             text_components = segment_text(current_text, current_character)
             text_components.each do |text_component|
-              Text.create(sequence: text_sequence, element: Element.find_by(element_name: current_character, element_type: "CHARACTER", work: @work_id), work: @work_id, content_text: text_component, visibility: true)
+              Text.create(sequence: text_sequence, element: character_object, work: @work_id, content_text: text_component, visibility: true)
               text_sequence += 1
             end
           end
@@ -50,9 +52,10 @@ class TXTParser < BaseParser
           # If this is a blankline and the first time
           elsif line_components[0].strip == "##"
             # add previous character's already built text to database
+            character_object = Element.find_by(element_name: current_character, element_type: "CHARACTER", work: @work_id)
             text_components = segment_text(current_text, current_character)
             text_components.each do |text_component|
-              Text.create(sequence: text_sequence, element: Element.find_by(element_name: current_character, element_type: "CHARACTER", work: @work_id), work: @work_id, content_text: text_component, visibility: true)
+              Text.create(sequence: text_sequence, element: character_object, work: @work_id, content_text: text_component, visibility: true)
               text_sequence += 1
             end
             # Set the indicator
@@ -68,9 +71,10 @@ class TXTParser < BaseParser
           raise current_line_number.to_s << ": " << line
         end
       end
+      character_object = Element.find_by(element_name: current_character, element_type: "CHARACTER", work: @work_id)
       text_components = segment_text(current_text, current_character)
       text_components.each do |text_component|
-        Text.create(sequence: text_sequence, element: Element.find_by(element_name: current_character, element_type: "CHARACTER", work: @work_id), work: @work_id, content_text: text_component, visibility: true)
+        Text.create(sequence: text_sequence, element: character_object, work: @work_id, content_text: text_component, visibility: true)
         text_sequence += 1
       end
     end
