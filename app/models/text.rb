@@ -9,7 +9,7 @@ class Text < ActiveRecord::Base
   delegate :element_name, to: :element
   delegate :element_type, to: :element
 
-  acts_as_list column: :sequence
+  acts_as_list scope: :work, column: :sequence 
 
   def previous_display_text(work, sequence)
     previous_text = work.texts.find_by sequence: sequence - 1
