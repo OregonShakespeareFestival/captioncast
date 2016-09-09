@@ -51,14 +51,12 @@ $(document).ready(function(){
 					data: { operator: operator },
 					dataType: 'json',
 					success:(function(j) {
-						console.log('sequence scraped ' + j.pos + ' blackout: ' + j.blackout);
 						//if the data sequence changed
 						if($('.shown-display').attr('data-sequence') != j.pos) {
 							//calculate scroll speed
 							var now = (new Date).getTime();
 							displayScrollSpd = Math.max(MINSCROLLDURATION, (Math.min(MAXSCROLLDURATION, (now - lastScrollMS))));
 							lastScrollMS = now;
-							console.log(displayScrollSpd);
 							//fade out the shown display
 							$('.shown-display').stop().fadeOut(dispFadeSpd);
 							//remove the shown display class
@@ -79,6 +77,13 @@ $(document).ready(function(){
 							singleHeartbeat();
 						}, refresh);
 					}),
+					error: (function(jqXHR, textStatus, errorThrown){
+						console.log("Something bad happened: " + errorThrown);
+						// Keep trying
+						setTimeout(function() {
+							singleHeartbeat();
+						}, refresh);
+					})
 				});
 			}
 
@@ -98,14 +103,12 @@ $(document).ready(function(){
 					data: { operator: operator },
 					dataType: 'json',
 					success:(function(j) {
-						console.log('sequence scraped ' + j.pos + ' blackout: ' + j.blackout);
 						//if the data sequence changed
 						if($('.focus-multi').attr('data-sequence') != j.pos) {
 							//calculate scroll speed
 							var now = (new Date).getTime();
 							displayScrollSpd = Math.max(MINSCROLLDURATION, (Math.min(MAXSCROLLDURATION, (now - lastScrollMS))));
 							lastScrollMS = now;
-							console.log(displayScrollSpd);
 							//animate scroll to the changed data sequence
 							$('#body-display-index, html').stop().animate({scrollTop:$('#line-display-'+j.pos).offset().top-$(window).height()+$('#line-display-'+j.pos).outerHeight()}, displayScrollSpd, "linear");
 							//remove the focus class
@@ -124,6 +127,13 @@ $(document).ready(function(){
 							multiHeartbeat();
 						}, refresh);
 					}),
+					error: (function(jqXHR, textStatus, errorThrown){
+						console.log("Something bad happened: " + errorThrown);
+						// Keep trying
+						setTimeout(function() {
+							multiHeartbeat();
+						}, refresh * 20);
+					})
 				});
 			}
 
