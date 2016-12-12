@@ -1,4 +1,7 @@
 class TextsController < ApplicationController
+
+  before_filter :authorize
+
   def index
     work = Work.find(params[:work_id])
     @texts = work.texts.page(params[:page]).per(100)

@@ -1,0 +1,23 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-6 col-md-4 col-sm-offset-3 col-md-offset-4">
+            <h1 class="text-center login-title">Login to CaptionCast</h1>
+            <div class="account-wall">
+                <% flash.each do |key, value| %>
+                    <div class="alert alert-danger" role="alert">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        <span class="sr-only">Error:</span>
+                        <%= value %>
+                    </div>
+                <% end %>
+                <%= image_tag "logo.png", class: "profile-img" %>
+                <%= form_tag "/login", method: "post", class: "form-signin" do %>
+                    <%= text_field_tag "username", nil, class: "form-control", placeholder: "Username", required: true, autofocus: true %>
+                    <%= text_field_tag "password", nil, class: "form-control", placeholder: "Password", type: "password", required: true %>
+                    <%= button_tag "Login", type: "submit", class: "btn btn-lg btn-primary btn-block" %>
+                <% end %>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
