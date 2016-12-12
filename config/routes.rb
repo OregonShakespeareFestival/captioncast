@@ -5,6 +5,10 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   mount Resque::Server.new, at: "/resque"
 
+  get '/login' => 'auth#new'
+  post '/login' => 'auth#create'
+  get '/logout' => 'auth#destroy'
+
   root 'cast#index'
   get 'cast/index'
   get 'cast/about'

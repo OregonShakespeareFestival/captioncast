@@ -1,5 +1,7 @@
 class WorksController < ApplicationController
 
+  before_filter :authorize
+
   def index
     @works = Work.order(:work_name, :language)
   end
