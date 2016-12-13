@@ -1,0 +1,9 @@
+production:
+  crowd_username: <%= ENV['CAPTIONCAST_CROWD_USERNAME'] %>
+  crowd_password: <%= ENV['CAPTIONCAST_CROWD_PASSWORD'] %>
+  crowd_base_url: <%= ENV['CAPTIONCAST_CROWD_BASE_URL'] %>
+
+development:
+  crowd_username: <%= ENV['CAPTIONCAST_DATABASE_USER'] %>
+  crowd_password: <%= ENV['CAPTIONCAST_DATABASE_USER'] %>
+  crowd_base_url: <%= ENV['CAPTIONCAST_DATABASE_USER'] %>

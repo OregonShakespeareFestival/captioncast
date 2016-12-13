@@ -21,5 +21,6 @@ module Captioncast
     # config.i18n.default_locale = :de
 
     config.operator_positions = {}
+    config.auth = config_for(:auth)
   end
 end

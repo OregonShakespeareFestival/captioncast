@@ -5,8 +5,11 @@ class Auth
 
   # validates whether the user belongs to the specified group
   def self.is_member_of(username, groupname)
-    rest_auth = "Basic " + Base64.encode64("broken-props:admin")
-    rest_url = "https://crowd.osfashland.org/crowd/rest/usermanagement/latest/user/group/direct?username=#{username}&groupname=#{groupname}"
+    username = Rails.configuration.auth["crowd_username"]
+    password = Rails.configuration.auth["crowd_password"]
+    url = Rails.configuration.auth["crowd_base_url"]
+    rest_auth = "Basic " + Base64.encode64("#{username}:#{password}")
+    rest_url = "#{url}crowd/rest/usermanagement/latest/user/group/direct?username=#{username}&groupname=#{groupname}"
     begin
       response2 = RestClient.get(rest_url, :Content_Type => :xml, :Accept => :xml, :Authorization => rest_auth)
     rescue => e
