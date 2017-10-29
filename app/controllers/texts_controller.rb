@@ -27,16 +27,15 @@ class TextsController < ApplicationController
       work_id: work_id,
       content_text: new_text['content_text'],
       visibility: new_text['visibility'],
-      operator_note: new_text['operator_note']
+      operator_note: new_text['operator_note'],
+      sequence: sequence + 1
     )
-    txt.insert_at(sequence + 1)
     if txt.save
       flash[:notice] = "New character line successfully added"
-      redirect_to :controller => 'texts', :action => 'index', :work_id => work_id, :page => params[:page], :lineSequence => sequence + 1
     else
-      flash[:notice] = "New Line NOT added"        # need to fix this
-       redirect_to :controller => 'texts', :action => 'index', :work_id => work_id, :page => params[:page], :lineSequence => sequence + 1
+      flash[:notice] = "New Line NOT added"
     end
+    redirect_to :controller => 'texts', :action => 'index', :work_id => work_id, :page => params[:page], :lineSequence => sequence + 1
   end
 
   def edit
