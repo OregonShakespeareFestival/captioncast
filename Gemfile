@@ -34,7 +34,7 @@ gem 'acts_as_list'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-gem 'nokogiri'
+gem 'nokogiri', '1.6.6.2'
 gem 'bootstrap-sass', '~> 3.3.1.0'
 gem 'bootstrap-switch-rails'
 gem 'autoprefixer-rails'
