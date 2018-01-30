@@ -20,33 +20,3 @@ lizzy  = Venue.find_or_create_by!(name: 'Allen Elizabethan Theatre')
 Text.delete_all 			#remove dialogue
 Element.delete_all 			#remove characters
 Work.delete_all 			#remove productions
-
-# Step 3
-# List all plays to be added to the database
-Work.create!(work_name: "Twelfth Night") { |work| work.venue = bowmer; work.language = "en" }
-Work.create!(work_name: "Great Expectations") { |work| work.venue = bowmer; work.language = "en" }
-Work.create!(work_name: "The River Bride") { |work| work.venue = bowmer; work.language = "en" }
-Work.create!(work_name: "The Yeomen of the Guard") { |work| work.venue = thomas; work.language = "en" }
-Work.create!(work_name: "Vietgone") { |work| work.venue = thomas; work.language = "en" }
-
-Work.create!(work_name: "Roe") { |work| work.venue = bowmer; work.language = "en" }
-Work.create!(work_name: "Hamlet") { |work| work.venue = lizzy; work.language = "en" }
-Work.create!(work_name: "The Wiz") { |work| work.venue = lizzy; work.language = "en" }
-
-Work.create!(work_name: "The Winter’s Tale") { |work| work.venue = lizzy; work.language = "en" }
-Work.create!(work_name: "Richard II") { |work| work.venue = lizzy; work.language = "en" }
-Work.create!(work_name: "Timon of Athens") { |work| work.venue = bowmer; work.language = "en" }
-
-Work.create!(work_name: "Twelfth Night") { |work| work.venue = bowmer; work.language = "es" }
-Work.create!(work_name: "Great Expectations") { |work| work.venue = bowmer; work.language = "es" }
-Work.create!(work_name: "The River Bride") { |work| work.venue = bowmer; work.language = "es" }
-Work.create!(work_name: "The Yeomen of the Guard") { |work| work.venue = thomas; work.language = "es" }
-Work.create!(work_name: "Vietgone") { |work| work.venue = thomas; work.language = "es" }
-
-Work.create!(work_name: "Roe") { |work| work.venue = bowmer; work.language = "es" }
-Work.create!(work_name: "Hamlet") { |work| work.venue = lizzy; work.language = "es" }
-Work.create!(work_name: "The Wiz") { |work| work.venue = lizzy; work.language = "es" }
-
-Work.create!(work_name: "The Winter’s Tale") { |work| work.venue = lizzy; work.language = "es" }
-Work.create!(work_name: "Richard II") { |work| work.venue = lizzy; work.language = "es" }
-Work.create!(work_name: "Timon of Athens") { |work| work.venue = bowmer; work.language = "es" }

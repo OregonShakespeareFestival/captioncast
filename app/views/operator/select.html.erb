@@ -26,7 +26,7 @@
         <% end %>
       <% end %>
 
-    <% if Work.where.not(uploading: true, characters_per_line: 0).present? %>
+    <% if Work.where.not(upload_status: "Ready", characters_per_line: 0).present? %>
       <%= content_tag :div, :id=>"create-operator" do %>
         <%= content_tag :div, :id=>"operator-details" do %>
 
@@ -35,7 +35,7 @@
 
                 <%= content_tag :div, :class=>"form-group" do %>
                   <%= label_tag("Select a Work") %></br>
-                  <%= select_tag "work", options_from_collection_for_select(Work.where.not(uploading: true, characters_per_line: 0).order(:work_name), "id", "name" ), :class=>"form-control"%>
+                  <%= select_tag "work", options_from_collection_for_select(Work.where.not(upload_status: "Ready", characters_per_line: 0).order(:work_name), "id", "name" ), :class=>"form-control"%>
                 <% end %>
                 </br>
                 <%= content_tag :div, :class=>"form-group" do %>

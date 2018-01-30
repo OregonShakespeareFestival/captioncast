@@ -29,9 +29,10 @@ class Uploads < Resque::Job
       end
     rescue => error
       logger.info(error.message)
+      work.update_attributes(:upload_status => "Failed")
     end
     # save characters_per_line to work
-    work.update_attributes(:uploading => false)
+    work.update_attributes(:upload_status => "Ready")
     # parse ran succesfully
     return true
   end

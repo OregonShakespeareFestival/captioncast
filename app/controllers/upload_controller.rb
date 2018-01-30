@@ -16,7 +16,7 @@ class UploadController < ApplicationController
       :language => params[:language],
       :characters_per_line => params[:characters_per_line],
       :venue => Venue.find_by_id(params[:venue]),
-      :uploading => true
+      :upload_status => "Uploading"
     ).id
     # save the file to the system
     save(params[:upload])

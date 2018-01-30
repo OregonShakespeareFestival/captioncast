@@ -11,9 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151007175844) do
+ActiveRecord::Schema.define(version: 20171214181704) do
 
-  create_table "elements", force: true do |t|
+  create_table "elements", force: :cascade do |t|
     t.string   "element_name"
     t.string   "element_type"
     t.string   "color"
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20151007175844) do
 
   add_index "elements", ["work_id"], name: "index_elements_on_work_id"
 
-  create_table "operators", force: true do |t|
+  create_table "operators", force: :cascade do |t|
     t.text     "name"
     t.text     "view_attributes"
     t.integer  "position"
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 20151007175844) do
 
   add_index "operators", ["work_id"], name: "index_operators_on_work_id"
 
-  create_table "texts", force: true do |t|
+  create_table "texts", force: :cascade do |t|
     t.integer  "sequence"
     t.text     "content_text"
     t.string   "color_override"
@@ -50,20 +50,20 @@ ActiveRecord::Schema.define(version: 20151007175844) do
   add_index "texts", ["element_id"], name: "index_texts_on_element_id"
   add_index "texts", ["work_id"], name: "index_texts_on_work_id"
 
-  create_table "venues", force: true do |t|
+  create_table "venues", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "works", force: true do |t|
+  create_table "works", force: :cascade do |t|
     t.string   "work_name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "language"
     t.integer  "characters_per_line", default: 0
     t.integer  "venue_id"
-    t.boolean  "uploading",           default: false
+    t.string   "upload_status",       default: "Uploading"
   end
 
   add_index "works", ["venue_id"], name: "index_works_on_venue_id"
